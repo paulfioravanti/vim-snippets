@@ -8,8 +8,8 @@ snippets, which requires the top-level `vim` directory here.
 
 Trigger words for snippets are typically short words or mnemonics (see
 [`honza/vim-snippets`][]), but many of mine tend to be whole words or phrases,
-since I use them primarily with [Plover][] [stenography][], which enables that
-easily.
+since I use them primarily with [Plover][] [stenography][] ([my stenography
+dictionaries][]), which enables that easily.
 
 ## Videos
 
@@ -19,6 +19,7 @@ You can see the snippets in action during the following videos:
 
 [`honza/vim-snippets`]: https://github.com/honza/vim-snippets
 [my dotfiles]: https://github.com/paulfioravanti/dotfiles
+[my stenography dictionaries]: https://github.com/paulfioravanti/steno-dictionaries
 [Plover]: https://www.openstenoproject.org/plover/
 [Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
 [rcm]: https://github.com/thoughtbot/rcm
