@@ -1,0 +1,28 @@
+global !p
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character,
+    root_module_name
+)
+
+def binding_name(match):
+    return match.group(1).replace(" ", "-")
+
+def binding_assign_character(character):
+    if character == "\"":
+        return ": "
+    return "="
+
+endglobal
+
+# NOTE: $3 may seem like an unnecessary tabstop, but it's needed when this
+# snippet is used in a nested way.
+snippet "\b(?:phx|phoenix) (.+)" "phx- binding" ri
+${1:"}phx-`!p snip.rv = binding_name(match) + closing_character(t[1]) + binding_assign_character(t[1])`${2|",{,@|}$3`!p snip.rv = closing_character(t[2])`$0
+endsnippet
+
+# REF path variable: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L894
+snippet "\buse (phx|phoenix)" "Kernel.use/2 with a Phoenix module" r
+use ${1:`!p snip.rv = root_module_name(path)`}, :${2|channel,component,controller,live_component,live_view,router,view|}$0
+endsnippet

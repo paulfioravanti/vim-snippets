@@ -1,0 +1,145 @@
+global !p
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character,
+    module_name,
+    root_module_name
+)
+
+def maybe_single_line(tabstop):
+    if not tabstop:
+        return ", do: "
+    return ""
+
+endglobal
+
+snippet alias "Kernel.SpecialForms.alias/2"
+alias ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4: as: ${5:Keyword}}$0
+endsnippet
+
+snippet case "Kernel.SpecialForms.case/2"
+case ${1:value} do
+  ${2:pattern} ${3:when ${4:condition} }->
+    ${5:${VISUAL:do_something}}
+  _ ->
+    $6
+end$0
+endsnippet
+
+snippet cond "Kernel.SpecialForms.cond/2"
+cond do
+  ${1:condition} ->
+    ${2:${VISUAL:do_something}}
+  true ->
+    $3
+end$0
+endsnippet
+
+snippet condition "Kernel.SpecialForms.cond/2 condition"
+${1:condition} ->
+  $0
+endsnippet
+
+snippet def "Kernel.(def|defp)/2 multiline"
+def${1:p} ${2:function_name}${3:(${4:args})}${5: do
+  $6
+end}`!p snip.rv = maybe_single_line(t[5])`$0
+endsnippet
+
+snippet "def(:| single line)" "Kernel.(def|defp)/2 single line" r
+def${1:p} ${2:function_name}${3:(${4:args})}, do: $0
+endsnippet
+
+snippet "def delegate" "Kernel.defdelegate/2"
+defdelegate ${1:fun}, to: ${2:Module}${3:, as: ${4:fun}}$0
+endsnippet
+
+snippet "def exception" "Kernel.defexception/1"
+defexception [:${1:field}]$0
+endsnippet
+
+snippet "def guard" "Kernel.(defguard|defguardp)/1"
+defguard${1:p} ${2:guard}(${3:value}) when ${4:condition}$0
+endsnippet
+
+snippet "def module" "Kernel.defmodule/2"
+defmodule ${1:`!p snip.rv = module_name(path)`} do
+  $0
+end
+endsnippet
+
+snippet "def struct" "Kernel.defstruct/1"
+defstruct ${1:[}:${2:field}$3`!p snip.rv = closing_character(t[1])`$0
+endsnippet
+
+snippet "f(:?u)?n(:?ction)?" "Kernel.SpecialForms.fn/2" ri
+fn ${1:args} -> ${2:do_something} end$0
+endsnippet
+
+snippet "f(:?u)?n(:?ction)? (?:(&|capture))" "Kernel.SpecialForms.&/1" ri
+&(&1${1:do_something})$0
+endsnippet
+
+snippet "\b(if|unless)" "Kernel.(if|unless)/2" r
+`!p snip.rv = match.group(1)` ${1:condition} do
+  ${2:${VISUAL:do_something}}${3:
+else
+  ${4:do_something_else}}$0
+end
+endsnippet
+
+snippet "\b(if|unless):" "Kernel.(if|unless)/2 single-line" r
+`!p snip.rv = match.group(1)` ${1:condition}, do: ${2:${VISUAL:do_something}}${3:, else: ${4:do_something_else}}$0
+endsnippet
+
+snippet import "Kernel.SpecialForms.import/2"
+import ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4:, ${5|only,except|}: [${6:function}: ${7:arity}]}$0
+endsnippet
+
+snippet "is nil" "Kernel.is_nil/1"
+is_nil(${1:term})$0
+endsnippet
+
+snippet pattern "Kernel.SpecialForms.case/2 pattern match"
+${1:pattern} ${2:when ${3:condition} }->
+  ${0:do_something}
+endsnippet
+
+snippet range "Kernel...///3" i
+${1:first}..${2:last}${3://${4:step}}$0
+endsnippet
+
+snippet "sigil c" "Kernel.sigil_c/2"
+~c(${1:chars})$0
+endsnippet
+
+snippet "sigil D" "Kernel.sigil_D/2"
+~D[${1:`date +%Y-%m-%d`}]$0
+endsnippet
+
+snippet "sigil N" "Kernel.sigil_N/2"
+~N[${1:`date "+%Y-%m-%d %T"`}]$0
+endsnippet
+
+# https://hexdocs.pm/elixir/1.12/Regex.html#module-modifiers
+snippet "sigil r" "Kernel.sigil_r/2"
+~r/${2:regex}/${1|f,i,m,s,u,x,U|}$0
+endsnippet
+
+snippet "sigil s" "Kernel.sigil_s/2"
+~s(${1:string})$0
+endsnippet
+
+snippet "sigil T" "Kernel.sigil_T/2"
+~T[${1:`date +%T`}]$0
+endsnippet
+
+# https://hexdocs.pm/elixir/1.12/Kernel.html#sigil_w/2
+snippet "sigil w" "Kernel.sigil_w/2"
+~w(${2:words})${1|s,a,c|}$0
+endsnippet
+
+snippet use "Kernel.use/2" b
+use ${1:Module}${2:, ${3:key}: ${4:value}}$0
+endsnippet

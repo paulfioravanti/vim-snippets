@@ -1,0 +1,9 @@
+snippet def "def <name>..."
+def ${1:method_name}${2:(${3:*args})}
+  $0
+end
+endsnippet
+
+snippet .map ".map" i
+.map${1|inline block,do block,explicit block,local proc,local method,external method|}$0
+endsnippet

@@ -1,0 +1,15 @@
+snippet import "import from module"
+import { ${1:exported} } from "${2:module-name}"$0
+endsnippet
+
+snippet "import all as" "import all in module as alias"
+import * as ${1:alias} from "${2:module-name}"$0
+endsnippet
+
+snippet "import as" "import from module"
+import { ${1:exported} as ${2:alias} } from "${3:module-name}"$0
+endsnippet
+
+snippet "import default" "import default exported"
+import ${1:defaultExported} from "${2:module-name}"$0
+endsnippet

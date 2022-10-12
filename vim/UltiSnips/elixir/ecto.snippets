@@ -1,0 +1,46 @@
+global !p
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character
+)
+
+def first_visual_character(snip):
+    if visual_text := snip.v.text:
+        return visual_text[0].lower()
+    return "x"
+
+def query_expression_name(match):
+    name = match.group(1)
+    name = "order_by" if name == "order" or name == "order by" else name
+    return name
+
+endglobal
+
+snippet asc "Ecto.Query.order_by/3 asc direction list" i
+${1|asc,asc_nulls_last,asc_nulls_first|}: ${2:field}$0
+endsnippet
+
+snippet desc "Ecto.Query.order_by/3 desc direction list" i
+${1|desc,desc_nulls_last,desc_nulls_first|}: ${2:field}$0
+endsnippet
+
+snippet from "Ecto.Query.from/2" i
+from${1:(}${2:${3:`!p snip.rv = first_visual_character(snip)`} in }${4:${VISUAL:Queryable}}`!p snip.rv = closing_character(t[1])`$0
+endsnippet
+
+snippet "\b(order(?: by)?|select|where)" "Ecto.Query.(order_by|select|where)/3" ri
+`!p snip.rv = query_expression_name(match)`: ${1:expression}$0
+endsnippet
+
+snippet "\b(order(?: by)?|select|where) (?:function|expression)" "Ecto.Query.(order_by|select|where)/3" r
+`!p snip.rv = query_expression_name(match)`(${1:${2:query}, }${3:[${4:binding}], }${5:expression})$0
+endsnippet
+
+snippet "update all" "Ecto.Repo.c:update_all/3"
+Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
+endsnippet
+
+snippet "validate length" "Ecto.Changeset.validate_length/3"
+validate_length(${1:${2:changeset}, }:${3:field}, ${4:is: ${5:length}${6:, }}${7:min: ${8:length}${9:, }}${10:max: ${11:length}${12:, }}${13:count: :${14:length_type}${15:, }}${16:message: "${17:message}"})$0
+endsnippet

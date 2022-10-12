@@ -1,0 +1,27 @@
+# Vim Snippets
+
+This is my collection of [Vim][] snippets, for use with [Ultisnips][].
+
+Their original home was in [my dotfiles][] before I extracted them out into
+this repository. I still use [rcm][] to symlink my `.vim` directory to the
+snippets, which requires the top-level `vim` directory here.
+
+Trigger words for snippets are typically short words or mnemonics (see
+[`honza/vim-snippets`][]), but many of mine tend to be whole words or phrases,
+since I use them primarily with [Plover][] [stenography][], which enables that
+easily.
+
+## Videos
+
+You can see the snippets in action during the following videos:
+
+- _[Rails 7: The Steno Demo][]_
+
+[`honza/vim-snippets`]: https://github.com/honza/vim-snippets
+[my dotfiles]: https://github.com/paulfioravanti/dotfiles
+[Plover]: https://www.openstenoproject.org/plover/
+[Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
+[rcm]: https://github.com/thoughtbot/rcm
+[stenography]: https://en.wikipedia.org/wiki/Stenotype
+[Ultisnips]: https://github.com/SirVer/ultisnips
+[Vim]: https://www.vim.org/

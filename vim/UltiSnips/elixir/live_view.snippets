@@ -1,0 +1,110 @@
+global !p
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character,
+    module_name,
+    to_module_name
+)
+
+def key_closing(opening):
+    return "," if opening == ":" else ":"
+
+endglobal
+
+# NOTE: Choice tabstops cannot be used to select between a potential
+# assign="x" or assign={x} due to issues around having no spaces between the
+# choice tabstop definition. Might be a bug with Ultisnips...
+
+snippet assign "Phoenix.LiveView.assign/(2|3)"
+assign(${1:socket, }${2::}${3:key}`!p snip.rv = key_closing(t[2])` ${4:$3})$0
+endsnippet
+
+snippet "assign new" "Phoenix.LiveView.assign_new/3"
+assign_new(${1:${2|assigns,socket|}, }:${3:key}, fn -> ${4:do_something} end)$0
+endsnippet
+
+snippet component "Phoenix.LiveView.Helpers.component/2" b
+<${1:Module}.${2:function}
+  ${3:assign}=${4:"}${5:value}`!p snip.rv = closing_character(t[4])`$6
+/>$0
+endsnippet
+
+snippet "connected(:??)?" "Phoenix.LiveView.connected?/1" r
+connected?(socket)$0
+endsnippet
+
+snippet form "Phoenix.LiveView.Helpers.form/1"
+<.form
+  let={${1:f}}
+  for={${2:@changeset}}
+  ${3:id="${4:form-id}"}
+  ${4:phx-target={${5:@myself}}}
+  ${6:phx-change="${7:validate}"}
+  ${8:phx-submit="${9:save}"}>
+
+  $0
+
+  <div>
+    <%= submit "${10:Save}", ${11:phx_disable_with: "${12:Saving...}"} %>
+  </div>
+</.form>
+endsnippet
+
+snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event/3"
+@impl true
+def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
+  ${4:socket = ${5:assign(socket, ${6::}${7:key}`!p snip.rv = key_closing(t[6])` ${8:$7}})}$0
+  ${3|{:noreply\, socket},{:reply\, reply_map\, socket}|}
+end
+endsnippet
+
+snippet heex "Phoenix.LiveView.Helpers.sigil_H/2"
+~H"""
+$0
+"""
+endsnippet
+
+snippet "live component" "Phoenix.LiveView.Helpers.live_component/1" b
+`!p
+module, file = module_name(path).rsplit(".", 1)
+`<.live_component
+  module={`!p snip.rv = module`.${1:`!p snip.rv = file`}Component}
+  id={${2:live-component-id}}$0
+/>
+endsnippet
+
+snippet "live patch" "Phoenix.LiveView.Helpers.live_patch/2"
+<%= live_patch${1: "${2:text}",} to: Routes.${3:path_function}(@socket, :${4:action}${5:, ${6:param}})${7:, replace: true} ${8:do %>
+  $9
+<% end %>}`!p snip.rv = "" if t[8] else "%>"`$0
+endsnippet
+
+snippet "live route" "Defines a LiveView route"
+live "/${1:path}", ${2:`!p snip.rv = to_module_name(t[1])`}Live${3:, :${4:action}${5:, ${6:opts}}}$0
+endsnippet
+
+snippet mount "Phoenix.LiveView.mount/3"
+@impl true
+def mount(${1|params,_params,:not_mounted_at_router|}, ${2:_}session, socket) do
+  ${3:socket = ${4:assign(socket, ${5::}${6:key}`!p snip.rv = key_closing(t[5])` ${7:$6}}})$0
+  {:ok, socket}
+end
+endsnippet
+
+snippet render "Phoenix.(LiveView|LiveComponent).render/1"
+@impl true
+def render(assigns) do
+  ~H"""
+  $0
+  """
+end
+endsnippet
+
+snippet "temporary assigns" "temporary_assigns parameter"
+temporary_assigns: [${1:assign}: ${2:reset_value}]$0
+endsnippet
+
+snippet update "Phoenix.LiveView.update/3"
+update(${1|socket,assigns|}, :${2:key}, ${3:fun})$0
+endsnippet

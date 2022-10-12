@@ -1,0 +1,32 @@
+extends html
+extends elixir
+
+global !p
+
+import re
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character
+)
+
+def eex_placeholder(tag):
+    if tag == "%#":
+        return "comment"
+    if tag in ["%%", "%%="]:
+        return "quotation"
+    return "expression"
+
+endglobal
+
+snippet assign-value "Assign-value pair"
+${1:assign}=${2:"}${3:value}`!p snip.rv = closing_character(t[2])`$0
+endsnippet
+
+snippet "\beex" "EEx tag" r
+<${1|%,%=,%#,%%,%%=|} ${2:`!p snip.rv = eex_placeholder(t[1])`} %>$0
+endsnippet
+
+snippet end "EEx <% end %> tag" b
+<% end %>$0
+endsnippet

@@ -1,0 +1,28 @@
+global !p
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    closing_character
+)
+
+endglobal
+
+# Always have snippets defined here override the ones imported from the
+# html.snippets file.
+priority 1
+
+# NOTE: Choice tabstops cannot be used to select between a potential attr="x" or
+# attr={x} due to issues around having no spaces between the choice tabstop
+# definition. Seems like a bug in Ultisnips...
+
+snippet "\b(button|div|p|span)" "Heex HTML tag with id and class options" r
+`!p
+tag = match.group(1)
+`<`!p snip.rv = tag`${1:${2: id=${3:"}${4:id}`!p snip.rv = closing_character(t[3])`}${5: class=${6:"}${7:class}`!p snip.rv = closing_character(t[6])`}}>
+  ${0:${VISUAL}}
+</`!p snip.rv = tag`>
+endsnippet
+
+snippet interpolate "Heex string interpolation" i
+#{${1:attribute}}$0
+endsnippet
