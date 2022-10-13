@@ -10,8 +10,11 @@ snippet "box shadow" "CSS box-shadow property"
 box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color};$0
 endsnippet
 
-snippet class "CSS class selector"
-.${1:class_name} {
+snippet "(class|id)" "CSS class selector" r
+`!p
+selector_type = match.group(1)
+selector = "." if selector_type == "class" else "#"
+snip.rv = selector`${1:`!p snip.rv = selector_type`_name} {
   $2
 }$0
 endsnippet
