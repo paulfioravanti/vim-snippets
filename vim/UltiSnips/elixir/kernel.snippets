@@ -18,6 +18,10 @@ snippet alias "Kernel.SpecialForms.alias/2"
 alias ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4: as: ${5:Keyword}}$0
 endsnippet
 
+snippet bitstring "Kernel.SpecialForms.<<>>/1"
+<<$1>>$0
+endsnippet
+
 snippet case "Kernel.SpecialForms.case/2"
 case ${1:value} do
   ${2:pattern} ${3:when ${4:condition} }->

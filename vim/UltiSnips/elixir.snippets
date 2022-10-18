@@ -14,6 +14,10 @@ def key_closing(opening):
 
 endglobal
 
+snippet "bitstring generator" "Bitstring generator used in for comprehensions"
+<<${1:char} <- ${2:"${3:binary}"}>>$0
+endsnippet
+
 snippet "cancel timer(?: 2)?" "Process.cancel_timer/2" r
 Process.cancel_timer(${1:timer_ref}${2:${3:, async: ${4:true}}${5:, info: ${6:false}}})
 endsnippet
@@ -57,6 +61,10 @@ snippet map "Literal Elixir map" i
 %{${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4}$0
 endsnippet
 
+snippet "list generator" "List generator used in for comprehensions"
+${1:element} <- ${2:[${3:list}]}$0
+endsnippet
+
 snippet message "Exception.message/1"
 @impl true
 def message(${1:exception}) do
@@ -70,6 +78,10 @@ endsnippet
 
 snippet "(?:enum )?random" "Enum.random/1" r
 Enum.random(${1:enumerable})$0
+endsnippet
+
+snippet segment "Bitstring segment"
+${1:name}::${2:type}$0
 endsnippet
 
 snippet "send after(?: 4)?" "Process.send_after/4" r
