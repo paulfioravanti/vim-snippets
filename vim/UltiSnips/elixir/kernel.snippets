@@ -95,8 +95,8 @@ snippet "\b(if|unless)" "Kernel.(if|unless)/2" r
 `!p snip.rv = match.group(1)` ${1:condition} do
   ${2:${VISUAL:do_something}}${3:
 else
-  ${4:do_something_else}}$0
-end
+  ${4:do_something_else}}
+end$0
 endsnippet
 
 snippet "\b(if|unless):" "Kernel.(if|unless)/2 single-line" r
