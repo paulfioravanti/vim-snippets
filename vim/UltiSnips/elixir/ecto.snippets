@@ -42,5 +42,5 @@ Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:v
 endsnippet
 
 snippet "validate length" "Ecto.Changeset.validate_length/3"
-validate_length(${1:${2:changeset}, }:${3:field}, ${4:is: ${5:length}${6:, }}${7:min: ${8:length}${9:, }}${10:max: ${11:length}${12:, }}${13:count: :${14:length_type}${15:, }}${16:message: "${17:message}"})$0
+validate_length(${1:${2:changeset}, }:${3:field}${4:, is: ${5:length}}${6:, min: ${7:length}}${8:, max: ${9:length}}${10:, count: :${11:length_type}}${12:, message: "${13:message}"})$0
 endsnippet
