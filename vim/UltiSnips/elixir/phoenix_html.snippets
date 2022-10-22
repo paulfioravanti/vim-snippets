@@ -45,7 +45,7 @@ endsnippet
 context "maybe_eex_tag(snip)"
 snippet link "Phoenix.HTML.Link.link/2"
 ${1:`!p snip.rv = initial_eex_tag(snip)`}link${2: "${3:text}",} to: "${4:/href}"$5${6: do`!p snip.rv = do_eex_tag(snip, t[1])`
-  $7
+  ${7:${VISUAL}}
 `!p snip.rv = initial_end_eex_tag(snip, t[1])`end}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
 
