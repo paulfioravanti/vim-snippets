@@ -8,9 +8,9 @@ from elixir_helpers import (
 endglobal
 
 snippet broadcast "Phoenix.PubSub.broadcast/4"
-${1:Phoenix.PubSub.}broadcast(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}", ${5:message}${6:, ${7:dispatcher \\ __MODULE__}})$0
+${1:Phoenix.PubSub.}broadcast(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}", ${5:message}${6:, ${7:dispatcher}})$0
 endsnippet
 
 snippet subscribe "Phoenix.PubSub.subscribe/4"
-${1:Phoenix.PubSub.}subscribe(${2:${3:`!p snip.rv = root_module_name()`.PubSub}, }"${4:topic}"${6:, metadata: ${7:some_metadata}})$0
+${1:Phoenix.PubSub.}subscribe(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}"${6:, metadata: ${7:some_metadata}})$0
 endsnippet
