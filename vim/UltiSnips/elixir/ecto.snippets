@@ -5,9 +5,14 @@ from elixir_helpers import (
     closing_character
 )
 
-def first_visual_character(snip):
-    if visual_text := snip.v.text:
-        return visual_text[0].lower()
+def queryable_name(snip, match):
+    if queryable := snip.v.text or match.group(1):
+        return queryable.title()
+    return "Queryable"
+
+def queryable_first_character(queryable):
+    if queryable:
+        return queryable[0].lower()
     return "x"
 
 def query_expression_name(match):
@@ -25,8 +30,10 @@ snippet desc "Ecto.Query.order_by/3 desc direction list" i
 ${1|desc,desc_nulls_last,desc_nulls_first|}: ${2:field}$0
 endsnippet
 
-snippet from "Ecto.Query.from/2" i
-from${1:(}${2:${3:`!p snip.rv = first_visual_character(snip)`} in }${4:${VISUAL:Queryable}}`!p snip.rv = closing_character(t[1])`$0
+snippet "from(?: (\w+))?" "Ecto.Query.from/2" ri
+`!p
+queryable = queryable_name(snip, match)
+`from${1:(}${2:${3:`!p snip.rv = queryable_first_character(queryable)`} in }${4:`!p snip.rv = queryable`}$5`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet "\b(order(?: by)?|select|where)" "Ecto.Query.(order_by|select|where)/3" ri
