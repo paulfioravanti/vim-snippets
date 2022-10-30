@@ -15,8 +15,10 @@ since I use them primarily with [Plover][] stenography (see
 
 You can see the snippets in action during the following videos:
 
+- _[Build a real-time Twitter clone with steno using LiveView and Phoenix 1.6][]_
 - _[Rails 7: The Steno Demo][]_
 
+[Build a real-time Twitter clone with steno using LiveView and Phoenix 1.6]: https://www.youtube.com/watch?v=T_kMd7rxYU0
 [`honza/vim-snippets`]: https://github.com/honza/vim-snippets
 [my dotfiles]: https://github.com/paulfioravanti/dotfiles
 [my stenography dictionaries]: https://github.com/paulfioravanti/steno-dictionaries
