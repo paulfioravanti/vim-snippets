@@ -10,18 +10,18 @@ def maybe_eex_tag(snip):
     return snip.before.lstrip()[0:3]
 
 def initial_eex_tag(snip):
-    return f"{_OPENING_EVAL_EEX_TAG} " if not has_eex_context(snip) else ""
+    return f"{_OPENING_EVAL_EEX_TAG} " if not _has_eex_context(snip) else ""
 
 def do_eex_tag(snip, t):
-    return f" {_CLOSING_EEX_TAG}" if has_eex_context(snip) or t else ""
+    return f" {_CLOSING_EEX_TAG}" if _has_eex_context(snip) or t else ""
 
 def initial_end_eex_tag(snip, t):
-    return f"{_OPENING_EEX_TAG} " if has_eex_context(snip) or t else ""
+    return f"{_OPENING_EEX_TAG} " if _has_eex_context(snip) or t else ""
 
 def final_eex_tag(snip, t):
-    return f" {_CLOSING_EEX_TAG}" if not has_eex_context(snip) and t else ""
+    return f" {_CLOSING_EEX_TAG}" if not _has_eex_context(snip) and t else ""
 
-def has_eex_context(snip):
+def _has_eex_context(snip):
     return snip.context == "<%="
 
 endglobal
