@@ -14,14 +14,14 @@ def emphasis_ending(opening):
 
 endglobal
 
-snippet "(code|code block|block)" "Code block" rb
+snippet "(code block|block)" "Code block" rb
 \`\`\`${1:txt}
 ${2:${VISUAL}}
 \`\`\`
 $0
 endsnippet
 
-snippet "code inline" "Inline Code" i
+snippet code "Inline Code" i
 \`${1:${VISUAL}}\`$0
 endsnippet
 
