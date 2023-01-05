@@ -14,7 +14,7 @@ def emphasis_ending(opening):
 
 endglobal
 
-snippet "(code block|block)" "Code block" rb
+snippet "((c|C)ode block|(B|b)lock)" "Code block" rb
 \`\`\`${1:txt}
 ${2:${VISUAL}}
 \`\`\`
@@ -89,6 +89,10 @@ endsnippet
 # entry, as sometimes gets highlighted in the Plover paper tape.
 snippet steno "Steno string entry" i
 "${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"$0
+endsnippet
+
+snippet "steno heading" "Steno heading entry" b
+### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"\`$0
 endsnippet
 
 snippet string "Literal string" i
