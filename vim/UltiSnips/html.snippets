@@ -6,7 +6,7 @@ tag = match.group(1)
 </`!p snip.rv = tag`>
 endsnippet
 
-snippet "\b(article|audio|body|button|code|div|figcaption|figure|footer|head|html|kbd|li|main|nav|ol|p|pre|rt|ruby|samp|section|select|span|style|table|tbody|td|textarea|tf|th|thead|title|tr|ul|var|video)" "HTML tag with id and class options" r
+snippet "\b(article|audio|body|button|code tag|div|figcaption|figure|footer|head|html|kbd|li|main|nav|ol|p|pre|rt|ruby|samp|section|select|span|style|table|tbody|td|textarea|tf|th|thead|title|tr|ul|var|video)" "HTML tag with id and class options" r
 `!p
 tag = match.group(1)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>
@@ -32,7 +32,7 @@ tag = match.group(1)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
-snippet "\b(?:h|heading )([1-6])" "HTML heading" r
+snippet "\bh([1-6])" "HTML heading" r
 `!p
 level = match.group(1)
 `<h`!p snip.rv = level`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</h`!p snip.rv = level`>$0
