@@ -20,7 +20,7 @@ tag = match.group(1)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
-snippet "(em|strong)" "Inline HTML tag without options" ri
+snippet "(em tag|strong)" "Inline HTML tag without options" ri
 `!p
 tag = match.group(1)
 `<`!p snip.rv = tag`>${1:${VISUAL}}</`!p snip.rv = tag`>$0
