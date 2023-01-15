@@ -20,7 +20,14 @@ def query_expression_name(match):
     name = "order_by" if name == "order" or name == "order by" else name
     return name
 
+def maybe_comma(left, right):
+    return ", " if left and right else ""
+
 endglobal
+
+snippet "(?:repo )?all" "Ecto.Repo.c:all/2" r
+Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
+endsnippet
 
 snippet asc "Ecto.Query.order_by/3 asc direction list" i
 ${1|asc,asc_nulls_last,asc_nulls_first|}: ${2:field}$0
@@ -44,7 +51,7 @@ snippet "\b(order(?: by)?|select|where) (?:function|expression)" "Ecto.Query.(or
 `!p snip.rv = query_expression_name(match)`(${1:${2:query}, }${3:[${4:binding}], }${5:expression})$0
 endsnippet
 
-snippet "update all" "Ecto.Repo.c:update_all/3"
+snippet "(?:repo )?update all" "Ecto.Repo.c:update_all/3" r
 Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
 endsnippet
 
