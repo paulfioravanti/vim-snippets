@@ -22,6 +22,10 @@ snippet "cancel timer(?: 2)?" "Process.cancel_timer/2" r
 Process.cancel_timer(${1:timer_ref}${2:${3:, async: ${4:true}}${5:, info: ${6:false}}})
 endsnippet
 
+snippet comment "Elixir comment"
+# ${1:${VISUAL}}$0
+endsnippet
+
 snippet exception "Exception.exception/1"
 @impl true
 def exception(${1:term}) do
