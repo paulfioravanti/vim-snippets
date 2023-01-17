@@ -54,7 +54,7 @@ endsnippet
 snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event/3"
 @impl true
 def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
-  ${4:socket = ${5:assign(socket, ${6::}${7:key}`!p snip.rv = key_closing(t[6])` ${8:$7}})}$0
+  ${4:socket = ${5:assign(socket, ${6::}${7:key}`!p snip.rv = key_closing(t[6])` ${8:$7})}}$0
   ${3|{:noreply\, socket},{:reply\, reply_map\, socket}|}
 end
 endsnippet
