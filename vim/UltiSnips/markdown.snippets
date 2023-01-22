@@ -91,7 +91,7 @@ snippet steno "Steno string entry" i
 "${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"$0
 endsnippet
 
-snippet "steno ([\w\*\/]+)" "Steno string entry with outline" ri
+snippet "steno ([\w\*\/\-]+)" "Steno string entry with outline" ri
 `!p
 outline = match.group(1)
 `"${1:`!p snip.rv = outline`}": "${2:value}"$0
