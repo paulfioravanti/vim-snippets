@@ -33,3 +33,7 @@ endsnippet
 snippet "tabstop choice" "Ultisnip tabstop" i
 ${${1:n}|${2:choice1},${3:choice2}|}$0
 endsnippet
+
+snippet visual "Ultisnip Visual placeholder" i
+`!p snip.rv = "${VISUAL:"`${1:${VISUAL:default}}`!p snip.rv = "}"`$0
+endsnippet
