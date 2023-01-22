@@ -27,6 +27,12 @@ snippet steno "String steno dictionary entry" b
 "${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"${3:,}$0
 endsnippet
 
+snippet "steno ([\w\*\/]+)" "String steno dictionary entry with outline" ri
+`!p
+outline = match.group(1)
+`"${1:`!p snip.rv = outline`}": "${2:value}"${3:,}$0
+endsnippet
+
 snippet string "String" b
 "${1:key}": "${2:value}"${3:,}$0
 endsnippet
