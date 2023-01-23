@@ -88,7 +88,7 @@ endsnippet
 # Final substitution is just to remove my final "copy" (KP*EU) brief from the
 # entry, as sometimes gets highlighted in the Plover paper tape.
 snippet steno "Steno string entry" i
-"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"$0
+"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"$0
 endsnippet
 
 snippet "steno ([\w\*\/\-]+)" "Steno string entry with outline" ri
@@ -98,7 +98,7 @@ outline = match.group(1)
 endsnippet
 
 snippet "steno heading" "Steno heading entry" b
-### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$', '', 'g')->substitute('\s', '', 'g')`}": "${2:value}"\`$0
+### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`$0
 endsnippet
 
 snippet string "Literal string" i
