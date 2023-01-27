@@ -25,7 +25,7 @@ endsnippet
 snippet case "Kernel.SpecialForms.case/2"
 case ${1:value} do
   ${2:pattern} ${3:when ${4:condition} }->
-    ${5:${VISUAL:do_something}}
+    ${5:${VISUAL:# do something}}
   _ ->
     $6
 end$0
@@ -34,7 +34,7 @@ endsnippet
 snippet cond "Kernel.SpecialForms.cond/2"
 cond do
   ${1:condition} ->
-    ${2:${VISUAL:do_something}}
+    ${2:${VISUAL:# do something}}
   true ->
     $3
 end$0
@@ -42,7 +42,7 @@ endsnippet
 
 snippet condition "Kernel.SpecialForms.cond/2 condition"
 ${1:condition} ->
-  ${2:${VISUAL:do_something}}$0
+  ${2:${VISUAL:# do something}}$0
 endsnippet
 
 snippet def "Kernel.(def|defp)/2 multiline"
@@ -84,23 +84,23 @@ end}`!p snip.rv = maybe_single_line(t[2])`$0
 endsnippet
 
 snippet "f(:?u)?n(:?ction)?" "Kernel.SpecialForms.fn/2" ri
-fn ${1:args} -> ${2:do_something} end$0
+fn ${1:args} -> $2 end$0
 endsnippet
 
 snippet "f(:?u)?n(:?ction)? (?:(&|capture))" "Kernel.SpecialForms.&/1" ri
-&(&1${1:do_something})$0
+&(&1$1)$0
 endsnippet
 
 snippet "\b(if|unless)" "Kernel.(if|unless)/2" r
 `!p snip.rv = match.group(1)` ${1:condition} do
-  ${2:${VISUAL:do_something}}${3:
+  ${2:${VISUAL:# do something}}${3:
 else
-  ${4:do_something_else}}
+  ${4:# do something else}}
 end$0
 endsnippet
 
 snippet "\b(if|unless):" "Kernel.(if|unless)/2 single-line" r
-`!p snip.rv = match.group(1)` ${1:condition}, do: ${2:${VISUAL:do_something}}${3:, else: ${4:do_something_else}}$0
+`!p snip.rv = match.group(1)` ${1:condition}, do: ${2:${VISUAL}}${3:, else: $4}$0
 endsnippet
 
 snippet import "Kernel.SpecialForms.import/2"
@@ -113,7 +113,7 @@ endsnippet
 
 snippet pattern "Kernel.SpecialForms.case/2 pattern match"
 ${1:pattern} ${2:when ${3:condition} }->
-  ${0:do_something}
+  ${0:# do something}
 endsnippet
 
 snippet range "Kernel...///3" i
