@@ -1,3 +1,5 @@
+priority -1
+
 global !p
 
 def maybe_comma(snip):
@@ -5,8 +7,16 @@ def maybe_comma(snip):
 
 endglobal
 
+snippet () "Literal function parentheses" i
+(${1:args})$0
+endsnippet
+
 snippet "less than" "<"
 < 
+endsnippet
+
+snippet "(array/list)" "Literal array/list" ri
+[$1]$0
 endsnippet
 
 snippet "more than" "<"
@@ -26,4 +36,8 @@ snippet "steno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno d
 `!p
 outline = match.group(1).upper()
 `"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_comma(snip)`$0
+endsnippet
+
+snippet string "Literal string" i
+"$1"$0
 endsnippet
