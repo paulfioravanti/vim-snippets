@@ -18,21 +18,6 @@ ${1:"${2:key}": }{
 }${3:,}
 endsnippet
 
-# Specifically for steno dictionary entries.
-# Copy a single/multi-stroke outline from the steno tape and it gets auto-filled
-# by the snippet, swapping out new line characters for slashes.
-# Final substitution is just to remove my final "copy" (KP*EU) brief from the
-# entry, as sometimes gets highlighted in the Plover paper tape.
-snippet steno "String steno dictionary entry" b
-"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"${3:,}$0
-endsnippet
-
-snippet "steno ([\w\*\/\-]+)" "String steno dictionary entry with outline" ri
-`!p
-outline = match.group(1)
-`"${1:`!p snip.rv = outline`}": "${2:value}"${3:,}$0
-endsnippet
-
 snippet string "String" b
 "${1:key}": "${2:value}"${3:,}$0
 endsnippet
