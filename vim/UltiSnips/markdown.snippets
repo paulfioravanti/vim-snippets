@@ -29,10 +29,6 @@ snippet comment "Markdown comment"
 <!-- ${1:${VISUAL}} -->$0
 endsnippet
 
-snippet command "Plover control command" i
-{#${1:COMMAND}}
-endsnippet
-
 snippet em "Markdown emphasis, strong, combination" w
 ${1|_,**,**_|}${2:${VISUAL}}`!p snip.rv = emphasis_ending(t[1])`$0
 endsnippet
