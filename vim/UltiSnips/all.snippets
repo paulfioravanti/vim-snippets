@@ -29,16 +29,16 @@ endsnippet
 
 ### Plover ###
 
-snippet command "Plover control command" i
-{#${1:COMMAND}}
-endsnippet
-
 snippet "(alt|control|option|shift|super)" "Plover modifier keystroke" ri
 `!p
 modifier = match.group(1).upper()
 modifier = "ALT" if modifier == "OPTION" else modifier
 snip.rv = modifier
 `(${1:KEY})$0
+endsnippet
+
+snippet command "Plover control command" i
+{#${1:COMMAND}}
 endsnippet
 
 snippet "command shell" "Plover shell command" i
