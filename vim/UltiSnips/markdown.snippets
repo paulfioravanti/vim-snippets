@@ -83,5 +83,11 @@ snippet "link inline" "Inline link"
 endsnippet
 
 snippet "steno heading" "Steno heading entry" b
-### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`$0
+### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`
+
+$0
+
+\`\`\`yaml
+"$1": "$2"
+\`\`\`
 endsnippet
