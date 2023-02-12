@@ -11,6 +11,14 @@ snippet () "Literal function parentheses" i
 (${1:args})$0
 endsnippet
 
+snippet and "&& operator" i
+&& $0
+endsnippet
+
+snippet equals "== operator" i
+== $0
+endsnippet
+
 snippet "less than" "<"
 < 
 endsnippet
@@ -21,6 +29,10 @@ endsnippet
 
 snippet "more than" "<"
 > 
+endsnippet
+
+snippet "not (equal(s)?|=)" "!= operator" ri
+!= $0
 endsnippet
 
 snippet string "Literal string" i
