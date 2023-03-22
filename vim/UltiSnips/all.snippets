@@ -2,7 +2,7 @@ priority -1
 
 global !p
 
-def maybe_comma(snip):
+def maybe_ending_comma(snip):
     return "," if snip.ft == "json" else ""
 
 endglobal
@@ -67,11 +67,11 @@ endsnippet
 # Final substitution is just to remove my final "copy" (KP*EU) brief from the
 # entry, as sometimes gets highlighted in the Plover paper tape.
 snippet steno "String steno dictionary entry" b
-"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"`!p snip.rv = maybe_comma(snip)`$0
+"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
 endsnippet
 
 snippet "steno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno dictionary entry with outline" ri
 `!p
 outline = match.group(1).upper()
-`"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_comma(snip)`$0
+`"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
 endsnippet

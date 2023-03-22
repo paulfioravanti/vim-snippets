@@ -5,6 +5,11 @@ from elixir_helpers import (
     closing_character
 )
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
 def queryable_name(snip, match):
     if queryable := snip.v.text or match.group(1):
         return queryable.title()
@@ -19,9 +24,6 @@ def query_expression_name(match):
     name = match.group(1)
     name = "order_by" if name == "order" or name == "order by" else name
     return name
-
-def maybe_comma(left, right):
-    return ", " if left and right else ""
 
 endglobal
 
