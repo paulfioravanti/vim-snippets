@@ -1,9 +1,19 @@
 """
-Ultisnips snippet global helper functions. Intended for any language.
+Ultisnips snippet global helper functions. Intended for multiple languages.
 NOTE: Changes to this file require restarting Vim!
 """
 
 import vim
+
+def key_closing(opening):
+    """
+    Intended for languages that have key-value stores where their keys can be
+    written as both strings or some kind of constant (like an atom or symbol
+    etc). E.g.
+    {"foo" => bar}
+    {foo: bar}
+    """
+    return "\" =>" if opening == "\"" else ":"
 
 def maybe_comma(left, right):
     """

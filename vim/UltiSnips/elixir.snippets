@@ -4,13 +4,15 @@ extends eelixir
 
 global !p
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    key_closing
+)
+
 # ~/.vim/pythonx/elixir_helpers.py
 from elixir_helpers import (
     closing_character
 )
-
-def key_closing(opening):
-    return "\" =>" if opening == "\"" else ":"
 
 endglobal
 

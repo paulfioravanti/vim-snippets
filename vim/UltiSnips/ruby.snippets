@@ -1,5 +1,10 @@
 global !p
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    key_closing
+)
+
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
@@ -16,8 +21,8 @@ else
 end$0
 endsnippet
 
-snippet "(class|module)" "class or module declaration" br
-`!p snip.rv = match.group(1)` ${1:`!p snip.rv = class_name(snip)`}
+snippet class "class declaration" b
+class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}
   $0
 end
 endsnippet
