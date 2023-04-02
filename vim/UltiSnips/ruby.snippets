@@ -1,11 +1,5 @@
 global !p
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
-    maybe_comma,
-    maybe_surround
-)
-
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
@@ -34,29 +28,13 @@ ${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}
 end
 endsnippet
 
-snippet ".each(_| )slice" ".each_slice(n) { ... }" ri
-.each_slice(${1:n})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
-endsnippet
-
 snippet "else if" "else if condition"
 elsif ${1:condition}
   ${2:${VISUAL:# do something}}$0
 endsnippet
 
-snippet "\.end(s)? with" ".end_with? method" ri
-.end_with?("${1:string}")$0
-endsnippet
-
 snippet "frozen( string( literal)?)?" "frozen string literal pragma" br
 # frozen_string_literal: true$0
-endsnippet
-
-snippet .gsub ".gsub(pattern, replacement)" i
-.gsub(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:replacement})$0
-endsnippet
-
-snippet "\.gsub block" ".gsub(pattern) {|match| ... }" ri
-.gsub(${1:pattern}) { |${1:match}| $2 }$0
 endsnippet
 
 snippet "^(?!else)\b(if|unless)" "(if|unless) statements" r
@@ -67,24 +45,8 @@ else
 end$0
 endsnippet
 
-snippet "(\.(map|then))" ".(map|then) methods" ri
-`!p snip.rv = match.group(1)`${1|inline block,do block,explicit block,local proc,local method,external method|}$0
-endsnippet
-
-snippet "(?<!/)\.match\?" "match?(pattern, offset = 0) method" ri
-.match?(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:offset})$0
-endsnippet
-
-snippet "(?<=/)\.match\?" "/regex/.match?(string) method" ri
-.match?(${1:string})$0
-endsnippet
-
 snippet "module function" "module_function statement" b
 module_function$0
-endsnippet
-
-snippet .modulo "modulo(p1)" i
-.modulo(${1:n})$0
 endsnippet
 
 snippet "private constant" "private_constant statement" b
@@ -94,10 +56,6 @@ endsnippet
 
 snippet "(pattern|regex)" "/regex/" ri
 /${1:pattern}/${2:.freeze}$0
-endsnippet
-
-snippet .sum ".sum(initial_value = 0) {|element| ... }" i
-.sum${1:(${2:initial_value})}${3:`!p snip.rv = maybe_surround(t[4], "<<")`${4|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[4], ">>")`}$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
