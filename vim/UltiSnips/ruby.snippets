@@ -8,6 +8,14 @@ from global_helpers import (
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
+def words_to_constant(match):
+    capture = match.group(1)
+    if not capture:
+        return "CONSTANT_NAME"
+
+    word_list = capture.upper().split()
+    return "_".join(word_list)
+
 endglobal
 
 snippet case "case statement"
@@ -43,7 +51,7 @@ snippet "frozen( string( literal)?)?" "frozen string literal pragma" br
 endsnippet
 
 snippet hash "Literal Ruby hash" i
-{${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4}$0
+{ ${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4 }$0
 endsnippet
 
 snippet "^(?!else)\b(if|unless)" "(if|unless) statements" r
@@ -78,9 +86,8 @@ snippet "module function" "module_function statement" b
 module_function$0
 endsnippet
 
-snippet "private constant" "private_constant statement" b
-${1:CONSTANT_NAME} = ${2:value}
-private_constant :$1$0
+snippet "private constant( .+)?" "private_constant statement" br
+private_constant :${1:`!p snip.rv = words_to_constant(match)`}$0
 endsnippet
 
 snippet "(pattern|regex)" "/regex/" ri
