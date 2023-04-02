@@ -42,12 +42,32 @@ snippet "frozen( string( literal)?)?" "frozen string literal pragma" br
 # frozen_string_literal: true$0
 endsnippet
 
+snippet hash "Literal Ruby hash" i
+{${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4}$0
+endsnippet
+
 snippet "^(?!else)\b(if|unless)" "(if|unless) statements" r
 `!p snip.rv = match.group(1)` ${1:condition}
   ${2:${VISUAL:# do something}}${3:
 else
   ${4:# do something else}}
 end$0
+endsnippet
+
+snippet initialize "def initialize ..." b
+def initialize(${1:*args})
+  $0
+end
+endsnippet
+
+snippet key-value "Key-value pair" i
+${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
+endsnippet
+
+snippet module "module declaration" b
+module ${1:`!p snip.rv = class_name(snip)`}
+  $0
+end
 endsnippet
 
 snippet "module function" "module_function statement" b
@@ -70,4 +90,10 @@ endsnippet
 snippet when "when clause for case statement" b
 when ${1:match}
   ${2:${VISUAL:# do something}}$0
+endsnippet
+
+snippet while "while <expression> ... end"
+while ${1:expression}
+  $0
+end
 endsnippet
