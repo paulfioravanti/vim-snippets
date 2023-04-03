@@ -16,10 +16,22 @@ snippet "inline block" "{ |<element>| <block> }" i
  { |${1:element}| $2 }$0
 endsnippet
 
+snippet lambda "lambda object" i
+${1|lambda,->|}${2|inline block,do block,lambda proc literal|}$0
+endsnippet
+
+snippet "lambda proc literal" "->(element) { <block> }" i
+${1:(${2:element}) }{ $3 }$0
+endsnippet
+
 snippet "local method" "(&method(:method))" i
 (&method(:${1:method}))$0
 endsnippet
 
 snippet "local proc" "(&:method)" i
 (&:${1:method})$0
+endsnippet
+
+snippet "(?<!local )proc" "Proc object" ri
+${1|Proc.new,proc|}${2|inline block,do block|}$0
 endsnippet
