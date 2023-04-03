@@ -26,11 +26,11 @@ snippet "(?:(p|P))ython" "Inline python code" ri
 `!p snip.rv = "\`!p "`${1:snip.rv = }$2`!p snip.rv = "\`"`$0
 endsnippet
 
-snippet tabstop "Ultisnip tabstop" i
+snippet "(?<!choice )tabstop" "Ultisnip tabstop" ri
 ${${1:n}:${2:placeholder}}$0
 endsnippet
 
-snippet "tabstop choice" "Ultisnip tabstop" i
+snippet "choice tabstop" "Ultisnip tabstop" i
 ${${1:n}|${2:choice1},${3:choice2}|}$0
 endsnippet
 
