@@ -95,10 +95,6 @@ snippet "private constant( .+)?" "private_constant statement" br
 private_constant :${1:`!p snip.rv = words_to_constant(match)`}$0
 endsnippet
 
-snippet raise "Kernel#raise" i
-raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}
-endsnippet
-
 snippet ternary "ternary (?:) statement" i
 ${1:condition} ? ${2:true} : ${3:false}$0
 endsnippet
