@@ -8,10 +8,6 @@ from global_helpers import (
 
 endglobal
 
-snippet "attr (reader|writer|accessible)" "attr_* methods" br
-attr_`!p snip.rv = match.group(1)` :${1:method_name}$0
-endsnippet
-
 snippet ".each(_| )slice" ".each_slice(n) { ... }" ri
 .each_slice(${1:n})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
 endsnippet
