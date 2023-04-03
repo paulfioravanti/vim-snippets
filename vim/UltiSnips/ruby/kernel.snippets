@@ -1,3 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
+snippet catch "catch([tag]) {|tag| block } → obj" b
+catch(:${1:tag})${2|inline block,do block|}$0
+endsnippet
+
 snippet lambda "lambda { |...| block } → a_proc" i
 ${1|lambda,->|}${2|inline block,do block,lambda proc literal|}$0
 endsnippet
@@ -16,4 +29,8 @@ endsnippet
 
 snippet require "Kernel#require" b
 require "${1:name}"$0
+endsnippet
+
+snippet throw "Kernel#throw" i
+throw(:${1:tag}${2:, ${3:object}})
 endsnippet
