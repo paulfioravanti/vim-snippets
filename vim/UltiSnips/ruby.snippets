@@ -2,7 +2,8 @@ global !p
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    key_closing
+    key_closing,
+    maybe_comma
 )
 
 def class_name(snip):
@@ -86,12 +87,16 @@ snippet "module function" "module_function statement" b
 module_function$0
 endsnippet
 
+snippet "(pattern|regex)" "/regex/" ri
+/${1:pattern}/${2:.freeze}$0
+endsnippet
+
 snippet "private constant( .+)?" "private_constant statement" br
 private_constant :${1:`!p snip.rv = words_to_constant(match)`}$0
 endsnippet
 
-snippet "(pattern|regex)" "/regex/" ri
-/${1:pattern}/${2:.freeze}$0
+snippet raise "Kernel#raise" i
+raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
