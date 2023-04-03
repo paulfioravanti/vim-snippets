@@ -6,8 +6,19 @@ from global_helpers import (
     maybe_comma
 )
 
+_PERCENT_LITERALS = {
+    "string": "w",
+    "symbol": "i"
+}
+
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
+
+def percent_literal(match):
+    capture = match.group(1)
+    if capture:
+        return _PERCENT_LITERALS.get(capture, "")
+    return ""
 
 def words_to_constant(match):
     capture = match.group(1)
@@ -18,6 +29,10 @@ def words_to_constant(match):
     return "_".join(word_list)
 
 endglobal
+
+snippet "(string|symbol) (?:(array|list))" "string/symbol array list literals" ri
+%`!p snip.rv = percent_literal(match)`[$1]$0
+endsnippet
 
 snippet case "case statement"
 case ${1:expression}
@@ -93,6 +108,10 @@ endsnippet
 
 snippet "private constant( .+)?" "private_constant statement" br
 private_constant :${1:`!p snip.rv = words_to_constant(match)`}$0
+endsnippet
+
+snippet range "range literal" i
+${1:start}${2|..,...|}${3:end}$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
