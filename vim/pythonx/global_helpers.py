@@ -5,6 +5,21 @@ NOTE: Changes to this file require restarting Vim!
 
 import vim
 
+_CLOSING_CHARACTERS = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+    "\"": "\""
+}
+
+def closing_character(tabstop):
+    """
+    Return closing character for a tabstop containing an opening character.
+    """
+    if tabstop:
+        return _CLOSING_CHARACTERS.get(tabstop[0], "")
+    return ""
+
 def key_closing(opening):
     """
     Intended for languages that have key-value stores where their keys can be
@@ -14,20 +29,6 @@ def key_closing(opening):
     {foo: bar}
     """
     return "\" =>" if opening == "\"" else ":"
-
-def maybe_comma(left, right):
-    """
-    Aims to remove commas between function arguments when the right-side
-    argument is removed.
-    """
-    return ", " if left and right else ""
-
-def maybe_surround(choice_tabstop, surround):
-    """
-    Surround a choice tabstop with `surround` chars to indicate the whole
-    tabstop itself is optional.
-    """
-    return surround if not is_chosen(choice_tabstop) else ""
 
 def choice_tabstop_chosen(choice_tabstop):
     """
@@ -43,3 +44,17 @@ def jump_forward():
     """
     # REF: https://github.com/reconquest/vim-pythonx/blob/master/pythonx/px/snippets.py#LL117C5-L118C41
     vim.command('call feedkeys("\<C-R>=UltiSnips#JumpForwards()\<CR>")')
+
+def maybe_comma(left, right):
+    """
+    Aims to remove commas between function arguments when the right-side
+    argument is removed.
+    """
+    return ", " if left and right else ""
+
+def maybe_surround(choice_tabstop, surround):
+    """
+    Surround a choice tabstop with `surround` chars to indicate the whole
+    tabstop itself is optional.
+    """
+    return surround if not is_chosen(choice_tabstop) else ""

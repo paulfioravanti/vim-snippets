@@ -6,26 +6,12 @@ import re
 
 _DASHES_AND_UNDERSCORES = re.compile(r"[-_]")
 _FILE_EXTENSIONS = re.compile(r"\.(?:html\.(?:h|l)?eex|ex)$")
-_CLOSING_CHARACTERS = {
-    "(": ")",
-    "{": "}",
-    "[": "]",
-    "\"": "\""
-}
 _NON_MODULE_DIRNAMES = [
     "controllers",
     "lib",
     "live",
     "views"
 ]
-
-def closing_character(tabstop):
-    """
-    Return closing character for a tabstop containing an opening character.
-    """
-    if tabstop:
-        return _CLOSING_CHARACTERS.get(tabstop[0], "")
-    return ""
 
 def module_name(path):
     """
