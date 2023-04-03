@@ -14,6 +14,11 @@ _PERCENT_LITERALS = {
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
+def maybe_single_line(tabstop):
+    if not tabstop:
+        return "; end"
+    return ""
+
 def percent_literal(match):
     capture = match.group(1)
     if capture:
@@ -46,9 +51,9 @@ end$0
 endsnippet
 
 snippet class "class declaration" b
-class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}
+class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
   $0
-end
+end}`!p snip.rv = maybe_single_line(t[4])`
 endsnippet
 
 snippet def "Ruby method definition"
