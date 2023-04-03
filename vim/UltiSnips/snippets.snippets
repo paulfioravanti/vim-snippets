@@ -2,14 +2,16 @@ extends python
 
 global !p
 
-def trigger_closing(opening):
-    return "\"" if opening == "\"" else ""
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
 
 endglobal
 
 # Snippet options: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L662
 snippet snippet "Ultisnips snippet definition" b
-`!p snip.rv = "snippet"` ${1:"}${2:tab_trigger}`!p snip.rv = trigger_closing(t[1])` "${3:description}" ${4|b,i,w,r,t,s,m,e,A|}
+`!p snip.rv = "snippet"` ${1:"}${2:tab_trigger}`!p snip.rv = closing_character(t[1])` "${3:description}" ${4|b,i,w,r,t,s,m,e,A|}
 ${0:${VISUAL:snippet_content}}
 `!p snip.rv = "endsnippet"`
 endsnippet
