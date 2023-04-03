@@ -3,7 +3,8 @@ global !p
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     key_closing,
-    maybe_comma
+    maybe_comma,
+    maybe_surround
 )
 
 _PERCENT_LITERALS = {
@@ -117,6 +118,10 @@ endsnippet
 
 snippet range "range literal" i
 ${1:start}${2|..,...|}${3:end}$0
+endsnippet
+
+snippet struct "Struct.new" i
+Struct.new("${1:ClassName}"`!p snip.rv = maybe_comma(t[1], t[2])`${2:*member_names})${3:`!p snip.rv = maybe_surround(t[4], "<<")`${4|inline block,do block|}`!p snip.rv = maybe_surround(t[4], ">>")`}$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
