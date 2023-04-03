@@ -16,6 +16,10 @@ snippet ".each(_| )slice" ".each_slice(n) { ... }" ri
 .each_slice(${1:n})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
 endsnippet
 
+snippet ".each with object" "Enumerable#each_with_object" i
+.each_with_object(${1:object})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
+endsnippet
+
 snippet "\.end(s)? with" ".end_with? method" ri
 .end_with?("${1:string}")$0
 endsnippet
@@ -42,6 +46,10 @@ endsnippet
 
 snippet .modulo "modulo(p1)" i
 .modulo(${1:n})$0
+endsnippet
+
+snippet .reduce "Enumerable#reduce" i
+.reduce(${1:initial_value}`!p snip.rv = maybe_comma(t[1], t[2])`${2::${3:symbol}})${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[5], ">>")`}$0
 endsnippet
 
 snippet .sum ".sum(initial_value = 0) {|element| ... }" i
