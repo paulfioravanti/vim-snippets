@@ -60,4 +60,4 @@ def maybe_surround(choice_tabstop, surround):
     Surround a choice tabstop with `surround` chars to indicate the whole
     tabstop itself is optional.
     """
-    return surround if not is_chosen(choice_tabstop) else ""
+    return surround if not choice_tabstop_chosen(choice_tabstop) else ""
