@@ -2,14 +2,18 @@ snippet lambda "lambda { |...| block } → a_proc" i
 ${1|lambda,->|}${2|inline block,do block,lambda proc literal|}$0
 endsnippet
 
+snippet loop "loop { block }" i
+loop${1|inline block,do block|}$0
+endsnippet
+
 snippet "(?<!local )proc" "proc { |...| block } → a_proc" ri
 ${1|Proc.new,proc|}${2|inline block,do block|}$0
 endsnippet
 
 snippet raise "Kernel#raise" i
-raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}
+raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}$0
 endsnippet
 
 snippet require "Kernel#require" b
-require "${1:name}"
+require "${1:name}"$0
 endsnippet
