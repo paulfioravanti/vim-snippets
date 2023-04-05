@@ -60,6 +60,12 @@ snippet "has rich text" "Rails has_rich_text"
 has_rich_text :${1:object}${2:, encrypted: ${3:false}}$0
 endsnippet
 
+snippet "model class" "Create model class"
+class `!p snip.rv = controller_class_name(snip)` < ApplicationRecord
+  $0
+end
+endsnippet
+
 snippet "redirect action" "Rails redirect_to action"
 redirect_to action: "${1:action}"${2:, id: ${3:id}}$0
 endsnippet
