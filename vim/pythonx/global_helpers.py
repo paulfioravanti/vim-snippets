@@ -67,3 +67,9 @@ def maybe_surround(choice_tabstop, surround):
     tabstop itself is optional.
     """
     return "" if choice_tabstop_chosen(choice_tabstop) else surround
+
+def snake_to_camel(string):
+    """
+    Given a snake_cased_string, returns a CamelCaseString.
+    """
+    return string.replace("_", " ").title().replace(" ", "")

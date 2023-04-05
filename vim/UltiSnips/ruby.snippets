@@ -5,7 +5,13 @@ from global_helpers import (
     key_closing,
     maybe,
     maybe_comma,
-    maybe_surround
+    maybe_surround,
+    key_closing,
+)
+
+# ~/.vim/pythonx/ruby_helpers.py
+from ruby_helpers import (
+    class_name
 )
 
 _PERCENT_LITERALS = {
@@ -13,9 +19,6 @@ _PERCENT_LITERALS = {
     "word": "w",
     "symbol": "i"
 }
-
-def class_name(snip):
-    return snip.basename.replace("_", " ").title().replace(" ", "")
 
 def percent_literal(match):
     capture = match.group(1)

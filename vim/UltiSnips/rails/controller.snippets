@@ -1,0 +1,80 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    snake_to_camel
+)
+
+# ~/.vim/pythonx/ruby_helpers.py
+from ruby_helpers import (
+    class_name
+)
+
+def controller_class_resource_name(snip):
+    return snake_to_camel(controller_file_resource_name(snip))
+
+def controller_file_resource_name(snip):
+    return snip.basename.replace("_controller", "")
+
+def controller_model_default(controller_variable):
+    return snake_to_camel(controller_variable)
+
+def controller_singular_variable(snip):
+    controller_resource_name = controller_file_resource_name(snip)
+    if controller_resource_name.endswith("s"):
+        return controller_resource_name[:-1]
+
+    # Plural does not end in "s", and we do not have a plural/singular
+    # dictionary to work with, so just return the plural name and correct it
+    # within the snippet inline.
+    return controller_resource_name
+
+def params_id(variable, controller_name_resource):
+    if snake_to_camel(variable) == controller_name_resource:
+        return "id"
+
+    return variable + "_id"
+
+endglobal
+
+snippet "before action" "Rails before_action callback"
+before_action :${0:method}
+endsnippet
+
+snippet "controller class" "Create controller class"
+class ${1:`!p snip.rv = controller_class_resource_name(snip)`}Controller < ApplicationController
+  before_action :set_${2:`!p snip.rv = controller_singular_variable(snip)`}
+
+  $0
+
+  private
+
+  def set_$2
+    @$2 = ${3:`!p snip.rv = controller_model_default(t[2])`}.find(params[:${4:`!p snip.rv = params_id(t[2], t[1])`}])
+  end
+
+  def $2_params
+    params.require(:$2).permit(:${5:param})
+  end
+end
+endsnippet
+
+snippet "redirect action" "Rails redirect_to action"
+redirect_to action: "${1:action}"${2:, id: ${3:id}}$0
+endsnippet
+
+snippet "redirect controller" "Rails redirect_to controller"
+redirect_to controller: "${1:controller}"${2:, action: "${3:instance}"${4:, id: ${5:id}}}$0
+endsnippet
+
+snippet "redirect instance" "Rails redirect_to instance"
+redirect_to @${0:`!p snip.rv = controller_singular_variable(snip)`}
+endsnippet
+
+snippet "redirect instance url" "Rails redirect_to named url of instance"
+redirect_to ${1:`!p snip.rv = controller_singular_variable(snip)`}_url(@${2:$1})$0
+endsnippet
+
+snippet "redirect plural url" "Rails redirect_to named url"
+redirect_to ${1:`!p snip.rv = controller_file_resource_name(snip)`}_url$0
+endsnippet
