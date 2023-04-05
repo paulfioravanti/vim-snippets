@@ -1,0 +1,9 @@
+snippet resources "ActionDispatch::Routing::Mapper::Resources#resources" b
+resources :${1:resource}${2: do
+  $3
+end}$0
+endsnippet
+
+snippet root "ActionDispatch::Routing::Mapper::Resources#root" b
+root${1: to:} "${2:controller}#${3:action}"
+endsnippet
