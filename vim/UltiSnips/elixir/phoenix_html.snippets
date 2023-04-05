@@ -22,7 +22,7 @@ def final_eex_tag(snip, t):
     return f" {_CLOSING_EEX_TAG}" if not _has_eex_context(snip) and t else ""
 
 def _has_eex_context(snip):
-    return snip.context == "<%="
+    return snip.context == _OPENING_EVAL_EEX_TAG
 
 endglobal
 

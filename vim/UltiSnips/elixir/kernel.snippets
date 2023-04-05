@@ -2,7 +2,8 @@ global !p
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    closing_character
+    closing_character,
+    maybe
 )
 
 # ~/.vim/pythonx/elixir_helpers.py
@@ -11,10 +12,7 @@ from elixir_helpers import (
     root_module_name
 )
 
-def maybe_single_line(tabstop):
-    if not tabstop:
-        return ", do: "
-    return ""
+_SINGLE_LINE_DO = ", do: "
 
 endglobal
 
@@ -52,7 +50,7 @@ endsnippet
 snippet def "Kernel.(def|defp)/2 multiline"
 def${1:p} ${2:function_name}${3:(${4:args})}${5: do
   $6
-end}`!p snip.rv = maybe_single_line(t[5])`$0
+end}`!p snip.rv = maybe(t[5], _SINGLE_LINE_DO)`$0
 endsnippet
 
 snippet "def(:| single line)" "Kernel.(def|defp)/2 single line" r
@@ -84,7 +82,7 @@ endsnippet
 snippet for "Kernel.SpecialForms.for/1"
 for ${1:args}${2: do
   $3
-end}`!p snip.rv = maybe_single_line(t[2])`$0
+end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
 endsnippet
 
 snippet "f(:?u)?n(:?ction)?" "Kernel.SpecialForms.fn/2" ri

@@ -3,6 +3,7 @@ global !p
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     key_closing,
+    maybe,
     maybe_comma,
     maybe_surround
 )
@@ -15,11 +16,6 @@ _PERCENT_LITERALS = {
 
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
-
-def maybe_single_line(tabstop, default):
-    if not tabstop:
-        return default
-    return ""
 
 def percent_literal(match):
     capture = match.group(1)
@@ -55,13 +51,13 @@ endsnippet
 snippet class "class declaration" b
 class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
   $0
-end}`!p snip.rv = maybe_single_line(t[4], "; end")`
+end}`!p snip.rv = maybe(t[4], "; end")`
 endsnippet
 
 snippet def "Ruby method definition"
 ${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}${7:
   $8
-end}`!p snip.rv = maybe_single_line(t[7], " = ")`$0
+end}`!p snip.rv = maybe(t[7], " = ")`$0
 endsnippet
 
 snippet "else if" "else if condition"
