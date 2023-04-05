@@ -89,9 +89,9 @@ redirect_to ${1:`!p snip.rv = controller_singular_variable(snip)`}_url(@${2:$1})
 endsnippet
 
 snippet "redirect plural url" "Rails redirect_to named url"
-redirect_to ${1:`!p snip.rv = controller_plural_variable(snip)`}_url$0
+redirect_to ${1:`!p snip.rv = controller_file_resource_name(snip)`}_url$0
 endsnippet
 
-snippet "validates presence of" "validates_presence_of"
+snippet "validate(s)? presence( of)?" "validates_presence_of" rb
 validates_presence_of :${1:attribute}${2:, on: :${3:create}, message: "${4:can't be blank}"}$0
 endsnippet
