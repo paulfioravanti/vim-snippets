@@ -5,6 +5,9 @@ global !p
 def controller_class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
+def controller_model_default(controller_variable):
+    return controller_variable.replace("_", " ").title().replace(" ", "")
+
 def controller_plural_variable(snip):
     return snip.basename.replace("_controller", "")
 
@@ -43,7 +46,7 @@ class `!p snip.rv = controller_class_name(snip)` < ApplicationController
   private
 
   def set_$1
-    @$1 = ${2:`!p snip.rv = t[1].capitalize()`}.find(params[:${3:`!p snip.rv = params_id(t[1], snip)`}])
+    @$1 = ${2:`!p snip.rv = controller_model_default(t[1])`}.find(params[:${3:`!p snip.rv = params_id(t[1], snip)`}])
   end
 
   def $1_params
