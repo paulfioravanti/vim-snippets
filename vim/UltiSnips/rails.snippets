@@ -2,6 +2,9 @@ extends ruby
 
 global !p
 
+def class_name(snip):
+    return _snake_to_camel(snip.basename)
+
 def controller_class_resource_name(snip):
     return _snake_to_camel(controller_file_resource_name(snip))
 
@@ -67,7 +70,7 @@ has_rich_text :${1:object}${2:, encrypted: ${3:false}}$0
 endsnippet
 
 snippet "model class" "Create model class"
-class `!p snip.rv = controller_class_name(snip)` < ApplicationRecord
+class ${1:`!p snip.rv = class_name(snip)`} < ApplicationRecord
   $0
 end
 endsnippet
