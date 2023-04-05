@@ -9,15 +9,16 @@ from global_helpers import (
 
 _PERCENT_LITERALS = {
     "string": "w",
+    "word": "w",
     "symbol": "i"
 }
 
 def class_name(snip):
     return snip.basename.replace("_", " ").title().replace(" ", "")
 
-def maybe_single_line(tabstop):
+def maybe_single_line(tabstop, default):
     if not tabstop:
-        return "; end"
+        return default
     return ""
 
 def percent_literal(match):
@@ -36,7 +37,7 @@ def words_to_constant(match):
 
 endglobal
 
-snippet "(string|symbol) (?:(array|list))" "string/symbol array list literals" ri
+snippet "(string|symbol|word) (?:(array|list))" "string/symbol array list literals" ri
 %`!p snip.rv = percent_literal(match)`[$1]$0
 endsnippet
 
@@ -54,13 +55,13 @@ endsnippet
 snippet class "class declaration" b
 class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
   $0
-end}`!p snip.rv = maybe_single_line(t[4])`
+end}`!p snip.rv = maybe_single_line(t[4], "; end")`
 endsnippet
 
 snippet def "Ruby method definition"
-${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}
-  $0
-end
+${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}${7:
+  $8
+end}`!p snip.rv = maybe_single_line(t[7], " = ")`$0
 endsnippet
 
 snippet "else if" "else if condition"
@@ -122,6 +123,10 @@ endsnippet
 
 snippet struct "Struct.new" i
 Struct.new("${1:ClassName}"`!p snip.rv = maybe_comma(t[1], t[2])`${2:*member_names})${3:`!p snip.rv = maybe_surround(t[4], "<<")`${4|inline block,do block|}`!p snip.rv = maybe_surround(t[4], ">>")`}$0
+endsnippet
+
+snippet symbol "ruby symbol" i
+:${1:symbol}$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
