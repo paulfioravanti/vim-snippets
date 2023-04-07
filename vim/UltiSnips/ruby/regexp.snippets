@@ -1,0 +1,11 @@
+snippet digit "A digit character ([0-9])" i
+\d
+endsnippet
+
+snippet "(pattern|regex)" "literal regex" ri
+/${1:\A}${2:pattern}${3:\z}/${4:.freeze}$0
+endsnippet
+
+snippet "(times|repetition)" "regex repetition quantifier" ri
+{${1:at least}${2:,${3:at most}}}
+endsnippet
