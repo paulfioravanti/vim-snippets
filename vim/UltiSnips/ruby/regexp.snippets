@@ -6,6 +6,10 @@ snippet "(pattern|regex)" "literal regex" ri
 /${1:\A}${2:pattern}${3:\z}/${4:.freeze}$0
 endsnippet
 
-snippet "(times|repetition)" "regex repetition quantifier" ri
+snippet repetition "regex repetition quantifier" i
 {${1:at least}${2:,${3:at most}}}
+endsnippet
+
+snippet whitespace "A whitespace character: /[ \t\r\n\f\v]/" i
+\s
 endsnippet
