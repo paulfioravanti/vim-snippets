@@ -29,8 +29,8 @@ def controller_singular_variable(snip):
     # within the snippet inline.
     return controller_resource_name
 
-def params_id(variable, controller_name_resource):
-    if snake_to_camel(variable) == controller_name_resource:
+def params_id(controller_name, variable, model_name):
+    if model_name == controller_name.rstrip("s"):
         return "id"
 
     return variable + "_id"
@@ -50,7 +50,7 @@ class ${1:`!p snip.rv = controller_class_resource_name(snip)`}Controller < Appli
   private
 
   def set_$2
-    @$2 = ${3:`!p snip.rv = controller_model_default(t[2])`}.find(params[:${4:`!p snip.rv = params_id(t[2], t[1])`}])
+    @$2 = ${3:`!p snip.rv = controller_model_default(t[2])`}.find(params[:${4:`!p snip.rv = params_id(t[1], t[2], t[3])`}])
   end
 
   def $2_params
