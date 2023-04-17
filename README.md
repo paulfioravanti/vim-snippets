@@ -15,6 +15,7 @@ since I use them primarily with [Plover][] stenography (see
 
 You can see the snippets in action during the following videos:
 
+- _[Stenography and Ruby][]_
 - _[Stenography and Elixir][]_
 - _[Build a real-time Twitter clone with steno using LiveView and Phoenix 1.6][]_
 - _[Rails 7: The Steno Demo][]_
@@ -27,5 +28,6 @@ You can see the snippets in action during the following videos:
 [Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
 [rcm]: https://github.com/thoughtbot/rcm
 [Stenography and Elixir]: https://www.youtube.com/watch?v=ZQO-5KfnCi4
+[Stenography and Ruby]: https://www.youtube.com/watch?v=3W9_k2CXrXE
 [Ultisnips]: https://github.com/SirVer/ultisnips
 [Vim]: https://www.vim.org/
