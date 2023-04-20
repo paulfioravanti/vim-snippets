@@ -86,7 +86,9 @@ endsnippet
 snippet "steno block" "Steno outlines block entry" b
 \`\`\`txt
 ${1:`!v substitute(@+, ': ', ':\n  ', 'g')->substitute(', ', '\n  ', 'g')`}
-\`\`\`$0
+\`\`\`
+
+$0
 endsnippet
 
 snippet "steno heading" "Steno heading entry" b
