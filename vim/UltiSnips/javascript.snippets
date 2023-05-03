@@ -1,15 +1,47 @@
-snippet import "import from module"
-import { ${1:exported} } from "${2:module-name}"$0
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
+endglobal
+
+snippet "(export )?const" "block-scoped constants" br
+`!p
+capture = match.group(1)
+export = capture if capture else ""
+snip.rv = export`const ${1:constant} = ${2:value}${3:;}$0
 endsnippet
 
-snippet "import all as" "import all in module as alias"
-import * as ${1:alias} from "${2:module-name}"$0
+snippet function "function declaration" b
+function ${1:name}(${2:params}) {
+  $0
+}
 endsnippet
 
-snippet "import as" "import from module"
-import { ${1:exported} as ${2:alias} } from "${3:module-name}"$0
+snippet "arrow function" "arrow function expression" i
+${1:(}${2:params}`!p snip.rv = closing_character(t[1])` => ${3:{
+  $5
+}}${4:;}$0
 endsnippet
 
-snippet "import default" "import default exported"
-import ${1:defaultExported} from "${2:module-name}"$0
+snippet "function expression" "function expression" w
+function (${1:params}) {
+  $0
+}${2:;}
+endsnippet
+
+priority -1
+snippet function "choose arrow or normal function expression" i
+${1|arrow function,function expression|}
+endsnippet
+priority 0
+
+snippet "(let|var)" "variable with optional initialization" br
+`!p snip.rv = match.group(1)` ${1:variable}${2: = ${3:value}}${4:;}$0
+endsnippet
+
+snippet object "Object data type" i
+{ ${1:${2:key}: ${3:value}} }$0
 endsnippet
