@@ -1,16 +1,20 @@
-snippet from "Python single import from statement" b
-from ${1:module} import ${2:function}${3: as ${4:alias}}
-endsnippet
+global !p
 
-snippet "from multi" "Python multi import from statement" b
-from ${1:module} import (
-    ${2:function}${3: as ${4:alias}},
-    ${5:function}${6: as ${7:alias}}$0
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
 )
+
+endglobal
+
+snippet from "Python import from statement" b
+from ${1:module} import ${2:(
+    }${3:function}${4: as ${5:alias}}$0
+`!p snip.rv = closing_character(t[2].strip())`
 endsnippet
 
 snippet import "Python single import statement" b
-import ${1:module}${2: as ${3:alias}}
+import ${1:module}${2: as ${3:alias}}$0
 endsnippet
 
 snippet def "module or instance method"
