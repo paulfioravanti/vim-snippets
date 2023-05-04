@@ -7,6 +7,16 @@ from global_helpers import (
 
 endglobal
 
+snippet class "Python class" b
+class ${1:ClassName}${2:(${3:object})}:
+    ${4:"""
+    ${5:TODO: Docstring for $1.}
+    """
+
+    }def __init__(self$6):
+        $0
+endsnippet
+
 snippet from "Python import from statement" b
 from ${1:module} import ${2:(
     }${3:function}${4: as ${5:alias}}$0
@@ -19,22 +29,22 @@ endsnippet
 
 snippet def "module or instance method"
 `!p
-maybe_self = "self, " if snip.indent else ""
-`def ${1:method_name}(`!p snip.rv = maybe_self`${2:args}):
+maybe_self = "self" if snip.indent else ""
+`def ${1:method_name}(`!p snip.rv = maybe_self`${2:, ${3:args}}):
+    ${4:"""
+    ${5:TODO: Docstring for $1.}
     """
-    ${3:TODO: Docstring for $1.}
-    """
-    $0
+    }$0
 endsnippet
 
 snippet "def (class|static)" "class or static method" r
 `!p
 method_type = match.group(1)
-maybe_first_arg = "cls, " if method_type == "class" else ""
+maybe_first_arg = "cls" if method_type == "class" else ""
 `@`!p snip.rv = method_type`method
-def ${1:method_name}(`!p snip.rv = maybe_first_arg`${2:args}):
+def ${1:method_name}(`!p snip.rv = maybe_first_arg`${2:, ${3:args}}):
+    ${3:"""
+    ${4:TODO: Docstring for $1.}
     """
-    ${3:TODO: Docstring for $1.}
-    """
-    $0
+    }$0
 endsnippet
