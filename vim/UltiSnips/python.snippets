@@ -2,7 +2,8 @@ global !p
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    closing_character
+    closing_character,
+    maybe_comma
 )
 
 endglobal
@@ -28,9 +29,7 @@ import ${1:module}${2: as ${3:alias}}$0
 endsnippet
 
 snippet def "module or instance method"
-`!p
-maybe_self = "self" if snip.indent else ""
-`def ${1:method_name}(`!p snip.rv = maybe_self`${2:, ${3:args}}):
+def ${1:method_name}(${2:self}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -42,9 +41,9 @@ snippet "def (class|static)" "class or static method" r
 method_type = match.group(1)
 maybe_first_arg = "cls" if method_type == "class" else ""
 `@`!p snip.rv = method_type`method
-def ${1:method_name}(`!p snip.rv = maybe_first_arg`${2:, ${3:args}}):
-    ${3:"""
-    ${4:TODO: Docstring for $1.}
+def ${1:method_name}(${2:`!p snip.rv = maybe_first_arg`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+    ${4:"""
+    ${5:TODO: Docstring for $1.}
     """
     }$0
 endsnippet
