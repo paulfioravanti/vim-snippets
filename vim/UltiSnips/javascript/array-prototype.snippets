@@ -1,0 +1,24 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
+endglobal
+
+snippet .join "Array.prototype.join()" i
+.join(${1:"${2:,}"})$0
+endsnippet
+
+snippet .map "Array.prototype.map()" i
+.map(${1:${2:x} => ${3:\{}$4`!p snip.rv = closing_character(t[3])`})$0
+endsnippet
+
+snippet .reduce "Array.prototype.reduce()" i
+.reduce(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = closing_character(t[5])`}, ${1:initialValue})$0
+endsnippet
+
+snippet .reverse "Array.prototype.reverse()" i
+.reverse()$0
+endsnippet
