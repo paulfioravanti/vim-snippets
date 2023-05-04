@@ -6,6 +6,16 @@ from global_helpers import (
     maybe_comma
 )
 
+def initialize_args(tabstop, snip):
+    if not tabstop:
+        snip.rv = ""
+
+    args = [string.strip() for string in tabstop.split(",") if string]
+    snip.shift(2)
+    for arg in args:
+        snip += snip.mkline("", indent="")
+        snip.rv += f"self.{arg} = {arg}"
+
 endglobal
 
 snippet class "Python class" b
@@ -14,8 +24,7 @@ class ${1:ClassName}${2:(${3:object})}:
     ${5:TODO: Docstring for $1.}
     """
 
-    }def __init__(self$6):
-        $0
+    }def __init__(self$6):`!p initialize_args(t[6], snip)`$0
 endsnippet
 
 snippet from "Python import from statement" b
@@ -28,7 +37,7 @@ snippet import "Python single import statement" b
 import ${1:module}${2: as ${3:alias}}$0
 endsnippet
 
-snippet def "module or instance method"
+snippet def "module or instance method" b
 def ${1:method_name}(${2:self}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
@@ -36,7 +45,7 @@ def ${1:method_name}(${2:self}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     }$0
 endsnippet
 
-snippet "def (class|static)" "class or static method" r
+snippet "def (class|static)" "class or static method" rb
 `!p
 method_type = match.group(1)
 maybe_first_arg = "cls" if method_type == "class" else ""
