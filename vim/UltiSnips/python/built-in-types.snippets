@@ -1,3 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
 snippet list "list([iterable])" i
 list(${1:iterable})$0
+endsnippet
+
+snippet range "range(start, stop[, step])" i
+range(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, ${4:step}})
 endsnippet

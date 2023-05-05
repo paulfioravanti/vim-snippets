@@ -53,6 +53,17 @@ elif ${1:condition}:
     ${2:${VISUAL:# do something}}$0
 endsnippet
 
+snippet false "False" w
+False$0
+endsnippet
+
+snippet for "for statement" b
+for ${1:element} in ${2:list}:
+    ${4:${VISUAL:# do something}}${3:
+else:
+    ${5:# nothing found in $2}}$0
+endsnippet
+
 snippet from "Python import from statement" b
 from ${1:module} import ${2:(
     }${3:function}${4: as ${5:alias}}$0
@@ -68,4 +79,24 @@ endsnippet
 
 snippet import "Python single import statement" b
 import ${1:module}${2: as ${3:alias}}$0
+endsnippet
+
+snippet lambda "Lambda expression" w
+lambda ${1:params}: $2$0
+endsnippet
+
+snippet mod "% modulo" w
+% ${1:number}${2: == ${3:0}}$0
+endsnippet
+
+snippet none "None" w
+None$0
+endsnippet
+
+snippet true "True" w
+True$0
+endsnippet
+
+snippet yield "yield statement" b
+yield ${1:from }${2:expression}$0
 endsnippet

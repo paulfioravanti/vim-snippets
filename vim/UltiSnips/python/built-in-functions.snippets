@@ -1,7 +1,32 @@
-snippet map "map(function, iterable, *iterables)" i
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
+snippet len "len(s)" w
+len(${1:s})$0
+endsnippet
+
+snippet map "map(function, iterable, *iterables)" w
 map(${1:function}, ${2:iterable}${3:, ${4:*iterables}})$0
 endsnippet
 
-snippet reversed "reversed(seq)" i
+snippet reversed "reversed(seq)" w
 reversed(${1:seq})$0
+endsnippet
+
+snippet "(?<!\[)slice" "slice(start, stop, step=1)" rw
+slice(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, step=${4:1}})
+endsnippet
+
+snippet [slice "[start:stop:step]" i
+[${1:start}:${2:stop}${3::${4:step}}
+endsnippet
+
+snippet sum "sum(iterable, start=0)" w
+sum(${1:iterable}${2:, start=${3:0}})$0
 endsnippet
