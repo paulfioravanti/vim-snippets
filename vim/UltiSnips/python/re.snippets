@@ -1,0 +1,31 @@
+snippet digit "A digit character ([0-9])" i
+\d
+endsnippet
+
+snippet .match "Pattern.match(string[, pos[, endpos]])" i
+.match(${1:string}${2:${3:, ${4:pos}}${5:, ${6:endpos}}})
+endsnippet
+
+snippet "(pattern|regex)" "literal regex" ri
+r"${1:^}${2:pattern}${3:$}"$0
+endsnippet
+
+snippet re.compile "re.compile(pattern, flags=0)" i
+re.compile(${1:pattern}${2:, flags=${3:0}})
+endsnippet
+
+snippet "re.ignore case" "re.IGNORECASE" i
+re.IGNORECASE
+endsnippet
+
+snippet re.sub "re.sub(pattern, repl, string, count=0, flags=0)" i
+re.sub(${1:pattern}, ${2:repl}, ${3:string}${4:${5:, count=${6:0}}${7:, flags=${8:0}}})
+endsnippet
+
+snippet repetition "regex repetition quantifier" i
+{${1:at least}${2:,${3:at most}}}
+endsnippet
+
+snippet whitespace "A whitespace character: /[ \t\r\n\f\v]/" i
+\s
+endsnippet
