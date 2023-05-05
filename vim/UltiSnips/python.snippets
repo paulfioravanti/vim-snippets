@@ -9,6 +9,7 @@ from global_helpers import (
 def initialize_args(tabstop, snip):
     if not tabstop:
         snip.rv = ""
+        return
 
     args = [string.strip() for string in tabstop.split(",") if string]
     snip.shift(2)
@@ -25,16 +26,6 @@ class ${1:ClassName}${2:(${3:object})}:
     """
 
     }def __init__(self$6):`!p initialize_args(t[6], snip)`$0
-endsnippet
-
-snippet from "Python import from statement" b
-from ${1:module} import ${2:(
-    }${3:function}${4: as ${5:alias}}$0
-`!p snip.rv = closing_character(t[2].strip())`
-endsnippet
-
-snippet import "Python single import statement" b
-import ${1:module}${2: as ${3:alias}}$0
 endsnippet
 
 snippet def "module or instance method" b
@@ -55,4 +46,26 @@ def ${1:method_name}(${2:`!p snip.rv = maybe_first_arg`}`!p snip.rv = maybe_comm
     ${5:TODO: Docstring for $1.}
     """
     }$0
+endsnippet
+
+snippet "else if" "else if condition" b
+elif ${1:condition}:
+    ${2:${VISUAL:# do something}}$0
+endsnippet
+
+snippet from "Python import from statement" b
+from ${1:module} import ${2:(
+    }${3:function}${4: as ${5:alias}}$0
+`!p snip.rv = closing_character(t[2].strip())`
+endsnippet
+
+snippet if "if statement" b
+if ${1:condition}:
+    ${2:${VISUAL:# do something}}${3:
+else:
+    ${4:# do something else}}$0
+endsnippet
+
+snippet import "Python single import statement" b
+import ${1:module}${2: as ${3:alias}}$0
 endsnippet
