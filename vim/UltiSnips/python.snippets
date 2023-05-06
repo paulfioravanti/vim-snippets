@@ -97,6 +97,10 @@ snippet true "True" w
 True$0
 endsnippet
 
+snippet "(conditional|ternary)" "Conditional expression (ternary)" rw
+${2:True} if ${1:condition} else ${3:False}$0
+endsnippet
+
 snippet yield "yield statement" b
 yield ${1:from }${2:expression}$0
 endsnippet
