@@ -20,6 +20,25 @@ _PERCENT_LITERALS = {
     "symbol": "i"
 }
 
+def initialize_args(tabstop, snip):
+    if not tabstop:
+        snip.rv = ""
+        return
+
+    args = [string.strip() for string in tabstop.split(",") if string]
+    snip.shift(2)
+    for arg in args:
+        snip += snip.mkline("", indent="")
+        snip.rv += f"@{arg} = {arg}"
+
+def initialize_attr_args(tabstop):
+    if not tabstop:
+        return ""
+
+    args = [string.strip() for string in tabstop.split(",") if string]
+    attrs = map(lambda arg: f":{arg}", args)
+    return " " + ", ".join(attrs)
+
 def percent_literal(match):
     capture = match.group(1)
     if capture:
@@ -53,7 +72,10 @@ endsnippet
 
 snippet class "class declaration" b
 class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
-  $0
+  ${5:${7:attr_${8|reader,writer,accessor|}`!p snip.rv = initialize_attr_args(t[6])`$9
+
+  }def initialize($6)`!p initialize_args(t[6], snip)`
+  end}$0
 end}`!p snip.rv = maybe(t[4], "; end")`
 endsnippet
 
