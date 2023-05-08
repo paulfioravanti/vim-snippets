@@ -2,6 +2,10 @@ snippet digit "A digit character ([0-9])" i
 \d$0
 endsnippet
 
+snippet .group "Match.group([group1, ...])" i
+.group(${1:group1}$2)$0
+endsnippet
+
 snippet .match "Pattern.match(string[, pos[, endpos]])" i
 .match(${1:string}${2:${3:, ${4:pos}}${5:, ${6:endpos}}})
 endsnippet
