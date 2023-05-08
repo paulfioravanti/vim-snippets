@@ -83,6 +83,10 @@ snippet "link inline" "Inline link"
 [${1:${VISUAL:Text}}](${2:url})$0
 endsnippet
 
+snippet "star flag" "Markdown brief for '`*`-flag'" w
+\`*\`-flag$0
+endsnippet
+
 snippet "steno block" "Steno outlines block entry" b
 \`\`\`txt
 ${1:`!v substitute(@+, ': ', ':\n  ', 'g')->substitute(', ', '\n  ', 'g')`}
