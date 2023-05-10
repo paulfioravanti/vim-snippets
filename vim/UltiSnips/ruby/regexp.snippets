@@ -2,6 +2,10 @@ snippet digit "A digit character ([0-9])" i
 \d
 endsnippet
 
+snippet "(?<=/)\.match\?" "match?(string, offset = 0) → true or false" ri
+.match?(${1:string})$0
+endsnippet
+
 snippet "(pattern|regex)" "literal regex" ri
 /${1:\A}${2:pattern}${3:\z}/${4:.freeze}$0
 endsnippet

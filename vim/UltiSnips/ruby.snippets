@@ -66,7 +66,7 @@ when ${2:match}
 when ${4:match}
   ${5:# do something else}
 else
-  ${6:# no match}
+  ${6:# fallback handling}
 end$0
 endsnippet
 
@@ -102,7 +102,7 @@ snippet "(?!else)\b(if|unless)" "(if|unless) statements" rb
 `!p snip.rv = match.group(1)` ${1:condition}
   ${2:${VISUAL:# do something}}${3:
 else
-  ${4:# do something else}}
+  ${4:# fallback handling}}
 end$0
 endsnippet
 

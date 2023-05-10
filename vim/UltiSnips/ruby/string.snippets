@@ -1,0 +1,21 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma,
+    maybe_surround
+)
+
+endglobal
+
+snippet "\.end(s)? with" ".end_with? method" ri
+.end_with?("${1:string}")$0
+endsnippet
+
+snippet .gsub ".gsub(pattern, replacement)<<{|match| ... }>>" i
+.gsub(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:replacement})${3:`!p snip.rv = maybe_surround(t[4], "<<")`${4|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[4], ">>")`}$0
+endsnippet
+
+snippet "(?<!/)\.match\?" "match?(pattern, offset = 0) → true or false" ri
+.match?(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:offset})$0
+endsnippet

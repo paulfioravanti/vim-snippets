@@ -23,14 +23,18 @@ snippet "(?<!local )proc" "proc { |...| block } → a_proc" ri
 ${1|Proc.new,proc|}${2|inline block,do block|}$0
 endsnippet
 
-snippet raise "Kernel#raise" i
+snippet raise "raise(exception [, string [, array]], cause: $!)" i
 raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}$0
 endsnippet
 
-snippet require "Kernel#require" b
+snippet require "require(name) → true or false" b
 require "${1:name}"$0
 endsnippet
 
-snippet throw "Kernel#throw" i
+snippet .then "then {|x| block } → an_object" i
+.then${1|inline block,do block,explicit block,local proc,local method,external method|}$0
+endsnippet
+
+snippet throw "throw(tag [, obj])" i
 throw(:${1:tag}${2:, ${3:object}})
 endsnippet
