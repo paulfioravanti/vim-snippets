@@ -28,20 +28,28 @@ class ${1:ClassName}${2:(${3:object})}:
     }${6:def __init__(self$7):`!p initialize_args(t[7], snip)`}$0
 endsnippet
 
-snippet def "module or instance method" b
-def ${1:method_name}(${2:self}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+snippet def "decide what kind of function or method to create" b
+def ${1|function,instance method,class method,static method|}$0
+endsnippet
+
+snippet "def (function|instance(?: method)?)" "function or instance method" rb
+`!p
+def_type = match.group(1)
+maybe_self = "self" if "instance" in def_type else ""
+`def ${1:name}(${2:`!p snip.rv = maybe_self`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
     }$0
 endsnippet
 
-snippet "def (class|static)" "class or static method" rb
+snippet "def (class(?: method)?|static(?: method)?)" "class or static method" rb
 `!p
-method_type = match.group(1)
-maybe_first_arg = "cls" if method_type == "class" else ""
-`@`!p snip.rv = method_type`method
-def ${1:method_name}(${2:`!p snip.rv = maybe_first_arg`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+def_type = match.group(1)
+decorator_name = "class" if "class" in def_type else "static"
+maybe_cls = "cls" if "class" in def_type else ""
+`@`!p snip.rv = decorator_name`method
+def ${1:name}(${2:`!p snip.rv = maybe_cls`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
