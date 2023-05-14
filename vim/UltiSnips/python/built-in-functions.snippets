@@ -8,15 +8,15 @@ from global_helpers import (
 endglobal
 
 snippet len "len(s)" w
-len(${1:s})$0
+len(${1:${VISUAL:s}})$0
 endsnippet
 
 snippet map "map(function, iterable, *iterables)" w
-map(${1:function}, ${2:iterable}${3:, ${4:*iterables}})$0
+map(${1:function}, ${2:${VISUAL:iterable}}${3:, ${4:*iterables}})$0
 endsnippet
 
 snippet reversed "reversed(seq)" w
-reversed(${1:seq})$0
+reversed(${1:${VISUAL:seq}})$0
 endsnippet
 
 snippet "(?<!\[)slice" "slice(start, stop, step=1)" rw
@@ -28,5 +28,5 @@ snippet [slice "[start:stop:step]" i
 endsnippet
 
 snippet sum "sum(iterable, start=0)" w
-sum(${1:iterable}${2:, start=${3:0}})$0
+sum(${1:${VISUAL:iterable}}${2:, start=${3:0}})$0
 endsnippet
