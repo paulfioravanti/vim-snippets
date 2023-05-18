@@ -101,7 +101,9 @@ endsnippet
 snippet "steno heading" "Steno heading entry" b
 ### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`
 
-$0
+${3:Plover uses the following outlines for "${4:word}":
+
+steno block}$0
 
 \`\`\`yaml
 "$1": "$2"
