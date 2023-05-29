@@ -7,6 +7,10 @@ from global_helpers import (
 
 endglobal
 
+snippet int "int(x, base=10)" w
+int(${1:x}${2:, base=${3:10}})$0
+endsnippet
+
 snippet len "len(s)" w
 len(${1:${VISUAL:s}})$0
 endsnippet

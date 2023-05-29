@@ -33,6 +33,10 @@ class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
     }${6:def __init__(self$7):`!p initialize_args(t[7], snip)`}$0
 endsnippet
 
+snippet "(?<!list )comprehension" "choice of comprehension type" rw
+list comprehension$0
+endsnippet
+
 snippet def "decide what kind of function or method to create" b
 def ${1|function,instance method,class method,static method|}$0
 endsnippet
@@ -98,6 +102,10 @@ snippet lambda "Lambda expression" w
 lambda ${1:params}: $2$0
 endsnippet
 
+snippet "list comprehension" "list comprehension" w
+[${4:expression} for ${1:item} in ${2:iterable}$3${5: if ${6:condition}}]$0
+endsnippet
+
 snippet "mod(ulo)?" "% modulo" rw
 % ${1:number}${2: == ${3:0}}$0
 endsnippet
@@ -106,11 +114,15 @@ snippet none "None" w
 None$0
 endsnippet
 
+snippet return "return statement" b
+return ${1:value}$0
+endsnippet
+
 snippet true "True" w
 True$0
 endsnippet
 
-snippet "(conditional|ternary)" "Conditional expression (ternary)" rw
+snippet "(ternary|conditional)" "Conditional expression (ternary)" rw
 ${2:True} if ${1:condition} else ${3:False}$0
 endsnippet
 
