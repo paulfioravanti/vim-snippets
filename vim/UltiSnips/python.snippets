@@ -6,6 +6,11 @@ from global_helpers import (
     maybe_comma
 )
 
+# ~/.vim/pythonx/python_helpers.py
+from python_helpers import (
+    class_name
+)
+
 def initialize_args(tabstop, snip):
     if not tabstop:
         snip.rv = ""
@@ -20,7 +25,7 @@ def initialize_args(tabstop, snip):
 endglobal
 
 snippet class "Python class" b
-class ${1:ClassName}${2:(${3:object})}:
+class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -67,7 +72,7 @@ endsnippet
 
 snippet for "for statement" b
 for ${1:element} in ${2:list}:
-    ${4:${VISUAL:# do something}}${3:
+    ${3:${VISUAL:# do something}}${4:
 else:
     ${5:# nothing found in $2}}$0
 endsnippet
@@ -93,7 +98,7 @@ snippet lambda "Lambda expression" w
 lambda ${1:params}: $2$0
 endsnippet
 
-snippet mod "% modulo" w
+snippet "mod(ulo)?" "% modulo" rw
 % ${1:number}${2: == ${3:0}}$0
 endsnippet
 
