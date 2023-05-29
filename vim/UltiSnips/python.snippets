@@ -22,6 +22,15 @@ def initialize_args(tabstop, snip):
         snip += snip.mkline("", indent="")
         snip.rv += f"self.{arg} = {arg}"
 
+def comprehension_opening(comprehension_type):
+    match comprehension_type:
+        case "list":
+            return "["
+        case "generator":
+            return "("
+        case _:
+            return "{"
+
 endglobal
 
 snippet class "Python class" b
@@ -33,8 +42,9 @@ class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
     }${6:def __init__(self$7):`!p initialize_args(t[7], snip)`}$0
 endsnippet
 
-snippet "(?<!list )comprehension" "choice of comprehension type" rw
-list comprehension$0
+# REF for multiple negative lookbehinds of differing lengths: https://stackoverflow.com/a/40617321/567863
+snippet "(?<!dictionary )(?<!generator )(?<!list )(?<!set )comprehension" "choice of comprehension type" rw
+${1|list comprehension,dictionary comprehension,set comprehension,generator comprehension|}$0
 endsnippet
 
 snippet def "decide what kind of function or method to create" b
@@ -102,8 +112,8 @@ snippet lambda "Lambda expression" w
 lambda ${1:params}: $2$0
 endsnippet
 
-snippet "list comprehension" "list comprehension" w
-[${4:expression} for ${1:item} in ${2:iterable}$3${5: if ${6:condition}}]$0
+snippet "(list|dictionary|set|generator) comprehension" "list comprehension" rw
+${1:`!p snip.rv = comprehension_opening(match.group(1))`}${5:expression} for ${2:item} in ${3:iterable}$4${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet "mod(ulo)?" "% modulo" rw
