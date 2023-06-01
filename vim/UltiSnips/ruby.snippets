@@ -55,7 +55,7 @@ def words_to_constant(match):
 
 endglobal
 
-snippet "(string|symbol|word) (?:(array|list))" "string/symbol array list literals" ri
+snippet "(string|symbol|word) (?:(array|list))" "string/symbol array list literals" r
 %`!p snip.rv = percent_literal(match)`[$1]$0
 endsnippet
 
@@ -90,7 +90,7 @@ elsif ${1:condition}
   ${2:${VISUAL:# do something}}$0
 endsnippet
 
-snippet "frozen( string( literal)?)?" "frozen string literal pragma" br
+snippet "\bfrozen( string( literal)?)?" "frozen string literal pragma" r
 # frozen_string_literal: true$0
 endsnippet
 
@@ -98,7 +98,7 @@ snippet hash "Literal Ruby hash" i
 { ${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4 }$0
 endsnippet
 
-snippet "(?!else)\b(if|unless)" "(if|unless) statements" rb
+snippet "\b(?!else)\b(if|unless)" "(if|unless) statements" r
 `!p snip.rv = match.group(1)` ${1:condition}
   ${2:${VISUAL:# do something}}${3:
 else
@@ -130,7 +130,7 @@ snippet "module function" "module_function statement" b
 module_function$0
 endsnippet
 
-snippet "private constant( .+)?" "private_constant statement" br
+snippet "\bprivate constant( .+)?" "private_constant statement" r
 private_constant :${1:`!p snip.rv = words_to_constant(match)`}$0
 endsnippet
 
@@ -150,7 +150,7 @@ snippet ternary "ternary (?:) statement" i
 ${1:condition} ? ${2:true} : ${3:false}$0
 endsnippet
 
-snippet "triple equals" "=== operator" ri
+snippet "triple equals" "=== operator" r
 === $0
 endsnippet
 
@@ -159,7 +159,7 @@ when ${1:match}
   ${2:${VISUAL:# do something}}$0
 endsnippet
 
-snippet while "while <expression> ... end"
+snippet while "while <expression> ... end" b
 while ${1:expression}
   $0
 end

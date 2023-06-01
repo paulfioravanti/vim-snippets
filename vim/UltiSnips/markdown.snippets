@@ -39,73 +39,25 @@ snippet footnote "Markdown Footnote"
 [^$1]:${2:Text}$0
 endsnippet
 
-snippet "front matter" "Jekyll front matter for blog posts"
----
-title: "${1:title}"
-date: ${2:`date "+%Y-%m-%d %T"`} +${3:1100}
-last_modified_at: $2 $3
-tags: ${4:tags separated by spaces}
-${5:narration_video_id: "video-id-goes-here"}
-header:
-  image: /assets/images/${6:`date "+%Y-%m-%d"`}/${7:image.jpg}
-  image_description: "${8:description}"
-  teaser: /assets/images/$6/$7
-  overlay_image: /assets/images/$6/$7
-  overlay_filter: ${9:0.4}
-${10:  caption: >
-    Photo by <a href="${11:author_link}">${12:author_name}</a> on <a href="${13:source_link}">${14:source_name}</a>}
-excerpt: >
-  ${15:some excerpt}
----
-$0
-endsnippet
-
 snippet "heading ([1-6])" "Markdown heading" r
 `!p snip.rv = heading(match)` ${0:${VISUAL}}
 endsnippet
 
-snippet image "Reference image link"
+snippet image "Reference image link" w
 [![${1:${VISUAL:text}}][${2:$1 image url}]][${3:$1 link url}]
 [$2]: ${4:image url}${5: "${6:$4}"}
 [$3]: ${7:link url}${8: "${9:$7}"}$0
 endsnippet
 
-snippet "image inline" "Inline image"
+snippet "image inline" "Inline image" i
 [![${1:${VISUAL:img alt text}}](${2:img href})](${3:href})$0
 endsnippet
 
-snippet link "Reference link"
+snippet link "Reference link" w
 [${1:${VISUAL:Text}}][${2:id}]
 [`!p snip.rv = t[2] or t[1]`]: ${3:url}${4: "${5:$3}"}$0
 endsnippet
 
-snippet "link inline" "Inline link"
+snippet "link inline" "Inline link" i
 [${1:${VISUAL:Text}}](${2:url})$0
-endsnippet
-
-snippet "star flag(ged|ging|s)?" "Markdown brief for '`*`-flag'" rw
-`!p
-capture = match.group(1)
-suffix = capture if capture else ""
-`\`*\`-flag`!p snip.rv = suffix`$0
-endsnippet
-
-snippet "steno block" "Steno outlines block entry" b
-\`\`\`txt
-${1:`!v substitute(@+, ': ', ':\n  ', 'g')->substitute(', ', '\n  ', 'g')`}
-\`\`\`
-
-$0
-endsnippet
-
-snippet "steno heading" "Steno heading entry" b
-### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`
-
-${3:Plover uses the following outlines for "${4:word}":
-
-steno block}$0
-
-\`\`\`yaml
-"$1": "$2"
-\`\`\`
 endsnippet

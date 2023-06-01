@@ -41,7 +41,7 @@ snippet "before action" "Rails before_action callback"
 before_action :${0:method}
 endsnippet
 
-snippet "controller class" "Create controller class"
+snippet "controller class" "Create controller class" b
 class ${1:`!p snip.rv = controller_class_resource_name(snip)`}Controller < ApplicationController
   before_action :set_${2:`!p snip.rv = controller_singular_variable(snip)`}
 
@@ -59,22 +59,22 @@ class ${1:`!p snip.rv = controller_class_resource_name(snip)`}Controller < Appli
 end
 endsnippet
 
-snippet "redirect action" "Rails redirect_to action"
+snippet "redirect action" "Rails redirect_to action" b
 redirect_to action: "${1:action}"${2:, id: ${3:id}}$0
 endsnippet
 
-snippet "redirect controller" "Rails redirect_to controller"
+snippet "redirect controller" "Rails redirect_to controller" b
 redirect_to controller: "${1:controller}"${2:, action: "${3:instance}"${4:, id: ${5:id}}}$0
 endsnippet
 
-snippet "redirect instance" "Rails redirect_to instance"
+snippet "redirect instance" "Rails redirect_to instance" b
 redirect_to @${0:`!p snip.rv = controller_singular_variable(snip)`}
 endsnippet
 
-snippet "redirect instance url" "Rails redirect_to named url of instance"
+snippet "redirect instance url" "Rails redirect_to named url of instance" b
 redirect_to ${1:`!p snip.rv = controller_singular_variable(snip)`}_url(@${2:$1})$0
 endsnippet
 
-snippet "redirect plural url" "Rails redirect_to named url"
+snippet "redirect plural url" "Rails redirect_to named url" b
 redirect_to ${1:`!p snip.rv = controller_file_resource_name(snip)`}_url$0
 endsnippet

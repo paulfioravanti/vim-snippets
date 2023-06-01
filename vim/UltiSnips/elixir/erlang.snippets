@@ -1,7 +1,3 @@
-snippet "send interval 2" "timer:send_interval/2"
-:timer.send_interval(${1:time_ms}, :${2:message})$0
-endsnippet
-
-snippet "send interval(?: 3)?" "timer:send_interval/3" r
-:timer.send_interval(${1:time_ms}, ${2:self()}, :${3:message})$0
+snippet "send interval" "timer:send_interval/3" w
+:timer.send_interval(${1:time_ms}, ${2:${3:self()},} :${4:message})$0
 endsnippet

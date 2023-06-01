@@ -2,18 +2,18 @@ snippet export "export declaration" b
 export${1: default} ${2:expression}$0
 endsnippet
 
-snippet import "import from module"
+snippet import "import from module" b
 import { ${1:exported} } from "${2:module-name}"${3:;}$0
 endsnippet
 
-snippet "import all as" "import all in module as alias"
+snippet "import all as" "import all in module as alias" b
 import * as ${1:alias} from "${2:module-name}"${3:;}$0
 endsnippet
 
-snippet "import as" "import from module"
+snippet "import as" "import from module" b
 import { ${1:exported} as ${2:alias} } from "${3:module-name}"${4:;}$0
 endsnippet
 
-snippet "import default" "import default exported"
+snippet "import default" "import default exported" b
 import ${1:defaultExported} from "${2:module-name}"${3:;}$0
 endsnippet

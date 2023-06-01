@@ -24,11 +24,11 @@ ${0:${VISUAL:python_code}}
 `!p snip.rv = "endglobal"`
 endsnippet
 
-snippet "(?:(p|P))ython" "Inline python code" ri
+snippet "(?:(p|P))ython" "Inline python code" r
 `!p snip.rv = "\`!p "`${1:snip.rv = }$2`!p snip.rv = "\`"`$0
 endsnippet
 
-snippet "(?<!choice )tabstop" "Ultisnip tabstop" ri
+snippet "(?<!choice )tabstop" "Ultisnip tabstop" r
 ${${1:n}:${2:${VISUAL:placeholder}}}$0
 endsnippet
 

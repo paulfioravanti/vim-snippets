@@ -1,7 +1,7 @@
-snippet "attr (reader|writer|accessible)" "attr_* methods" br
+snippet "\battr (reader|writer|accessible)" "attr_* methods" r
 attr_`!p snip.rv = match.group(1)` :${1:method_name}$0
 endsnippet
 
-snippet "(include|prepend)" "Module#(include|prepend)" br
+snippet "\b(include|prepend)" "Module#(include|prepend)" r
 `!p snip.rv = match.group(1)` ${1:ModuleNames}$0
 endsnippet

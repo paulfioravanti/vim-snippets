@@ -7,10 +7,10 @@ from elixir_helpers import (
 
 endglobal
 
-snippet broadcast "Phoenix.PubSub.broadcast/4"
+snippet broadcast "Phoenix.PubSub.broadcast(pubsub, topic, message, dispatcher \\ __MODULE__)" w
 ${1:Phoenix.PubSub.}broadcast(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}", ${5:message}${6:, ${7:dispatcher}})$0
 endsnippet
 
-snippet subscribe "Phoenix.PubSub.subscribe/4"
+snippet subscribe "Phoenix.PubSub.subscribe(pubsub, topic, opts \\ [])" w
 ${1:Phoenix.PubSub.}subscribe(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}"${6:, metadata: ${7:some_metadata}})$0
 endsnippet

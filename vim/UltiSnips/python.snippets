@@ -43,7 +43,7 @@ class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
 endsnippet
 
 # REF for multiple negative lookbehinds of differing lengths: https://stackoverflow.com/a/40617321/567863
-snippet "(?<!dictionary )(?<!generator )(?<!list )(?<!set )comprehension" "choice of comprehension type" rw
+snippet "\b(?<!dictionary )(?<!generator )(?<!list )(?<!set )comprehension" "choice of comprehension type" r
 ${1|list comprehension,dictionary comprehension,set comprehension,generator comprehension|}$0
 endsnippet
 
@@ -51,7 +51,7 @@ snippet def "decide what kind of function or method to create" b
 def ${1|function,instance method,class method,static method|}$0
 endsnippet
 
-snippet "def (function|instance(?: method)?)" "function or instance method" rb
+snippet "\bdef (function|instance(?: method)?)" "function or instance method" r
 `!p
 def_type = match.group(1)
 maybe_self = "self" if "instance" in def_type else ""
@@ -62,7 +62,7 @@ maybe_self = "self" if "instance" in def_type else ""
     }$0
 endsnippet
 
-snippet "def (class(?: method)?|static(?: method)?)" "class or static method" rb
+snippet "\bdef (class(?: method)?|static(?: method)?)" "class or static method" r
 `!p
 def_type = match.group(1)
 decorator_name = "class" if "class" in def_type else "static"
@@ -112,11 +112,11 @@ snippet lambda "Lambda expression" w
 lambda ${1:params}: $2$0
 endsnippet
 
-snippet "(list|dictionary|set|generator) comprehension" "comprehension" rw
+snippet "\b(list|dictionary|set|generator) comprehension" "comprehension" r
 ${1:`!p snip.rv = comprehension_opening(match.group(1))`}${5:expression} for ${4:item} in ${2:iterable}$3${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
-snippet "mod(ulo)?" "% modulo" rw
+snippet "\bmod(ulo)?" "% modulo" r
 % ${1:number}${2: == ${3:0}}$0
 endsnippet
 
@@ -132,7 +132,7 @@ snippet true "True" w
 True$0
 endsnippet
 
-snippet "(ternary|conditional)" "Conditional expression (ternary)" rw
+snippet "\b(ternary|conditional)" "Conditional expression (ternary)" r
 ${2:True} if ${1:condition} else ${3:False}$0
 endsnippet
 

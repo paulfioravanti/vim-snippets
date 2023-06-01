@@ -1,0 +1,69 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe
+)
+
+# ~/.vim/pythonx/elixir_helpers.py
+from elixir_helpers import (
+    root_module_name
+)
+
+_SINGLE_LINE_DO = ", do: "
+
+endglobal
+
+snippet alias "Kernel.SpecialForms.alias(module, opts)" b
+alias ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4: as: ${5:Keyword}}$0
+endsnippet
+
+snippet bitstring "Kernel.SpecialForms.<<args>>" i
+<<$1>>$0
+endsnippet
+
+snippet case "Kernel.SpecialForms.case(condition, clauses)" w
+case ${1:value} do
+  ${2:pattern} ${3:when ${4:condition} }->
+    ${5:${VISUAL:# do something}}
+  _ ->
+    $6
+end$0
+endsnippet
+
+snippet cond "Kernel.SpecialForms.cond(clauses)" w
+cond do
+  ${1:condition} ->
+    ${2:${VISUAL:# do something}}
+  true ->
+    $3
+end$0
+endsnippet
+
+snippet condition "Kernel.SpecialForms.cond/2 condition" b
+${1:condition} ->
+  ${2:${VISUAL:# do something}}$0
+endsnippet
+
+snippet for "Kernel.SpecialForms.for/1"
+for ${1:args}${2: do
+  $3
+end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
+endsnippet
+
+snippet "f(:?u)?n(:?ction)?" "Kernel.SpecialForms.fn/2" ri
+fn ${1:args} -> $2 end$0
+endsnippet
+
+snippet "f(:?u)?n(:?ction)? (?:(&|capture))" "Kernel.SpecialForms.&/1" ri
+&(&1$1)$0
+endsnippet
+
+snippet import "Kernel.SpecialForms.import/2" b
+import ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4:, ${5|only,except|}: [${6:function}: ${7:arity}]}$0
+endsnippet
+
+snippet pattern "Kernel.SpecialForms.case/2 pattern match" b
+${1:pattern} ${2:when ${3:condition} }->
+  ${0:# do something}
+endsnippet

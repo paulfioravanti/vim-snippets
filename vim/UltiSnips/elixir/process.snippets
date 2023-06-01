@@ -1,0 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
+endglobal
+
+snippet "\bcancel timer(?: 2)?" "Process.cancel_timer(timer_ref, options \\ [])" r
+Process.cancel_timer(${1:timer_ref}${2:${3:, async: ${4:true}}${5:, info: ${6:false}}})
+endsnippet
+
+snippet "\bsend after(?: 4)?" "Process.send_after/4" r
+Process.send_after(${1:dest}, ${2::}${3:msg}`!p snip.rv = closing_character(t[2])`, ${4:time}${5:, {:abs, ${6:true}}})$0
+endsnippet

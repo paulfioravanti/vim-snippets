@@ -2,8 +2,7 @@ global !p
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    closing_character,
-    maybe_comma
+    closing_character
 )
 
 def queryable_name(snip, match):
@@ -23,10 +22,6 @@ def query_expression_name(match):
 
 endglobal
 
-snippet "(?:repo )?all" "Ecto.Repo.c:all/2" r
-Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
-endsnippet
-
 snippet asc "Ecto.Query.order_by/3 asc direction list" i
 ${1|asc,asc_nulls_last,asc_nulls_first|}: ${2:field}$0
 endsnippet
@@ -35,24 +30,16 @@ snippet desc "Ecto.Query.order_by/3 desc direction list" i
 ${1|desc,desc_nulls_last,desc_nulls_first|}: ${2:field}$0
 endsnippet
 
-snippet "from(?: (\w+))?" "Ecto.Query.from/2" ri
+snippet "from(?: (\w+))?" "Ecto.Query.from(expr, kw \\ [])" r
 `!p
 queryable = queryable_name(snip, match)
 `from${1:(}${2:${3:`!p snip.rv = queryable_first_character(queryable)`} in }${4:`!p snip.rv = queryable`}$5`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
-snippet "\b(order(?: by)?|select|where)" "Ecto.Query.(order_by|select|where)/3" ri
+snippet "\b(order(?: by)?|select|where)" "Ecto.Query.(order_by|select|where)/3" r
 `!p snip.rv = query_expression_name(match)`: ${1:expression}$0
 endsnippet
 
 snippet "\b(order(?: by)?|select|where) (?:function|expression)" "Ecto.Query.(order_by|select|where)/3" r
 `!p snip.rv = query_expression_name(match)`(${1:${2:query}, }${3:[${4:binding}], }${5:expression})$0
-endsnippet
-
-snippet "(?:repo )?update all" "Ecto.Repo.c:update_all/3" r
-Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
-endsnippet
-
-snippet "validate length" "Ecto.Changeset.validate_length/3"
-validate_length(${1:${2:changeset}, }:${3:field}${4:, is: ${5:length}}${6:, min: ${7:length}}${8:, max: ${9:length}}${10:, count: :${11:length_type}}${12:, message: "${13:message}"})$0
 endsnippet

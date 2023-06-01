@@ -1,0 +1,26 @@
+snippet "\bstar flag(ged|ging|s)?" "Markdown brief for '`*`-flag'" r
+`!p
+capture = match.group(1)
+suffix = capture if capture else ""
+`\`*\`-flag`!p snip.rv = suffix`$0
+endsnippet
+
+snippet "steno block" "Steno outlines block entry" b
+\`\`\`txt
+${1:`!v substitute(@+, ': ', ':\n  ', 'g')->substitute(', ', '\n  ', 'g')`}
+\`\`\`
+
+$0
+endsnippet
+
+snippet "steno heading" "Steno heading entry" b
+### \`"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"\`
+
+${3:Plover uses the following outlines for "${4:word}":
+
+steno block}$0
+
+\`\`\`yaml
+"$1": "$2"
+\`\`\`
+endsnippet

@@ -20,11 +20,11 @@ endglobal
 # assign="x" or assign={x} due to issues around having no spaces between the
 # choice tabstop definition. Might be a bug with Ultisnips...
 
-snippet assign "Phoenix.LiveView.assign/(2|3)"
+snippet assign "Phoenix.LiveView.assign(socket_or_assigns, key, value)" w
 assign(${1:socket, }${2::}${3:key}`!p snip.rv = key_closing(t[2])` ${4:$3})$0
 endsnippet
 
-snippet "assign new" "Phoenix.LiveView.assign_new/3"
+snippet "assign new" "Phoenix.LiveView.assign_new(socket_or_assigns, key, fun)" w
 assign_new(${1:${2|assigns,socket|}, }:${3:key}, fn -> ${4:do_something} end)$0
 endsnippet
 
@@ -38,7 +38,7 @@ snippet "connected(:??)?" "Phoenix.LiveView.connected?/1" r
 connected?(socket)$0
 endsnippet
 
-snippet form "Phoenix.LiveView.Helpers.form/1"
+snippet form "Phoenix.LiveView.Helpers.form(assigns)" b
 <.form
   let={${1:f}}
   for={${2:@changeset}}
@@ -55,7 +55,7 @@ snippet form "Phoenix.LiveView.Helpers.form/1"
 </.form>
 endsnippet
 
-snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event/3"
+snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event(event, unsigned_params, socket)" b
 @impl true
 def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
   ${4:socket = ${5:assign(socket, ${6::}${7:key}`!p snip.rv = key_closing(t[6])` ${8:$7})}}$0
@@ -63,13 +63,13 @@ def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
 end
 endsnippet
 
-snippet heex "Phoenix.LiveView.Helpers.sigil_H/2"
+snippet heex "Phoenix.LiveView.Helpers.sigil_H/2" b
 ~H"""
 $0
 """
 endsnippet
 
-snippet "live component" "Phoenix.LiveView.Helpers.live_component/1" b
+snippet "live component" "Phoenix.LiveView.Helpers.live_component(assigns)" b
 `!p
 module, file = module_name(path).rsplit(".", 1)
 `<.live_component
@@ -78,17 +78,17 @@ module, file = module_name(path).rsplit(".", 1)
 />
 endsnippet
 
-snippet "live patch" "Phoenix.LiveView.Helpers.live_patch/2"
+snippet "live patch" "Phoenix.LiveView.Helpers.live_patch/2" b
 <%= live_patch${1: "${2:text}",} to: Routes.${3:path_function}(@socket, :${4:action}${5:, ${6:param}})${7:, replace: true} ${8:do %>
   $9
 <% end %>}`!p snip.rv = "" if t[8] else "%>"`$0
 endsnippet
 
-snippet "live route" "Defines a LiveView route"
+snippet "live route" "Phoenix.LiveView.Router.live(path, live_view, action \\ nil, opts \\ [])" b
 live "/${1:path}", ${2:`!p snip.rv = to_module_name(t[1])`}Live${3:, :${4:action}${5:, ${6:opts}}}$0
 endsnippet
 
-snippet mount "Phoenix.LiveView.mount/3"
+snippet mount "Phoenix.LiveView.mount(params, session, socket)" b
 @impl true
 def mount(${1|params,_params,:not_mounted_at_router|}, ${2:_}session, socket) do
   ${3:socket = ${4:assign(socket, ${5::}${6:key}`!p snip.rv = key_closing(t[5])` ${7:$6}}})$0
@@ -96,7 +96,7 @@ def mount(${1|params,_params,:not_mounted_at_router|}, ${2:_}session, socket) do
 end
 endsnippet
 
-snippet render "Phoenix.(LiveView|LiveComponent).render/1"
+snippet render "Phoenix.(LiveView|LiveComponent).render(assigns)" b
 @impl true
 def render(assigns) do
   ~H"""
@@ -105,10 +105,10 @@ def render(assigns) do
 end
 endsnippet
 
-snippet "temporary assigns" "temporary_assigns parameter"
+snippet "temporary assigns" "temporary_assigns parameter" w
 temporary_assigns: [${1:assign}: ${2:reset_value}]$0
 endsnippet
 
-snippet update "Phoenix.LiveView.update/3"
+snippet update "Phoenix.LiveView.update(socket_or_assigns, key, fun)" w
 update(${1|socket,assigns|}, :${2:key}, ${3:fun})$0
 endsnippet

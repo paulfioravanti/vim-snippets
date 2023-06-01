@@ -12,26 +12,15 @@ from global_helpers import (
 
 endglobal
 
-snippet "bitstring generator" "Bitstring generator used in for comprehensions"
+snippet "bitstring generator" "Bitstring generator used in for comprehensions" i
 <<${1:char} <- ${2:"${3:binary}"}>>$0
 endsnippet
 
-snippet "cancel timer(?: 2)?" "Process.cancel_timer/2" r
-Process.cancel_timer(${1:timer_ref}${2:${3:, async: ${4:true}}${5:, info: ${6:false}}})
-endsnippet
-
-snippet comment "Elixir comment"
+snippet comment "Elixir comment" w
 # ${1:${VISUAL}}$0
 endsnippet
 
-snippet exception "Exception.exception/1"
-@impl true
-def exception(${1:term}) do
-  $0
-end
-endsnippet
-
-snippet filter "(Enum|Keyword|Map|Stream).filter/2"
+snippet filter "(Enum|Keyword|Map|Stream).filter/2" w
 ${1|Enum,Map,Stream,Keyword|}.filter(${2:${3:enumerable}, }${4:fun})$0
 endsnippet
 
@@ -43,15 +32,15 @@ snippet key-value "Key-value pair" i
 ${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
 endsnippet
 
-snippet keyword "Literal Elixir keyword list"
+snippet keyword "Literal Elixir keyword list" i
 ${1:[}${2:key}: ${3:value}$4`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
-snippet "line length" "Elixir formatter line_length parameter"
+snippet "line length" "Elixir formatter line_length parameter" w
 line_length: ${0:80}
 endsnippet
 
-snippet "list prepend" "prepend to literal Elixir list"
+snippet "list prepend" "prepend to literal Elixir list" i
 [${1:element} | ${2:list}]$0
 endsnippet
 
@@ -59,15 +48,8 @@ snippet map "Literal Elixir map" i
 %{${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4}$0
 endsnippet
 
-snippet "list generator" "List generator used in for comprehensions"
+snippet "list generator" "List generator used in for comprehensions" i
 ${1:element} <- ${2:[${3:list}]}$0
-endsnippet
-
-snippet message "Exception.message/1"
-@impl true
-def message(${1:exception}) do
-  $2
-end$0
 endsnippet
 
 snippet "n get text(?: 3)?" "Gettext.Backend.ngettext/3" r
@@ -78,34 +60,22 @@ snippet "(?:enum )?random" "Enum.random/1" r
 Enum.random(${1:enumerable})$0
 endsnippet
 
-snippet segment "Bitstring segment"
+snippet segment "Bitstring segment" i
 ${1:name}::${2:type}$0
 endsnippet
 
-snippet "send after(?: 4)?" "Process.send_after/4" r
-Process.send_after(${1:dest}, ${2::}${3:msg}`!p snip.rv = closing_character(t[2])`, ${4:time}${5:, {:abs, ${6:true}}})$0
-endsnippet
-
-snippet "struct( .+)?" "Elixir struct" ri
+snippet "struct( .+)?" "Elixir struct" r
 `!p
 capture = match.group(1)
 name = capture.lstrip().title() if capture else "Struct"
 `%${1:`!p snip.rv = name`}{${2:${3:field}: ${4:$3}}}$0
 endsnippet
 
-snippet "Timex format" "Timex.format/(1|2)"
-Timex.format!(${1:${2:datetime}, }"${3:%FT%T%:z}", :${4:strftime})$0
-endsnippet
-
-snippet "Timex now" "Timex.now/(0|1)"
-Timex.now(${1:time_zone})$0
-endsnippet
-
 snippet tuple "literal tuple" i
 {${1:first}, ${2:second}$3}$0
 endsnippet
 
-snippet "tuple (.+)" "tagged tuple" ri
+snippet "tuple (.+)" "tagged tuple" r
 `!p
 tag = match.group(1)
 tag = "ok" if tag == "okay" else tag

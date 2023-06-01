@@ -62,7 +62,7 @@ input_type = match.group(1)
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: min="${11:min}"}${12: max="${13:max}"}} />$0
 endsnippet
 
-snippet "input tel" "HTML input tag of telephone number type"
+snippet "input tel" "HTML input tag of telephone number type" b
 <input type="tel"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: pattern="${11:pattern}"}} />$0
 endsnippet
 
@@ -70,17 +70,17 @@ snippet label "Inline label tag" i
 <label ${1:for="${2:input-id}}>${3:${VISUAL}}</label>$0
 endsnippet
 
-snippet "(link|anchor|a tag)" "HTML <a> tag" ri
+snippet "(link|anchor|a tag)" "HTML <a> tag" r
 <a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
   ${4:${VISUAL:text}}
 </a>$0
 endsnippet
 
-snippet "(link|anchor) (mail|email)" "HTML <a> tag link to telephone number" ri
+snippet "(link|anchor) (mail|email)" "HTML <a> tag link to telephone number" r
 <a href="mailto:${1:${VISUAL:address}}">${2:$1}</a>$0
 endsnippet
 
-snippet "(link|anchor) phone" "HTML <a> tag link to telephone number" ri
+snippet "(link|anchor) phone" "HTML <a> tag link to telephone number" r
 <a href="tel:${1:${VISUAL:number}}">${2:$1}</a>$0
 endsnippet
 

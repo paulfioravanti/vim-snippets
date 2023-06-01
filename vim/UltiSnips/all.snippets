@@ -1,105 +1,65 @@
 priority -1
 
-global !p
-
-def maybe_ending_comma(snip):
-    return "," if snip.ft == "json" else ""
-
-endglobal
-
 snippet () "Literal function parentheses" i
 (${1:args})$0
 endsnippet
 
-snippet and "&& operator" i
+snippet and "&& operator" w
 && $0
 endsnippet
 
-snippet "(?<!(string|symbol) )(array|list)" "Literal array/list" ri
+snippet "\b(?<!(string|symbol) )(array|list)" "Literal array/list" r
 [$1]$0
 endsnippet
 
-snippet "(?<!not )equal" "= operator" ri
+snippet "\b(?<!not )equal" "= operator" r
 = $0
 endsnippet
 
-snippet "(?<!not )equals" "== operator" ri
+snippet "\b(?<!not )equals" "== operator" r
 == $0
 endsnippet
 
-snippet "less than" "< operator"
+snippet "less than" "< operator" w
 < $0
 endsnippet
 
-snippet minus "- operator" i
+snippet minus "- operator" w
 - $0
 endsnippet
 
-snippet "minus equal(s)?" "-= operator" ri
+snippet "\bminus equal(s)?" "-= operator" r
 -= $0
 endsnippet
 
-snippet "more than" "< operator"
+snippet "more than" "< operator" w
 > $0
 endsnippet
 
-snippet not "! operator" i
+snippet not "! operator" w
 !$0
 endsnippet
 
-snippet "not (equal(s)?|=)" "!= operator" ri
+snippet "\bnot (equal(s)?|=)" "!= operator" r
 != $0
 endsnippet
 
-snippet plus "+ operator" i
+snippet plus "+ operator" w
 + $0
 endsnippet
 
-snippet "plus equal(s)?" "+= operator" ri
+snippet "\bplus equal(s)?" "+= operator" r
 += $0
 endsnippet
 
-snippet "or equal(s)?" "||= operator" ri
+snippet "\bor equal(s)?" "||= operator" r
 ||= $0
 endsnippet
 
-snippet string "Literal string" i
+snippet string "Literal string" w
 "$1"$0
 endsnippet
 
-snippet multiply "* operator" i
+snippet multiply "* operator" w
 * $0
-endsnippet
-
-### Plover ###
-
-snippet "(alt|control|option|shift|super)" "Plover modifier keystroke" ri
-`!p
-modifier = match.group(1).upper()
-modifier = "ALT" if modifier == "OPTION" else modifier
-snip.rv = modifier
-`(${1:KEY})$0
-endsnippet
-
-snippet command "Plover control command" i
-{#${1:COMMAND}}
-endsnippet
-
-snippet "command shell" "Plover shell command" i
-{:COMMAND:SHELL:bash -ci 'osascript $STENO_COMMAND/${1:directory}/${2:script}.scpt'}
-endsnippet
-
-# Specifically for steno dictionary entries.
-# Copy a single/multi-stroke outline from the steno tape and it gets auto-filled
-# by the snippet, swapping out new line characters for slashes.
-# Final substitution is just to remove my final "copy" (KP*EU) brief from the
-# entry, as sometimes gets highlighted in the Plover paper tape.
-snippet steno "String steno dictionary entry" b
-"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
-endsnippet
-
-snippet "steno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno dictionary entry with outline" ri
-`!p
-outline = match.group(1).upper()
-`"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
 endsnippet

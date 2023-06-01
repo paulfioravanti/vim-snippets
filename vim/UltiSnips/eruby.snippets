@@ -16,54 +16,54 @@ snippet "dom id" "ERB tag calling the Rails dom_id method" i
 <%= dom_id ${1:object} %>$0
 endsnippet
 
-snippet erb "ERB executable tag"
+snippet erb "ERB executable tag" i
 <${1|%,%=,%==,%#|} ${2:`!p snip.rv = erb_placeholder(t[1])`} %>$0
 endsnippet
 
-snippet "form submit" "Rails form.submit method"
+snippet "form submit" "Rails form.submit method" b
 <%= form.submit %>$0
 endsnippet
 
-snippet "form text area" "Rails form.text_area method"
+snippet "form text area" "Rails form.text_area method" b
 <%= form.text_area :${1:method}${2:, ${3:key}: ${4:value}}$5 %>$0
 endsnippet
 
-snippet "form with" "Rails form_with method with custom options"
+snippet "form with" "Rails form_with method with custom options" b
 <%= form_with ${1:key}: ${2:value} do |${3:form}| %>
   $4
   <%= $3.submit %>
 <% end %>$0
 endsnippet
 
-snippet "form with associated model" "Rails form_with method with associated model"
+snippet "form with associated model" "Rails form_with method with associated model" b
 <%= form_with model: [${1:model}, ${2:new_association}] do |${3:form}| %>
   $4
   <%= $3.submit %>
 <% end %>$0
 endsnippet
 
-snippet "form with model" "Rails form_with method with model option"
+snippet "form with model" "Rails form_with method with model option" b
 <%= form_with model: ${1:model} do |${2:form}| %>
   $3
   <%= $2.submit %>
 <% end %>$0
 endsnippet
 
-snippet "form with namespaced model" "Rails form_with method with namespaced model"
+snippet "form with namespaced model" "Rails form_with method with namespaced model" b
 <%= form_with model: [:${1:namespace}, ${2:model}] do |${3:form}| %>
   $4
   <%= $3.submit %>
 <% end %>$0
 endsnippet
 
-snippet "form with scope" "Rails form_with method with scope option"
+snippet "form with scope" "Rails form_with method with scope option" b
 <%= form_with scope: :${1:scope}${2:, url: ${3:resource}_path} do |${4:form}| %>
   $5
   <%= $4.submit %>
 <% end %>$0
 endsnippet
 
-snippet "form with url" "Rails form_with method with url option"
+snippet "form with url" "Rails form_with method with url option" b
 <%= form_with url: ${1:resource}_path do |${2:form}| %>
   $3
   <%= $2.submit %>
@@ -74,30 +74,30 @@ snippet pluralize "Rails pluralize method" i
 <%= pluralize ${1:count}, "${2:singular}"${3:${4:, plural: "${5:plural}"}${6:, locale: :${7:locale}}}$8 %>$0
 endsnippet
 
-snippet "render collection" "render named partial with collection"
+snippet "render collection" "render named partial with collection" b
 <%= render partial: "${1:partial}", collection: ${2:@${3:collection}}$4 %>$0
 endsnippet
 
-snippet "render collection as" "render named partial with collection and custom local variable"
+snippet "render collection as" "render named partial with collection and custom local variable" b
 <%= render partial: "${1:partial}",
            collection: ${2:@${3:collection}},
            as: :${4:item}$5 %>$0
 endsnippet
 
-snippet "render collection as locals" "render named partial with collection, custom local variable, and local variable set"
+snippet "render collection as locals" "render named partial with collection, custom local variable, and local variable set" b
 <%= render partial: "${1:partial}",
            collection: ${2:@${3:collection}},
            as: :${4:item},
            locals: { ${5:var}: ${6:value}$7 } %>$0
 endsnippet
 
-snippet "render collection layout" "render named partial with collection and layout"
+snippet "render collection layout" "render named partial with collection and layout" b
 <%= render partial: "${1:partial}",
            collection: ${2:@${3:collection}},
            layout: "${4:layout}"$5 %>$0
 endsnippet
 
-snippet "render collection options" "render named partial with collection and all options"
+snippet "render collection options" "render named partial with collection and all options" b
 <%= render partial: "${1:partial}",
            collection: ${2:@${3:collection}}${4:${5:,
            layout: "${6:layout}"}${7:,
@@ -105,58 +105,58 @@ snippet "render collection options" "render named partial with collection and al
            locals: { ${10:var}: ${11:value} }}}$12 %>$0
 endsnippet
 
-snippet "render instance" "render partial for model instance"
+snippet "render instance" "render partial for model instance" b
 <%= render ${1:@${2:instance}} %>$0
 endsnippet
 
-snippet "render partial" "render named partial"
+snippet "render partial" "render named partial" b
 <%= render "${1:partial}"$2 %>$0
 endsnippet
 
-snippet "render partial block" "render named partial with block"
+snippet "render partial block" "render named partial with block" b
 <%= render "${1:partial}" do |${2:yielded}| %>
   $3
 <% end %>$0
 endsnippet
 
-snippet "render partial collection" "render named partial with collection"
+snippet "render partial collection" "render named partial with collection" b
 <%= render partial: "${1:partial}", collection: ${2:@${3:collection}}$4 %>$0
 endsnippet
 
-snippet "render partial instance" "render named partial with model instance"
+snippet "render partial instance" "render named partial with model instance" b
 <%= render "${1:partial}", ${2:model}: ${3:@${4:$2}}$5 %>$0
 endsnippet
 
-snippet "render partial layout" "render named partial with named layout"
+snippet "render partial layout" "render named partial with named layout" b
 <%= render partial: "${1:partial}", layout: "${2:layout}"$3 %>$0
 endsnippet
 
-snippet "render partial locals" "render named partial with explicit locals options"
+snippet "render partial locals" "render named partial with explicit locals options" b
 <%= render partial: "${1:partial}", locals: { ${2:var}: ${3:value}$4 } %>$0
 endsnippet
 
-snippet "render partial object" "render named partial with named object variable set"
+snippet "render partial object" "render named partial with named object variable set" b
 <%= render partial: "${1:partial}", object: ${2:@${3:var}}$4 %>$0
 endsnippet
 
-snippet "render partial var" "render named partial with local variable"
+snippet "render partial var" "render named partial with local variable" b
 <%= render "${1:partial}", ${2:var}: ${3:$2}$4 %>$0
 endsnippet
 
-snippet "render partial var block" "render named partial with local variable and block"
+snippet "render partial var block" "render named partial with local variable and block" b
 <%= render "${1:partial}", ${2:var}: ${3:value} do |${4:yielded}| %>
   $5
 <% end %>$0
 endsnippet
 
-snippet "render var" "render partial for some variable"
+snippet "render var" "render partial for some variable" b
 <%= render ${1:var} %>$0
 endsnippet
 
-snippet "time tag" "display Rails time_tag with options"
+snippet "time tag" "display Rails time_tag with options" i
 <%= time_tag ${1:time}${2:, ${3:key}: ${4:value}}$5 %>$0
 endsnippet
 
-snippet "turbo stream from" "turbo-rails turbo_stream_from method"
+snippet "turbo stream from" "turbo-rails turbo_stream_from method" i
 <%= turbo_stream_from @${1:var}${2:, channel: ${3:ChannelName}}$4 %>$0
 endsnippet

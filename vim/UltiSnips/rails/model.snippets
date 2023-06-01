@@ -7,20 +7,20 @@ from ruby_helpers import (
 
 endglobal
 
-snippet "has many" "Rails has_many"
+snippet "has many" "Rails has_many" b
 has_many :${1:object}s${2:, ${3:class_name: "${4:$1}"}${5:, foreign_key: "${6:reference}_id"}}$0
 endsnippet
 
-snippet "has rich text" "Rails has_rich_text"
+snippet "has rich text" "Rails has_rich_text" b
 has_rich_text :${1:object}${2:, encrypted: ${3:false}}$0
 endsnippet
 
-snippet "model class" "Create model class"
+snippet "model class" "Create model class" b
 class ${1:`!p snip.rv = class_name(snip)`} < ApplicationRecord
   $0
 end
 endsnippet
 
-snippet "validate(s)? presence( of)?" "validates_presence_of" rb
+snippet "\bvalidate(s)? presence( of)?" "validates_presence_of" r
 validates_presence_of :${1:attribute}${2:, on: :${3:create}${4:, message: "${5:can't be blank}"}}$0
 endsnippet

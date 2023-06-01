@@ -8,11 +8,11 @@ from global_helpers import (
 
 endglobal
 
-snippet ".all(/?)?" "all?(pattern) {|element| ... } → true or false" ri
+snippet ".all(/?)?" "all?(pattern) {|element| ... } → true or false" r
 .all?${1:${2:(${3:pattern})}${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[5], ">>")`}}$0
 endsnippet
 
-snippet ".each(_| )slice" ".each_slice(n) { ... } → self" ri
+snippet ".each(_| )slice" ".each_slice(n) { ... } → self" r
 .each_slice(${1:n})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
 endsnippet
 
@@ -20,11 +20,11 @@ snippet ".each with object" "each_with_object(object) { |(*args), memo_object| .
 .each_with_object(${1:object})${2:`!p snip.rv = maybe_surround(t[3], "<<")`${3|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[3], ">>")`}$0
 endsnippet
 
-snippet "\.(map|collect)" "map {|element| ... } → array" ri
+snippet "\.(map|collect)" "map {|element| ... } → array" r
 .`!p snip.rv = match.group(1)`${1|inline block,do block,explicit block,local proc,local method,external method|}$0
 endsnippet
 
-snippet "\.(reduce|inject)" "reduce(initial_operand) {|memo, operand| ... } → object" ri
+snippet "\.(reduce|inject)" "reduce(initial_operand) {|memo, operand| ... } → object" r
 .`!p snip.rv = match.group(1)`(${1:initial_value}`!p snip.rv = maybe_comma(t[1], t[2])`${2::${3:symbol}})${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|inline block,do block,explicit block,local proc,local method,external method|}`!p snip.rv = maybe_surround(t[5], ">>")`}$0
 endsnippet
 

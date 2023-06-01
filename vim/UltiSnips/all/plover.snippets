@@ -1,0 +1,37 @@
+global !p
+
+def maybe_ending_comma(snip):
+    return "," if snip.ft == "json" else ""
+
+endglobal
+
+snippet "(alt|control|option|shift|super)" "Plover modifier keystroke" r
+`!p
+modifier = match.group(1).upper()
+modifier = "ALT" if modifier == "OPTION" else modifier
+snip.rv = modifier
+`(${1:KEY})$0
+endsnippet
+
+snippet command "Plover control command" w
+{#${1:COMMAND}}
+endsnippet
+
+snippet "command shell" "Plover shell command" w
+{:COMMAND:SHELL:bash -ci 'osascript $STENO_COMMAND/${1:directory}/${2:script}.scpt'}
+endsnippet
+
+# Specifically for steno dictionary entries.
+# Copy a single/multi-stroke outline from the steno tape and it gets auto-filled
+# by the snippet, swapping out new line characters for slashes.
+# Final substitution is just to remove my final "copy" (KP*EU) brief from the
+# entry, as sometimes gets highlighted in the Plover paper tape.
+snippet steno "String steno dictionary entry" b
+"${1:`!v substitute(@+, '\n', '/', 'g')->substitute('\/KP\*EU$\|\s', '', 'g')`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
+endsnippet
+
+snippet "\bsteno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno dictionary entry with outline" r
+`!p
+outline = match.group(1).upper()
+`"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
+endsnippet

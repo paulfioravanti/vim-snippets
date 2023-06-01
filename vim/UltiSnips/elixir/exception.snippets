@@ -1,0 +1,13 @@
+snippet exception "Exception.exception(term)" w
+@impl true
+def exception(${1:term}) do
+  $0
+end
+endsnippet
+
+snippet message "Exception.message(exception)"
+@impl true
+def message(${1:exception}) do
+  $2
+end$0
+endsnippet

@@ -1,0 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
+snippet "(?:repo )?all" "Ecto.Repo.c:all(queryable, opts)" r
+Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
+endsnippet
+
+snippet "(?:repo )?update all" "Ecto.Repo.c:update_all(queryable, updates, opts)" r
+Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
+endsnippet
