@@ -42,6 +42,14 @@ snippet prop "define a prop" i
 ${1:name}=${2:"}${3:value}`!p snip.rv = closing_character(t[2])`$0
 endsnippet
 
+snippet props "destructure props" w
+{ ${1:prop} }$0
+endsnippet
+
+snippet render "render value" w
+{${1:${VISUAL:value}}}$0
+endsnippet
+
 snippet "render component" "render user-defined component" i
 <${1:ComponentName}${2: prop}`!p snip.rv = maybe_self_closing(t[3])`>${3:
   ${4:// children}
