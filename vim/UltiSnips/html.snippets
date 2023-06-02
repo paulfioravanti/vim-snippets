@@ -1,3 +1,11 @@
+global !p
+
+def class_attribute_name(snip):
+    # This handling needed for React.
+    return "className" if snip.ft == "javascript" else "class"
+
+endglobal
+
 snippet "\b(form)" "HTML tag without options" r
 `!p
 tag = match.group(1)
@@ -9,9 +17,9 @@ endsnippet
 snippet "\b(article|audio|body|button|code tag|div|figcaption|figure|footer|head|html|kbd|li|main|nav|ol|p|pre|rt|ruby|samp|section|select|span|style|table|tbody|td|textarea|tf|th|thead|title|tr|ul|var|video)" "HTML tag with id and class options" r
 `!p
 tag = match.group(1)
-`<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>
-  ${0:${VISUAL}}
-</`!p snip.rv = tag`>
+`<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}>${7:
+  }${9:${VISUAL}}${8:
+}</`!p snip.rv = tag`>$0
 endsnippet
 
 snippet "\b(button|div|p|span) inline" "HTML tag with id and class options" r
@@ -20,13 +28,13 @@ tag = match.group(1)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
-snippet "(em tag|strong)" "Inline HTML tag without options" ri
+snippet "(em tag|strong)" "Inline HTML tag without options" r
 `!p
 tag = match.group(1)
 `<`!p snip.rv = tag`>${1:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
-snippet "(span|strong|em) inline" "Inline HTML tag with id and class options" ri
+snippet "(span|strong|em) inline" "Inline HTML tag with id and class options" r
 `!p
 tag = match.group(1)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
@@ -46,7 +54,7 @@ snippet img "HTML img tag" i
 <img src="${1:src}"${2: alt="${3:alt}"} />$0
 endsnippet
 
-snippet input "HTML input tag of type 'text'"
+snippet input "HTML input tag of type 'text'" b
 <input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
