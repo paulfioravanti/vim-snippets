@@ -1,27 +1,43 @@
+snippet boundary "boundary character" i
+\b$0
+endsnippet
+
 snippet digit "A digit character ([0-9])" i
 \d$0
 endsnippet
 
+snippet ignore "non capturing group" i
+(?:${1:match})$0
+endsnippet
+
+snippet "negate characters" "negated character classes" i
+[^${1:match}]$0
+endsnippet
+
 snippet "negative look ahead" "negative lookahead assertion" i
-(?!${1:match})
+(?!${1:match})$0
 endsnippet
 
 snippet "negative look behind" "negative lookbehind assertion" i
-(?<!${1:match})
+(?<!${1:match})$0
 endsnippet
 
 snippet "positive look ahead" "positive lookahead assertion" i
-(?=${1:match})
+(?=${1:match})$0
 endsnippet
 
 snippet "positive look behind" "positive lookbehind assertion" i
-(?<=${1:match})
+(?<=${1:match})$0
 endsnippet
 
 snippet repetition "regex repetition quantifier" i
-{${1:at least}${2:,${3:at most}}}
+{${1:at least}${2:,${3:at most}}}$0
 endsnippet
 
 snippet whitespace "A whitespace character: /[ \t\r\n\f\v]/" i
 \s$0
+endsnippet
+
+snippet word "word character" i
+\w$0
 endsnippet
