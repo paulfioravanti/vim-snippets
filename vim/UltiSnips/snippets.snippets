@@ -7,12 +7,15 @@ from global_helpers import (
     closing_character
 )
 
+def maybe_visual_colon(tabstop):
+    return ":" if tabstop else ""
+
 endglobal
 
 # Snippet options: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L662
 snippet snippet "Ultisnips snippet definition" b
 `!p snip.rv = "snippet"` ${1:"}${2:tab_trigger}`!p snip.rv = closing_character(t[1])` "${3:description}" ${4|b,i,w,r,t,s,m,e,A|}
-${0:${VISUAL:}}
+${0:${VISUAL}}
 `!p snip.rv = "endsnippet"`
 endsnippet
 
@@ -41,5 +44,5 @@ t[$1]$0
 endsnippet
 
 snippet visual "Ultisnip Visual placeholder" i
-`!p snip.rv = "${VISUAL:"`${1:${VISUAL:default}}`!p snip.rv = "}"`$0
+`!p snip.rv = "${VISUAL"``!p snip.rv = maybe_visual_colon(t[1])`${1:${VISUAL:default}}`!p snip.rv = "}"`$0
 endsnippet
