@@ -7,18 +7,6 @@ from global_helpers import (
 
 endglobal
 
-snippet digit "A digit character ([0-9])" i
-\d
-endsnippet
-
 snippet "(pattern|regex)" "literal regex" r
 /${1:^}${2:pattern}${3:$}/${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|d,g,i,m,s,u,y|}`!p snip.rv = maybe_surround(t[5], ">>")`}$0
-endsnippet
-
-snippet repetition "regex repetition quantifier" i
-{${1:at least}${2:,${3:at most}}}
-endsnippet
-
-snippet whitespace "A whitespace character: /[ \t\r\n\f\v]/" i
-\s
 endsnippet
