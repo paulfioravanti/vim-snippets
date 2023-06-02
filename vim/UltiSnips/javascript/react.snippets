@@ -1,13 +1,49 @@
-snippet "\bcomponent" "render or define component" r
-${1|render component,define function component, define class component|}
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
+def maybe_self_closing(tabstop):
+    return "" if tabstop else " /"
+
+endglobal
+
+snippet "\b(?<!render )(?<!define function )(?<!define class )component" "render or define component" r
+${1|render component,define function component,define class component|}$0
 endsnippet
 
 snippet "define component" "define component type" b
-${1|define function component,define class component|}
+${1|define function component,define class component|}$0
+endsnippet
+
+snippet "define class component" "class component" b
+class ${1:ClassName} extends React.Component {
+  render() {
+    return$0
+  }
+}
+endsnippet
+
+snippet "define function component" "function component" b
+function ${1:ComponentName}(${2:props}) {
+  return$0
+}
 endsnippet
 
 snippet fragment "React component to return multiple elements" b
 <${1:React.Fragment}>
   ${2:${VISUAL}}$0
 </$1>
+endsnippet
+
+snippet prop "define a prop" i
+${1:name}=${2:"}${3:value}`!p snip.rv = closing_character(t[2])`$0
+endsnippet
+
+snippet "render component" "render user-defined component" i
+<${1:ComponentName}${2: prop}`!p snip.rv = maybe_self_closing(t[3])`>${3:
+  ${4:// children}
+</$1>}$0
 endsnippet
