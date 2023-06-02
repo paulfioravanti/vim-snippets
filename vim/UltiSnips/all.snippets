@@ -44,12 +44,20 @@ snippet "more than or equal to" ">= operator" w
 >= $0
 endsnippet
 
+snippet multiply "* operator" w
+* $0
+endsnippet
+
 snippet not "! operator" w
 !$0
 endsnippet
 
 snippet "\bnot (equal(s)?|=)" "!= operator" r
 != $0
+endsnippet
+
+snippet "\bor equal(s)?" "||= operator" r
+||= $0
 endsnippet
 
 snippet plus "+ operator" w
@@ -60,14 +68,6 @@ snippet "\bplus equal(s)?" "+= operator" r
 += $0
 endsnippet
 
-snippet "\bor equal(s)?" "||= operator" r
-||= $0
-endsnippet
-
 snippet string "Literal string" w
 "$1"$0
-endsnippet
-
-snippet multiply "* operator" w
-* $0
 endsnippet
