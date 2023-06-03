@@ -9,6 +9,10 @@ from javascript_helpers import (
 
 endglobal
 
+snippet "\bconsole(\.| )log" "console.log" r
+console.log(${1:msg/obj}$2)`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
+
 snippet const "block-scoped constants" b
 ${1:export }const ${2:CONST_NAME} = ${3:value}`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
