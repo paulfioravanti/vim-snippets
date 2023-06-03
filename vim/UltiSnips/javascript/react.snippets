@@ -1,9 +1,20 @@
 global !p
 
+import re
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
 )
+
+def format_tag(snip):
+    parts = list(filter(None, re.split(r'\s+|(>)', snip.v.text)))
+    snip.rv += parts[0]
+    for part in parts[1:-1]:
+        snip += snip.mkline("", indent="  ")
+        snip.rv += part
+    snip += snip.mkline("", indent="")
+    snip.rv += parts[-1]
 
 def maybe_self_closing(tabstop):
     return "" if tabstop else " /"
@@ -36,6 +47,10 @@ snippet fragment "React component to return multiple elements" b
 <${1:React.Fragment}>
   ${2:${VISUAL}}$0
 </$1>
+endsnippet
+
+snippet format "format single line tag to multiline" b
+`!p format_tag(snip)`
 endsnippet
 
 snippet prop "define a prop" i
