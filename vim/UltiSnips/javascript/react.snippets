@@ -10,7 +10,11 @@ from global_helpers import (
 _SPACES_KEEP_END_BRACKET = re.compile(r"\s+|(>)")
 
 def format_tag(snip):
-    parts = list(filter(None, re.split(_SPACES_KEEP_END_BRACKET, snip.v.text)))
+    if not (tag := snip.v.text):
+        snip.rv = "ERROR: No visual text provided."
+        return
+
+    parts = list(filter(None, re.split(_SPACES_KEEP_END_BRACKET, tag)))
     snip.rv += parts[0]
     for part in parts[1:-1]:
         snip += snip.mkline("", indent="  ")
@@ -51,7 +55,7 @@ snippet fragment "React component to return multiple elements" b
 </$1>
 endsnippet
 
-snippet format "format single line tag to multiline" b
+snippet format "format single line tag to multiline" w
 `!p format_tag(snip)`
 endsnippet
 
