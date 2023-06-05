@@ -38,14 +38,18 @@ endsnippet
 snippet "define class component" "class component" b
 class ${1:ClassName} extends React.Component {
   render() {
-    return$0
+    return (
+      $0
+    )`!p snip.rv = maybe_semi(snip)`
   }
 }
 endsnippet
 
 snippet "define function component" "function component" b
 function ${1:ComponentName}(${2:props}) {
-  return$0
+  return (
+    $0
+  )`!p snip.rv = maybe_semi(snip)`
 }
 endsnippet
 
