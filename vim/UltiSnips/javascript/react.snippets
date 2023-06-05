@@ -86,6 +86,10 @@ snippet "render component" "render user-defined component" i
 </$1>}$0
 endsnippet
 
+snippet "\bset([A-Z]\w+)" "user-defined set method" r
+set`!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`
+endsnippet
+
 snippet "use state" "useState" b
 `!p
 state_name = t[1].capitalize()

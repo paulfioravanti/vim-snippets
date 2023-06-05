@@ -9,8 +9,8 @@ from global_helpers import (
 
 _GLOBAL_START = "global"
 _GLOBAL_END = "endglobal"
-_INLINE_PYTHON_START = "\`!p "
-_INLINE_PYTHON_END = "\`"
+_INLINE_PYTHON_START = "`!p "
+_INLINE_PYTHON_END = "`"
 _SNIPPET_START = "snippet"
 _SNIPPET_END = "endsnippet"
 
@@ -44,6 +44,10 @@ endsnippet
 
 snippet "choice tabstop" "Ultisnip tabstop" i
 ${${1:n}|${2:choice1},${3:choice2}|}$0
+endsnippet
+
+snippet "maybe semi" "Call the maybe_semi function" i
+`!p snip.rv = _INLINE_PYTHON_START + "snip.rv = maybe_semi(snip)" + _INLINE_PYTHON_END`$0
 endsnippet
 
 snippet t "Python placeholder value" w
