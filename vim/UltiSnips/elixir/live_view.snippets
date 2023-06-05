@@ -14,6 +14,9 @@ from elixir_helpers import (
 def key_closing(opening):
     return "," if opening == ":" else ":"
 
+def module_parts(path):
+    return module_name(path).rsplit(".", 1)
+
 endglobal
 
 # NOTE: Choice tabstops cannot be used to select between a potential
@@ -71,7 +74,7 @@ endsnippet
 
 snippet "live component" "Phoenix.LiveView.Helpers.live_component(assigns)" b
 `!p
-module, file = module_name(path).rsplit(".", 1)
+module, file = module_parts(path)
 `<.live_component
   module={`!p snip.rv = module`.${1:`!p snip.rv = file`}Component}
   id={${2:live-component-id}}$0

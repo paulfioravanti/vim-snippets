@@ -10,6 +10,14 @@ from global_helpers import (
     key_closing
 )
 
+def struct_name(match):
+    capture = match.group(1)
+    return capture.lstrip().title() if capture else "Struct"
+
+def tuple_tag(match):
+    tag = match.group(1)
+    return "ok" if tag == "okay" else tag
+
 endglobal
 
 snippet "bitstring generator" "Bitstring generator used in for comprehensions" i
@@ -65,10 +73,7 @@ ${1:name}::${2:type}$0
 endsnippet
 
 snippet "struct( .+)?" "Elixir struct" r
-`!p
-capture = match.group(1)
-name = capture.lstrip().title() if capture else "Struct"
-`%${1:`!p snip.rv = name`}{${2:${3:field}: ${4:$3}}}$0
+%${1:`!p snip.rv = struct_name(match)`}{${2:${3:field}: ${4:$3}}}$0
 endsnippet
 
 snippet tuple "literal tuple" i
@@ -76,8 +81,5 @@ snippet tuple "literal tuple" i
 endsnippet
 
 snippet "tuple (.+)" "tagged tuple" r
-`!p
-tag = match.group(1)
-tag = "ok" if tag == "okay" else tag
-`{:`!p snip.rv = tag`, ${1:value}}$0
+{:`!p snip.rv = tuple_tag(match)`, ${1:value}}$0
 endsnippet

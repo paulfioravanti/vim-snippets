@@ -5,10 +5,17 @@ from global_helpers import (
     closing_character
 )
 
-def binding_name(match):
+def binding_var(match, tabstop):
+    return (
+        _binding_name(match)
+        + closing_character(tabstop)
+        + _binding_assign_character(tabstop)
+    )
+
+def _binding_name(match):
     return match.group(1).replace(" ", "-")
 
-def binding_assign_character(character):
+def _binding_assign_character(character):
     if character == "\"":
         return ": "
     return "="
@@ -18,5 +25,5 @@ endglobal
 # NOTE: $3 may seem like an unnecessary tabstop, but it's needed when this
 # snippet is used in a nested way.
 snippet "\b(?:phx|phoenix) (.+)" "phx- binding" r
-${1:"}phx-`!p snip.rv = binding_name(match) + closing_character(t[1]) + binding_assign_character(t[1])`${2|",{,@|}$3`!p snip.rv = closing_character(t[2])`$0
+${1:"}phx-`!p snip.rv = binding_var(match, t[1])`${2|",{,@|}$3`!p snip.rv = closing_character(t[2])`$0
 endsnippet

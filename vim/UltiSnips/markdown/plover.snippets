@@ -1,8 +1,12 @@
+global !p
+
+def star_flag_suffix(match):
+    return match.group(1) or ""
+
+endglobal
+
 snippet "\bstar flag(ged|ging|s)?" "Markdown brief for '`*`-flag'" r
-`!p
-capture = match.group(1)
-suffix = capture if capture else ""
-`\`*\`-flag`!p snip.rv = suffix`$0
+\`*\`-flag`!p snip.rv =  star_flag_suffix(match)`$0
 endsnippet
 
 snippet "steno block" "Steno outlines block entry" b

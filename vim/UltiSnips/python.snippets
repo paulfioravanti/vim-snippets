@@ -11,6 +11,18 @@ from python_helpers import (
     class_name
 )
 
+def comprehension_opening(match):
+    match match.group(1):
+        case "list":
+            return "["
+        case "generator":
+            return "("
+        case _:
+            return "{"
+
+def decorator_tag(match):
+    return "classmethod" if "class" in match.group(1) else "staticmethod"
+
 def initialize_args(tabstop, snip):
     if not tabstop:
         snip.rv = ""
@@ -22,14 +34,11 @@ def initialize_args(tabstop, snip):
         snip += snip.mkline("", indent="")
         snip.rv += f"self.{arg} = {arg}"
 
-def comprehension_opening(comprehension_type):
-    match comprehension_type:
-        case "list":
-            return "["
-        case "generator":
-            return "("
-        case _:
-            return "{"
+def maybe_cls(match):
+    return "cls" if "class" in match.group(1) else ""
+
+def maybe_self(match):
+    return "self" if "instance" in match.group(1) else ""
 
 endglobal
 
@@ -52,10 +61,7 @@ def ${1|function,instance method,class method,static method|}$0
 endsnippet
 
 snippet "\bdef (function|instance(?: method)?)" "function or instance method" r
-`!p
-def_type = match.group(1)
-maybe_self = "self" if "instance" in def_type else ""
-`def ${1:name}(${2:`!p snip.rv = maybe_self`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+def ${1:name}(${2:`!p snip.rv = maybe_self(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -63,12 +69,8 @@ maybe_self = "self" if "instance" in def_type else ""
 endsnippet
 
 snippet "\bdef (class(?: method)?|static(?: method)?)" "class or static method" r
-`!p
-def_type = match.group(1)
-decorator_name = "class" if "class" in def_type else "static"
-maybe_cls = "cls" if "class" in def_type else ""
-`@`!p snip.rv = decorator_name`method
-def ${1:name}(${2:`!p snip.rv = maybe_cls`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+@`!p snip.rv = decorator_tag(match)`
+def ${1:name}(${2:`!p snip.rv = maybe_cls(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -113,7 +115,7 @@ lambda ${1:params}: $2$0
 endsnippet
 
 snippet "\b(list|dictionary|set|generator) comprehension" "comprehension" r
-${1:`!p snip.rv = comprehension_opening(match.group(1))`}${5:expression} for ${4:item} in ${2:iterable}$3${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
+${1:`!p snip.rv = comprehension_opening(match)`}${5:expression} for ${4:item} in ${2:iterable}$3${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet "\bmod(ulo)?" "% modulo" r

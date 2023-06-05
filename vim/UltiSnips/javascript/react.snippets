@@ -7,8 +7,10 @@ from global_helpers import (
     closing_character
 )
 
+_SPACES_KEEP_END_BRACKET = re.compile(r"\s+|(>)")
+
 def format_tag(snip):
-    parts = list(filter(None, re.split(r'\s+|(>)', snip.v.text)))
+    parts = list(filter(None, re.split(_SPACES_KEEP_END_BRACKET, snip.v.text)))
     snip.rv += parts[0]
     for part in parts[1:-1]:
         snip += snip.mkline("", indent="  ")

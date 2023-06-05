@@ -3,14 +3,17 @@ global !p
 def maybe_ending_comma(snip):
     return "," if snip.ft == "json" else ""
 
+def plover_modifier(match):
+    modifier = format_match(match)
+    return "ALT" if modifier == "OPTION" else modifier
+
+def format_match(match):
+    return match.group(1).upper()
+
 endglobal
 
 snippet "(alt|control|option|shift|super)" "Plover modifier keystroke" r
-`!p
-modifier = match.group(1).upper()
-modifier = "ALT" if modifier == "OPTION" else modifier
-snip.rv = modifier
-`(${1:KEY})$0
+`!p snip.rv = plover_modifier(match)`(${1:KEY})$0
 endsnippet
 
 snippet command "Plover control command" w
@@ -31,7 +34,5 @@ snippet steno "String steno dictionary entry" b
 endsnippet
 
 snippet "\bsteno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno dictionary entry with outline" r
-`!p
-outline = match.group(1).upper()
-`"${1:`!p snip.rv = outline`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
+"${1:`!p snip.rv = format_match(match)`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
 endsnippet
