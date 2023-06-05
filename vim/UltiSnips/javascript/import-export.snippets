@@ -1,15 +1,19 @@
 global !p
 
+import re
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
 )
 
+_OPENING_CURLY = r"{ "
+
 def maybe_closing_import(tabstop):
-    return " }" if tabstop == "{ " else ""
+    return " }" if re.match(_OPENING_CURLY, tabstop) else ""
 
 def import_module_text(tabstop):
-    return "exported" if tabstop == "{ " else "exported or *"
+    return "exported" if re.match(_OPENING_CURLY, tabstop) else "exported or *"
 
 endglobal
 
