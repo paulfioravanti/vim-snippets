@@ -17,11 +17,11 @@ snippet "(alt|control|option|shift|super)" "Plover modifier keystroke" r
 endsnippet
 
 snippet command "Plover control command" w
-{#${1:COMMAND}}
+{#${1:COMMAND}}$0
 endsnippet
 
 snippet "command shell" "Plover shell command" w
-{:COMMAND:SHELL:bash -ci 'osascript $STENO_COMMAND/${1:directory}/${2:script}.scpt'}
+{:COMMAND:SHELL:bash -ci 'osascript $STENO_COMMAND/${1:directory}/${2:script}.scpt'}$0
 endsnippet
 
 # Specifically for steno dictionary entries.
