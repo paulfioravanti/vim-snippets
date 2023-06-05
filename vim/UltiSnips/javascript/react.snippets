@@ -7,6 +7,11 @@ from global_helpers import (
     closing_character
 )
 
+# ~/.vim/pythonx/javascript_helpers.py
+from javascript_helpers import (
+    maybe_semi
+)
+
 _SPACES_KEEP_END_BRACKET = re.compile(r"\s+|(>)")
 
 def format_tag(snip):
@@ -79,4 +84,10 @@ snippet "render component" "render user-defined component" i
 <${1:ComponentName}${2: prop}`!p snip.rv = maybe_self_closing(t[3])`>${3:
   ${4:// children}
 </$1>}$0
+endsnippet
+
+snippet "use state" "useState" b
+`!p
+state_name = t[1].capitalize()
+`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p snip.rv = maybe_semi(snip)`
 endsnippet
