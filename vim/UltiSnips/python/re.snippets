@@ -18,6 +18,10 @@ snippet "re.ignore case" "re.IGNORECASE" i
 re.IGNORECASE$0
 endsnippet
 
+snippet re.match "re.match(pattern, string, flags=0)" i
+re.match(${1:${VISUAL:pattern}}, ${2:string}${3:, flags=${4:0}})$0
+endsnippet
+
 snippet re.sub "re.sub(pattern, repl, string, count=0, flags=0)" i
 re.sub(${1:${VISUAL:pattern}}, ${2:repl}, ${3:string}${4:${5:, count=${6:0}}${7:, flags=${8:0}}})$0
 endsnippet
