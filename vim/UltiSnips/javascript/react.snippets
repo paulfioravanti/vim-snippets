@@ -30,6 +30,9 @@ def format_tag(snip):
 def maybe_self_closing(tabstop):
     return "" if tabstop else " /"
 
+def uppercased(tabstop):
+    return tabstop[0].capitalize() + tabstop[1:]
+
 endglobal
 
 snippet "\b(?<!render )(?<!define function )(?<!define class )component" "render or define component" r
@@ -73,7 +76,7 @@ snippet "\b((handle|set)[A-Z]\w+)" "user-defined (handle|set)Something methods" 
 endsnippet
 
 snippet prop "define a prop" i
-${1:name}=${2:"}${3:value}`!p snip.rv = closing_character(t[2])`$0
+${1:name}=${2:\{}${3:value}`!p snip.rv = closing_character(t[2])`$0
 endsnippet
 
 snippet props "destructure props" w
@@ -92,6 +95,6 @@ endsnippet
 
 snippet "use state" "useState" b
 `!p
-state_name = t[1].capitalize()
+state_name = uppercased(t[1])
 `const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
