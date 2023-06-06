@@ -2,6 +2,11 @@ extends html
 
 global !p
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
@@ -15,6 +20,16 @@ endsnippet
 
 snippet const "block-scoped constants" b
 ${1:export }const ${2:CONST_NAME} = ${3:value}`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
+
+snippet "\b(?<!not )equals" "== operator" r
+==${1:=} $0
+endsnippet
+
+snippet for "for statement" b
+for (${1:let ${2:i} = ${3:0}};${4: $2 < ${5:upperBound}};${6: $2++}) {
+  ${7:// do something}
+}$0
 endsnippet
 
 snippet key-value "Object Key-value pair" i
@@ -36,5 +51,5 @@ return (
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
-${1:condition} ? ${2:true} : ${3:false}$0
+${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
