@@ -13,6 +13,7 @@ from javascript_helpers import (
 )
 
 _SPACES_KEEP_END_BRACKET = re.compile(r"\s+|(>)")
+_ON_PROP = re.compile(r"^on([A-Z]\w+)")
 
 def format_tag(snip):
     if not (tag := snip.v.text):
@@ -32,6 +33,12 @@ def maybe_self_closing(tabstop):
 
 def uppercased(tabstop):
     return tabstop[0].capitalize() + tabstop[1:]
+
+def prop_value_placeholder(tabstop):
+    if (match := _ON_PROP.match(tabstop)):
+        return "handle" + match.group(1)
+    else:
+        return tabstop
 
 endglobal
 
@@ -76,7 +83,7 @@ snippet "\b((handle|set)[A-Z]\w+)" "user-defined (handle|set)Something methods" 
 endsnippet
 
 snippet prop "define a prop" i
-${1:name}=${2:\{}${3:value}`!p snip.rv = closing_character(t[2])`$0
+${1:name}=${2:\{}${3:`!p snip.rv = prop_value_placeholder(t[1])`}`!p snip.rv = closing_character(t[2])`$0
 endsnippet
 
 snippet props "destructure props" w
