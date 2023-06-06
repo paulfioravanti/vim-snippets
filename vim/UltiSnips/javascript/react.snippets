@@ -68,6 +68,10 @@ snippet format "format single line tag to multiline" w
 `!p format_tag(snip)`
 endsnippet
 
+snippet "\b((handle|set)[A-Z]\w+)" "user-defined (handle|set)Something methods" r
+`!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
+
 snippet prop "define a prop" i
 ${1:name}=${2:"}${3:value}`!p snip.rv = closing_character(t[2])`$0
 endsnippet
@@ -86,12 +90,8 @@ snippet "render component" "render user-defined component" i
 </$1>}$0
 endsnippet
 
-snippet "\bset([A-Z]\w+)" "user-defined set method" r
-set`!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`
-endsnippet
-
 snippet "use state" "useState" b
 `!p
 state_name = t[1].capitalize()
-`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p snip.rv = maybe_semi(snip)`
+`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
