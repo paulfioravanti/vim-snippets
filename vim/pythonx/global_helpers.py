@@ -26,10 +26,12 @@ def choice_tabstop_chosen(choice_tabstop):
 def closing_character(tabstop):
     """
     Return closing character for a tabstop containing an opening character.
+    NOTE: Always assumes that if there is any whitespace contained in the
+    tabstop, it is at the beginning of the string.
     """
     if tabstop:
-        closing = _CLOSING_CHARACTERS.get(tabstop[0].strip(), "")
-        return closing if len(tabstop) < 2 else tabstop[1:] + closing
+        closing = _CLOSING_CHARACTERS.get(tabstop[-1].strip(), "")
+        return closing if len(tabstop) < 2 else tabstop[0:-1] + closing
 
     return ""
 

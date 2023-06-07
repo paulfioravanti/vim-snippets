@@ -20,11 +20,11 @@ snippet .join "Array.prototype.join(separator)" i
 endsnippet
 
 snippet .map "Array.prototype.map(callbackFn, thisArg)" i
-.map(${1:${2:x} => ${3:\{}$4`!p snip.rv = closing_character(t[3])`})$0
+.map(${1:${2:x} =>${3: \{} $4`!p snip.rv = closing_character(t[3])`})$0
 endsnippet
 
 snippet .reduce "Array.prototype.reduce(callbackFn, initialValue)" i
-.reduce(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = closing_character(t[5])`}, ${1:initialValue})$0
+.reduce(${2:(${3:acc}, ${4:currentValue}) =>${5: \{} $6`!p snip.rv = closing_character(t[5])`}, ${1:initialValue})$0
 endsnippet
 
 snippet .reverse "Array.prototype.reverse()" i
