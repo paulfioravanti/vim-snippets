@@ -78,7 +78,7 @@ snippet format "format single line tag to multiline" w
 `!p format_tag(snip)`
 endsnippet
 
-snippet "\b((handle|set)[A-Z]\w+)" "user-defined (handle|set)Something methods" r
+snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something methods" r
 `!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
 
