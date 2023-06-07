@@ -28,7 +28,9 @@ def closing_character(tabstop):
     Return closing character for a tabstop containing an opening character.
     """
     if tabstop:
-        return _CLOSING_CHARACTERS.get(tabstop[0], "")
+        closing = _CLOSING_CHARACTERS.get(tabstop[0].strip(), "")
+        return closing if len(tabstop) < 2 else tabstop[1:] + closing
+
     return ""
 
 def key_closing(opening):
