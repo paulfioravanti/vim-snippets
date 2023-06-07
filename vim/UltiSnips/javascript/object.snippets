@@ -1,0 +1,12 @@
+global !p
+
+# ~/.vim/pythonx/javascript_helpers.py
+from javascript_helpers import (
+    maybe_semi
+)
+
+endglobal
+
+snippet "\b(Object\.|object )freeze" "Object.freeze(obj)" r
+Object.freeze(${1:${VISUAL:obj}})`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
