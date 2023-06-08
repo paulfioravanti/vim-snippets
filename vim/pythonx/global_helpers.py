@@ -26,14 +26,10 @@ def choice_tabstop_chosen(choice_tabstop):
 def closing_character(tabstop):
     """
     Return closing character for a tabstop containing an opening character.
-    NOTE: Always assumes that if there is any whitespace contained in the
-    tabstop, it is at the beginning of the string.
     """
-    if tabstop:
-        closing = _CLOSING_CHARACTERS.get(tabstop[-1].strip(), "")
-        return closing if len(tabstop) < 2 else tabstop[0:-1] + closing
-
-    return ""
+    # Just in case there are empty strings directly after the tabstop, making
+    # them run into each other, always take the first character of the string.
+    return _CLOSING_CHARACTERS.get(tabstop[0], "") if tabstop else ""
 
 def key_closing(opening):
     """
@@ -52,11 +48,12 @@ def jump_forward():
     # REF: https://github.com/reconquest/vim-pythonx/blob/master/pythonx/px/snippets.py#LL117C5-L118C41
     vim.command('call feedkeys("\<C-R>=UltiSnips#JumpForwards()\<CR>")')
 
-def maybe(tabstop, default):
+def maybe(tabstop, alternative):
     """
-    A simple maybe clause.
+    A simple maybe clause to put in an alternative value if a tabstop
+    is missing.
     """
-    return "" if tabstop else default
+    return "" if tabstop else alternative
 
 def maybe_comma(left, right):
     """
