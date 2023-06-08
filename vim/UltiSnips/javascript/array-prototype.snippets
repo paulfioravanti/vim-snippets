@@ -1,26 +1,14 @@
 global !p
 
-import re
-
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
 )
 
-# REF: https://stackoverflow.com/a/3469155/567863
-_NON_NEWLINE_WHITESPACE = "[^\S\r\n]"
-
-def maybe_spaces(tabstop):
-    if not tabstop:
-        return ""
-
-    # Match spaces on one-line functions only, not multiline.
-    trailing_spaces = re.match(
-        rf"^{tabstop[0]}({_NON_NEWLINE_WHITESPACE}+)",
-        tabstop
-    )
-
-    return trailing_spaces.group(1) if trailing_spaces else ""
+# ~/.vim/pythonx/javascript_helpers.py
+from javascript_helpers import (
+    maybe_spaces
+)
 
 endglobal
 
