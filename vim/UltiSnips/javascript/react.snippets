@@ -12,7 +12,7 @@ from javascript_helpers import (
     maybe_semi
 )
 
-_SPACES_KEEP_END_BRACKET = re.compile(r"\s+|(/?>)")
+_PROP_SPACES_KEEP_END_BRACKET = re.compile(r"\s(?![^{]*\})|(/?>$)")
 _ON_PROP = re.compile(r"^on([A-Z]\w+)")
 
 def format_tag(snip):
@@ -20,7 +20,7 @@ def format_tag(snip):
         snip.rv = "ERROR: No visual text provided."
         return
 
-    parts = list(filter(None, re.split(_SPACES_KEEP_END_BRACKET, tag)))
+    parts = list(filter(None, re.split(_PROP_SPACES_KEEP_END_BRACKET, tag)))
     snip.rv += parts[0]
     for part in parts[1:-1]:
         snip += snip.mkline("", indent="  ")
