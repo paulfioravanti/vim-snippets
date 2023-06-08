@@ -1,9 +1,26 @@
 global !p
 
+import re
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
 )
+
+# REF: https://stackoverflow.com/a/3469155/567863
+_NON_NEWLINE_WHITESPACE = "[^\S\r\n]"
+
+def maybe_spaces(tabstop):
+    if not tabstop:
+        return ""
+
+    # Match spaces on one-line functions only, not multiline.
+    trailing_spaces = re.match(
+        rf"^{tabstop[0]}({_NON_NEWLINE_WHITESPACE}+)",
+        tabstop
+    )
+
+    return trailing_spaces.group(1) if trailing_spaces else ""
 
 endglobal
 
@@ -20,11 +37,11 @@ snippet .join "Array.prototype.join(separator)" i
 endsnippet
 
 snippet .map "Array.prototype.map(callbackFn, thisArg)" i
-.map(${3:x} => ${4:\{}$5`!p snip.rv = closing_character(t[4])`${1:, ${2:thisArg}})$0
+.map(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
 endsnippet
 
 snippet .reduce "Array.prototype.reduce(callbackFn, initialValue)" i
-.reduce(${2:(${3:acc}, ${4:currentValue}) =>${5: \{} $6`!p snip.rv = closing_character(t[5])`}, ${1:initialValue})$0
+.reduce(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
 endsnippet
 
 snippet .reverse "Array.prototype.reverse()" i
