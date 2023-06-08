@@ -12,11 +12,11 @@ snippet "(?<!(string|symbol) )(array|list|\[\])" "Literal array/list" r
 [$1]$0
 endsnippet
 
-snippet "\b(?<!not )equal" "= operator" r
+snippet "\b(?<!not )(?<!plus )equal" "= operator" r
 = $0
 endsnippet
 
-snippet "\b(?<!not )equals" "== operator" r
+snippet "\b(?<!not )(?<!plus )equals" "== operator" r
 == $0
 endsnippet
 
