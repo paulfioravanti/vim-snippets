@@ -40,6 +40,10 @@ snippet "\b(let|var)" "variable with optional initialization" r
 ${1:export }`!p snip.rv = match.group(1)` ${2:variable}${3: = ${4:value}}`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
 
+snippet "\bmod(ulo)?" "% modulo" r
+% ${1:number}${2: === ${3:0}}$0
+endsnippet
+
 snippet object "Object data type" i
 { ${1:${2:key}: ${3:value}} }$0
 endsnippet
