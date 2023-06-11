@@ -18,8 +18,12 @@ snippet "\bconsole(\.| )log" "console.log" r
 console.log(${1:msg/obj}$2)`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
 
-snippet const "block-scoped constants" b
+snippet "(?<!\s)const" "top level constants" r
 ${1:export }const ${2:CONST_NAME} = ${3:value}`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
+
+snippet "(?<=\s)const" "block-scoped constants" r
+const ${2:CONST_NAME} = ${3:value}`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
 
 snippet "\b(?<!not )(?<!plus )equals" "== operator" r
