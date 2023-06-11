@@ -13,6 +13,10 @@ from javascript_helpers import (
 
 endglobal
 
+snippet .bind "Function.prototype.bind(thisArg, arg1, /* …, */ argN)" i
+.bind(${1:thisArg}${2:, ${3:arg1}}$4)$0
+endsnippet
+
 snippet function "function declaration" b
 ${1:export ${2:default }}function${3:*} ${4:functionName}(${5:params}) {
   $0
