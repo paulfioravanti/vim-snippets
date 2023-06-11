@@ -32,6 +32,10 @@ for (${1:let ${2:i} = ${3:0}};${4: $2 < ${5:upperBound}};${6: $2++}) {
 }$0
 endsnippet
 
+snippet interpolate "string interpolation" i
+${${1:attribute}}$0
+endsnippet
+
 snippet key-value "Object Key-value pair" i
 ${1:key}: ${2:$1}${3:,}$0
 endsnippet
@@ -56,6 +60,10 @@ endsnippet
 
 snippet spread "Spread syntax (...)" i
 ...${1:object}$0
+endsnippet
+
+snippet string "Literal string" w
+${1|",`|}$2`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
