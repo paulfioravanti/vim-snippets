@@ -12,7 +12,19 @@ from javascript_helpers import (
     maybe_semi
 )
 
+def maybe_spread(snip):
+    if not (visual := snip.tabstops[1].current_text):
+        snip.rv = ""
+        return
+
+    snip.rv = snip.expand_anon("${1:...}")
+
 endglobal
+
+post_jump "if snip.tabstop == 1: maybe_spread(snip)"
+snippet "(array|list|\[\])" "Literal array/list" r
+[${1:${VISUAL}}]$0
+endsnippet
 
 snippet "\bconsole(\.| )log" "console.log" r
 console.log(${1:msg/obj}$2)`!p snip.rv = maybe_semi(snip)`$0

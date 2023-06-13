@@ -10,3 +10,7 @@ endglobal
 snippet "\b(Object\.|object )?freeze" "Object.freeze(obj)" r
 Object.freeze(${1:${VISUAL:obj}})`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
+
+snippet "\b(Object\.|object )keys" "Object.keys(obj)" r
+Object.keys(${1:${VISUAL:obj}})`!p snip.rv = maybe_semi(snip)`$0
+endsnippet

@@ -24,6 +24,10 @@ snippet .join "Array.prototype.join(separator)" i
 .join(${1:"${2:,}"})$0
 endsnippet
 
+snippet "(?<!Object).keys" "Array.prototype.keys()" r
+.keys()$0
+endsnippet
+
 snippet .map "Array.prototype.map(callbackFn, thisArg)" i
 .map(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
 endsnippet
