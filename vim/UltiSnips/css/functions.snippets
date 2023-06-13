@@ -1,0 +1,23 @@
+snippet color "select from different color types" w
+${1|hex,rgba,hsl,hwb|}$0
+endsnippet
+
+snippet fit-content "fit-content(<length-percentage>) function" w
+fit-content(${1|length,percentage|})$0
+endsnippet
+
+snippet hex "Hexadecimal color syntax" w
+#$0
+endsnippet
+
+snippet hsl "Hue, Saturation, Lightness hsl() function" w
+hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:saturation}% ${4:lightness}%${5: / ${6:alpha}%})$0
+endsnippet
+
+snippet hwb "Hue, Whiteness, Blackness hwb() function" w
+hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:whiteness}% ${4:blackness}%${5: / ${6:alpha}${7:%}})$0
+endsnippet
+
+snippet rgb "Red, Green, Blue components rgb() function" w
+rgb(${1:red} ${2:green} ${3:blue}${4: ${5:alpha}})$0
+endsnippet

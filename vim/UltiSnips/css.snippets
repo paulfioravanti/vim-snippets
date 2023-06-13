@@ -3,11 +3,6 @@ global !p
 def join_properties(match):
     return "-".join(match.group(1, 2))
 
-def selector_info(match):
-    selector_type = match.group(1)
-    selector = "." if selector_type == "class" else "#"
-    return (selector, selector_type)
-
 endglobal
 
 snippet background "CSS background property" b
@@ -15,7 +10,7 @@ background: $1;$0
 endsnippet
 
 snippet border "CSS border property" b
-border: ${1:{style|width}}${2: ${3:{style|color}}${4: ${5:{color}}}};$0
+border: ${1:{style|width}}${2: ${3:{style|color}}${4: color$5}};$0
 endsnippet
 
 snippet "border radius" "CSS border-radius property" b
@@ -23,35 +18,43 @@ border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{t
 endsnippet
 
 snippet "box shadow" "CSS box-shadow property" b
-box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color};$0
-endsnippet
-
-snippet "(class|id)" "CSS class selector" r
-`!p
-selector, selector_type = selector_info(match)
-snip.rv = selector`${1:`!p snip.rv = selector_type`_name} {
-  $2
-}$0
+box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color$13};$0
 endsnippet
 
 snippet display "CSS display property" b
-display: ${1|none,block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root|};$0
+display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
 endsnippet
 
-snippet import "@import directive" b
-@import ${1:"${2:url}"};$0
+snippet "flex direction" "flex-direction property" b
+flex-direction: ${1|row,row-reverse,column,column-reverse,global|};$0
+endsnippet
+
+snippet float "float property" b
+float: ${1|left,right,none,inline-start,inline-end|};$0
+endsnippet
+
+snippet "font size" "font-size property" b
+font-size: $1;$0
+endsnippet
+
+snippet "font weight" "font-weight property" b
+font-weight: ${1|bold,bolder,lighter,normal,100,200,300,400,500,600,700,800,900|};$0
+endsnippet
+
+snippet "\b((?<!line )height|width)" "height/width property" r
+`!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "line height" "line-height property" b
+line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
 
 snippet "\b(margin|padding)" "CSS properties that deal with sides of an element" r
 `!p snip.rv = match.group(1)`: ${1:{all|vertical|top}}${2|px,em,rem,%|}${3: ${4:{horizontal|right}}${5|px,em,rem,%|}${6: ${7:{bottom}}${8|px,em,rem,%|}${9: ${10:{right}}${11|px,em,rem,%|}}}};$0
 endsnippet
 
-snippet "\b(margin|padding) (top)" "CSS properties that deal with top of an element" r
-`!p snip.rv = join_properties(match)`: ${1:value}${2|px,em,rem,%|};$0
-endsnippet
-
-snippet rgba "CSS rgba() function" w
-rgba(${1:red}, ${2:green}, ${3:blue}, ${4:alpha})$0
+snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto|};$0
 endsnippet
 
 snippet "text align" "CSS text-align property" b
