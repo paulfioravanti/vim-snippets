@@ -12,6 +12,9 @@ from javascript_helpers import (
     maybe_semi
 )
 
+def maybe_paren(tabstop):
+    return ")" if tabstop == "(" else ""
+
 def maybe_spread(snip):
     if not (visual := snip.tabstops[1].current_text):
         snip.rv = ""
@@ -83,7 +86,7 @@ ${1|",`|}$2`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet ternary "ternary (?:) statement" i
-${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = closing_character(t[1])`$0
+${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = maybe_paren(t[1])`$0
 endsnippet
 
 snippet yield "yield statement" b
