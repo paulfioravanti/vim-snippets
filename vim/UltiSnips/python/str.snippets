@@ -1,3 +1,8 @@
 snippet .join "str.join(iterable)" i
 .join(${1:iterable})$0
 endsnippet
+
+snippet "\.remove\s?(prefix|suffix)" "str.removeprefix(prefix)/str.removesuffix(suffix)" r
+`!p part = match.group(1)
+`.remove`!p snip.rv = part`(${1:`!p snip.rv = part`})$0
+endsnippet
