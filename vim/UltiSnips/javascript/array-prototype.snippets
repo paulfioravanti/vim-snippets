@@ -16,6 +16,15 @@ snippet Array "Array() constructor" i
 Array(${1:elements or length})$0
 endsnippet
 
+context "snip.visual_text"
+snippet "(array|list|\[\])" "Literal array/list with potential spread" r
+[${1:...}${2:${VISUAL}}]$0
+endsnippet
+
+snippet "(array|list|\[\])" "Literal array/list" r
+[$1]$0
+endsnippet
+
 snippet .fill "Array.prototype.fill(value, start, end)" i
 .fill(${1:value}${2:, ${3:start}${4:, ${5:end}}})$0
 endsnippet
