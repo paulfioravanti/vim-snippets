@@ -16,11 +16,9 @@ _PROP_SPACES_KEEP_END_BRACKET = re.compile(r"\s(?![^{]*\})|(/?>$)")
 _ON_PROP = re.compile(r"^on([A-Z]\w+)")
 
 def format_tag(snip):
-    if not (tag := snip.v.text):
-        snip.rv = "ERROR: No visual text provided."
-        return
-
-    parts = list(filter(None, re.split(_PROP_SPACES_KEEP_END_BRACKET, tag)))
+    parts = list(
+        filter(None, re.split(_PROP_SPACES_KEEP_END_BRACKET, snip.v.text))
+    )
     snip.rv += parts[0]
     for part in parts[1:-1]:
         snip += snip.mkline("", indent="  ")
@@ -74,8 +72,9 @@ snippet fragment "React component to return multiple elements" b
 </$1>
 endsnippet
 
+context "snip.visual_text"
 snippet format "format single line tag to multiline" w
-`!p format_tag(snip)`
+`!p format_tag(snip)`$0
 endsnippet
 
 snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something methods" r
