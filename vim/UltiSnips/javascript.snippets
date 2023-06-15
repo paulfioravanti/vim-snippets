@@ -19,11 +19,14 @@ def maybe_spreaded_list(snip):
     # Clear originally matched snippet trigger text
     snip.buffer[snip.line] = ""
 
-    if (visual := snip.visual_content):
-        snip.expand_anon("[${1:...}${2:" + visual + "}]")
-        return
+    output = ""
 
-    snip.expand_anon("[$1]")
+    if (visual := snip.visual_content):
+         output += "[${1:...}${2:" + visual + "}]"
+    else:
+         output += "[$1]"
+
+    snip.expand_anon(output)
 
 
 endglobal
