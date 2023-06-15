@@ -23,16 +23,30 @@ def comprehension_opening(match):
 def decorator_tag(match):
     return "classmethod" if "class" in match.group(1) else "staticmethod"
 
-def initialize_args(tabstop, snip):
-    if not tabstop:
-        snip.rv = ""
+def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
+    if not (args_tabstop := snip.tabstops[init_tabstop_index]):
         return
 
-    args = [string.strip() for string in tabstop.split(",") if string]
-    snip.shift(2)
-    for arg in args:
-        snip += snip.mkline("", indent="")
-        snip.rv += f"self.{arg} = {arg}"
+    # Strip out all the surrounding tabstop characters
+    args_list = (
+        args_tabstop
+        .current_text
+        .removeprefix("def __init__(self")
+        .removesuffix("):")
+        .split(",")
+    )
+
+    args = [string.strip() for string in args_list if string]
+    tabstop_indexes = range(
+        starting_tabstop_index,
+        len(args) + starting_tabstop_index
+    )
+
+    output = ""
+    for arg, index in zip(args, tabstop_indexes):
+        output += "\n    self." + arg + " = ${" +  str(index) + ":" + arg + "}"
+
+    snip.expand_anon(output)
 
 def maybe_cls(match):
     return "cls" if "class" in match.group(1) else ""
@@ -42,13 +56,16 @@ def maybe_self(match):
 
 endglobal
 
+# NOTE: snip.tabstops[7] cannot be used here due to it being nested within
+# snip.tabstops[6]. So, we have to take the outer tabstop.
+post_jump "if snip.tabstop == 0: initialize_args(snip, 6, 8)"
 snippet class "Python class" b
 class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
 
-    }${6:def __init__(self$7):`!p initialize_args(t[7], snip)`}$0
+    }${6:def __init__(self$7):}$0
 endsnippet
 
 # REF for multiple negative lookbehinds of differing lengths: https://stackoverflow.com/a/40617321/567863
