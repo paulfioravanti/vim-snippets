@@ -15,18 +15,22 @@ from javascript_helpers import (
 def maybe_paren(tabstop):
     return ")" if tabstop == "(" else ""
 
-def maybe_spread(snip):
-    if not (visual := snip.tabstops[1].current_text):
-        snip.rv = ""
+def maybe_spreaded_list(snip):
+    # Clear originally matched snippet trigger text
+    snip.buffer[snip.line] = ""
+
+    if (visual := snip.visual_content):
+        snip.expand_anon("[${1:...}${2:" + visual + "}]")
         return
 
-    snip.rv = snip.expand_anon("${1:...}")
+    snip.expand_anon("[$1]")
+
 
 endglobal
 
-post_jump "if snip.tabstop == 1: maybe_spread(snip)"
+pre_expand "maybe_spreaded_list(snip)"
 snippet "(array|list|\[\])" "Literal array/list" r
-[${1:${VISUAL}}]$0
+$0
 endsnippet
 
 snippet "\bconsole(\.| )log" "console.log" r
