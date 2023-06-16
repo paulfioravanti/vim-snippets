@@ -2,12 +2,17 @@ global !p
 
 def selector_info(match):
     selector_type = match.group(1)
-    selector = "." if selector_type == "class" else "#"
-    return (selector, selector_type)
+    match selector_type:
+        case "class":
+            return (".", selector_type)
+        case "id":
+            return ("#", selector_type)
+        case _:
+            return ("", selector_type)
 
 endglobal
 
-snippet "(class|id)" "CSS class selector" r
+snippet "(class|id|tag)" "CSS selector" r
 `!p
 selector, selector_type = selector_info(match)
 snip.rv = selector`${1:`!p snip.rv = selector_type`_name} {
