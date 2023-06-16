@@ -1,3 +1,7 @@
+snippet "(?<!do)(?<!explicit)(?<!inline) block" "block choice tabstop" r
+${1|inline block,do block,explicit block,local proc,local method,external method|}$0
+endsnippet
+
 snippet "do block" "do |<element>| <block> end" i
  do${1: |${2:element}|}
   $3
