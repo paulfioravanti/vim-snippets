@@ -1,0 +1,38 @@
+snippet case "case conditional" b
+case ${1:pattern}${2: if ${3:guard}}:
+    ${4:# do something}$0
+endsnippet
+
+snippet else "else condition" b
+else:
+    ${1:${VISUAL:# do something}}$0
+endsnippet
+
+snippet "else if" "else if condition" b
+elif ${1:condition}:
+    ${2:${VISUAL:# do something}}$0
+endsnippet
+
+snippet for "for statement" b
+for ${2:element} in ${1:iterable}:
+    ${3:${VISUAL:# do something}}${4:
+else:
+    ${5:# nothing found in $1}}$0
+endsnippet
+
+snippet if "if statement" b
+if ${1:condition}:
+    ${2:${VISUAL:# do something}}${3:
+else:
+    ${4:# do something else}}$0
+endsnippet
+
+snippet match "match statement" b
+match ${1:subject}:
+    case ${2:pattern}${3: if ${4:guard}}:
+        ${5:# do something}
+    case ${6:pattern}${7: if ${8:guard}}:
+        ${9:# do something}
+    case _:
+        ${10:# handle no match}$0
+endsnippet
