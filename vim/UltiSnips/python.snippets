@@ -44,7 +44,7 @@ def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
 
     output = ""
     for arg, index in zip(args, tabstop_indexes, strict=True):
-        output += "\n    self." + arg + " = ${" +  str(index) + ":" + arg + "}"
+        output += f"\n    self.{arg} = ${{{index}:{arg}}}"
 
     snip.expand_anon(output)
 
