@@ -66,15 +66,15 @@ function ${1:ComponentName}(${2:props}) {
 }
 endsnippet
 
+context "snip.visual_text"
+snippet format "format single line tag to multiline" w
+`!p format_tag(snip)`$0
+endsnippet
+
 snippet fragment "React component to return multiple elements" b
 <${1:React.Fragment}>
   ${2:${VISUAL}}$0
 </$1>
-endsnippet
-
-context "snip.visual_text"
-snippet format "format single line tag to multiline" w
-`!p format_tag(snip)`$0
 endsnippet
 
 snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something methods" r
