@@ -1,12 +1,13 @@
 global !p
 
 def star_flag_suffix(match):
-    return match.group(1) if match else ""
+    suffix = match.group(1)
+    return suffix or ""
 
 endglobal
 
 snippet "\bstar flag(ged|ging|s)?" "Markdown brief for '`*`-flag'" r
-\`*\`-flag`!p snip.rv =  star_flag_suffix(match)`$0
+\`*\`-flag`!p snip.rv = star_flag_suffix(match)`$0
 endsnippet
 
 snippet "steno block" "Steno outlines block entry" b
