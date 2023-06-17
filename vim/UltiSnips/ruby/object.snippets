@@ -1,8 +1,14 @@
+global !p
+
+def method_or_proc(match):
+    return "." if match.group(1) == "." else " &"
+
+endglobal
+
 snippet extend "Object#extend" b
 extend ${1:ModuleNames}$0
 endsnippet
 
-snippet "(\.|\s)method" "Object#method(sym)" r
-`!p snip.rv = "." if match.group(1) == "." else " &"
-`method(:${1:sym})$0
+snippet "(?<!external)(?<!local)(\.|\s)method" "Object#method(sym)" r
+`!p snip.rv = method_or_proc(match)`method(:${1:sym})$0
 endsnippet
