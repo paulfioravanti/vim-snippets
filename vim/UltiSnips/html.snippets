@@ -1,8 +1,28 @@
 global !p
 
+_TAG_NAMES = {
+    "em tag": "em",
+    "figure caption": "figcaption",
+    "keyboard": "kbd",
+    "list item": "li",
+    "ordered list": "ol",
+    "ruby text": "rt",
+    "sample": "samp",
+    "table data": "td",
+    "table footer": "tfoot",
+    "table head": "thead",
+    "table row": "tr",
+    "text area": "textarea",
+    "unordered list": "ul"
+}
+
 def class_attribute_name(snip):
     # This handling needed for React.
     return "className" if snip.ft == "javascript" else "class"
+
+def text_to_tag(match):
+    text = match.group(1)
+    return _TAG_NAMES.get(text, text)
 
 endglobal
 
@@ -14,9 +34,9 @@ tag = match.group(1)
 </`!p snip.rv = tag`>
 endsnippet
 
-snippet "\b(article|audio|body|button|code tag|div|figcaption|figure|footer|head|html|kbd|li|main|nav|ol|p|pre|rt|ruby|samp|section|select|span|style|table|tbody|td|textarea|tf|th|thead|title|tr|ul|var|video)" "HTML tag with id and class options" r
+snippet "\b(article|audio|body|button|code tag|div|figcaption|figure|figure caption|footer|head|html|kbd|keyboard|li(st item)?|main|nav|ol|ordered list|p|pre|rt|ruby|ruby text|samp(le)?|section|select|span|style|table|table data|table footer|table head|table row|tbody|td|text\s?area|tf|th|thead|title|tr|ul|unordered list|var|video)" "HTML tag with id and class options" r
 `!p
-tag = match.group(1)
+tag = text_to_tag(match)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}$7>${8:
   }${10:${VISUAL}}${9:
 }</`!p snip.rv = tag`>$0
@@ -24,19 +44,19 @@ endsnippet
 
 snippet "\b(button|div|p|span) inline" "HTML tag with id and class options" r
 `!p
-tag = match.group(1)
+tag = text_to_tag(match)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
 snippet "(em tag|strong)" "Inline HTML tag without options" r
 `!p
-tag = match.group(1)
+tag = text_to_tag(match)
 `<`!p snip.rv = tag`>${1:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
 snippet "(span|strong|em) inline" "Inline HTML tag with id and class options" r
 `!p
-tag = match.group(1)
+tag = text_to_tag(match)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: class="${5:class}"}}>${6:${VISUAL}}</`!p snip.rv = tag`>$0
 endsnippet
 
