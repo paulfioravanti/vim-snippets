@@ -81,6 +81,10 @@ snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something met
 `!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`$0
 endsnippet
 
+snippet "import use state" "import useState from react" b
+import { ${1:useState}${2: as ${3:alias}} } from "${6:react}"`!p snip.rv = maybe_semi(snip)`$0
+endsnippet
+
 snippet prop "define a prop" i
 ${1:name}=${2:\{}${3:`!p snip.rv = prop_value_placeholder(t[1])`}`!p snip.rv = closing_character(t[2])`$0
 endsnippet
