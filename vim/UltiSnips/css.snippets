@@ -34,11 +34,11 @@ float: ${1|left,right,none,inline-start,inline-end|};$0
 endsnippet
 
 snippet "font size" "font-size property" b
-font-size: $1;$0
+font-size: ${1|absolute size,relative size,length,percentage,global|};$0
 endsnippet
 
 snippet "font weight" "font-weight property" b
-font-weight: ${1|bold,bolder,lighter,normal,100,200,300,400,500,600,700,800,900|};$0
+font-weight: ${1|weight keyword,weight value|};$0
 endsnippet
 
 snippet "\b((?<!line )height|width)" "height/width property" r
