@@ -16,8 +16,13 @@ def get_config_option(snip, option, default=None):
     return snip.opt('g:ultisnips_javascript["{}"]'.format(option), default)
 
 def maybe_semi(snip):
+    # NOTE: This guard is needed to prevent recursion bugs when starting a
+    # snippet and then running undo before the snippet has finished.
+    if snip.c:
+         snip.rv = ""
+
     option = get_config_option(snip, "semi", "always")
-    return ";" if option == "always" else ""
+    snip.rv = ";" if option == "always" else ""
 
 def maybe_spaces(tabstop):
     if not tabstop:

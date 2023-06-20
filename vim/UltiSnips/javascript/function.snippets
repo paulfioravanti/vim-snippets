@@ -37,7 +37,7 @@ priority 0
 snippet "arrow function" "arrow function expression" i
 ${1:(}${2:params}`!p snip.rv = closing_character(t[1])` => ${3:{
   $5
-}`!p snip.rv = maybe_semi(snip)`}$0
+}`!p maybe_semi(snip)`}$0
 endsnippet
 
 snippet "function declaration" "function declaration" r
@@ -49,5 +49,5 @@ endsnippet
 snippet "function expression" "function expression" w
 function${1:*} (${2:params}) {
   $0
-}`!p snip.rv = maybe_semi(snip)`
+}`!p maybe_semi(snip)`
 endsnippet

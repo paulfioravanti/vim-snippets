@@ -53,7 +53,7 @@ class ${1:ClassName} extends React.Component {
   render() {
     return (
       $0
-    )`!p snip.rv = maybe_semi(snip)`
+    )`!p maybe_semi(snip)`
   }
 }
 endsnippet
@@ -62,7 +62,7 @@ snippet "define function component" "function component" b
 function ${1:ComponentName}(${2:props}) {
   return (
     $0
-  )`!p snip.rv = maybe_semi(snip)`
+  )`!p maybe_semi(snip)`
 }
 endsnippet
 
@@ -78,11 +78,11 @@ snippet fragment "React component to return multiple elements" b
 endsnippet
 
 snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something methods" r
-`!p snip.rv = match.group(1)`(${1:args})`!p snip.rv = maybe_semi(snip)`$0
+`!p snip.rv = match.group(1)`(${1:args})`!p maybe_semi(snip)`$0
 endsnippet
 
 snippet "import use state" "import useState from react" b
-import { ${1:useState}${2: as ${3:alias}} } from "${6:react}"`!p snip.rv = maybe_semi(snip)`$0
+import { ${1:useState}${2: as ${3:alias}} } from "${6:react}"`!p maybe_semi(snip)`$0
 endsnippet
 
 snippet prop "define a prop" i
@@ -106,5 +106,5 @@ endsnippet
 snippet "use state" "useState" b
 `!p
 state_name = uppercased(t[1])
-`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p snip.rv = maybe_semi(snip)`$0
+`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p maybe_semi(snip)`$0
 endsnippet
