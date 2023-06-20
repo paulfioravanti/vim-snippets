@@ -17,7 +17,7 @@ snippet .bind "Function.prototype.bind(thisArg, arg1, /* …, */ argN)" i
 .bind(${1:thisArg}${2:, ${3:arg1}}$4)$0
 endsnippet
 
-snippet "(?<!\s)function" "top level function declaration" r
+snippet "(?<=^)function" "top level function declaration" r
 ${1:export ${2:default }}function${3:*} ${4:functionName}(${5:params}) {
   $0
 }
