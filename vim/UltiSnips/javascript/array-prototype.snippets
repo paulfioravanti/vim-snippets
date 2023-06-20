@@ -16,12 +16,14 @@ snippet Array "Array() constructor" i
 Array(${1:elements or length})$0
 endsnippet
 
+# NOTE: Negative look behind for "ordered" due to conflicts with HTML
+# "ordered list" (<ol>) tag trigger word.
 context "snip.visual_text"
-snippet "(array|list|\[\])" "Literal array/list with potential spread" r
+snippet "(?<!ordered )(array|list|\[\])" "Literal array/list with potential spread" r
 [${1:...}${2:${VISUAL}}]$0
 endsnippet
 
-snippet "(array|list|\[\])" "Literal array/list" r
+snippet "(?<!ordered )(array|list|\[\])" "Literal array/list" r
 [$1]$0
 endsnippet
 
