@@ -6,11 +6,11 @@ def join_properties(match):
 endglobal
 
 snippet background "CSS background property" b
-background: $1;$0
+background: ${1|color,global|};$0
 endsnippet
 
 snippet border "CSS border property" b
-border: ${1:{style|width}}${2: ${3:{style|color}}${4: color$5}};$0
+border: ${1|border style,border width|}${2: ${3|border style,color|}${4: color}}$5;$0
 endsnippet
 
 snippet "border radius" "CSS border-radius property" b
@@ -41,7 +41,7 @@ snippet "font weight" "font-weight property" b
 font-weight: ${1|weight keyword,weight value|};$0
 endsnippet
 
-snippet "\b((?<!line )height|width)" "height/width property" r
+snippet "\b((?<!line )height|(?<!border )width)" "height/width property" r
 `!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
@@ -50,7 +50,7 @@ line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
 
 snippet "\b(margin|padding)" "CSS properties that deal with sides of an element" r
-`!p snip.rv = match.group(1)`: ${1:{all|vertical|top}}${2|px,em,rem,%|}${3: ${4:{horizontal|right}}${5|px,em,rem,%|}${6: ${7:{bottom}}${8|px,em,rem,%|}${9: ${10:{right}}${11|px,em,rem,%|}}}};$0
+`!p snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
 endsnippet
 
 snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r

@@ -2,11 +2,23 @@ snippet "absolute size" "choose absolute size property" w
 ${1|xx-small,x-small,small,medium,large,x-large,xx-large,xx-large|}$0
 endsnippet
 
+snippet "border style" "border styles" w
+${1|dotted,dashed,solid,double,groove,ridge,inset,outset,hidden,none|}$0
+endsnippet
+
+snippet color "select from different color types" w
+${1|hex,rgba,hsl,hwb,color keyword|}$0
+endsnippet
+
+snippet "color keyword" "color keywords" w
+${1|black,silver,gray,white,maroon,red,purple,fuchsia,green,lime,olive,yellow,navy,blue,teal,aqua|}$0
+endsnippet
+
 snippet global "global values" w
 ${1|inherit,initial,revert,revert-layer,unset|}$0
 endsnippet
 
-snippet length "common <length> values" w
+snippet "\b(length|border width)" "common length values" r
 ${1:number}${2|px,em,rem,vh|}$0
 endsnippet
 
