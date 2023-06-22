@@ -29,14 +29,23 @@ def format_tag(snip):
 def maybe_self_closing(tabstop):
     return "" if tabstop else " /"
 
-def uppercased(tabstop):
-    return tabstop[0].capitalize() + tabstop[1:]
-
 def prop_value_placeholder(tabstop):
     if (match := _ON_PROP.match(tabstop)):
         return "handle" + match.group(1)
     else:
         return tabstop
+
+def state_text_defaults(snip, tabstop):
+    state_name = _uppercased(tabstop) or "State"
+    set_state_text = f"set{state_name}"
+    initial_state_text = snip.v.text or f"initial{state_name}"
+    return (set_state_text, initial_state_text)
+
+def _uppercased(tabstop):
+    if not tabstop:
+        return ""
+    else:
+        return tabstop[0].capitalize() + tabstop[1:]
 
 endglobal
 
@@ -105,6 +114,6 @@ endsnippet
 
 snippet "use state" "useState" b
 `!p
-state_name = uppercased(t[1])
-`const [${1:state}, ${2:set`!p snip.rv = state_name`}] = useState(${3:initial`!p snip.rv = state_name`})`!p maybe_semi(snip)`$0
+(set_state_text, initial_state_text) = state_text_defaults(snip, t[1])
+`const [${1:state}, ${2:`!p snip.rv = set_state_text`}] = useState(${3:`!p snip.rv = initial_state_text`})`!p maybe_semi(snip)`$0
 endsnippet
