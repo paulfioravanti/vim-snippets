@@ -18,11 +18,9 @@ def get_config_option(snip, option, default=None):
 def maybe_semi(snip):
     # NOTE: This guard is needed to prevent recursion bugs when starting a
     # snippet and then running undo before the snippet has finished.
-    if snip.c:
-         snip.rv = ""
-
-    option = get_config_option(snip, "semi", "always")
-    snip.rv = ";" if option == "always" else ""
+    if not snip.c:
+        option = get_config_option(snip, "semi", "always")
+        snip.rv = ";" if option == "always" else ""
 
 def maybe_spaces(tabstop):
     if not tabstop:
