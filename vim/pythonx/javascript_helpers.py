@@ -18,6 +18,7 @@ def get_config_option(snip, option, default=None):
 def maybe_semi(snip):
     # NOTE: This guard is needed to prevent recursion bugs when starting a
     # snippet and then running undo before the snippet has finished.
+    # See: https://github.com/SirVer/ultisnips/issues/375#issuecomment-55115227
     if not snip.c:
         option = get_config_option(snip, "semi", "always")
         snip.rv = ";" if option == "always" else ""
