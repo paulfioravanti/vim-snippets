@@ -25,11 +25,11 @@ def text_to_tag(match):
 
 endglobal
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure|figure caption|footer|form|h[1-6]|head|html|kbd|keyboard|li|list item|main|nav|ol|ordered list|p|pre|rt|ruby|ruby text|samp|sample|section|select|span|strong|style|table|table data|table footer|table head|table row|tbody|td|text\s?area|tf|th|thead|title|tr|ul|unordered list|var|video)" "HTML tag single-line or multi-line choice" r
+snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video)" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = text_to_tag(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure|figure caption|footer|form|h[1-6]|head|html|kbd|keyboard|li|list item|main|nav|ol|ordered list|p|pre|rt|ruby|ruby text|samp|sample|section|select|span|strong|style|table|table data|table footer|table head|table row|tbody|td|text\s?area|tf|th|thead|title|tr|ul|unordered list|var|video) multi-line" "Multi-line HTML tag with id and class options" r
+snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video) multi-line" "HTML tag multi-line" r
 `!p
 tag = text_to_tag(match)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}$7>
@@ -37,7 +37,7 @@ tag = text_to_tag(match)
 </`!p snip.rv = tag`>$0
 endsnippet
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure|figure caption|footer|form|h[1-6]|head|html|kbd|keyboard|li|list item|main|nav|ol|ordered list|p|pre|rt|ruby|ruby text|samp|sample|section|select|span|strong|style|table|table data|table footer|table head|table row|tbody|td|text\s?area|tf|th|thead|title|tr|ul|unordered list|var|video) single-line" "Single-line HTML tag with id and class options" r
+snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video) single-line" "HTML tag single-line" r
 `!p
 tag = text_to_tag(match)
 `<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}$7>${8:${VISUAL}}</`!p snip.rv = tag`>$0
