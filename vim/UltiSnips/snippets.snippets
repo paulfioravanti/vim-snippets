@@ -17,14 +17,21 @@ _SNIPPET_END = "endsnippet"
 def maybe_visual_colon(tabstop):
     return ":" if tabstop else ""
 
+def parse_snippet_action_name(match):
+    action_name = match.group(1)
+    if action_name == "preexpand":
+        return "pre_expand"
+    else:
+        return action_name.replace(" ", "_")
+
 endglobal
 
 snippet "choice tabstop" "Ultisnip tabstop" i
 ${${1:n}|${2:choice1},${3:choice2}|}$0
 endsnippet
 
-snippet context "Context expression" b
-context "${1:python_expression}"$0
+snippet "\b(context|preexpand|post expand|post jump)" "Snippet actions" r
+`!p snip.rv = parse_snippet_action_name(match)` "${1:python_expression}"$0
 endsnippet
 
 snippet global "Global snippet" b
