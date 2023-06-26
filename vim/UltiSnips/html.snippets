@@ -1,5 +1,58 @@
 global !p
 
+import re
+from UltiSnips import vim_helper
+
+_HTML_KEYWORDS = [
+    "article",
+    "audio",
+    "body",
+    "button",
+    "code",
+    "div",
+    "em",
+    "figcaption",
+    "figure(?: caption)?",
+    "footer",
+    "form",
+    "h[1-6]",
+    "head",
+    "html",
+    "k(?:ey)?b(?:oar)?d",
+    "li(?:st item)?",
+    "main",
+    "nav",
+    "ol",
+    "ordered list",
+    "p(?:re)?",
+    "rt",
+    "ruby(?: text)?",
+    "samp(?:le)?",
+    "section",
+    "select",
+    "span",
+    "strong",
+    "style",
+    "table(?: data| footer| head| row)?",
+    "tbody",
+    "td",
+    "text\s?area",
+    "tf",
+    "th(?:ead)?",
+    "title",
+    "tr",
+    "ul",
+    "unordered list",
+    "var",
+    "video"
+]
+_HTML_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_KEYWORDS)})\b")
+
+_IDS = re.compile(r"(?<=#)[^\.#]+") # #some-id
+_CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
+_MULTILINE = "multi-line"
+
+# Bridging list of English words/phrases to HTML tag names
 _TAG_NAMES = {
     "figure caption": "figcaption",
     "keyboard": "kbd",
@@ -15,32 +68,81 @@ _TAG_NAMES = {
     "unordered list": "ul"
 }
 
-def class_attribute_name(snip):
+def build_tag_with_attributes(snip, match):
+    tag = text_to_tag(match)
+    tag_type = match.group(3)
+    output = f"<{tag}"
+
+    if (specified_attributes := tag_args(match)):
+        id_default_text = _attribute_text(_IDS, specified_attributes)
+        class_default_text = _attribute_text(_CLASSES, specified_attributes)
+    else:
+        id_default_text = "id"
+        class_default_text = "classes"
+
+    # NOTE: Although a tag with attributes probably doesn't need this wrapping
+    # $1 tabstop, without it, the snippet spacing is borked.
+    output += "${1:"
+
+    if specified_attributes:
+        if id_default_text:
+            output += f" id=\"{id_default_text}\""
+
+        if class_default_text:
+            output += f" {class_attribute_name()}=\"{class_default_text}\""
+    else:
+        output += f"${{2: id=\"${{3:{id_default_text}}}\"}}"
+        output += f"${{4: ${{5:{class_attribute_name()}}}=\"${{6:{class_default_text}}}\"}}"
+
+    output += "}$7>"
+
+    if tag_type == _MULTILINE:
+        output += "\n  "
+
+    output += "${8:${VISUAL}}"
+
+    if tag_type == _MULTILINE:
+        output += "\n"
+
+    output += f"</{tag}>"
+
+    snip.expand_anon(output)
+
+def class_attribute_name():
     # This handling needed for React.
-    return "className" if snip.ft == "javascript" else "class"
+    # NOTE: snip.ft not available during pre_expand/post_jump, which is when
+    # this function is used. See SnippetUtilForAction class in Ultisnips
+    # codebase to show that it only responds to `expand_anon`:
+    # https://github.com/SirVer/ultisnips/blob/master/pythonx/UltiSnips/text_objects/python_code.py
+    return "className" if vim_helper.eval("&filetype") == "javascript" else "class"
+
+def tag_args(match):
+    return match.group(2) or ""
 
 def text_to_tag(match):
     text = match.group(1)
     return _TAG_NAMES.get(text, text)
 
+def _attribute_text(attribute_type, attributes):
+    return " ".join(re.findall(attribute_type, attributes))
+
 endglobal
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video)" "HTML tag single-line or multi-line choice" r
-`!p snip.rv = text_to_tag(match)` ${1|multi-line,single-line|}$0
+context "re.match(_HTML_KEYWORD, match.group(1))"
+snippet "\b([a-z1-6\s]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
+`!p snip.rv = text_to_tag(match) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video) multi-line" "HTML tag multi-line" r
-`!p
-tag = text_to_tag(match)
-`<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}$7>
-  ${8:${VISUAL}}
-</`!p snip.rv = tag`>$0
+context "re.match(_HTML_KEYWORD, match.group(1))"
+post_jump "build_tag_with_attributes(snip, match)"
+snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (multi-line)" "HTML tag multi-line" r
+$0
 endsnippet
 
-snippet "\b(article|audio|body|button|code|div|em|figcaption|figure( caption)?|footer|form|h[1-6]|head|html|k(ey)?b(oar)?d|li(st item)?|main|nav|ol|ordered list|p(re)?|rt|ruby( text)?|samp(le)?|section|select|span|strong|style|table( data| footer| head| row)?|tbody|td|text\s?area|tf|th(ead)?|title|tr|ul|unordered list|var|video) single-line" "HTML tag single-line" r
-`!p
-tag = text_to_tag(match)
-`<`!p snip.rv = tag`${1:${2: id="${3:id}"}${4: ${5:`!p snip.rv = class_attribute_name(snip)`}="${6:class}"}}$7>${8:${VISUAL}}</`!p snip.rv = tag`>$0
+context "re.match(_HTML_KEYWORD, match.group(1))"
+post_jump "build_tag_with_attributes(snip, match)"
+snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (single-line)" "HTML tag single-line" r
+$0
 endsnippet
 
 snippet iframe "HTML iframe tag" i
