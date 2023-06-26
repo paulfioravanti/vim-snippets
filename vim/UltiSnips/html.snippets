@@ -46,7 +46,7 @@ _HTML_KEYWORDS = [
     "var",
     "video"
 ]
-_HTML_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_KEYWORDS)})\b")
+HTML_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_KEYWORDS)})\b")
 
 _IDS = re.compile(r"(?<=#)[^\.#]+") # #some-id
 _CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
@@ -70,51 +70,34 @@ _TAG_NAMES = {
 
 def build_tag_with_attributes(snip, match):
     tag = text_to_tag(match)
-    tag_type = match.group(3)
-    output = f"<{tag}"
-
-    if (specified_attributes := tag_args(match)):
-        id_default_text = _attribute_text(_IDS, specified_attributes)
-        class_default_text = _attribute_text(_CLASSES, specified_attributes)
-    else:
-        id_default_text = "id"
-        class_default_text = "classes"
-
     # NOTE: Although a tag with attributes probably doesn't need this wrapping
     # $1 tabstop, without it, the snippet spacing is borked.
-    output += "${1:"
+    output = f"<{tag}${{1:"
 
-    if specified_attributes:
-        if id_default_text:
-            output += f" id=\"{id_default_text}\""
+    if (specified_attributes := tag_args(match)):
+        ids = _attribute_text(_IDS, specified_attributes)
+        classes = _attribute_text(_CLASSES, specified_attributes)
 
-        if class_default_text:
-            output += f" {class_attribute_name()}=\"{class_default_text}\""
+        if ids:
+            output += f" id=\"{ids}\""
+
+        if classes:
+            output += f" {_class_attribute_name()}=\"{classes}\""
     else:
-        output += f"${{2: id=\"${{3:{id_default_text}}}\"}}"
-        output += f"${{4: ${{5:{class_attribute_name()}}}=\"${{6:{class_default_text}}}\"}}"
+        output += "${2: id=\"${3:id}\"}"
+        output += f"${{4: ${{5:{_class_attribute_name()}}}=\"${{6:classes}}\"}}"
 
     output += "}$7>"
+    visual = "${8:${VISUAL}}"
 
-    if tag_type == _MULTILINE:
-        output += "\n  "
-
-    output += "${8:${VISUAL}}"
-
-    if tag_type == _MULTILINE:
-        output += "\n"
+    # tag type
+    if match.group(3) == _MULTILINE:
+        output += f"\n  {visual}\n"
+    else:
+        output += visual
 
     output += f"</{tag}>"
-
     snip.expand_anon(output)
-
-def class_attribute_name():
-    # This handling needed for React.
-    # NOTE: snip.ft not available during pre_expand/post_jump, which is when
-    # this function is used. See SnippetUtilForAction class in Ultisnips
-    # codebase to show that it only responds to `expand_anon`:
-    # https://github.com/SirVer/ultisnips/blob/master/pythonx/UltiSnips/text_objects/python_code.py
-    return "className" if vim_helper.eval("&filetype") == "javascript" else "class"
 
 def tag_args(match):
     return match.group(2) or ""
@@ -126,20 +109,28 @@ def text_to_tag(match):
 def _attribute_text(attribute_type, attributes):
     return " ".join(re.findall(attribute_type, attributes))
 
+def _class_attribute_name():
+    # This handling needed for React.
+    # NOTE: snip.ft not available during pre_expand/post_jump, which is when
+    # this function is used. See SnippetUtilForAction class in Ultisnips
+    # codebase to show that it only responds to `expand_anon`:
+    # https://github.com/SirVer/ultisnips/blob/master/pythonx/UltiSnips/text_objects/python_code.py
+    return "className" if vim_helper.eval("&filetype") == "javascript" else "class"
+
 endglobal
 
-context "re.match(_HTML_KEYWORD, match.group(1))"
+context "re.match(HTML_KEYWORD, match.group(1))"
 snippet "\b([a-z1-6\s]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = text_to_tag(match) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-context "re.match(_HTML_KEYWORD, match.group(1))"
+context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
 snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (multi-line)" "HTML tag multi-line" r
 $0
 endsnippet
 
-context "re.match(_HTML_KEYWORD, match.group(1))"
+context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
 snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (single-line)" "HTML tag single-line" r
 $0
