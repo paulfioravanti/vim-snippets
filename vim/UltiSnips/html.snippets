@@ -120,19 +120,19 @@ def _class_attribute_name():
 endglobal
 
 context "re.match(HTML_KEYWORD, match.group(1))"
-snippet "\b([a-z1-6\s]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
+snippet "\b([^\s#\.]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = text_to_tag(match) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
 context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
-snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (multi-line)" "HTML tag multi-line" r
+snippet "\b([^\s#\.]+)([#\.][^\s]+)? (multi-line)" "HTML tag multi-line" r
 $0
 endsnippet
 
 context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
-snippet "\b([a-z1-6\s]+)([#\.][^\s]+)? (single-line)" "HTML tag single-line" r
+snippet "\b([^\s\.]+)([#\.][^\s]+)? (single-line)" "HTML tag single-line" r
 $0
 endsnippet
 
