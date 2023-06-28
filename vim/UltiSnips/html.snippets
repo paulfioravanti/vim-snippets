@@ -120,7 +120,7 @@ def _class_attribute_name():
 endglobal
 
 context "re.match(HTML_KEYWORD, match.group(1))"
-snippet "\b(?!.*(?:(?:multi|single)-line))([^#\.]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
+snippet "\b(?<!<)(?!.*(?:(?:multi|single)-line))([^#\.]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = text_to_tag(match) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
