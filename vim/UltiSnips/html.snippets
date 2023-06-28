@@ -126,13 +126,7 @@ endsnippet
 
 context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
-snippet "\b([^\s#\.]+)([#\.][^\s]+)? (multi-line)" "HTML tag multi-line" r
-$0
-endsnippet
-
-context "re.match(HTML_KEYWORD, match.group(1))"
-post_jump "build_tag_with_attributes(snip, match)"
-snippet "\b([^\s#\.]+)([#\.][^\s]+)? (single-line)" "HTML tag single-line" r
+snippet "\b([^\s#\.]+)([#\.][^\s]+)? ((multi|single)-line)" "HTML tag multi-line" r
 $0
 endsnippet
 
