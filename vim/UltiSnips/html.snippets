@@ -12,33 +12,33 @@ _HTML_KEYWORDS = [
     "div",
     "em",
     "figcaption",
-    "figure(?: caption)?",
+    "figure",
     "footer",
     "form",
     "h[1-6]",
     "head",
     "html",
-    "k(?:ey)?b(?:oar)?d",
-    "li(?:st item)?",
+    "kbd",
+    "li",
     "main",
     "nav",
     "ol",
     "ordered list",
     "p(?:re)?",
     "rt",
-    "ruby(?: text)?",
-    "samp(?:le)?",
+    "ruby",
+    "samp",
     "section",
     "select",
     "span",
     "strong",
     "style",
-    "table(?: data| footer| head| row)?",
+    "table",
     "tbody",
     "td",
-    "text\s?area",
-    "tf",
-    "th(?:ead)?",
+    "textarea",
+    "tfoot",
+    "th",
     "title",
     "tr",
     "ul",
@@ -53,8 +53,14 @@ _CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
 _MULTILINE = "multi-line"
 
 # Bridging list of English words/phrases to HTML tag names
-_TAG_NAMES = {
+TAG_NAME_MAPPINGS = {
     "figure caption": "figcaption",
+    "heading 1": "h1",
+    "heading 2": "h2",
+    "heading 3": "h3",
+    "heading 4": "h4",
+    "heading 5": "h5",
+    "heading 6": "h6",
     "keyboard": "kbd",
     "list item": "li",
     "ordered list": "ol",
@@ -104,7 +110,7 @@ def tag_args(match):
 
 def text_to_tag(match):
     text = match.group(1)
-    return _TAG_NAMES.get(text, text)
+    return TAG_NAME_MAPPINGS.get(text, text)
 
 def _attribute_text(attribute_type, attributes):
     return " ".join(re.findall(attribute_type, attributes))
@@ -119,14 +125,19 @@ def _class_attribute_name():
 
 endglobal
 
+context "match.group(1) in TAG_NAME_MAPPINGS"
+snippet "((?:\w+\s)?\w+)" "convert tag descriptions to tag names" r
+`!p snip.rv = text_to_tag(match)`$0
+endsnippet
+
 context "re.match(HTML_KEYWORD, match.group(1))"
-snippet "\b(?<!<)(?!.*(?:(?:multi|single)-line))([^#\.]+)([#\.][^\s]+)?" "HTML tag single-line or multi-line choice" r
-`!p snip.rv = text_to_tag(match) + tag_args(match)` ${1|multi-line,single-line|}$0
+snippet "(\w+)([#\.][\w\-#\.]+)?" "HTML tag single-line or multi-line choice" r
+`!p snip.rv = match.group(1) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
 context "re.match(HTML_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
-snippet "\b([^\s#\.]+)([#\.][^\s]+)? ((multi|single)-line)" "HTML tag multi-line" r
+snippet "(\w+)([#\.][\w\-#\.]+)? ((multi|single)-line)" "HTML tag multi-line" r
 $0
 endsnippet
 
