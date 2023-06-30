@@ -58,20 +58,20 @@ ${1|define function component,define class component|}$0
 endsnippet
 
 snippet "define class component" "class component" b
-class ${1:ClassName} extends React.Component {
+class ${1:`!p snip.rv = snip.basename`} extends React.Component {
   render() {
     return (
-      $0
-    )`!p maybe_semi(snip)`
+      $2
+    )`!p maybe_semi(snip)`$0
   }
 }
 endsnippet
 
 snippet "define function component" "function component" b
-function ${1:ComponentName}(${2:props}) {
+${1:export ${2:default }}function ${3:`!p snip.rv = snip.basename`}(${4:props$5}) {
   return (
-    $0
-  )`!p maybe_semi(snip)`
+    $6
+  )`!p maybe_semi(snip)`$0
 }
 endsnippet
 
@@ -91,7 +91,7 @@ snippet "\b((handle|on|set)[A-Z]\w+)" "user-defined (handle|on|set)Something met
 endsnippet
 
 snippet "import use state" "import useState from react" b
-import { ${1:useState}${2: as ${3:alias}} } from "${6:react}"`!p maybe_semi(snip)`$0
+import { useState } from "react"`!p maybe_semi(snip)`$0
 endsnippet
 
 snippet prop "define a prop" i
