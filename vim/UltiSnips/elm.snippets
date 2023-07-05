@@ -1,3 +1,9 @@
+snippet "else if" "else if clause" b
+else if ${1:condition} then
+    ${2:${VISUAL:-- do something}}
+
+endsnippet
+
 snippet false "False" w
 False$0
 endsnippet
@@ -7,7 +13,15 @@ if ${1:condition} then
     ${2:${VISUAL:-- do something}}
 
 else
-    ${4:-- do something else}$0
+    ${3:-- do something else}$0
+endsnippet
+
+snippet let "let statement" b
+let
+    ${1:variable} =
+        ${2:${VISUAL:-- do something}}
+in
+${4:-- do something else}$0
 endsnippet
 
 snippet pluses "String concat operator" w
