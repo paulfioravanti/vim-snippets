@@ -1,0 +1,25 @@
+global !p
+
+def import_exposing_default_text(tabstop):
+    return tabstop.split(".")[-1]
+
+def module_alias_default_text(tabstop):
+    module_parts = tabstop.split(".")
+
+    if len(module_parts) == 1:
+        return "Alias"
+    else:
+        return text if (text := module_parts[-1]) else "Alias"
+
+def module_exposing_default_text(tabstop):
+    return "main" if tabstop == "Main" else ".."
+
+endglobal
+
+snippet import "import statement" b
+import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}$6)}$0
+endsnippet
+
+snippet module "Module definition" b
+${1:port }module ${2:`!p snip.rv = snip.basename`} exposing (${3:`!p snip.rv = module_exposing_default_text(t[2])`})$0
+endsnippet

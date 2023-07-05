@@ -1,0 +1,38 @@
+global !p
+
+def record_update_default_text(match):
+    return text if (text := match.group(1)) else "recordName"
+
+endglobal
+
+snippet field "Choose field type/definition" b
+${1|field type,field definition|}$0
+endsnippet
+
+snippet "field definition" "Record field definition" b
+, ${1:fieldName} = ${2:value}$0
+endsnippet
+
+snippet "field type" "Record field type" b
+, ${1:fieldName} : ${2:Type}$0
+endsnippet
+
+snippet record "Choose record type/definition/update" b
+${1|record type,record definition,record update|}$0
+endsnippet
+
+snippet "record definition" "Record definition" b
+{${1: ${2:fieldName1} = ${3:value}
+${4:, ${5:fieldName2} = ${6:value}}$7
+}}$0
+endsnippet
+
+snippet "record type" "Record Type definition" b
+{${1: ${2:fieldName1} : ${3:Type}
+${4:, ${5:fieldName2} : ${6:Type}}$7
+}}$0
+endsnippet
+
+snippet "\brecord update(?:\s(\w+))?" "Update some fields of a record" r
+{ ${1:`!p snip.rv = record_update_default_text(match)`} | ${2:fieldName} = ${3:value} }$0
+endsnippet

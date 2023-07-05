@@ -1,0 +1,11 @@
+snippet "inbound port" "Inbound port for subscriptions" b
+port ${1:inbound} : (${2|Value,String|} -> msg) -> Sub msg$0
+endsnippet
+
+snippet "outbound port" "Outbound port for ports" b
+port ${1:outbound} : ${2|Value,String|} -> Cmd msg$0
+endsnippet
+
+snippet "\b(?<!inbound )(?<!outbound )port" "choose inbound/outbound port" r
+${1|inbound port,outbound port|}$0
+endsnippet
