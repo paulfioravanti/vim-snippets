@@ -39,7 +39,7 @@ def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
     args = [string.strip() for string in args_list if string]
     tabstop_indexes = range(
         starting_tabstop_index,
-        len(args) + starting_tabstop_index
+        starting_tabstop_index + len(args)
     )
 
     output = ""
