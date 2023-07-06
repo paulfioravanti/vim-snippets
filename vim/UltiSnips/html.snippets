@@ -5,7 +5,7 @@ global !p
 import re
 from UltiSnips import vim_helper
 
-_HTML_KEYWORDS = [
+_HTML_TAG_KEYWORDS = [
     "article",
     "audio",
     "body",
@@ -48,7 +48,35 @@ _HTML_KEYWORDS = [
     "var",
     "video"
 ]
-HTML_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_KEYWORDS)})\b")
+HTML_TAG_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_TAG_KEYWORDS)})\b")
+
+_HTML_INPUT_TYPE_KEYWORDS = [
+    "button",
+    "checkbox",
+    "color",
+    "datetime-local",
+    "email",
+    "file",
+    "hidden",
+    "month",
+    "password",
+    "radio",
+    "reset",
+    "search",
+    "submit",
+    "text",
+    "time",
+    "url",
+    "week",
+]
+HTML_INPUT_TYPE_KEYWORD = re.compile(
+    rf"\b({'|'.join(_HTML_INPUT_TYPE_KEYWORDS)})\b"
+)
+
+_HTML_MIN_MAX_INPUT_TYPE_KEYWORDS = ["date", "number", "range"]
+HTML_MIN_MAX_INPUT_TYPE_KEYWORD = re.compile(
+    rf"\b({'|'.join(_HTML_MIN_MAX_INPUT_TYPE_KEYWORDS)})\b"
+)
 
 _IDS = re.compile(r"(?<=#)[^\.#]+") # #some-id
 _CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
@@ -132,12 +160,12 @@ snippet "((?:\w+\s)?\w+)" "convert tag descriptions to tag names" r
 `!p snip.rv = text_to_tag(match)`$0
 endsnippet
 
-context "re.match(HTML_KEYWORD, match.group(1))"
+context "re.match(HTML_TAG_KEYWORD, match.group(1))"
 snippet "(\w+)([#\.][\w\-#\.]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = match.group(1) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-context "re.match(HTML_KEYWORD, match.group(1))"
+context "re.match(HTML_TAG_KEYWORD, match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
 snippet "(\w+)([#\.][\w\-#\.]+)? ((multi|single)-line)" "HTML tag multi-line" r
 $0
@@ -155,13 +183,15 @@ snippet input "HTML input tag of type 'text'" b
 <input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-snippet "\binput (button|checkbox|color|datetime-local|email|file|hidden|month|password|radio|reset|search|submit|text|time|url|week)" "HTML input tag of (type) with id, class, name, value" r
+context "re.match(HTML_INPUT_TYPE_KEYWORD, match.group(1))"
+snippet "\binput (\w+)" "HTML input tag of (type) with id, class, name, value" r
 `!p
 input_type = match.group(1)
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-snippet "\binput (date|number|range)" "HTML input tag of (type) with id, name, min, max" r
+context "re.match(HTML_MIN_MAX_INPUT_TYPE_KEYWORD, match.group(1))"
+snippet "\binput (\w+)" "HTML input tag of (type) with id, name, min, max" r
 `!p
 input_type = match.group(1)
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: min="${11:min}"}${12: max="${13:max}"}} />$0
