@@ -1,0 +1,41 @@
+global !p
+
+def initialize_types(snip, args_index, types_index):
+    if not (args_tabstop := snip.tabstops[args_index]):
+        return
+
+    # Strip out all the surrounding tabstop characters
+    args_list = args_tabstop.current_text.split(" ")
+
+    args = [string.strip() for string in args_list if string]
+    tabstop_indexes = range(types_index, types_index + len(args))
+
+    output = ""
+    for arg, index in zip(args, tabstop_indexes, strict=True):
+        arg_type_text = f"{arg[0].capitalize() + arg[1:]}Type"
+        output += f" ${{{index}:{arg_type_text}}} ->"
+
+    snip.expand_anon(output)
+
+def maybe_space(tabstop):
+    return " " if tabstop else ""
+
+endglobal
+
+snippet "(?<=-> )arg(ument)?" "function argument type declaration" r
+${1:ArgumentType} -> $0
+endsnippet
+
+# NOTE: The tabstop 10 number is arbitrary: I'd never expect an Elm function to
+# have 7 arguments, so I figure it gives enough buffer room for the dynamically
+# generated tabstops from `initialize_types`.
+post_jump "if snip.tabstop == 3: initialize_types(snip, 2, 3)"
+snippet function "function" b
+$1 :$3 ${10:ReturnType}
+${1:functionName}`!p snip.rv = maybe_space(t[2])`${2:arguments} =
+    $0
+endsnippet
+
+snippet "((?<=: )|(?<=-> ))function" "function type declaration" r
+(${1:ArgumentType} -> $2${3:ReturnType})$0
+endsnippet
