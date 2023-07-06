@@ -1,31 +1,6 @@
-snippet case "case statement" b
-case ${1:value} of
-    ${2:MessageOne} ->
-        ${3:-- do something}
-
-    ${4:MessageTwo} ->
-        ${5:-- do something else}
-
-    ${6:_ ->
-        ${7:-- do the default thing}}$0
-endsnippet
-
-snippet "else if" "else if clause" b
-else if ${1:condition} then
-    ${2:${VISUAL:-- do something}}$0
-
-endsnippet
 
 snippet false "False" w
 False$0
-endsnippet
-
-snippet if "if...else" b
-if ${1:condition} then
-    ${2:${VISUAL:-- do something}}
-
-else
-    ${3:-- do something else}$0
 endsnippet
 
 snippet let "let statement" b
@@ -33,7 +8,7 @@ let
     ${1:variable} =
         ${2:${VISUAL:-- do something}}
 in
-${4:-- do something else}$0
+${4:-- return value}$0
 endsnippet
 
 snippet main "choice for main-related function type" b
@@ -46,11 +21,6 @@ endsnippet
 
 snippet "main subscriptions" "choice for application type" b
 main subscriptions ${1|application,document,element|}$0
-endsnippet
-
-snippet message "message variant for case statement" b
-${1:MessageName} ->
-    ${1:-- do something}$0
 endsnippet
 
 snippet pluses "String concat operator" w
