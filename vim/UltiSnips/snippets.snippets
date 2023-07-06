@@ -27,7 +27,7 @@ def parse_snippet_action_name(match):
 endglobal
 
 snippet "choice tabstop" "Ultisnip tabstop" i
-${${1:n}|${2:choice1},${3:choice2}|}$0
+${${1:n}|${2:${VISUAL:choice1}},${3:choice2}|}$0
 endsnippet
 
 snippet "\b(context|preexpand|post expand|post jump)" "Snippet actions" r
