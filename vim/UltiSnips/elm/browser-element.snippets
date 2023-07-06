@@ -1,0 +1,50 @@
+global !p
+
+# ~/.vim/pythonx/elm_helpers.py
+from elm_helpers import (
+    flags_text,
+    maybe_flags
+)
+
+endglobal
+
+snippet "main main element" "Browser.element main function" b
+main : Program ${1|Flags,()|} Model Msg
+main =
+    Browser.element
+        { init = ${2:init}
+        , update = ${3:update}
+        , view = ${4:view}
+        , subscriptions = ${5:subscriptions}
+        }$0
+endsnippet
+
+snippet "main init element" "Browser.element init function" b
+init : ${1|Flags,()|} -> ( Model, Cmd Msg )
+init `!p snip.rv = flags_text(t[1])` =
+    ( ${2:Model.init`!p snip.rv = maybe_flags(t[1])`}
+    , ${3:Cmd.none}
+    )$0
+endsnippet
+
+snippet "main update element" "Browser.element update function" b
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        ${1:SomeMsg ->
+            (model, Cmd.none)}$0
+endsnippet
+
+snippet "main view element" "Browser.element view function" b
+view : Model -> Html Msg
+view model =
+    ${1:div []
+        [ h1 [] [ text "Replace this with real code!" ]
+        ]}$0
+endsnippet
+
+snippet "main subscriptions element" "Browser.element subscriptions function" b
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    ${1:Sub.none}$0
+endsnippet

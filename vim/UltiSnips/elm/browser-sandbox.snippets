@@ -1,0 +1,31 @@
+snippet "main main sandbox" "Browser.sandbox main function" b
+main : Program Model Msg
+main =
+    Browser.sandbox
+        { init = ${1:init}
+        , update = ${2:update}
+        , view = ${3:view}
+        }$0
+endsnippet
+
+snippet "main init sandbox" "Browser.sandbox init function" b
+init : Model
+init =
+    model$0
+endsnippet
+
+snippet "main update sandbox" "Browser.sandbox update function" b
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        ${1:SomeMsg ->
+            model}$0
+endsnippet
+
+snippet "main view sandbox" "Browser.sandbox view function" b
+view : Model -> Html Msg
+view model =
+    ${1:div []
+        [ h1 [] [ text "Replace this with real code!" ]
+        ]}$0
+endsnippet

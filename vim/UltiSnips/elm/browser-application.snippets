@@ -1,0 +1,52 @@
+global !p
+
+# ~/.vim/pythonx/elm_helpers.py
+from elm_helpers import (
+    flags_text,
+    maybe_flags
+)
+
+endglobal
+
+snippet "main main application" "Browser.application main function" b
+main : Program ${1|Flags,()|} Model Msg
+main =
+    Browser.application
+        { init = ${2:init}
+        , update = ${3:update}
+        , view = ${4:view}
+        , subscriptions = ${5:subscriptions}
+        , onUrlRequest = ${6:UrlRequested UrlRequest}
+        , onUrlChange = ${7:UrlChanged Url}
+        }$0
+endsnippet
+
+snippet "main init application" "Browser.application init function" b
+init : ${1|Flags,()|} -> Url -> Key -> ( Model, Cmd Msg )
+init `!p snip.rv = flags_text(t[1])` url key =
+    ( ${2:Model.init`!p snip.rv = maybe_flags(t[1])` url (Just key)}
+    , ${3:Navigation.pushUrl key (Url.toString url)}
+    )$0
+endsnippet
+
+snippet "main update application" "Browser.application update function" b
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        ${1:SomeMsg ->
+            (model, Cmd.none)}$0
+endsnippet
+
+snippet "main view application" "Browser.application view function" b
+view : Model -> Document Msg
+view model =
+    ${1:{ title = ${2:title}
+    , body = ${3:body}
+    }}$0
+endsnippet
+
+snippet "main subscriptions application" "Browser.application subscriptions function" b
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    ${1:Sub.none}$0
+endsnippet

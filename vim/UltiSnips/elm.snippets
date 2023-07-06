@@ -24,6 +24,18 @@ in
 ${4:-- do something else}$0
 endsnippet
 
+snippet main "choice for main-related function type" b
+main ${1|main,init,update,view,subscriptions|}$0
+endsnippet
+
+snippet "\bmain (main|init|update|view)" "choice for application type" r
+main `!p snip.rv = match.group(1)` ${1|application,document,element,sandbox|}$0
+endsnippet
+
+snippet "main subscriptions" "choice for application type" b
+main subscriptions ${1|application,document,element|}$0
+endsnippet
+
 snippet pluses "String concat operator" w
 ++ $0
 endsnippet
