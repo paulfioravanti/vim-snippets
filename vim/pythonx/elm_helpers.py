@@ -8,6 +8,7 @@ from global_helpers import (
     choice_tabstop_chosen
 )
 
+
 def flags_text(tabstop):
     """
     Return default text for flags

@@ -4,6 +4,7 @@ NOTE: Changes to this file require restarting Vim!
 """
 import re
 
+
 _DASHES_AND_UNDERSCORES = re.compile(r"[-_]")
 _FILE_EXTENSIONS = re.compile(r"\.(?:html\.(?:h|l)?eex|ex)$")
 _NON_MODULE_DIRNAMES = [

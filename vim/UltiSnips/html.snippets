@@ -5,104 +5,17 @@ global !p
 import re
 from UltiSnips import vim_helper
 
-_HTML_TAG_KEYWORDS = [
-    "article",
-    "audio",
-    "body",
-    "button",
-    "code",
-    "div",
-    "em",
-    "figcaption",
-    "figure",
-    "footer",
-    "form",
-    "h[1-6]",
-    "head",
-    "html",
-    "kbd",
-    "li",
-    "main",
-    "nav",
-    "ol",
-    "ordered list",
-    "p(?:re)?",
-    "rt",
-    "ruby",
-    "samp",
-    "section",
-    "select",
-    "span",
-    "strong",
-    "style",
-    "table",
-    "tbody",
-    "td",
-    "textarea",
-    "tfoot",
-    "th",
-    "title",
-    "tr",
-    "ul",
-    "unordered list",
-    "var",
-    "video"
-]
-HTML_TAG_KEYWORD = re.compile(rf"\b({'|'.join(_HTML_TAG_KEYWORDS)})\b")
-
-_HTML_INPUT_TYPE_KEYWORDS = [
-    "button",
-    "checkbox",
-    "color",
-    "datetime-local",
-    "email",
-    "file",
-    "hidden",
-    "month",
-    "password",
-    "radio",
-    "reset",
-    "search",
-    "submit",
-    "text",
-    "time",
-    "url",
-    "week",
-]
-HTML_INPUT_TYPE_KEYWORD = re.compile(
-    rf"\b({'|'.join(_HTML_INPUT_TYPE_KEYWORDS)})\b"
+# ~/.vim/pythonx/html_helpers.py
+from html_helpers import (
+    CLASSES,
+    HTML_INPUT_TYPE_KEYWORD,
+    HTML_MIN_MAX_INPUT_TYPE_KEYWORD,
+    HTML_TAG_KEYWORD,
+    IDS,
+    TAG_NAME_MAPPINGS
 )
 
-_HTML_MIN_MAX_INPUT_TYPE_KEYWORDS = ["date", "number", "range"]
-HTML_MIN_MAX_INPUT_TYPE_KEYWORD = re.compile(
-    rf"\b({'|'.join(_HTML_MIN_MAX_INPUT_TYPE_KEYWORDS)})\b"
-)
-
-_IDS = re.compile(r"(?<=#)[^\.#]+") # #some-id
-_CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
 _MULTILINE = "multi-line"
-
-# Bridging list of English words/phrases to HTML tag names
-TAG_NAME_MAPPINGS = {
-    "figure caption": "figcaption",
-    "heading 1": "h1",
-    "heading 2": "h2",
-    "heading 3": "h3",
-    "heading 4": "h4",
-    "heading 5": "h5",
-    "heading 6": "h6",
-    "keyboard": "kbd",
-    "list item": "li",
-    "ordered list": "ol",
-    "ruby text": "rt",
-    "sample": "samp",
-    "table data": "td",
-    "table footer": "tfoot",
-    "table head": "thead",
-    "table row": "tr",
-    "text area": "textarea",
-    "unordered list": "ul"
-}
 
 def build_tag_with_attributes(snip, match):
     tag = text_to_tag(match)
@@ -111,8 +24,8 @@ def build_tag_with_attributes(snip, match):
     output = f"<{tag}${{1:"
 
     if (specified_attributes := tag_args(match)):
-        ids = _attribute_text(_IDS, specified_attributes)
-        classes = _attribute_text(_CLASSES, specified_attributes)
+        ids = _attribute_text(IDS, specified_attributes)
+        classes = _attribute_text(CLASSES, specified_attributes)
 
         if ids:
             output += f" id=\"{ids}\""

@@ -2,8 +2,8 @@
 Ultisnips snippet global helper functions. Intended for multiple languages.
 NOTE: Changes to this file require restarting Vim!
 """
-
 import vim
+
 
 _CLOSING_CHARACTERS = {
     "(": ")",

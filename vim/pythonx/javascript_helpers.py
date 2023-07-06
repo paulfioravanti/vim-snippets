@@ -3,8 +3,8 @@ JavaScript-related Ultisnips snippet helper functions.
 Based off https://github.com/honza/vim-snippets/blob/master/pythonx/javascript_snippets.py
 NOTE: Changes to this file require restarting Vim!
 """
-
 import re
+
 
 # REF: https://stackoverflow.com/a/3469155/567863
 _NON_NEWLINE_WHITESPACE = "[^\S\r\n]"
