@@ -21,15 +21,16 @@ from javascript_helpers import (
 _MULTILINE = "multi-line"
 
 def build_tag_with_attributes(snip, match):
-    tag = text_to_tag(match.group(1))
+    tag, attributes, tag_type = match.group(1, 2, 3)
+    tag = text_to_tag(tag)
     # NOTE: Although a tag with attributes probably doesn't need this wrapping
     # $1 tabstop, without it, the snippet spacing is borked, which seems like a
     # bug in UltiSnips.
     output = f"<{tag}${{1:"
 
-    if (specified_attributes := tag_args(match)):
-        ids = extract_ids(specified_attributes)
-        classes = extract_classes(specified_attributes)
+    if attributes:
+        ids = extract_ids(attributes)
+        classes = extract_classes(attributes)
 
         if ids:
             output += f" id=\"{ids}\""
@@ -43,8 +44,7 @@ def build_tag_with_attributes(snip, match):
     output += "}$7>"
     visual = "${8:${VISUAL}}"
 
-    # tag type
-    if match.group(3) == _MULTILINE:
+    if tag_type == _MULTILINE:
         output += f"\n  {visual}\n"
     else:
         output += visual
