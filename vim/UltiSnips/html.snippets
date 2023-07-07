@@ -40,12 +40,14 @@ def build_tag_with_attributes(snip, match):
         output += f"${{4: ${{5:{class_attribute_name()}}}=\"${{6:classes}}\"}}"
 
     output += "}$7>"
-    visual = "${8:${VISUAL}}"
 
+    # NOTE: Unfortunately, visual text is not available in post_jump, so no
+    # support for it can be provided.
+    # See: https://github.com/SirVer/ultisnips/issues/1524
     if tag_type == _MULTILINE:
-        output += f"\n  {visual}\n"
+        output += "\n  $8\n"
     else:
-        output += visual
+        output += "$8"
 
     output += f"</{tag}>"
     snip.expand_anon(output)
