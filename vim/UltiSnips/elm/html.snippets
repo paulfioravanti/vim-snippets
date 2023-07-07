@@ -1,0 +1,164 @@
+global !p
+
+# ~/.vim/pythonx/html_helpers.py
+from html_helpers import (
+    can_map_to_tag_name,
+    extract_ids_and_classes,
+    is_html_input_tag,
+    is_html_min_max_input_tag,
+    is_html_tag,
+    text_to_tag
+)
+
+_DOUBLELINE = "double-line"
+_MULTILINE = "multi-line"
+_SINGLELINE = "single-line"
+
+def build_tag_with_attributes(snip, match):
+    tag, attributes, tag_type = match.group(1, 2, 3)
+    tag = text_to_tag(tag)
+    # NOTE: Although a tag with attributes probably doesn't need this wrapping
+    # $1 tabstop, without it, the snippet spacing is borked, which seems like a
+    # bug in UltiSnips.
+    output = tag
+
+    if tag_type == _MULTILINE:
+        output += "\n   "
+
+    output += " [${1:"
+
+    if attributes:
+        ids, classes = extract_ids_and_classes(attributes)
+
+        if ids:
+            output += f" id \"{ids}\""
+
+            if classes:
+                if tag_type == _MULTILINE:
+                    output += "\n    "
+
+                output += ","
+
+        if classes:
+            output += f" class \"{classes}\""
+    else:
+        output += "${2: id \"${3:id}\""
+        if tag_type == _MULTILINE:
+            output += "\n    ,}${4: class \"${6:classes}\""
+        else:
+            output += ",}${4: class \"${6:classes}\"}"
+
+    if tag_type == _MULTILINE:
+        output += "\n    "
+
+        if not attributes:
+            output += "}"
+
+        output += "}$7]"
+    else:
+        output += "$7 }]"
+
+    if tag_type == _SINGLELINE:
+        output += " "
+    else:
+        output += "\n    "
+
+    # NOTE: Unfortunately, visual text is not available in post_jump, so no
+    # support for it can be provided.
+    # See: https://github.com/SirVer/ultisnips/issues/1524
+    if tag_type == _MULTILINE:
+        output += "[ $8\n    ]"
+    else:
+        output += "[ $8 ]"
+
+    snip.expand_anon(output)
+
+def tag_args(match):
+    return match.group(2) or ""
+
+endglobal
+
+context "can_map_to_tag_name(match.group(1))"
+snippet "((?:\w+\s)?\w+)" "convert tag descriptions to tag names" r
+`!p snip.rv = text_to_tag(match.group(1))`$0
+endsnippet
+
+context "is_html_tag(match.group(1))"
+snippet "(?<!input )(\w+)([#\.][\w\-#\.]+)?" "HTML tag double-/single-/multi-line choice" r
+`!p snip.rv = match.group(1) + tag_args(match)` ${1|double-line,multi-line,single-line|}$0
+endsnippet
+
+context "is_html_tag(match.group(1))"
+post_jump "build_tag_with_attributes(snip, match)"
+snippet "(\w+)([#\.][\w\-#\.]+)? ((double|multi|single)-line)" "HTML tag double-/single-/multi-line" r
+$0
+endsnippet
+
+snippet iframe "HTML iframe tag" i
+iframe [ src "${1:src}" ] []$0
+endsnippet
+
+snippet img "HTML img tag" i
+img [ src "${1:src}"${2:, alt "${3:alt}"} ] []$0
+endsnippet
+
+snippet input "HTML input tag of type 'text'" b
+input [ type_ "text"${1:${2:, id "${3:id}"}${4:, class "${5:class}"}${6:, name "${7:name}"}${8:, value "${9:value}"}} ] []$0
+endsnippet
+
+context "is_html_input_tag(match.group(1))"
+snippet "\binput (\w+)" "HTML input tag of (type) with id, class, name, value" r
+`!p
+input_type = match.group(1)
+`input [ type_ "`!p snip.rv = input_type`"${1:${2:, id "${3:id}"}${4:, class "${5:class}"}${6:, name "${7:name}"}${8:, value "${9:value}"}} ] []$0
+endsnippet
+
+context "is_html_min_max_input_tag(match.group(1))"
+snippet "\binput (\w+)" "HTML input tag of (type) with id, name, min, max" r
+`!p
+input_type = match.group(1)
+`input [ type_ "`!p snip.rv = input_type`"${1:${2:, id "${3:id}"}${4:, class "${5:class}"}${6:, name "${7:name}"}${8:, value "${9:value}"}${10:, min "${11:min}"}${12:, max "${13:max}"}} ] []$0
+endsnippet
+
+snippet "input tel" "HTML input tag of telephone number type" b
+<input type="tel"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: pattern="${11:pattern}"}} />$0
+input [ type_ "tel"${1:${2:, id "${3:id}"}${4:, class "${5:class}"}${6:, name "${7:name}"}${8:, value "${9:value}"}${10:, pattern "${11:pattern}"}} ] []$0
+endsnippet
+
+snippet label "Inline label tag" i
+label [ ${1:for "${2:input-id}} ]
+    [ text ${3:${VISUAL}} ]$0
+endsnippet
+
+snippet "(link|anchor|a tag)" "HTML <a> tag" r
+a [ href "${1:url}"${2:, target "${3|_blank,_parent,_top|}"} ]
+    [ text ${4:${VISUAL:"text"}} ]$0
+endsnippet
+
+snippet "(link|anchor) (mail|email)" "HTML <a> tag link to telephone number" r
+a [ href "mailto:${1:${VISUAL:address}}" ]
+    [ text "${2:$1}" ]$0
+endsnippet
+
+snippet "(link|anchor) phone" "HTML <a> tag link to telephone number" r
+a [ href "tel:${1:${VISUAL:number}}" ]
+    [ text "${2:$1}" ]$0
+endsnippet
+
+snippet method "<form> method attribute" i
+method "${1|post,get|}"$0
+endsnippet
+
+snippet option "HTML option tag" i
+<option value="${1:value}">${2:text}</option>$0
+option [ value "${1:value}" ]
+    [ text "${2:text}" ]$0
+endsnippet
+
+snippet source "HTML source tag" i
+source [ src "${1:url}", type_ "${2:type}" ] []$0
+endsnippet
+
+snippet target "<form> target attribute" i
+target "${1|_blank,_parent,_top|}"$0
+endsnippet
