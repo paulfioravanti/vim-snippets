@@ -21,7 +21,6 @@ _HTML_TAG_KEYWORDS = [
     "main",
     "nav",
     "ol",
-    "ordered list",
     "p(?:re)?",
     "rt",
     "ruby",
@@ -40,7 +39,6 @@ _HTML_TAG_KEYWORDS = [
     "title",
     "tr",
     "ul",
-    "unordered list",
     "var",
     "video"
 ]
