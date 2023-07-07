@@ -105,17 +105,14 @@ def can_map_to_tag_name(string):
     """
     return string in _TAG_NAME_MAPPINGS
 
-def extract_classes(attributes):
+def extract_ids_and_classes(attributes):
     """
-    Extract html classes from a string of attributes.
+    Extract html ids and classes from a string of attributes.
     """
-    return _attribute_text(_CLASSES, attributes)
-
-def extract_ids(attributes):
-    """
-    Extract html ids from a string of attributes.
-    """
-    return _attribute_text(_IDS, attributes)
+    return (
+        _attribute_text(_IDS, attributes),
+        _attribute_text(_CLASSES, attributes)
+    )
 
 def is_html_input_tag(string):
     """
