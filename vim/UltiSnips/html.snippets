@@ -2,16 +2,15 @@ priority -1
 
 global !p
 
-import re
-
 # ~/.vim/pythonx/html_helpers.py
 from html_helpers import (
-    CLASSES,
-    HTML_INPUT_TYPE_KEYWORD,
-    HTML_MIN_MAX_INPUT_TYPE_KEYWORD,
-    HTML_TAG_KEYWORD,
-    IDS,
-    TAG_NAME_MAPPINGS
+    can_map_to_tag_name,
+    extract_classes,
+    extract_ids,
+    is_html_input_tag,
+    is_html_min_max_input_tag,
+    is_html_tag,
+    text_to_tag
 )
 
 # ~/.vim/pythonx/html_helpers.py
@@ -22,15 +21,15 @@ from javascript_helpers import (
 _MULTILINE = "multi-line"
 
 def build_tag_with_attributes(snip, match):
-    tag = text_to_tag(match)
+    tag = text_to_tag(match.group(1))
     # NOTE: Although a tag with attributes probably doesn't need this wrapping
     # $1 tabstop, without it, the snippet spacing is borked, which seems like a
     # bug in UltiSnips.
     output = f"<{tag}${{1:"
 
     if (specified_attributes := tag_args(match)):
-        ids = _attribute_text(IDS, specified_attributes)
-        classes = _attribute_text(CLASSES, specified_attributes)
+        ids = extract_ids(specified_attributes)
+        classes = extract_classes(specified_attributes)
 
         if ids:
             output += f" id=\"{ids}\""
@@ -56,26 +55,19 @@ def build_tag_with_attributes(snip, match):
 def tag_args(match):
     return match.group(2) or ""
 
-def text_to_tag(match):
-    text = match.group(1)
-    return TAG_NAME_MAPPINGS.get(text, text)
-
-def _attribute_text(attribute_type, attributes):
-    return " ".join(re.findall(attribute_type, attributes))
-
 endglobal
 
-context "match.group(1) in TAG_NAME_MAPPINGS"
+context "can_map_to_tag_name(match.group(1))"
 snippet "((?:\w+\s)?\w+)" "convert tag descriptions to tag names" r
-`!p snip.rv = text_to_tag(match)`$0
+`!p snip.rv = text_to_tag(match.group(1))`$0
 endsnippet
 
-context "re.match(HTML_TAG_KEYWORD, match.group(1))"
+context "is_html_tag(match.group(1))"
 snippet "(\w+)([#\.][\w\-#\.]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = match.group(1) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-context "re.match(HTML_TAG_KEYWORD, match.group(1))"
+context "is_html_tag(match.group(1))"
 post_jump "build_tag_with_attributes(snip, match)"
 snippet "(\w+)([#\.][\w\-#\.]+)? ((multi|single)-line)" "HTML tag multi-line" r
 $0
@@ -93,14 +85,14 @@ snippet input "HTML input tag of type 'text'" b
 <input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-context "re.match(HTML_INPUT_TYPE_KEYWORD, match.group(1))"
+context "is_html_input_tag(match.group(1))"
 snippet "\binput (\w+)" "HTML input tag of (type) with id, class, name, value" r
 `!p
 input_type = match.group(1)
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-context "re.match(HTML_MIN_MAX_INPUT_TYPE_KEYWORD, match.group(1))"
+context "is_html_min_max_input_tag(match.group(1))"
 snippet "\binput (\w+)" "HTML input tag of (type) with id, name, min, max" r
 `!p
 input_type = match.group(1)
