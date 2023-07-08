@@ -8,7 +8,7 @@ from elm_helpers import (
 
 endglobal
 
-snippet "main main document" "Browser.document main function" b
+snippet "main document" "Browser.document main function" b
 main : Program ${1|Flags,()|} Model Msg
 main =
     Browser.document
@@ -19,7 +19,7 @@ main =
         }$0
 endsnippet
 
-snippet "main init document" "Browser.document init function" b
+snippet "init document" "Browser.document init function" b
 init : ${1|Flags,()|} -> ( Model, Cmd Msg )
 init `!p snip.rv = flags_text(t[1])` =
     ( ${2:Model.init`!p snip.rv = maybe_flags(t[1])`}
@@ -27,7 +27,7 @@ init `!p snip.rv = flags_text(t[1])` =
     )$0
 endsnippet
 
-snippet "main update document" "Browser.document update function" b
+snippet "update document" "Browser.document update function" b
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -35,7 +35,7 @@ update msg model =
             (model, Cmd.none)}$0
 endsnippet
 
-snippet "main view document" "Browser.document view function" b
+snippet "view document" "Browser.document view function" b
 view : Model -> Document Msg
 view model =
     ${1:{ title = ${2:title}
@@ -43,7 +43,7 @@ view model =
     }}$0
 endsnippet
 
-snippet "main subscriptions document" "Browser.document subscriptions function" b
+snippet "subscriptions document" "Browser.document subscriptions function" b
 subscriptions : Model -> Sub Msg
 subscriptions model =
     ${1:Sub.none}$0

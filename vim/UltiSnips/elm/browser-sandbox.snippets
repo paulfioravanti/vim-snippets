@@ -1,4 +1,4 @@
-snippet "main main sandbox" "Browser.sandbox main function" b
+snippet "main sandbox" "Browser.sandbox main function" b
 main : Program Model Msg
 main =
     Browser.sandbox
@@ -8,13 +8,13 @@ main =
         }$0
 endsnippet
 
-snippet "main init sandbox" "Browser.sandbox init function" b
+snippet "init sandbox" "Browser.sandbox init function" b
 init : Model
 init =
     model$0
 endsnippet
 
-snippet "main update sandbox" "Browser.sandbox update function" b
+snippet "update sandbox" "Browser.sandbox update function" b
 update : Msg -> Model -> Model
 update msg model =
     case msg of
@@ -22,7 +22,7 @@ update msg model =
             model}$0
 endsnippet
 
-snippet "main view sandbox" "Browser.sandbox view function" b
+snippet "view sandbox" "Browser.sandbox view function" b
 view : Model -> Html Msg
 view model =
     ${1:div []
