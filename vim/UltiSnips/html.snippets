@@ -24,7 +24,8 @@ def build_tag_with_attributes(snip, match):
     tag = text_to_tag(tag)
     # NOTE: Although a tag with attributes probably doesn't need this wrapping
     # $1 tabstop, without it, the snippet spacing is borked, which seems like a
-    # bug in UltiSnips.
+    # bug in UltiSnips. Might be related to the following issue:
+    # https://github.com/SirVer/ultisnips/issues/1013
     output = f"<{tag}${{1:"
 
     if attributes:
