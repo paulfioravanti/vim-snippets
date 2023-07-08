@@ -29,10 +29,16 @@ endsnippet
 # NOTE: The tabstop 10 number is arbitrary: I'd never expect an Elm function to
 # have 7 arguments, so I figure it gives enough buffer room for the dynamically
 # generated tabstops from `initialize_types`.
+# NOTE 2: $2 tabstop cannot be given default text due to junk text being added
+# to the snippet expansion text in the following situation:
+# - Jump to $2 when it has default text
+# - Don't change the default text and jump to $3
+# See this Ultisnips issue for more details of what seems to be a bug:
+# https://github.com/SirVer/ultisnips/issues/751
 post_jump "if snip.tabstop == 3: initialize_types(snip, 2, 3)"
 snippet function "function" b
 $1 :$3 ${10:ReturnType}
-${1:functionName}`!p snip.rv = maybe_space(t[2])`${2:arguments} =
+${1:functionName}`!p snip.rv = maybe_space(t[2])`$2 =
     $0
 endsnippet
 
