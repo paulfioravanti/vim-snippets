@@ -6,7 +6,7 @@ in
 ${4:-- return value}$0
 endsnippet
 
-snippet "\b(main|init|update|view)" "choice for application type" r
+snippet "(?<=^)(main|init|update|view)" "choice for application type" r
 `!p snip.rv = match.group(1)` ${1|application,document,element,sandbox|}$0
 endsnippet
 
