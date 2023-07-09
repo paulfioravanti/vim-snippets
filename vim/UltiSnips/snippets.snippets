@@ -30,11 +30,11 @@ snippet "choice tabstop" "Ultisnip tabstop" i
 ${${1:n}|${2:${VISUAL:choice1}},${3:choice2}|}$0
 endsnippet
 
-snippet "\b(context|preexpand|post expand|post jump)" "Snippet actions" r
+snippet "^(context|preexpand|post expand|post jump)" "Snippet actions" r
 `!p snip.rv = parse_snippet_action_name(match)` "${1:python_expression}"$0
 endsnippet
 
-snippet global "Global snippet" b
+snippet "^global" "Global snippet" r
 `!p snip.rv = _GLOBAL_START` !p
 
 ${0:${VISUAL:# python code goes here}}
@@ -51,7 +51,7 @@ snippet "[Pp]ython" "Inline python code" r
 endsnippet
 
 # Snippet options: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L662
-snippet snippet "Ultisnips snippet definition" b
+snippet "^snippet" "Ultisnips snippet definition" r
 `!p snip.rv = _SNIPPET_START` ${1:"}${2:tab_trigger}`!p snip.rv = closing_character(t[1])` "${3:description}" ${4|b,i,w,r,t,s,m,e,A|}
 ${5:${VISUAL}}`!p snip.rv = "$0"`$0
 `!p snip.rv = _SNIPPET_END`
