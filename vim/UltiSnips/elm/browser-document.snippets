@@ -27,7 +27,7 @@ init `!p snip.rv = flags_text(t[1])` =
     )$0
 endsnippet
 
-snippet "update document" "Browser.document update function" b
+snippet "^update document" "Browser.document update function" r
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -35,7 +35,7 @@ update msg model =
             (model, Cmd.none)}$0
 endsnippet
 
-snippet "view document" "Browser.document view function" b
+snippet "^view document" "Browser.document view function" r
 view : Model -> Document Msg
 view model =
     ${1:{ title = ${2:title}
@@ -43,7 +43,7 @@ view model =
     }}$0
 endsnippet
 
-snippet "subscriptions document" "Browser.document subscriptions function" b
+snippet "^subscriptions document" "Browser.document subscriptions function" r
 subscriptions : Model -> Sub Msg
 subscriptions model =
     ${1:Sub.none}$0
