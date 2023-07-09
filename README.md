@@ -16,11 +16,11 @@ since I use them primarily with [Plover][] stenography (see
 Currently, I have the snippets in a "stack" of priorities that looks like the
 following (higher priority snippets always override lower):
 
-|                              Priorities                                      |
-|------------------------------------------------------------------------------|
-|  0 | Language-specific snippets                                              |
-| -1 | HTML snippets                                                           |
-| -2 | All snippets                                                            |
+| Priority |                       Dictionary Type                             |
+|----------|-------------------------------------------------------------------|
+|  0       | Language-specific snippets                                        |
+| -1       | HTML snippets                                                     |
+| -2       | All snippets                                                      |
 
 Web languages leverage HTML snippets, but they sometimes have naming clashes
 with HTML, so in all general cases, the language-specific snippet should win.
