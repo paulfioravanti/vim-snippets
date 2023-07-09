@@ -39,12 +39,12 @@ endsnippet
 
 snippet "function declaration" "function declaration" r
 function${1:*} ${2:functionName}(${3:params}) {
-  $0
-}
+  $4
+}$0
 endsnippet
 
 snippet "function expression" "function expression" w
 function${1:*} (${2:params}) {
-  $0
-}`!p maybe_semi(snip)`
+  $3
+}`!p maybe_semi(snip)`$0
 endsnippet
