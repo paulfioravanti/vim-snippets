@@ -11,10 +11,26 @@ Trigger words for snippets are typically short words or mnemonics (see
 since I use them primarily with [Plover][] stenography (see
 [my stenography dictionaries][]), which enables that easily.
 
+## Priorities
+
+Currently, I have the snippets in a "stack" of priorities that looks like the
+following (higher priority snippets always override lower):
+
+|                              Priorities                                      |
+|------------------------------------------------------------------------------|
+|  0 | Language-specific snippets                                              |
+| -1 | HTML snippets                                                           |
+| -2 | All snippets                                                            |
+
+Web languages leverage HTML snippets, but they sometimes have naming clashes
+with HTML, so in all general cases, the language-specific snippet should win.
+
 ## Videos
 
 You can see the snippets in action during the following videos:
 
+- _[Steno Coding: React Tic-Tac-Toe][]_
+- _[Steno Coding: Exercism's "Luhn" challenge in Python][]_
 - _[Steno Coding: TDD-ing Exercism's "Bob" challenge in Ruby][]_
 - _[Stenography and Ruby][]_
 - _[Stenography and Elixir][]_
@@ -28,6 +44,8 @@ You can see the snippets in action during the following videos:
 [Plover]: https://www.openstenoproject.org/plover/
 [Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
 [rcm]: https://github.com/thoughtbot/rcm
+[Steno Coding: Exercism's "Luhn" challenge in Python]: https://www.youtube.com/watch?v=YcIwT5i9_lA
+[Steno Coding: React Tic-Tac-Toe]: https://www.youtube.com/watch?v=3TDgZVIxncg
 [Steno Coding: TDD-ing Exercism's "Bob" challenge in Ruby]: https://www.youtube.com/watch?v=I9Oc4AirX_0
 [Stenography and Elixir]: https://www.youtube.com/watch?v=ZQO-5KfnCi4
 [Stenography and Ruby]: https://www.youtube.com/watch?v=3W9_k2CXrXE
