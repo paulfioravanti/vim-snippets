@@ -39,4 +39,4 @@ def _module_parts(path):
     for dirname in _NON_MODULE_DIRNAMES:
         if dirname in path_parts:
             path_parts.remove(dirname)
-    return list(map(to_module_name, path_parts))
+    return [to_module_name(path_part) for path_part in path_parts]
