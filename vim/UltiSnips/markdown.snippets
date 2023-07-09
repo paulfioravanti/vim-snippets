@@ -15,7 +15,7 @@ def emphasis_ending(opening):
 
 endglobal
 
-snippet "((c|C)ode block|(B|b)lock)" "Code block" rb
+snippet "\b((c|C)ode block|(B|b)lock)" "Code block" r
 \`\`\`${1:txt}
 ${2:${VISUAL}}
 \`\`\`
@@ -26,7 +26,7 @@ snippet code "Inline Code" i
 \`${1:${VISUAL}}\`$0
 endsnippet
 
-snippet comment "Markdown comment"
+snippet comment "Markdown comment" i
 <!-- ${1:${VISUAL}} -->$0
 endsnippet
 
@@ -34,12 +34,12 @@ snippet em "Markdown emphasis, strong, combination" w
 ${1|_,**,**_|}${2:${VISUAL:text}}`!p snip.rv = emphasis_ending(t[1])`$0
 endsnippet
 
-snippet footnote "Markdown Footnote"
+snippet footnote "Markdown Footnote" i
 [^${1:${VISUAL:Footnote}}]
 [^$1]:${2:Text}$0
 endsnippet
 
-snippet "heading ([1-6])" "Markdown heading" r
+snippet "^heading ([1-6])" "Markdown heading" r
 `!p snip.rv = heading(match)` ${0:${VISUAL}}
 endsnippet
 
