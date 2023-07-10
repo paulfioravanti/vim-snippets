@@ -11,7 +11,42 @@ from javascript_helpers import (
     maybe_spaces
 )
 
+def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
+    if not (args_tabstop := snip.tabstops[init_tabstop_index]):
+        return
+
+    # Strip out all the surrounding tabstop characters
+    args_list = (
+        args_tabstop
+        .current_text
+        .removeprefix("  constructor(")
+        .removesuffix(") {\n  }")
+        .split(",")
+    )
+
+    args = [string.strip() for string in args_list if string]
+    tabstop_indexes = range(
+        starting_tabstop_index,
+        starting_tabstop_index + len(args)
+    )
+
+    output = ""
+    for arg, index in zip(args, tabstop_indexes, strict=True):
+        output += f"\n  this.{arg} = ${{{index}:{arg}}};"
+
+    snip.expand_anon(output)
+
 endglobal
+
+# NOTE: snip.tabstops[5] cannot be used here due to it being nested within
+# snip.tabstops[4]. So, we have to take the outer tabstop.
+post_jump "if snip.tabstop == 6: initialize_args(snip, 4, 6)"
+snippet class "class declaration" w
+class ${1:`!p snip.rv = snip.basename`}${2: extends ${3:SuperClass}} {
+${4:  constructor($5) \{$6
+  \}}
+}$0
+endsnippet
 
 snippet .bind "Function.prototype.bind(thisArg, arg1, /* …, */ argN)" i
 .bind(${1:thisArg}${2:, ${3:arg1}}$4)$0
