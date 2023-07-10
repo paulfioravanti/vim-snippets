@@ -5,7 +5,25 @@ from javascript_helpers import (
     maybe_semi
 )
 
+def maybe_block_end(tabstop):
+    return "\n  }" if tabstop == " {" else ""
+
 endglobal
+
+snippet "\b(break|continue)" "break statement" r
+`!p snip.rv = match.group(1)`${1: ${2:label}}`!p snip.rv = maybe_semi()`$0
+endsnippet
+
+snippet case "case clause for a switch statement" b
+case ${1:value}:${2: \{}
+  ${3:// statements}${4:
+  break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[2])`$0
+endsnippet
+
+snippet "else if" "else if statement (use during if statement)" b
+} else if (${1:condition}) {
+  ${2:// do something else}$0
+endsnippet
 
 snippet if "if...else" b
 if (${1:condition}) {
@@ -15,8 +33,31 @@ if (${1:condition}) {
 }}$0
 endsnippet
 
-snippet return "multi-line return statement" b
-return (
+snippet "\b(return|throw)" "multi-line (return|throw) statement" r
+`!p snip.rv = match.group(1)` (
   ${0:${VISUAL}}
 )`!p maybe_semi(snip)`
+endsnippet
+
+snippet switch "switch statement" b
+switch (${1:expression}) {
+  case ${2:value1}:${3: \{}
+    ${4:// statements}${5:
+    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[3])`
+  case ${6:value2}:${7: \{}
+    ${8:// statements}${9:
+    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[7])`
+  default:${10: \{}
+    ${11:// statements}`!p snip.rv = maybe_block_end(t[10])`
+}$0
+endsnippet
+
+snippet try "try...catch statement" b
+try {
+  ${1:// try statements}
+${2:\} catch (${3:exceptionVar}) \{
+  ${4:// catch statements}
+}${5:\} finally \{
+  ${6:// finally statements}
+}}$0
 endsnippet
