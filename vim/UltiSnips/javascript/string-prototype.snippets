@@ -1,3 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    closing_character
+)
+
+endglobal
+
+snippet interpolate "string interpolation" i
+${${1:attribute}}$0
+endsnippet
+
 snippet .match "String.prototype.match(regexp)" i
 .match(${1:pattern})$0
 endsnippet
@@ -8,4 +21,8 @@ endsnippet
 
 snippet .split "String.prototype.split(separator, limit)" i
 .split(${1:separator}${2:, ${3:limit}})$0
+endsnippet
+
+snippet string "Literal string" w
+${1|",`|}$2`!p snip.rv = closing_character(t[1])`$0
 endsnippet

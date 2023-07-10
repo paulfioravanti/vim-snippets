@@ -1,0 +1,24 @@
+global !p
+
+# ~/.vim/pythonx/javascript_helpers.py
+from javascript_helpers import (
+    maybe_semi
+)
+
+endglobal
+
+snippet "^const" "top level constants" r
+${1:export }const ${2:name} = ${3:value}`!p maybe_semi(snip)`$0
+endsnippet
+
+snippet "(?<!^)const" "block-scoped constants" r
+const ${2:name} = ${3:value}`!p maybe_semi(snip)`$0
+endsnippet
+
+snippet "^(let|var)" "variable with optional initialization" r
+${1:export }`!p snip.rv = match.group(1)` ${2:variable}${3: = ${4:value}}`!p maybe_semi(snip)`$0
+endsnippet
+
+snippet "(?<!^)(let|var)" "variable with optional initialization" r
+`!p snip.rv = match.group(1)` ${1:variable}${2: = ${3:value}}`!p maybe_semi(snip)`$0
+endsnippet

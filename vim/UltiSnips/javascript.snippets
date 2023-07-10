@@ -2,11 +2,6 @@ extends html
 
 global !p
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
-    closing_character
-)
-
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
@@ -21,63 +16,19 @@ snippet "\bconsole(\.| )log" "console.log" r
 console.log(${1:msg/obj}$2)`!p maybe_semi(snip)`$0
 endsnippet
 
-snippet "^const" "top level constants" r
-${1:export }const ${2:name} = ${3:value}`!p maybe_semi(snip)`$0
-endsnippet
-
-snippet "(?<!^)const" "block-scoped constants" r
-const ${2:name} = ${3:value}`!p maybe_semi(snip)`$0
-endsnippet
-
 snippet "\b(?<!not )(?<!plus )equals" "== operator" r
 ==${1:=} $0
-endsnippet
-
-snippet for "for statement" b
-for (${1:let ${2:i} = ${3:0}};${4: $2 < ${5:upperBound}};${6: $2++}) {
-  ${7:// do something}
-}$0
-endsnippet
-
-snippet interpolate "string interpolation" i
-${${1:attribute}}$0
-endsnippet
-
-snippet key-value "Object Key-value pair" i
-${1:key}: ${2:$1}${3:,}$0
-endsnippet
-
-snippet "^(let|var)" "variable with optional initialization" r
-${1:export }`!p snip.rv = match.group(1)` ${2:variable}${3: = ${4:value}}`!p maybe_semi(snip)`$0
-endsnippet
-
-snippet "(?<!^)(let|var)" "variable with optional initialization" r
-`!p snip.rv = match.group(1)` ${1:variable}${2: = ${3:value}}`!p maybe_semi(snip)`$0
 endsnippet
 
 snippet "\bmod(ulo)?" "% modulo" r
 % ${1:number}${2: === ${3:0}}$0
 endsnippet
 
-snippet object "Object data type" i
-{ ${1:${2:key}: ${3:value}} }$0
-endsnippet
-
-snippet return "multi-line return statement" b
-return (
-  ${0:${VISUAL}}
-)`!p maybe_semi(snip)`
-endsnippet
-
 snippet spread "Spread syntax (...)" i
 ...${1:object}$0
 endsnippet
 
-snippet string "Literal string" w
-${1|",`|}$2`!p snip.rv = closing_character(t[1])`$0
-endsnippet
-
-snippet ternary "ternary (?:) statement" i
+snippet ternary "ternary (?:) operator" i
 ${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = maybe_paren(t[1])`$0
 endsnippet
 
