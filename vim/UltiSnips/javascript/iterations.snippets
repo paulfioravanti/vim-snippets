@@ -5,12 +5,6 @@ from javascript_helpers import (
     maybe_semi
 )
 
-def variable_placeholder(loop_type):
-    return "element" if loop_type == "of" else "property"
-
-def iterable_placeholder(loop_type):
-    return "iterable" if loop_type == "of" else "object"
-
 endglobal
 
 snippet "\b(do while|do-while statement)" "do...while statement" r
