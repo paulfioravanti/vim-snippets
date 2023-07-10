@@ -29,10 +29,15 @@ for (${1:let ${2:i} = ${3:0}};${4: $2 < ${5:upperBound}};${6: $2++}) {
 }$0
 endsnippet
 
-snippet "\bfor-(in|of) statement" "for in/of statement" r
-`!p loop_type = match.group(1)
-`for (const ${1:`!p snip.rv = variable_placeholder(loop_type)`} `!p snip.rv = loop_type` ${2:`!p snip.rv = iterable_placeholder(loop_type)`}) {
+snippet "for-in statement" "for...in statement" r
+for (const ${2:property} in ${1:object}) {
   ${3:// statement}
+}$0
+endsnippet
+
+snippet "for-of statement" "for (await)...of statement" b
+for${1: await} (const ${3:element} of ${2:iterable}) {
+  ${4:// statement}
 }$0
 endsnippet
 
