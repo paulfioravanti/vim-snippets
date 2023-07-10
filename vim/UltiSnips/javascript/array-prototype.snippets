@@ -43,6 +43,10 @@ snippet .map "Array.prototype.map(callbackFn, thisArg)" i
 .map(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
 endsnippet
 
+snippet .push "Array.prototype.push()" i
+.push(${1:${2:element1}${3:, ${4:element2}}})$0
+endsnippet
+
 snippet .reduce "Array.prototype.reduce(callbackFn, initialValue)" i
 .reduce(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
 endsnippet
