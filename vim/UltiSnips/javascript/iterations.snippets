@@ -1,5 +1,47 @@
-snippet for "for statement" b
+global !p
+
+# ~/.vim/pythonx/javascript_helpers.py
+from javascript_helpers import (
+    maybe_semi
+)
+
+def variable_placeholder(loop_type):
+    return "element" if loop_type == "of" else "property"
+
+def iterable_placeholder(loop_type):
+    return "iterable" if loop_type == "of" else "object"
+
+endglobal
+
+snippet "\b(do while|do-while statement)" "do...while statement" r
+do {
+  ${2:// statement}
+} while (${1:condition})`!p maybe_semi(snip)`$0
+endsnippet
+
+snippet for "for statement choice" b
+${1|for statement,for-in statement,for-of statement|}$0
+endsnippet
+
+snippet "for statement" "for statement" b
 for (${1:let ${2:i} = ${3:0}};${4: $2 < ${5:upperBound}};${6: $2++}) {
   ${7:// do something}
+}$0
+endsnippet
+
+snippet "\bfor-(in|of) statement" "for in/of statement" r
+`!p loop_type = match.group(1)
+`for (const ${1:`!p snip.rv = variable_placeholder(loop_type)`} `!p snip.rv = loop_type` ${2:`!p snip.rv = iterable_placeholder(loop_type)`}) {
+  ${3:// statement}
+}$0
+endsnippet
+
+snippet "\b(?<!do )while" "while statement choice" r
+${1|while statement,do-while statement|}$0
+endsnippet
+
+snippet "while statement" "while statement" b
+while (${1:condition}) {
+  ${2:// statement}
 }$0
 endsnippet
