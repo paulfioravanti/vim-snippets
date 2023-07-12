@@ -42,10 +42,7 @@ def state_text_defaults(snip, tabstop):
     return (set_state_text, initial_state_text)
 
 def _uppercased(tabstop):
-    if not tabstop:
-        return ""
-    else:
-        return tabstop[0].capitalize() + tabstop[1:]
+    return tabstop[0].capitalize() + tabstop[1:] if tabstop else ""
 
 endglobal
 
