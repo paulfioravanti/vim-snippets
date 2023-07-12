@@ -7,7 +7,6 @@ from global_helpers import (
 
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
-    maybe_semi,
     maybe_spaces
 )
 
@@ -41,13 +40,13 @@ endglobal
 snippet "arrow function" "arrow function expression" i
 ${1:(}${2:params}`!p snip.rv = closing_character(t[1])` => ${3:{
   $5
-}`!p maybe_semi(snip)`}$0
+}}$0
 endsnippet
 
 snippet "\barrow (iife|IIFE)" "arrow IIFE" r
 (${1:async }(${3:$2}) => {
   ${4:// statements}
-})(${2:args});$0
+})(${2:args})$0
 endsnippet
 
 snippet .bind "Function.prototype.bind(thisArg, arg1, /* …, */ argN)" i
@@ -70,7 +69,7 @@ ${1:export ${2:default }}${3:async }function${4:*} ${5:functionName}(${6:params}
 }$0
 endsnippet
 
-snippet "(?<!^)(?<!arrow )function" "choose arrow or normal function expression" r
+snippet "(?<!^)(?<!arrow )(?<!\()(?<!{)function" "choose arrow or normal function expression" r
 ${1|arrow function,function declaration,function expression,iife|}$0
 endsnippet
 
@@ -87,7 +86,7 @@ endsnippet
 snippet "function expression" "function expression" w
 function${1:*} (${2:params}) {
   $3
-}`!p maybe_semi(snip)`$0
+}$0
 endsnippet
 
 snippet "\bfunction (iife|IIFE)" "function IIFE" r
