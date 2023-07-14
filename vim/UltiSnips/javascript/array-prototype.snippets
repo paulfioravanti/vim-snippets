@@ -10,27 +10,33 @@ from javascript_helpers import (
     maybe_spaces
 )
 
+def words_to_function(words):
+    head, *tail = words.split(" ")
+    tail = [word.capitalize() for word in tail]
+    return "".join([head, *tail])
+
 endglobal
 
-snippet Array "Array() constructor" i
+snippet Array "Array(elements/length) constructor" i
 Array(${1:elements or length})$0
 endsnippet
 
-snippet "[Aa]rray[\. ]from\s?([Aa]sync)?" "Array.from/fromAsync()" r
+snippet "[Aa]rray[\. ]from\s?([Aa]sync)?" "Array.from/fromAsync(arrayLike, mapFn, thisArg)" r
 `!p maybeAsync = "Async" if match.group(1) else ""
 `Array.from`!p snip.rv = maybeAsync`(${1:${VISUAL:arrayLike}}${2:${3:, ${4:mapFn}}${5:, ${6:thisArg}}})$0
 endsnippet
 
-snippet "([Aa]rray\.)?is\s?[Aa]rray" "Array.isArray()" r
+snippet "([Aa]rray\.)?is\s?[Aa]rray" "Array.isArray(value)" r
 Array.isArray(${1:value})$0
 endsnippet
 
-snippet "[Aa]rray[\. ]of" "Array.of()" r
+snippet "[Aa]rray[\. ]of" "Array.of(element1, element2, ...)" r
 Array.of(${1:${2:element1}${3:, ${4:element2}}$5})$0
 endsnippet
 
-# NOTE: Negative look behind for "ordered" due to conflicts with HTML
-# "ordered list" (<ol>) tag trigger word.
+# NOTE: Negative look behinds needed for:
+# - "ordered" due to conflicts with HTML "ordered list" (<ol>) tag trigger word
+# - "is" for Array.isArray(value) snippet
 context "snip.visual_text"
 snippet "(?<!ordered )(?<!is )(?<!is)(array|list|\[\])" "Literal array/list with potential spread" r
 [${1:...}${2:${VISUAL}}$3]$0
@@ -40,24 +46,32 @@ snippet "(?<!ordered )(?<!is )(?<!is)(array|list|\[\])" "Literal array/list" r
 [$1]$0
 endsnippet
 
+snippet .at "(Array|String).prototype.at(index)" i
+.at(${1:index})$0
+endsnippet
+
+snippet "\.(concat|push)" "(Array|String).prototype.concat/push(value1, value2, ...)" i
+.`!p snip.rv = match.group(1)`(${1:${2:value1}${3:, ${4:value2}}$5})$0
+endsnippet
+
+snippet "\.copy\s?[Ww]ithin" "Array.prototype.copyWithin(target, start, end)" r
+.copyWithin(${1:target}, ${2:start}${3:, ${4:end}})$0
+endsnippet
+
+snippet "(?<!Object)\.(entries|keys)" "Array.prototype.entries/keys()" r
+.`!p snip.rv = match.group(1)`()$0
+endsnippet
+
 snippet .fill "Array.prototype.fill(value, start, end)" i
 .fill(${1:value}${2:, ${3:start}${4:, ${5:end}}})$0
 endsnippet
 
+snippet "\.(every|filter|find(?:(\sl|L)ast)?(?:(\si|I)ndex)?|map)" "Array.prototype.every/filter/find/findIndex/findLast/findLastIndex/map(callbackFn, thisArg)" r
+.`!p snip.rv = words_to_function(match.group(1))`(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
+endsnippet
+
 snippet .join "Array.prototype.join(separator)" i
 .join(${1:"${2:,}"})$0
-endsnippet
-
-snippet "(?<!Object).keys" "Array.prototype.keys()" r
-.keys()$0
-endsnippet
-
-snippet .map "Array.prototype.map(callbackFn, thisArg)" i
-.map(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
-endsnippet
-
-snippet .push "Array.prototype.push()" i
-.push(${1:${2:element1}${3:, ${4:element2}}})$0
 endsnippet
 
 snippet .reduce "Array.prototype.reduce(callbackFn, initialValue)" i
