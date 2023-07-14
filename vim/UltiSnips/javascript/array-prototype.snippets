@@ -16,14 +16,27 @@ snippet Array "Array() constructor" i
 Array(${1:elements or length})$0
 endsnippet
 
+snippet "[Aa]rray[\. ]from\s?([Aa]sync)?" "Array.from/fromAsync()" r
+`!p maybeAsync = "Async" if match.group(1) else ""
+`Array.from`!p snip.rv = maybeAsync`(${1:${VISUAL:arrayLike}}${2:${3:, ${4:mapFn}}${5:, ${6:thisArg}}})$0
+endsnippet
+
+snippet "([Aa]rray\.)?is\s?[Aa]rray" "Array.isArray()" r
+Array.isArray(${1:value})$0
+endsnippet
+
+snippet "[Aa]rray[\. ]of" "Array.of()" r
+Array.of(${1:${2:element1}${3:, ${4:element2}}$5})$0
+endsnippet
+
 # NOTE: Negative look behind for "ordered" due to conflicts with HTML
 # "ordered list" (<ol>) tag trigger word.
 context "snip.visual_text"
-snippet "(?<!ordered )(array|list|\[\])" "Literal array/list with potential spread" r
+snippet "(?<!ordered )(?<!is )(?<!is)(array|list|\[\])" "Literal array/list with potential spread" r
 [${1:...}${2:${VISUAL}}$3]$0
 endsnippet
 
-snippet "(?<!ordered )(array|list|\[\])" "Literal array/list" r
+snippet "(?<!ordered )(?<!is )(?<!is)(array|list|\[\])" "Literal array/list" r
 [$1]$0
 endsnippet
 
