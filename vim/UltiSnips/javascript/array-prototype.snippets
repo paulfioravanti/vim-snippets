@@ -50,7 +50,7 @@ snippet .at "(Array|String).prototype.at(index)" i
 .at(${1:index})$0
 endsnippet
 
-snippet "\.(concat|push)" "(Array|String).prototype.concat/push(value1, value2, ...)" i
+snippet "\.(concat|push|unshift)" "(Array|String).prototype.concat/push/unshift(value1, value2, ...)" i
 .`!p snip.rv = match.group(1)`(${1:${2:value1}${3:, ${4:value2}}$5})$0
 endsnippet
 
@@ -58,30 +58,54 @@ snippet "\.copy\s?[Ww]ithin" "Array.prototype.copyWithin(target, start, end)" r
 .copyWithin(${1:target}, ${2:start}${3:, ${4:end}})$0
 endsnippet
 
-snippet "(?<!Object)\.(entries|keys)" "Array.prototype.entries/keys()" r
+snippet "(?<!Object)\.(entries|keys|values)" "Array.prototype.entries/keys/values()" r
 .`!p snip.rv = match.group(1)`()$0
+endsnippet
+
+snippet "\.(every|filter|find(?:(\sl|L)ast)?(?:(\si|I)ndex)?|flat(?:(\sm|M)ap)|for(?:(\se|E)ach)|group(?:((\st|T)o)((\sm|M)ap))?|map|some)" "Array.prototype.every/filter/find/findIndex/findLast/findLastIndex/flatMap/forEach/group/groupToMap/map(callbackFn, thisArg)" r
+.`!p snip.rv = words_to_function(match.group(1))`(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
 endsnippet
 
 snippet .fill "Array.prototype.fill(value, start, end)" i
 .fill(${1:value}${2:, ${3:start}${4:, ${5:end}}})$0
 endsnippet
 
-snippet "\.(every|filter|find(?:(\sl|L)ast)?(?:(\si|I)ndex)?|map)" "Array.prototype.every/filter/find/findIndex/findLast/findLastIndex/map(callbackFn, thisArg)" r
-.`!p snip.rv = words_to_function(match.group(1))`(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
+snippet .flat "Array.prototype.flat(depth)" i
+.flat(${1:depth})$0
+endsnippet
+
+snippet "\.(includes|(?:last)?(?:((?<!last)i|\si|I))ndex(?:(\so|O)f))" "Array.prototype.includes/indexOf/lastIndexOf(searchElement, fromIndex)" r
+.`!p snip.rv = words_to_function(match.group(1))`(${1:searchElement}${2:, ${3:fromIndex}})$0
 endsnippet
 
 snippet .join "Array.prototype.join(separator)" i
 .join(${1:"${2:,}"})$0
 endsnippet
 
-snippet .reduce "Array.prototype.reduce(callbackFn, initialValue)" i
-.reduce(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
+snippet "\.(pop|reverse|shift|to(?:(\sr|R)eversed)|to(?:(\ss|S)tring))" "Array.prototype.pop/reverse/shift/toReversed/toString()" r
+.`!p snip.rv = words_to_function(match.group(1))`()$0
 endsnippet
 
-snippet .reverse "Array.prototype.reverse()" i
-.reverse()$0
+snippet "\.(reduce(?:(\sr|R)ight)?)" "Array.prototype.reduce/reduceRight(callbackFn, initialValue)" r
+.`!p snip.rv = words_to_function(match.group(1))`(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
 endsnippet
 
 snippet .slice "(Array|String).prototype.slice(indexStart, indexEnd)" i
 .slice(${1:${2:indexStart}${3:, ${4:indexEnd}}})$0
+endsnippet
+
+snippet "\.(sort|to(?:(\ss|S)orted))" "Array.prototype.sort/toSorted(compareFn)" r
+.`!p snip.rv = words_to_function(match.group(1))`(${1:(${2:a}, ${3:b}) => ${4:\{}$5`!p snip.rv = maybe_spaces(t[4]) + closing_character(t[4])`})$0
+endsnippet
+
+snippet "\.(splice|to(?:(\ss|S)pliced))" "Array.prototype.splice/toSpliced(start, deleteCount, item1, item2, ...)" r
+.splice(${1:start}${2:, ${3:deleteCount}${4:, ${5:item1}${6:, ${7:item2}$8}}})$0
+endsnippet
+
+snippet "\.(to(?:(\sl|L)ocale)(?:(\ss|S)tring))" "Array.prototype.toLocaleString(locales, options)" r
+.toLocaleString(${1:${2:locales}${3:, ${4:options}}})$0
+endsnippet
+
+snippet .with "Array.prototype.with(index, value)" i
+.with(${1:index}, ${2:value})$0
 endsnippet
