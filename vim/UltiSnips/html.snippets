@@ -2,6 +2,11 @@ priority -1
 
 global !p
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    visual_context
+)
+
 # ~/.vim/pythonx/html_helpers.py
 from html_helpers import (
     can_map_to_tag_name,
@@ -12,7 +17,7 @@ from html_helpers import (
     text_to_tag
 )
 
-# ~/.vim/pythonx/html_helpers.py
+# ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     class_attribute_name
 )
@@ -42,13 +47,11 @@ def build_tag_with_attributes(snip, match):
 
     output += "}$7>"
 
-    # NOTE: Unfortunately, visual text is not available in post_jump, so no
-    # support for it can be provided.
-    # See: https://github.com/SirVer/ultisnips/issues/1524
+    visual = snip.context["visual"].strip(" \t\n\r")
     if tag_type == _MULTILINE:
-        output += "\n  $8\n"
+        output += f"\n  ${{8:{visual}}}\n"
     else:
-        output += "$8"
+        output += f"${{8:{visual}}}"
 
     output += f"</{tag}>"
     snip.expand_anon(output)
@@ -68,7 +71,7 @@ snippet "(\w+)([#\.][\w\-#\.]+)?" "HTML tag single-line or multi-line choice" r
 `!p snip.rv = match.group(1) + tag_args(match)` ${1|multi-line,single-line|}$0
 endsnippet
 
-context "is_html_tag(match.group(1))"
+context "is_html_tag(match.group(1)) and visual_context(snip)"
 post_jump "build_tag_with_attributes(snip, match)"
 snippet "(\w+)([#\.][\w\-#\.]+)? ((multi|single)-line)" "HTML tag multi-line" r
 $0

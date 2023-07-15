@@ -75,3 +75,15 @@ def snake_to_camel(string):
     Given a snake_cased_string, returns a CamelCaseString.
     """
     return string.replace("_", " ").title().replace(" ", "")
+
+def visual_context(snip):
+    """
+    Visual text is not available in post_jump by default
+    (see: https://github.com/SirVer/ultisnips/issues/1524), so this function
+    works around that limitation by storing the visual text inside a context
+    dictionary, which can then be accessed during post_jump.
+    Context blocks are not just for conditional statements, they can store
+    actual context state.
+    See html.snippets for an example of using this function.
+    """
+    return {"visual": snip.visual_text}
