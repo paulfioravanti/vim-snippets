@@ -24,5 +24,5 @@ snippet .split "String.prototype.split(separator, limit)" i
 endsnippet
 
 snippet "(?<!to )string" "Literal string" r
-${1|",`|}$2`!p snip.rv = closing_character(t[1])`$0
+${1|",`|}${2:text}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
