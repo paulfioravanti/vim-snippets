@@ -1,5 +1,14 @@
 global !p
 
+# https://github.com/reconquest/vim-pythonx
+from px.snippets import (
+    advance_jumper,
+    get_jumper_position,
+    get_jumper_text,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
@@ -35,6 +44,11 @@ def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
 
     snip.expand_anon(output)
 
+def jump_if_blank(snip, positions):
+    if get_jumper_position(snip) in positions:
+        if not get_jumper_text(snip):
+            advance_jumper(snip)
+
 endglobal
 
 snippet "arrow function" "arrow function expression" i
@@ -63,8 +77,16 @@ ${4:  constructor($5) \{$6
 }$0
 endsnippet
 
+# NOTE: Because $1 is at the very beginning of the snippet, there seems to be a
+# problem getting auto jump to work when it is deleted. If you put even just a
+# single space at the beginning of the snippet, things start working as
+# expected, but then you're left with an unwanted space at the beginning.
+# Unsure how to fix...
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^function" "top level function declaration" r
-${1:export ${2:default }}${3:async }function${4:*} ${5:functionName}(${6:params}) {
+`!p jump_if_blank(snip, [1, 2, 3, 4])
+`${1:export ${2:default }}${3:async }function${4:*} ${5:functionName}(${6:params}) {
   $7
 }$0
 endsnippet
