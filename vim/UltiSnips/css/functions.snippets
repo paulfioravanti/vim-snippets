@@ -1,3 +1,14 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
 snippet fit-content "fit-content(<length-percentage>) function" w
 fit-content(${1|length,percentage|})$0
 endsnippet
@@ -6,14 +17,23 @@ snippet hex "Hexadecimal color syntax" w
 #$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet hsl "Hue, Saturation, Lightness hsl() function" w
-hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:saturation}% ${4:lightness}%${5: / ${6:alpha}%})$0
+`!p autojump_if_blank(snip, [5])
+`hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:saturation}% ${4:lightness}%${5: / ${6:alpha}%})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet hwb "Hue, Whiteness, Blackness hwb() function" w
-hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:whiteness}% ${4:blackness}%${5: / ${6:alpha}${7:%}})$0
+`!p autojump_if_blank(snip, [5])
+`hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:whiteness}% ${4:blackness}%${5: / ${6:alpha}${7:%}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet rgb "Red, Green, Blue components rgb() function" w
-rgb(${1:red} ${2:green} ${3:blue}${4: ${5:alpha}})$0
+`!p autojump_if_blank(snip, [4])
+`rgb(${1:red} ${2:green} ${3:blue}${4: ${5:alpha}})$0
 endsnippet

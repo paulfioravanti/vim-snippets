@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 def join_properties(match):
     return "-".join(match.group(1, 2))
 
@@ -9,16 +16,25 @@ snippet background "CSS background property" b
 background: ${1|color,global|};$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet border "CSS border property" b
-border: ${1|border style,border width|}${2: ${3|border style,color|}${4: color}}$5;$0
+`!p autojump_if_blank(snip, [2])
+`border: ${1|border style,border width|}${2: ${3|border style,color|}${4: color}$5};$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "border radius" "CSS border-radius property" b
-border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{top-right|top-right-bottom-left}}${5|px,em,%|}${6: ${7:{bottom-right}}${8|px,em,%|}${9: ${10:{bottom-left}}${11|px,em,%|}}}};$0
+`!p autojump_if_blank(snip, [3, 6, 9])
+`border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{top-right|top-right-bottom-left}}${5|px,em,%|}${6: ${7:{bottom-right}}${8|px,em,%|}${9: ${10:{bottom-left}}${11|px,em,%|}}}};$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "box shadow" "CSS box-shadow property" b
-box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color$13};$0
+`!p autojump_if_blank(snip, [6, 9])
+`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color$13};$0
 endsnippet
 
 snippet display "CSS display property" b
@@ -49,8 +65,11 @@ snippet "line height" "line-height property" b
 line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(margin|padding)" "CSS properties that deal with sides of an element" r
-`!p snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
+`!p autojump_if_blank(snip, [2, 4, 6])
+``!p snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
 endsnippet
 
 snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
