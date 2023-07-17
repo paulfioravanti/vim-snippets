@@ -2,6 +2,13 @@ extends html
 
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
@@ -13,25 +20,37 @@ def maybe_paren(tabstop):
 endglobal
 
 snippet "\bconsole(\.| )log" "console.log" r
-console.log(${1:msg/obj}$2)`!p maybe_semi(snip)`$0
+console.log(${1:msg/obj})`!p maybe_semi(snip)`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(?<!not )(?<!plus )equals" "== operator" r
-==${1:=} $0
+`!p autojump_if_blank(snip, [1])
+`==${1:=} $0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bmod(ulo)?" "% modulo" r
-% ${1:number}${2: === ${3:0}}$0
+`!p autojump_if_blank(snip, [2])
+`% ${1:number}${2: === ${3:0}}$0
 endsnippet
 
 snippet spread "Spread syntax (...)" i
 ...${1:${VISUAL:object}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet ternary "ternary (?:) operator" i
-${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = maybe_paren(t[1])`$0
+`!p autojump_if_blank(snip, [1])
+`${1:(}${2:condition} ? ${3:true} : ${4:false}`!p snip.rv = maybe_paren(t[1])`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet yield "yield statement" b
-yield${1:*} ${2:expression}$0
+`!p autojump_if_blank(snip, [1])
+`yield${1:*} ${2:expression}$0
 endsnippet
