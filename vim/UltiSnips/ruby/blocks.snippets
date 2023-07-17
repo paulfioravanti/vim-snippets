@@ -1,9 +1,23 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
 snippet "(?<!do)(?<!explicit)(?<!inline) block" "block choice tabstop" r
 ${1|inline block,do block,explicit block,local proc,local method,external method|}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "do block" "do |<element>| <block> end" i
- do${1: |${2:element}|}
+`!p autojump_if_blank(snip, [1])
+` do${1: |${2:element}|}
   $3
 end$0
 endsnippet
@@ -16,12 +30,18 @@ snippet "external method" "(&Module.method(:method))" i
 (&${1:Module}.method(:${2:method}))$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "inline block" "{ |<element>| <block> }" i
- { ${1:|${2:element}| }$3 }$0
+`!p autojump_if_blank(snip, [1])
+` { ${1:|${2:element}| }$3 }$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "lambda proc literal" "->(element) { <block> }" i
-${1:(${2:element}) }{ $3 }$0
+`!p autojump_if_blank(snip, [1])
+`${1:(${2:element}) }{ $3 }$0
 endsnippet
 
 snippet "local method" "(&method(:method))" i

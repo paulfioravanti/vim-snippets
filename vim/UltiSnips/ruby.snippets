@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     key_closing,
@@ -69,17 +76,23 @@ else
 end$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet class "class declaration" b
-class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
+`!p autojump_if_blank(snip, [2, 4, 5])
+`class ${1:`!p snip.rv = class_name(snip)`}${2: < ${3:SuperClass}}${4:
   ${5:${7:attr_${8|reader,writer,accessor|}`!p snip.rv = initialize_attr_args(t[6])`$9
 
   }def initialize($6)`!p initialize_args(t[6], snip)`
-  end}$0
-end}`!p snip.rv = maybe(t[4], "; end")`
+  end}
+end}`!p snip.rv = maybe(t[4], "; end")`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet def "Ruby method definition" b
-${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}${7:
+`!p autojump_if_blank(snip, [1, 2, 3, 5, 7])
+`${1:private${2:_class_method} }def ${3:self.}${4:method_name}${5:(${6:*args})}${7:
   ${8:${VISUAL}}
 end}`!p snip.rv = maybe(t[7], " = ")`$0
 endsnippet
@@ -97,8 +110,11 @@ snippet hash "Literal Ruby hash" i
 { ${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4 }$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(?!else)\b(if|unless)" "(if|unless) statements" r
-`!p snip.rv = match.group(1)` ${1:condition}
+`!p autojump_if_blank(snip, [3])
+``!p snip.rv = match.group(1)` ${1:condition}
   ${2:${VISUAL:# do something}}${3:
 else
   ${4:# fallback handling}}
@@ -115,8 +131,11 @@ snippet interpolate "string interpolation" i
 #{${1:attribute}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet key-value "Key-value pair" i
-${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
+`!p autojump_if_blank(snip, [4])
+`${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
 endsnippet
 
 snippet module "module declaration" b

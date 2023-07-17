@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/ruby_helpers.py
 from ruby_helpers import (
     class_name
@@ -7,12 +14,18 @@ from ruby_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "has many" "Rails has_many" b
-has_many :${1:object}s${2:, ${3:class_name: "${4:$1}"}${5:, foreign_key: "${6:reference}_id"}}$0
+`!p autojump_if_blank(snip, [2, 3, 5])
+`has_many :${1:object}${2:, ${3:class_name: "${4:$1}"}${5:, foreign_key: "${6:reference}_id"}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "has rich text" "Rails has_rich_text" b
-has_rich_text :${1:object}${2:, encrypted: ${3:false}}$0
+`!p autojump_if_blank(snip, [2])
+`has_rich_text :${1:object}${2:, encrypted: ${3:false}}$0
 endsnippet
 
 snippet "model class" "Create model class" b
@@ -21,6 +34,9 @@ class ${1:`!p snip.rv = class_name(snip)`} < ApplicationRecord
 end
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bvalidate(s)? presence( of)?" "validates_presence_of" r
-validates_presence_of :${1:attribute}${2:, on: :${3:create}${4:, message: "${5:can't be blank}"}}$0
+`!p autojump_if_blank(snip, [2, 4])
+`validates_presence_of :${1:attribute}${2:, on: :${3:create}${4:, message: "${5:can't be blank}"}}$0
 endsnippet

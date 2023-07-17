@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character,
@@ -24,7 +31,10 @@ def decorator_tag(match):
     return "classmethod" if "class" in match.group(1) else "staticmethod"
 
 def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
-    if not (args_tabstop := snip.tabstops[init_tabstop_index]):
+    if (
+        not snip.tabstop == 0 and
+        not (args_tabstop := snip.tabstops[init_tabstop_index])
+    ):
         return
 
     # Strip out all the surrounding tabstop characters
@@ -58,9 +68,11 @@ endglobal
 
 # NOTE: snip.tabstops[7] cannot be used here due to it being nested within
 # snip.tabstops[6]. So, we have to take the outer tabstop.
-post_jump "if snip.tabstop == 0: initialize_args(snip, 6, 8)"
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop); initialize_args(snip, 6, 8)"
 snippet class "Python class" b
-class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
+`!p autojump_if_blank(snip, [2, 4, 6])
+`class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -78,16 +90,22 @@ snippet def "decide what kind of function or method to create" b
 def ${1|function,instance method,class method,static method|}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bdef (function|instance(?: method)?)" "function or instance method" r
-def ${1:name}(${2:`!p snip.rv = maybe_self(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+`!p autojump_if_blank(snip, [2, 4])
+`def ${1:name}(${2:`!p snip.rv = maybe_self(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
     }$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bdef (class(?: method)?|static(?: method)?)" "class or static method" r
-@`!p snip.rv = decorator_tag(match)`
+`!p autojump_if_blank(snip, [2, 4])
+`@`!p snip.rv = decorator_tag(match)`
 def ${1:name}(${2:`!p snip.rv = maybe_cls(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
@@ -99,26 +117,38 @@ snippet false "False" w
 False$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet from "Python import from statement" b
-from ${1:module} import ${2:(
+`!p autojump_if_blank(snip, [2, 4])
+`from ${1:module} import ${2:(
     }${3:function}${4: as ${5:alias}}$0
 `!p snip.rv = closing_character(t[2].strip())`
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet import "Python single import statement" b
-import ${1:module}${2: as ${3:alias}}$0
+`!p autojump_if_blank(snip, [2])
+`import ${1:module}${2: as ${3:alias}}$0
 endsnippet
 
 snippet lambda "Lambda expression" w
 lambda ${1:params}: $2$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(list|dictionary|set|generator) comprehension" "comprehension" r
-${1:`!p snip.rv = comprehension_opening(match)`}${5:expression} for ${4:item} in ${2:iterable}$3${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
+`!p autojump_if_blank(snip, [6])
+`${1:`!p snip.rv = comprehension_opening(match)`}${5:expression} for ${4:item} in ${2:iterable}$3${6: if ${7:condition}}`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bmod(ulo)?" "% modulo" r
-% ${1:number}${2: == ${3:0}}$0
+`!p autojump_if_blank(snip, [2])
+`% ${1:number}${2: == ${3:0}}$0
 endsnippet
 
 snippet none "None" w
@@ -129,8 +159,11 @@ snippet return "return statement" b
 return ${1:value}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet string "Literal string with fstring option" w
-${1:f}"$2"$0
+`!p autojump_if_blank(snip, [1])
+`${1:f}"$2"$0
 endsnippet
 
 snippet true "True" w
@@ -145,6 +178,9 @@ snippet tuple "literal tuple" i
 (${1:first}, ${2:second}$3)$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet yield "yield statement" b
-yield ${1:from }${2:expression}$0
+`!p autojump_if_blank(snip, [1])
+`yield ${1:from }${2:expression}$0
 endsnippet

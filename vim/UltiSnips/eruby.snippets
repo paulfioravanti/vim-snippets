@@ -2,6 +2,13 @@ extends html
 
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 def erb_placeholder(tag):
     if tag == "%#":
         return "comment"
@@ -24,8 +31,11 @@ snippet "form submit" "Rails form.submit method" b
 <%= form.submit %>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "form text area" "Rails form.text_area method" b
-<%= form.text_area :${1:method}${2:, ${3:key}: ${4:value}}$5 %>$0
+`!p autojump_if_blank(snip, [2])
+`<%= form.text_area :${1:method}${2:, ${3:key}: ${4:value}}$5 %>$0
 endsnippet
 
 snippet "form with" "Rails form_with method with custom options" b
@@ -70,8 +80,11 @@ snippet "form with url" "Rails form_with method with url option" b
 <% end %>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet pluralize "Rails pluralize method" i
-<%= pluralize ${1:count}, "${2:singular}"${3:${4:, plural: "${5:plural}"}${6:, locale: :${7:locale}}}$8 %>$0
+`!p autojump_if_blank(snip, [3, 4, 6])
+`<%= pluralize ${1:count}, "${2:singular}"${3:${4:, plural: "${5:plural}"}${6:, locale: :${7:locale}}}$8 %>$0
 endsnippet
 
 snippet "render collection" "render named partial with collection" b
@@ -97,8 +110,11 @@ snippet "render collection layout" "render named partial with collection and lay
            layout: "${4:layout}"$5 %>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "render collection options" "render named partial with collection and all options" b
-<%= render partial: "${1:partial}",
+`!p autojump_if_blank(snip, [4, 5, 7, 9])
+`<%= render partial: "${1:partial}",
            collection: ${2:@${3:collection}}${4:${5:,
            layout: "${6:layout}"}${7:,
            as: :${8:item}}${9:,
@@ -153,10 +169,16 @@ snippet "render var" "render partial for some variable" b
 <%= render ${1:var} %>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "time tag" "display Rails time_tag with options" i
-<%= time_tag ${1:time}${2:, ${3:key}: ${4:value}}$5 %>$0
+`!p autojump_if_blank(snip, [2])
+`<%= time_tag ${1:time}${2:, ${3:key}: ${4:value}}$5 %>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "turbo stream from" "turbo-rails turbo_stream_from method" i
-<%= turbo_stream_from @${1:var}${2:, channel: ${3:ChannelName}}$4 %>$0
+`!p autojump_if_blank(snip, [2])
+`<%= turbo_stream_from @${1:var}${2:, channel: ${3:ChannelName}}$4 %>$0
 endsnippet

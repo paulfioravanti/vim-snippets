@@ -1,5 +1,19 @@
 extends ruby
 
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "broadcasts to" "turbo-rails broadcasts_to method" b
-broadcasts_to :${1:stream}${2:, inserts_by: ${3::append}${4:, target: ${5:broadcast_target_default}}}$0
+`!p autojump_if_blank(snip, [2, 4])
+`broadcasts_to :${1:stream}${2:, inserts_by: ${3::append}${4:, target: ${5:broadcast_target_default}}}$0
 endsnippet

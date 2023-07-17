@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     snake_to_camel
@@ -59,12 +66,18 @@ class ${1:`!p snip.rv = controller_class_resource_name(snip)`}Controller < Appli
 end
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "redirect action" "Rails redirect_to action" b
-redirect_to action: "${1:action}"${2:, id: ${3:id}}$0
+`!p autojump_if_blank(snip, [2])
+`redirect_to action: "${1:action}"${2:, id: ${3:id}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "redirect controller" "Rails redirect_to controller" b
-redirect_to controller: "${1:controller}"${2:, action: "${3:instance}"${4:, id: ${5:id}}}$0
+`!p autojump_if_blank(snip, [2, 4])
+`redirect_to controller: "${1:controller}"${2:, action: "${3:instance}"${4:, id: ${5:id}}}$0
 endsnippet
 
 snippet "redirect instance" "Rails redirect_to instance" b

@@ -2,6 +2,13 @@ priority -1
 
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     visual_context
@@ -81,38 +88,54 @@ snippet iframe "HTML iframe tag" i
 <iframe src="${1:src}">$0</iframe>
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet img "HTML img tag" i
-<img src="${1:src}"${2: alt="${3:alt}"} />$0
+`!p autojump_if_blank(snip, [2])
+`<img src="${1:src}"${2: alt="${3:alt}"} />$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet input "HTML input tag of type 'text'" b
-<input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
+`!p autojump_if_blank(snip, [2, 4, 6, 8])
+`<input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-context "is_html_input_tag(match.group(1))"
+context "is_html_input_tag(match.group(1)) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\binput (\w+)" "HTML input tag of (type) with id, class, name, value" r
 `!p
 input_type = match.group(1)
+autojump_if_blank(snip, [2, 4, 6, 8])
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
 endsnippet
 
-context "is_html_min_max_input_tag(match.group(1))"
+context "is_html_min_max_input_tag(match.group(1)) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\binput (\w+)" "HTML input tag of (type) with id, name, min, max" r
 `!p
 input_type = match.group(1)
+autojump_if_blank(snip, [2, 4, 6, 8, 10, 12])
 `<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: min="${11:min}"}${12: max="${13:max}"}} />$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "input tel" "HTML input tag of telephone number type" b
-<input type="tel"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: pattern="${11:pattern}"}} />$0
+`!p autojump_if_blank(snip, [2, 4, 6, 8, 10])
+`<input type="tel"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: pattern="${11:pattern}"}} />$0
 endsnippet
 
 snippet label "Inline label tag" i
 <label ${1:for="${2:input-id}}>${3:${VISUAL}}</label>$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(link|anchor|a tag)" "HTML <a> tag" r
-<a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
+`!p autojump_if_blank(snip, [2])
+`<a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
   ${4:${VISUAL:text}}
 </a>$0
 endsnippet

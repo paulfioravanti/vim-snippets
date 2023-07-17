@@ -1,5 +1,19 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "front matter" "Jekyll front matter for blog posts"
----
+`!p autojump_if_blank(snip, [10])
+`---
 title: "${1:title}"
 date: ${2:`date "+%Y-%m-%d %T"`} +${3:1100}
 last_modified_at: $2 $3

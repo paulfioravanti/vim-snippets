@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -7,26 +14,41 @@ from global_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet ".all(/?)?" "all?(pattern) {|element| ... } → true or false" r
-.all?${1:${2:(${3:pattern})}${4: block}}$0
+`!p autojump_if_blank(snip, [1, 2, 4])
+`.all?${1:${2:(${3:pattern})}${4: block}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet ".each(_| )slice" ".each_slice(n) { ... } → self" r
-.each_slice(${1:n})${2: block}$0
+`!p autojump_if_blank(snip, [2])
+`.each_slice(${1:n})${2: block}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet ".each with object" "each_with_object(object) { |(*args), memo_object| ... } → object" i
-.each_with_object(${1:object})${2: block}$0
+`!p autojump_if_blank(snip, [2])
+`.each_with_object(${1:object})${2: block}$0
 endsnippet
 
 snippet "\.(map|collect)" "map {|element| ... } → array" r
 .`!p snip.rv = match.group(1)` block$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\.(reduce|inject)" "reduce(initial_operand) {|memo, operand| ... } → object" r
-.`!p snip.rv = match.group(1)`(${1:initial_value}`!p snip.rv = maybe_comma(t[1], t[2])`${2::${3:symbol}})${4: block}$0
+`!p autojump_if_blank(snip, [4])
+`.`!p snip.rv = match.group(1)`(${1:initial_value}`!p snip.rv = maybe_comma(t[1], t[2])`${2::${3:symbol}})${4: block}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet .sum ".sum(initial_value = 0) {|element| ... }" i
-.sum${1:(${2:initial_value})}${3: block}$0
+`!p autojump_if_blank(snip, [3])
+`.sum${1:(${2:initial_value})}${3: block}$0
 endsnippet

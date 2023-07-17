@@ -1,5 +1,19 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet case "case conditional" b
-case ${1:pattern}${2: if ${3:guard}}:
+`!p autojump_if_blank(snip, [2])
+`case ${1:pattern}${2: if ${3:guard}}:
     ${4:# do something}$0
 endsnippet
 
@@ -13,22 +27,31 @@ elif ${1:condition}:
     ${2:${VISUAL:# do something}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet for "for statement" b
-for ${2:element} in ${1:iterable}:
+`!p autojump_if_blank(snip, [4])
+`for ${2:element} in ${1:iterable}:
     ${3:${VISUAL:# do something}}${4:
 else:
     ${5:# nothing found in $1}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet if "if statement" b
-if ${1:condition}:
+`!p autojump_if_blank(snip, [3])
+`if ${1:condition}:
     ${2:${VISUAL:# do something}}${3:
 else:
     ${4:# do something else}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet match "match statement" b
-match ${1:subject}:
+`!p autojump_if_blank(snip, [3, 7])
+`match ${1:subject}:
     case ${2:pattern}${3: if ${4:guard}}:
         ${5:# do something}
     case ${6:pattern}${7: if ${8:guard}}:

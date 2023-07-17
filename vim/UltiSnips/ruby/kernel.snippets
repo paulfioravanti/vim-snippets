@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -23,8 +30,11 @@ snippet "(?<!local )proc" "proc { |...| block } → a_proc" r
 ${1|Proc.new,proc|}${2|inline block,do block|}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet raise "raise(exception [, string [, array]], cause: $!)" i
-raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}$0
+`!p autojump_if_blank(snip, [2])
+`raise ${1:RuntimeError}`!p snip.rv = maybe_comma(t[1], t[2])`${2:"${3:Error message}"}$0
 endsnippet
 
 snippet require "require(name) → true or false" b
@@ -35,6 +45,9 @@ snippet .then "then {|x| block } → an_object" i
 .then block$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet throw "throw(tag [, obj])" i
-throw(:${1:tag}${2:, ${3:object}})
+`!p autojump_if_blank(snip, [2])
+`throw(:${1:tag}${2:, ${3:object}})
 endsnippet

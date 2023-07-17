@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -11,6 +18,9 @@ snippet list "list([iterable])" i
 list(${1:${VISUAL:iterable}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet range "range(start, stop[, step])" i
-range(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, ${4:step}})$0
+`!p autojump_if_blank(snip, [3])
+`range(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, ${4:step}})$0
 endsnippet

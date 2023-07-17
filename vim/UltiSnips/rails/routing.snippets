@@ -1,9 +1,26 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet resources "ActionDispatch::Routing::Mapper::Resources#resources" b
-resources :${1:resource}${2: do
+`!p autojump_if_blank(snip, [2])
+`resources :${1:resource}${2: do
   $3
 end}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet root "ActionDispatch::Routing::Mapper::Resources#root" b
-root${1: to:} "${2:controller}#${3:action}"
+`!p autojump_if_blank(snip, [2])
+`root${1: to:} "${2:controller}#${3:action}"$0
 endsnippet

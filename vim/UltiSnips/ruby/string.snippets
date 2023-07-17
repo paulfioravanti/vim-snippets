@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -11,8 +18,11 @@ snippet "\.end(s)? with" ".end_with? method" r
 .end_with?("${1:string}")$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet .gsub ".gsub(pattern, replacement)<<{|match| ... }>>" i
-.gsub(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:replacement})${3: block}$0
+`!p autojump_if_blank(snip, [3])
+`.gsub(${1:pattern}`!p snip.rv = maybe_comma(t[1], t[2])`${2:replacement})${3: block}$0
 endsnippet
 
 snippet "(?<!/)\.match\?" "match?(pattern, offset = 0) → true or false" r

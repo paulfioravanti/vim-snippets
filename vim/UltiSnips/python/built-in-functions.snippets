@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -7,34 +14,52 @@ from global_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet int "int(x, base=10)" w
-int(${1:x}${2:, base=${3:10}})$0
+`!p autojump_if_blank(snip, [2])
+`int(${1:x}${2:, base=${3:10}})$0
 endsnippet
 
 snippet len "len(s)" w
 len(${1:${VISUAL:s}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet map "map(function, iterable, *iterables)" w
-map(${4:function}, ${1:${VISUAL:iterable}}${2:, ${3:*iterables}})$0
+`!p autojump_if_blank(snip, [2])
+`map(${4:function}, ${1:${VISUAL:iterable}}${2:, ${3:*iterables}})$0
 endsnippet
 
 snippet reversed "reversed(seq)" w
 reversed(${1:${VISUAL:seq}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(?<!\[)slice" "slice(start, stop, step=1)" r
-slice(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, step=${4:1}})
+`!p autojump_if_blank(snip, [3])
+`slice(${1:start}`!p snip.rv = maybe_comma(t[1], t[2])`${2:stop}${3:, step=${4:1}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet [slice "[start:stop:step]" i
-[${1:start}:${2:stop}${3::${4:step}}
+`!p autojump_if_blank(snip, [3])
+`[${1:start}:${2:stop}${3::${4:step}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet sum "sum(iterable, start=0)" w
-sum(${1:${VISUAL:iterable}}${2:, start=${3:0}})$0
+`!p autojump_if_blank(snip, [2])
+`sum(${1:${VISUAL:iterable}}${2:, start=${3:0}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet zip "zip(*iterables, strict=False)" w
-zip(${1:*iterables}${2:, strict=${3:True}})$0
+`!p autojump_if_blank(snip, [2])
+`zip(${1:${VISUAL:*iterables}}${2:, strict=${3:True}})$0
 endsnippet
