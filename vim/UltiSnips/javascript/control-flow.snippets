@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
@@ -10,12 +17,18 @@ def maybe_block_end(tabstop):
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(break|continue)" "break statement" r
-`!p snip.rv = match.group(1)`${1: ${2:label}}`!p snip.rv = maybe_semi()`$0
+`!p autojump_if_blank(snip, [1])
+``!p snip.rv = match.group(1)`${1: ${2:label}}`!p snip.rv = maybe_semi()`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet case "case clause for a switch statement" b
-case ${1:value}:${2: \{}
+`!p autojump_if_blank(snip, [2, 4])
+`case ${1:value}:${2: \{}
   ${3:// statements}${4:
   break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[2])`$0
 endsnippet
@@ -25,8 +38,11 @@ snippet "else if" "else if statement (use during if statement)" b
   ${2:// do something else}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet if "if...else" b
-if (${1:condition}) {
+`!p autojump_if_blank(snip, [3])
+`if (${1:condition}) {
   ${2:${VISUAL:\/\/ do something}}
 }${3: else {
   ${4:// do something else}
@@ -39,8 +55,11 @@ snippet "\b(return|throw)" "multi-line (return|throw) statement" r
 )`!p maybe_semi(snip)`
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet switch "switch statement" b
-switch (${1:expression}) {
+`!p autojump_if_blank(snip, [3, 5, 7, 9, 10])
+`switch (${1:expression}) {
   case ${2:value1}:${3: \{}
     ${4:// statements}${5:
     break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[3])`
@@ -52,8 +71,11 @@ switch (${1:expression}) {
 }$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet try "try...catch statement" b
-try {
+`!p autojump_if_blank(snip, [2, 5])
+`try {
   ${1:// try statements}
 ${2:\} catch (${3:exceptionVar}) \{
   ${4:// catch statements}

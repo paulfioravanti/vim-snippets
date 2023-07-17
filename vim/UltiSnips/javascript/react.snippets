@@ -2,6 +2,13 @@ global !p
 
 import re
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
@@ -64,8 +71,11 @@ class ${1:`!p snip.rv = snip.basename`} extends React.Component {
 }
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "define function component" "function component" b
-${1:export ${2:default }}function ${3:`!p snip.rv = snip.basename`}(${4:props$5}) {
+`!p autojump_if_blank(snip, [1, 2])
+`${1:export ${2:default }}function ${3:`!p snip.rv = snip.basename`}(${4:props$5}) {
   return (
     ${6:${VISUAL}}
   )`!p maybe_semi(snip)`$0
@@ -77,8 +87,11 @@ snippet format "format single line tag to multiline" w
 `!p format_tag(snip)`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet fragment "React component to return multiple elements" b
-<${1:React.Fragment}>
+`!p autojump_if_blank(snip, [1])
+`<${1:React.Fragment}>
   ${2:${VISUAL}}$0
 </$1>
 endsnippet
@@ -103,9 +116,14 @@ snippet render "render value" w
 {${1:${VISUAL:value}}}$0
 endsnippet
 
+# NOTE: The autojumps here don't seem to work as expected. Maybe related to
+# https://github.com/reconquest/vim-pythonx/issues/16 (...?)
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "render component" "render user-defined component" i
-<${1:ComponentName}${2: prop$3}`!p snip.rv = maybe_self_closing(t[4])`>${4:
-  ${5:${VISUAL:\/\/ children}}
+`!p autojump_if_blank(snip, [2, 4])
+`<${1:ComponentName}${2: prop$3}`!p snip.rv = maybe_self_closing(t[4])`>${4:
+  ${5:${VISUAL}}
 </$1>}$0
 endsnippet
 

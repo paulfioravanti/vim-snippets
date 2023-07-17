@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
@@ -29,8 +36,11 @@ for (const ${2:property} in ${1:object}) {
 }$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "for-of statement" "for (await)...of statement" b
-for${1: await} (const ${3:element} of ${2:iterable}) {
+`!p autojump_if_blank(snip, [1])
+`for${1: await} (const ${3:element} of ${2:iterable}) {
   ${4:// statement}
 }$0
 endsnippet

@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_surround
@@ -7,6 +14,9 @@ from global_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(pattern|regex)" "literal regex" r
-/${1:^}${2:pattern}${3:$}/${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|d,g,i,m,s,u,y|}`!p snip.rv = maybe_surround(t[5], ">>")`}$0
+`!p autojump_if_blank(snip, [1, 3, 4])
+`/${1:^}${2:pattern}${3:$}/${4:`!p snip.rv = maybe_surround(t[5], "<<")`${5|d,g,i,m,s,u,y|}`!p snip.rv = maybe_surround(t[5], ">>")`}$0
 endsnippet

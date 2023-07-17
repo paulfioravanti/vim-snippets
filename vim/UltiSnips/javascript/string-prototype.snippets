@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
@@ -19,8 +26,11 @@ snippet .replace "String.prototype.replace(pattern, replacement)" i
 .replace(${1:pattern}, ${2:replacement})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet .split "String.prototype.split(separator, limit)" i
-.split(${1:separator}${2:, ${3:limit}})$0
+`!p autojump_if_blank(snip, [2])
+`.split(${1:separator}${2:, ${3:limit}})$0
 endsnippet
 
 snippet "(?<!to )string" "Literal string" r
