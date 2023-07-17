@@ -11,6 +11,12 @@ Trigger words for snippets are typically short words or mnemonics (see
 since I use them primarily with [Plover][] stenography (see
 [my stenography dictionaries][]), which enables that easily.
 
+## Dependencies
+
+Some of my snippets leverage [`px.snippets`][] helpers from the
+[`vim-pythonx`][] repo. If you use any of them, you will need to install
+`vim-pythonx`.
+
 ## Priorities
 
 Currently, I have the snippets in a "stack" of priorities that looks like the
@@ -42,6 +48,7 @@ You can see the snippets in action during the following videos:
 [my dotfiles]: https://github.com/paulfioravanti/dotfiles
 [my stenography dictionaries]: https://github.com/paulfioravanti/steno-dictionaries
 [Plover]: https://www.openstenoproject.org/plover/
+[`px.snippets`]: https://github.com/reconquest/vim-pythonx/blob/master/pythonx/px/snippets.py
 [Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
 [rcm]: https://github.com/thoughtbot/rcm
 [Steno Coding: Exercism's "Luhn" challenge in Python]: https://www.youtube.com/watch?v=YcIwT5i9_lA
@@ -51,3 +58,4 @@ You can see the snippets in action during the following videos:
 [Stenography and Ruby]: https://www.youtube.com/watch?v=3W9_k2CXrXE
 [Ultisnips]: https://github.com/SirVer/ultisnips
 [Vim]: https://www.vim.org/
+[`vim-pythonx`]: https://github.com/reconquest/vim-pythonx
