@@ -3,6 +3,12 @@ Ultisnips snippet global helper functions. Intended for multiple languages.
 NOTE: Changes to this file require restarting Vim!
 """
 import vim
+# https://github.com/reconquest/vim-pythonx
+from px.snippets import (
+    advance_jumper,
+    get_jumper_position,
+    get_jumper_text
+)
 
 
 _CLOSING_CHARACTERS = {
@@ -15,6 +21,17 @@ _CLOSING_CHARACTERS = {
     "`": "`",
     "\"": "\""
 }
+
+def autojump_if_blank(snip, positions):
+    """
+    Derived from the "Autojump from tabstop when it's empty" guide:
+    https://github.com/SirVer/ultisnips/tree/master/doc/examples/autojump-if-empty
+    """
+    if (
+        get_jumper_position(snip) in positions and
+        not get_jumper_text(snip)
+    ):
+        advance_jumper(snip)
 
 def choice_tabstop_chosen(choice_tabstop):
     """
@@ -41,13 +58,6 @@ def key_closing(opening):
     {foo: bar}
     """
     return "\" =>" if opening == "\"" else ":"
-
-def jump_forward():
-    """
-    Jumps forward a tabstop.
-    """
-    # REF: https://github.com/reconquest/vim-pythonx/blob/master/pythonx/px/snippets.py#LL117C5-L118C41
-    vim.command('call feedkeys("\<C-R>=UltiSnips#JumpForwards()\<CR>")')
 
 def maybe(tabstop, alternative):
     """
