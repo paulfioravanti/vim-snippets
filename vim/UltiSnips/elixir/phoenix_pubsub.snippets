@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/elixir_helpers.py
 from elixir_helpers import (
     root_module_name
@@ -7,10 +14,16 @@ from elixir_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet broadcast "Phoenix.PubSub.broadcast(pubsub, topic, message, dispatcher \\ __MODULE__)" w
-${1:Phoenix.PubSub.}broadcast(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}", ${5:message}${6:, ${7:dispatcher}})$0
+`!p autojump_if_blank(snip, [2, 6])
+`${1:Phoenix.PubSub.}broadcast(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}", ${5:message}${6:, ${7:dispatcher}})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet subscribe "Phoenix.PubSub.subscribe(pubsub, topic, opts \\ [])" w
-${1:Phoenix.PubSub.}subscribe(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}"${6:, metadata: ${7:some_metadata}})$0
+`!p autojump_if_blank(snip, [2, 6])
+`${1:Phoenix.PubSub.}subscribe(${2:${3:`!p snip.rv = root_module_name(path)`.PubSub}, }"${4:topic}"${6:, metadata: ${7:some_metadata}})$0
 endsnippet

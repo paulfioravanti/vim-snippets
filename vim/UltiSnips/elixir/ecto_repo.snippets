@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     maybe_comma
@@ -7,10 +14,16 @@ from global_helpers import (
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(?:repo )?all" "Ecto.Repo.c:all(queryable, opts)" r
-Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
+`!p autojump_if_blank(snip, [2])
+`Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(?:repo )?update all" "Ecto.Repo.c:update_all(queryable, updates, opts)" r
-Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
+`!p autojump_if_blank(snip, [1])
+`Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
 endsnippet

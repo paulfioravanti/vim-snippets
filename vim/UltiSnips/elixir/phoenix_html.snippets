@@ -2,6 +2,13 @@ extends html
 
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 _OPENING_EEX_TAG = "<%"
 _OPENING_EVAL_EEX_TAG = "<%="
 _CLOSING_EEX_TAG = "%>"
@@ -30,21 +37,28 @@ snippet "\bdata" "Phoenix.HTML data param" r
 data: [${1:confirm}: ${2:"${3:Really?}"}]$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "img tag" "Phoenix.HTML.Tag.img_tag(src, opts \\ [])" w
-${1:`!p snip.rv = initial_eex_tag(snip)`}img_tag "${2:src}"${3:, class: "${4:class}"${5:, }${6:srcset: %{"${7:$1}" => "${8:1x}", "${9:2x-$1}" => "${10:2x}"}}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
+`!p autojump_if_blank(snip, [3, 5, 6])
+`${1:`!p snip.rv = initial_eex_tag(snip)`}img_tag "${2:src}"${3:, class: "${4:class}"${5:, }${6:srcset: %{"${7:$1}" => "${8:1x}", "${9:2x-$1}" => "${10:2x}"}}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
 
-context "maybe_eex_tag(snip)"
+context "maybe_eex_tag(snip) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet label "Phoenix.HTML.Form.label/4" w
-${1:`!p snip.rv = initial_eex_tag(snip)`}label ${2:form}, :${3:field}, "${4:text}"${5:, ${6:id: "${7:id}"}${8:, }${9:class: "${10:class}"}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
+`!p autojump_if_blank(snip, [5, 6, 9])
+`${1:`!p snip.rv = initial_eex_tag(snip)`}label ${2:form}, :${3:field}, "${4:text}"${5:, ${6:id: "${7:id}"}${8:, }${9:class: "${10:class}"}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
 
 # NOTE: Due to issues with usage of nested snippets for link function params,
 # and the way the do/end block is implemented as a default value for a tabstop,
 # $6 is used to force the tabstop into the block.
-context "maybe_eex_tag(snip)"
+context "maybe_eex_tag(snip) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet link "Phoenix.HTML.Link.link/2" w
-${1:`!p snip.rv = initial_eex_tag(snip)`}link${2: "${3:text}",} to: "${4:/href}"$5${6: do`!p snip.rv = do_eex_tag(snip, t[1])`
+`!p autojump_if_blank(snip, [2, 6])
+`${1:`!p snip.rv = initial_eex_tag(snip)`}link${2: "${3:text}",} to: "${4:/href}"$5${6: do`!p snip.rv = do_eex_tag(snip, t[1])`
   ${7:${VISUAL}}
 `!p snip.rv = initial_end_eex_tag(snip, t[1])`end}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
@@ -53,14 +67,18 @@ snippet "\bmethod" "Phoenix.HTML method param" r
 method: ${1|:get,:post,:put,:patch,:delete|}$0
 endsnippet
 
-context "maybe_eex_tag(snip)"
+context "maybe_eex_tag(snip) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "form select" "Phoenix.HTML.Form.select/4" w
-${1:`!p snip.rv = initial_eex_tag(snip)`}select ${2:form}, :${3:field}, ${4:options}${5:, ${6:selected: ${7:selected}}${8:, }${9:prompt: ${10:[key: "${11:prompt_string}", disabled: ${12:true}]}}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
+`!p autojump_if_blank(snip, [5, 9])
+`${1:`!p snip.rv = initial_eex_tag(snip)`}select ${2:form}, :${3:field}, ${4:options}${5:, ${6:selected: ${7:selected}}${8:, }${9:prompt: ${10:[key: "${11:prompt_string}", disabled: ${12:true}]}}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
 
-context "maybe_eex_tag(snip)"
+context "maybe_eex_tag(snip) and make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(form )?submit" "Phoenix.HTML.Form.submit/2" r
-${1:`!p snip.rv = initial_eex_tag(snip)`}submit "${2:value}"${3:, ${4:class: "${5:class}"}${6:, }${7:phx_disable_with: "${8:Saving...}"}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
+`!p autojump_if_blank(snip, [3, 7])
+`${1:`!p snip.rv = initial_eex_tag(snip)`}submit "${2:value}"${3:, ${4:class: "${5:class}"}${6:, }${7:phx_disable_with: "${8:Saving...}"}}`!p snip.rv = final_eex_tag(snip, t[1])`$0
 endsnippet
 
 context "maybe_eex_tag(snip)"

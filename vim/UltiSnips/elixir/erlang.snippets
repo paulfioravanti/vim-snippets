@@ -1,3 +1,17 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "send interval" "timer:send_interval/3" w
-:timer.send_interval(${1:time_ms}, ${2:${3:self()},} :${4:message})$0
+`!p autojump_if_blank(snip, [2])
+`:timer.send_interval(${1:time_ms}, ${2:${3:self()},} :${4:message})$0
 endsnippet

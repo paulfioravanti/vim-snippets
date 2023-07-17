@@ -1,3 +1,17 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "validate length" "Ecto.Changeset.validate_length(changeset, field, opts)" w
-validate_length(${1:${2:changeset}, }:${3:field}${4:, is: ${5:length}}${6:, min: ${7:length}}${8:, max: ${9:length}}${10:, count: :${11:length_type}}${12:, message: "${13:message}"})$0
+`!p autojump_if_blank(snip, [1, 4, 6, 8, 10, 12])
+`validate_length(${1:${2:changeset}, }:${3:field}${4:, is: ${5:length}}${6:, min: ${7:length}}${8:, max: ${9:length}}${10:, count: :${11:length_type}}${12:, message: "${13:message}"})$0
 endsnippet

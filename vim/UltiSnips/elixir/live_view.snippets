@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
@@ -23,12 +30,18 @@ endglobal
 # assign="x" or assign={x} due to issues around having no spaces between the
 # choice tabstop definition. Might be a bug with Ultisnips...
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet assign "Phoenix.LiveView.assign(socket_or_assigns, key, value)" w
-assign(${1:socket, }${2::}${3:key}`!p snip.rv = key_closing(t[2])` ${4:$3})$0
+`!p autojump_if_blank(snip, [1])
+`assign(${1:socket, }${2::}${3:key}`!p snip.rv = key_closing(t[2])` ${4:$3})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "assign new" "Phoenix.LiveView.assign_new(socket_or_assigns, key, fun)" w
-assign_new(${1:${2|assigns,socket|}, }:${3:key}, fn -> ${4:do_something} end)$0
+`!p autojump_if_blank(snip, [1])
+`assign_new(${1:${2|assigns,socket|}, }:${3:key}, fn -> ${4:do_something} end)$0
 endsnippet
 
 snippet component "Phoenix.LiveView.Helpers.component/2" b
@@ -41,25 +54,31 @@ snippet "connected(:??)?" "Phoenix.LiveView.connected?/1" r
 connected?(socket)$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet form "Phoenix.LiveView.Helpers.form(assigns)" b
-<.form
+`!p autojump_if_blank(snip, [3, 5, 7, 9])
+`<.form
   let={${1:f}}
   for={${2:@changeset}}
   ${3:id="${4:form-id}"}
-  ${4:phx-target={${5:@myself}}}
-  ${6:phx-change="${7:validate}"}
-  ${8:phx-submit="${9:save}"}>
+  ${5:phx-target={${6:@myself}}}
+  ${7:phx-change="${8:validate}"}
+  ${9:phx-submit="${10:save}"}>
 
   $0
 
   <div>
-    <%= submit "${10:Save}", ${11:phx_disable_with: "${12:Saving...}"} %>
+    <%= submit "${11:Save}"${12:, phx_disable_with: "${13:Saving...}"} %>
   </div>
 </.form>
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event(event, unsigned_params, socket)" b
-@impl true
+`!p autojump_if_blank(snip, [4])
+`@impl true
 def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
   ${4:socket = ${5:assign(socket, ${6::}${7:key}`!p snip.rv = key_closing(t[6])` ${8:$7})}}$0
   ${3|{:noreply\, socket},{:reply\, reply_map\, socket}|}
@@ -81,18 +100,27 @@ module, file = module_parts(path)
 />
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "live patch" "Phoenix.LiveView.Helpers.live_patch/2" b
-<%= live_patch${1: "${2:text}",} to: Routes.${3:path_function}(@socket, :${4:action}${5:, ${6:param}})${7:, replace: true} ${8:do %>
+`!p autojump_if_blank(snip, [1, 5, 7, 8])
+`<%= live_patch${1: "${2:text}",} to: Routes.${3:path_function}(@socket, :${4:action}${5:, ${6:param}})${7:, replace: true} ${8:do %>
   $9
 <% end %>}`!p snip.rv = "" if t[8] else "%>"`$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "live route" "Phoenix.LiveView.Router.live(path, live_view, action \\ nil, opts \\ [])" b
-live "/${1:path}", ${2:`!p snip.rv = to_module_name(t[1])`}Live${3:, :${4:action}${5:, ${6:opts}}}$0
+`!p autojump_if_blank(snip, [3, 5])
+`live "/${1:path}", ${2:`!p snip.rv = to_module_name(t[1])`}Live${3:, :${4:action}${5:, ${6:opts}}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet mount "Phoenix.LiveView.mount(params, session, socket)" b
-@impl true
+`!p autojump_if_blank(snip, [2, 3])
+`@impl true
 def mount(${1|params,_params,:not_mounted_at_router|}, ${2:_}session, socket) do
   ${3:socket = ${4:assign(socket, ${5::}${6:key}`!p snip.rv = key_closing(t[5])` ${7:$6}}})$0
   {:ok, socket}

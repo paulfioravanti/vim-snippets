@@ -1,5 +1,19 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "Timex format" "Timex.format/(1|2)" w
-Timex.format!(${1:${2:datetime}, }"${3:%FT%T%:z}", :${4:strftime})$0
+`!p autojump_if_blank(snip, [1])
+`Timex.format!(${1:${2:datetime}, }"${3:%FT%T%:z}", :${4:strftime})$0
 endsnippet
 
 snippet "Timex now" "Timex.now/(0|1)" w
