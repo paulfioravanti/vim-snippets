@@ -1,3 +1,14 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
 snippet boundary "boundary character" i
 \b$0
 endsnippet
@@ -30,8 +41,11 @@ snippet "positive look behind" "positive lookbehind assertion" i
 (?<=${1:match})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet repetition "regex repetition quantifier" i
-{${1:at least}${2:,${3:at most}}}$0
+`!p autojump_if_blank(snip, [2])
+`{${1:at least}${2:,${3:at most}}}$0
 endsnippet
 
 snippet whitespace "A whitespace character: /[ \t\r\n\f\v]/" i
