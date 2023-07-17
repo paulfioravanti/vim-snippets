@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 def import_exposing_default_text(tabstop):
     return tabstop.split(".")[-1]
 
@@ -16,10 +23,16 @@ def module_exposing_default_text(tabstop):
 
 endglobal
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet import "import statement" b
-import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}$6)}$0
+`!p autojump_if_blank(snip, [2, 4])
+`import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}$6)}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet module "Module definition" b
-${1:port }module ${2:`!p snip.rv = snip.basename`} exposing (${3:`!p snip.rv = module_exposing_default_text(t[2])`})$0
+`!p autojump_if_blank(snip, [1])
+`${1:port }module ${2:`!p snip.rv = snip.basename`} exposing (${3:`!p snip.rv = module_exposing_default_text(t[2])`})$0
 endsnippet

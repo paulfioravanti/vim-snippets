@@ -1,5 +1,12 @@
 global !p
 
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
 # ~/.vim/pythonx/elm_helpers.py
 from elm_helpers import (
     flags_text,
@@ -29,24 +36,32 @@ init `!p snip.rv = flags_text(t[1])` url key =
     )$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^update application" "Browser.application update function" r
-update : Msg -> Model -> ( Model, Cmd Msg )
+`!p autojump_if_blank(snip, [1])
+`update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ${1:SomeMsg ->
             (model, Cmd.none)}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^view application" "Browser.application view function" r
-view : Model -> Document Msg
+`!p autojump_if_blank(snip, [1])
+`view : Model -> Document Msg
 view model =
     ${1:{ title = ${2:title}
     , body = ${3:body}
     }}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^subscriptions application" "Browser.application subscriptions function" r
-subscriptions : Model -> Sub Msg
+`!p autojump_if_blank(snip, [1])
+`subscriptions : Model -> Sub Msg
 subscriptions model =
     ${1:Sub.none}$0
-endsnippet
