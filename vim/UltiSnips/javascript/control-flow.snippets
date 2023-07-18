@@ -27,7 +27,7 @@ endsnippet
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet case "case clause for a switch statement" b
-`!p autojump_if_blank(snip, [2, 4])
+`!p autojump_if_blank(snip, [2])
 `case ${1:value}:${2: \{}
   ${3:// statements}${4:
   break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[2])`$0
@@ -55,10 +55,12 @@ snippet "\b(return|throw)" "multi-line (return|throw) statement" r
 )`!p maybe_semi(snip)`
 endsnippet
 
+# NOTE: Autojumping if the `break` statements (tabstops 5 & 9) are blank seem
+# to break autojumping for the rest of the snippet, so I've removed them for now
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet switch "switch statement" b
-`!p autojump_if_blank(snip, [3, 5, 7, 9, 10])
+`!p autojump_if_blank(snip, [3, 7, 10])
 `switch (${1:expression}) {
   case ${2:value1}:${3: \{}
     ${4:// statements}${5:
