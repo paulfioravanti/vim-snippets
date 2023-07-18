@@ -71,11 +71,8 @@ class ${1:`!p snip.rv = snip.basename`} extends React.Component {
 }
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
 snippet "define function component" "function component" b
-`!p autojump_if_blank(snip, [1, 2])
-`${1:export ${2:default }}function ${3:`!p snip.rv = snip.basename`}(${4:props$5}) {
+${1:export ${2:default }}function ${3:`!p snip.rv = snip.basename`}(${4:props$5}) {
   return (
     ${6:${VISUAL}}
   )`!p maybe_semi(snip)`$0

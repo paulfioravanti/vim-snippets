@@ -93,7 +93,7 @@ endsnippet
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^function" "top level function declaration" r
-`!p autojump_if_blank(snip, [1, 2, 3, 4])
+`!p autojump_if_blank(snip, [3, 4])
 `${1:export ${2:default }}${3:async }function${4:*} ${5:functionName}(${6:params}) {
   $7
 }$0
