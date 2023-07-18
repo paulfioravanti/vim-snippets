@@ -1,6 +1,5 @@
 """
 JavaScript-related Ultisnips snippet helper functions.
-Based off https://github.com/honza/vim-snippets/blob/master/pythonx/javascript_snippets.py
 NOTE: Changes to this file require restarting Vim!
 """
 import re

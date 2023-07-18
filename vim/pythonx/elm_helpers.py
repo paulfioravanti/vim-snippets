@@ -2,7 +2,6 @@
 Elm-related Ultisnips snippet helper functions.
 NOTE: Changes to this file require restarting Vim!
 """
-
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     choice_tabstop_chosen
