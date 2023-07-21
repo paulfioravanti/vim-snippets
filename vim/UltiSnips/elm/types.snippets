@@ -26,7 +26,7 @@ snippet "^(custom type|message|msg)" "Custom type" r
     ${3:| ${4:Variant2}}$0
 endsnippet
 
-snippet "\b(?<!custom )(?<!record )type" "choose between type alias and custom type" r
+snippet "^(?<!custom )(?<!record )type" "choose between type alias and custom type" r
 ${1|custom type,type alias|}$0
 endsnippet
 
@@ -34,7 +34,7 @@ snippet maybe "Maybe type" w
 Maybe ${1:Type}$0
 endsnippet
 
-snippet "\b(type alias|model)" "Type Alias" r
+snippet "^(type alias|model)" "Type Alias" r
 type alias ${1:`!p snip.rv = type_alias_default_text(match)`} =
     ${2:record type}$0
 endsnippet
