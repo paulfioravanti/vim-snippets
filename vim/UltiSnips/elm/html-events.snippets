@@ -1,0 +1,12 @@
+global !p
+
+def words_to_function(words):
+    head, *tail = words.split(" ")
+    tail = [word.capitalize() for word in tail]
+    return "".join([head, *tail])
+
+endglobal
+
+snippet "\b(on(?:(\sc|C)lick|(\sd|D)ouble(\sc|C)lick|(\sm|M)ouse(\sd|D)own|(\su|U)p|(\se|E)nter|(\sl|L)eave|(\so|O)ver|(\so|O)ut))" "Html.Events.onX" r
+`!p snip.rv = words_to_function(match.group(1))` ${1:msg}$0
+endsnippet
