@@ -22,7 +22,7 @@ endsnippet
 snippet "^init sandbox" "Browser.sandbox init function" r
 init : Model
 init =
-    model$0
+     ${1:model}$0
 endsnippet
 
 context "make_context(snip)"
@@ -32,8 +32,8 @@ snippet "^update sandbox" "Browser.sandbox update function" r
 `update : Msg -> Model -> Model
 update msg model =
     case msg of
-        ${1:SomeMsg ->
-            model}$0
+        ${1:${2:SomeMsg} ->
+            ${3:model}}$0
 endsnippet
 
 context "make_context(snip)"
@@ -42,7 +42,7 @@ snippet "^view sandbox" "Browser.sandbox view function" r
 `!p autojump_if_blank(snip, [1])
 `view : Model -> Html Msg
 view model =
-    ${1:div []
-        [ h1 [] [ text "Replace this with real code!" ]
+    ${1:div [$2]
+        [ ${3:h1 [$4] [ text "${5:Replace this with real code!}" ]}
         ]}$0
 endsnippet
