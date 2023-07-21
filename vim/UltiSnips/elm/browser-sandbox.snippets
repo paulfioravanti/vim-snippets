@@ -10,7 +10,7 @@ from vim_pythonx_helpers import (
 endglobal
 
 snippet "^main sandbox" "Browser.sandbox main function" r
-main : Program Model Msg
+main : Program () Model Msg
 main =
     Browser.sandbox
         { init = ${1:init}
