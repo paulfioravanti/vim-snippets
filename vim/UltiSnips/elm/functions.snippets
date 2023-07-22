@@ -1,7 +1,10 @@
 global !p
 
 def initialize_types(snip, args_index, types_index):
-    if not (args_tabstop := snip.tabstops[args_index]):
+    if (
+        not snip.tabstop == types_index or
+        not (args_tabstop := snip.tabstops[args_index])
+    ):
         return
 
     # Strip out all the surrounding tabstop characters
@@ -35,7 +38,7 @@ endsnippet
 # - Don't change the default text and jump to $3
 # See this Ultisnips issue for more details of what seems to be a bug:
 # https://github.com/SirVer/ultisnips/issues/751
-post_jump "if snip.tabstop == 3: initialize_types(snip, 2, 3)"
+post_jump "initialize_types(snip, 2, 3)"
 snippet function "function" b
 $1 :$3 ${10:ReturnType}
 ${1:functionName}`!p snip.rv = maybe_space(t[2])`$2 =
