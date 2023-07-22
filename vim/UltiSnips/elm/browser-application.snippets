@@ -9,8 +9,7 @@ from vim_pythonx_helpers import (
 
 # ~/.vim/pythonx/elm_helpers.py
 from elm_helpers import (
-    flags_text,
-    maybe_flags
+    flags_text
 )
 
 endglobal
@@ -30,9 +29,9 @@ endsnippet
 
 snippet "init application" "Browser.application init function" b
 init : ${1|Flags,()|} -> Url -> Key -> ( Model, Cmd Msg )
-init `!p snip.rv = flags_text(t[1])` url key =
-    ( ${2:Model.init`!p snip.rv = maybe_flags(t[1])` url (Just key)}
-    , ${3:Navigation.pushUrl key (Url.toString url)}
+init ${2:`!p snip.rv = flags_text(t[1])`} url key =
+    ( ${3:Model.init${4: flags} url (Just key)}
+    , ${5:Navigation.pushUrl key (Url.toString url)}
     )$0
 endsnippet
 
