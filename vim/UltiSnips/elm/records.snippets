@@ -24,17 +24,17 @@ snippet "field type" "Record field type" b
 , ${1:fieldName} : ${2:Type}$0
 endsnippet
 
-snippet record "Choose record type/definition/update" b
+snippet record "Choose record type/definition/update" w
 ${1|record type,record definition,record update|}$0
 endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "record definition" "Record definition" b
+snippet "record definition" "Record definition" w
 `!p autojump_if_blank(snip, [4])
 `{${1: ${2:fieldName1} = ${3:value}${4:
-, ${5:fieldName2} = ${6:value}}$7
-}}$0
+, ${5:fieldName2} = ${6:value}}$7${8:
+}}}$0
 endsnippet
 
 context "make_context(snip)"
