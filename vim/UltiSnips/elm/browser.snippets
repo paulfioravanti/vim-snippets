@@ -1,0 +1,123 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/elm_helpers.py
+from elm_helpers import (
+    flags_text
+)
+
+endglobal
+
+snippet "init application" "Browser.application init function" b
+init : ${1|Flags,()|} -> Url -> Key -> ( Model, Cmd Msg )
+init ${2:`!p snip.rv = flags_text(t[1])`} url key =
+    ( ${3:Model.init${4: flags} url (Just key)}
+    , ${5:Navigation.pushUrl key (Url.toString url)}
+    )$0
+endsnippet
+
+snippet "^init (document|element)" "Browser.(document|element) init function" r
+init : ${1|Flags,()|} -> ( Model, Cmd Msg )
+init ${2:`!p snip.rv = flags_text(t[1])`} =
+    ( ${3:Model.init${4: flags}}
+    , ${5:Cmd.none}
+    )$0
+endsnippet
+
+snippet "^init sandbox" "Browser.sandbox init function" r
+init : Model
+init =
+    ${1:model}$0
+endsnippet
+
+snippet "main application" "Browser.application main function" b
+main : Program ${1|Flags,()|} Model Msg
+main =
+    Browser.application
+        { init = ${2:init}
+        , update = ${3:update}
+        , view = ${4:view}
+        , subscriptions = ${5:subscriptions}
+        , onUrlRequest = ${6:UrlRequested UrlRequest}
+        , onUrlChange = ${7:UrlChanged Url}
+        }$0
+endsnippet
+
+snippet "main (document|element)" "Browser.(document|element) main function" b
+main : Program ${1|Flags,()|} Model Msg
+main =
+    Browser.`!p snip.rv = match.group(1)`
+        { init = ${2:init}
+        , update = ${3:update}
+        , view = ${4:view}
+        , subscriptions = ${5:subscriptions}
+        }$0
+endsnippet
+
+snippet "^main sandbox" "Browser.sandbox main function" r
+main : Program () Model Msg
+main =
+    Browser.sandbox
+        { init = ${1:init}
+        , update = ${2:update}
+        , view = ${3:view}
+        }$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "^update (application|document|element)" "Browser.(application|document|element) update function" r
+`!p autojump_if_blank(snip, [1])
+`update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        ${1:${2:SomeMsg} ->
+            (${3:model}, ${4:Cmd.none})}$0
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "^update sandbox" "Browser.sandbox update function" r
+`!p autojump_if_blank(snip, [1])
+`update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        ${1:${2:SomeMsg} ->
+            ${3:model}}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "^view (application|document)" "Browser.(application|document) view function" r
+`!p autojump_if_blank(snip, [1])
+`view : Model -> Document Msg
+view model =
+    ${1:{ title = ${2:title}
+    , body = ${3:body}
+    }}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "^view (element|sandbox)" "Browser.(element|sandbox) view function" r
+`!p autojump_if_blank(snip, [1])
+`view : Model -> Html Msg
+view model =
+    ${1:div [$2]
+        [ ${3:h1 [$4] [ text "${5:Replace this with real code!}" ]}
+        ]}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "^subscriptions" "Browser.(application|document|element) subscriptions function" r
+`!p autojump_if_blank(snip, [1])
+`subscriptions : Model -> Sub Msg
+subscriptions model =
+    ${1:Sub.none}$0
+endsnippet
