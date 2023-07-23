@@ -1,0 +1,14 @@
+global !p
+
+def effect_module_name(string):
+    return "Cmd" if string.startswith(("C", "c")) else "Sub"
+
+endglobal
+
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]batch" "Cmd.batch" r
+`!p snip.rv = effect_module_name(match.group(1))`.batch [ ${1:${VISUAL:cmds}} ]$0
+endsnippet
+
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]none" "Cmd.none" r
+`!p snip.rv = effect_module_name(match.group(1))`.none$0
+endsnippet
