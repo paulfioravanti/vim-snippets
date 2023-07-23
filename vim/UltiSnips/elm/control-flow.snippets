@@ -14,10 +14,10 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet case "case statement" b
 `!p autojump_if_blank(snip, [6])
 `case ${1:value} of
-    ${2:MessageOne} ->
+    ${2:valueOne} ->
         ${3:-- do something}
 
-    ${4:MessageTwo} ->
+    ${4:valueTwo} ->
         ${5:-- do something else}
 
     ${6:_ ->
@@ -38,7 +38,7 @@ else
     ${3:-- do something else}$0
 endsnippet
 
-snippet message "message variant for case statement" b
-${1:MessageName} ->
+snippet "(?<!^)(message|pattern)" "pattern for case statement" r
+${1:pattern} ->
     ${2:${VISUAL:-- do something}}$0
 endsnippet
