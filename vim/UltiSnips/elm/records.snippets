@@ -41,11 +41,8 @@ snippet "record destructure" "destructure a record" w
 { $1 }$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
 snippet "record type" "Record Type definition" b
-`!p autojump_if_blank(snip, [4])
-`{${1: ${2:fieldName1} : ${3:Type}${4:
+{${1: ${2:fieldName1} : ${3:Type}${4:
 , ${5:fieldName2} : ${6:Type}}$7
 }}$0
 endsnippet

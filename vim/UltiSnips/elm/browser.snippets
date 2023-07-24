@@ -14,7 +14,11 @@ from elm_helpers import (
 
 endglobal
 
-snippet "init application" "Browser.application init function" b
+snippet "^(init|main|update|view)" "choice for application type" r
+`!p snip.rv = match.group(1)` ${1|application,document,element,sandbox|}$0
+endsnippet
+
+snippet "^init application" "Browser.application init function" r
 init : ${1|Flags,()|} -> Url -> Key -> ( Model, Cmd Msg )
 init ${2:`!p snip.rv = flags_text(t[1])`} url key =
     ( ${3:Model.init${4: flags} url (Just key)}
@@ -36,7 +40,7 @@ init =
     ${1:model}$0
 endsnippet
 
-snippet "main application" "Browser.application main function" b
+snippet "^main application" "Browser.application main function" r
 main : Program ${1|Flags,()|} Model Msg
 main =
     Browser.application
@@ -49,7 +53,7 @@ main =
         }$0
 endsnippet
 
-snippet "main (document|element)" "Browser.(document|element) main function" b
+snippet "^main (document|element)" "Browser.(document|element) main function" r
 main : Program ${1|Flags,()|} Model Msg
 main =
     Browser.`!p snip.rv = match.group(1)`

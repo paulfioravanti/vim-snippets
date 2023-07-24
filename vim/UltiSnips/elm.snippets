@@ -5,10 +5,6 @@ in
 ${2:${VISUAL:code}}$0
 endsnippet
 
-snippet "^(main|init|update|view)" "choice for application type" r
-`!p snip.rv = match.group(1)` ${1|application,document,element,sandbox|}$0
-endsnippet
-
 snippet "(?<!^)main" "Override for 'main' word to mean the main_ HTML keyword" r
 main_$0
 endsnippet
