@@ -1,7 +1,24 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    words_to_camel_case_function
+)
+
+endglobal
+
 snippet "\b[Tt]ime[\s\.]millis(econds)?\s?[Tt]o\s?[Pp]osix" "Time.millisToPosix" r
 Time.millisToPosix${1: ${2:milliseconds}}$0
 endsnippet
 
+snippet "\b[Tt]ime[\s\.]every" "Time.every" r
+Time.every ${1:milliseconds}${2: ${3:msg}}$0
+endsnippet
+
 snippet "\b[Tt]ime[\s\.](here|utc)" "Time.here|utc" r
 Time.`!p snip.rv = match.group(1)`$0
+endsnippet
+
+snippet "\b[Tt]ime[\s\.](to(?:(\sd|D)ay|(\sh|H)our|(\sm|M)illis|(\sm|M)inute|(\sm|M)onth|(\ss|S)econd|(\sw|W)eekday|(\sy|Y)ear))" "Time.to(Day|Hour|Millis|Minute|Month|Second|Weekday|Year)" r
+Time.`!p snip.rv = words_to_camel_case_function(match.group(1))` ${3:zone}${1: ${2:posix}}$0
 endsnippet

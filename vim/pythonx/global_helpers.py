@@ -67,6 +67,14 @@ def snake_to_camel(string):
     """
     return string.replace("_", " ").title().replace(" ", "")
 
+def words_to_camel_case_function(words):
+    """
+    Converts words into a camelCase string for use as a function name.
+    """
+    head, *tail = words.split(" ")
+    tail = [word.capitalize() for word in tail]
+    return "".join([head, *tail])
+
 def visual_context(snip):
     """
     Visual text is not available in post_jump by default
