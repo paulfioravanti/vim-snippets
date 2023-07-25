@@ -93,7 +93,7 @@ endsnippet
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\bdef (function|instance(?: method)?)" "function or instance method" r
-`!p autojump_if_blank(snip, [2, 4])
+`!p autojump_if_blank(snip, [4])
 `def ${1:name}(${2:`!p snip.rv = maybe_self(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
