@@ -22,8 +22,8 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^(custom type|message|msg)" "Custom type" r
 `!p autojump_if_blank(snip, [3])
 `type ${1:`!p snip.rv = type_name_default_text(match)`} =
-    ${2:Variant1}
-    ${3:| ${4:Variant2}}$0
+    ${2:Variant1}${3:
+    | ${4:Variant2}}$0
 endsnippet
 
 snippet "^(?<!custom )(?<!record )type" "choose between type alias and custom type" r

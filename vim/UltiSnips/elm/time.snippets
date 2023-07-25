@@ -1,0 +1,7 @@
+snippet "\b[Tt]ime[\s\.]millis(econds)?\s?[Tt]o\s?[Pp]osix" "Time.millisToPosix" r
+Time.millisToPosix${1: ${2:milliseconds}}$0
+endsnippet
+
+snippet "\b[Tt]ime[\s\.](here|utc)" "Time.here|utc" r
+Time.`!p snip.rv = match.group(1)`$0
+endsnippet
