@@ -18,7 +18,7 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet int "int(x, base=10)" w
 `!p autojump_if_blank(snip, [2])
-`int(${1:x}${2:, base=${3:10}})$0
+`int(${1:${VISUAL:x}}${2:, base=${3:10}})$0
 endsnippet
 
 snippet len "len(s)" w
