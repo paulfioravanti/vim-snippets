@@ -1,5 +1,10 @@
 global !p
 
+import re
+
+# NOTE: Regex ignores spaces between destructured records
+_SPACES_BETWEEN_ARGS = re.compile(r"(?<![{,])\s(?!})")
+
 def initialize_types(snip, args_index, types_index):
     if (
         not snip.tabstop == types_index or
@@ -8,14 +13,15 @@ def initialize_types(snip, args_index, types_index):
         return
 
     # Strip out all the surrounding tabstop characters
-    args_list = args_tabstop.current_text.split(" ")
+    args_list = re.split(_SPACES_BETWEEN_ARGS, args_tabstop.current_text)
 
     args = [string.strip() for string in args_list if string]
     tabstop_indexes = range(types_index, types_index + len(args))
 
     output = ""
     for arg, index in zip(args, tabstop_indexes, strict=True):
-        arg_type_text = f"{arg[0].capitalize() + arg[1:]}Type"
+        arg_name = "Record" if arg[0] == "{" else arg[0].capitalize() + arg[1:]
+        arg_type_text = f"{arg_name}Type"
         output += f" ${{{index}:{arg_type_text}}} ->"
 
     snip.expand_anon(output)
