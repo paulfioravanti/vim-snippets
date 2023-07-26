@@ -75,6 +75,12 @@ def words_to_camel_case(words):
     tail = [word.capitalize() for word in tail]
     return "".join([head, *tail])
 
+def words_to_pascal_case(words):
+    """
+    Converts words into a PascalCase string for use as a constant etc name.
+    """
+    return "".join([word.capitalize() for word in words.split(" ")])
+
 def visual_context(snip):
     """
     Visual text is not available in post_jump by default
