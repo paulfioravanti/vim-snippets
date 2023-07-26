@@ -72,14 +72,16 @@ def words_to_camel_case(words):
     Converts words into a camelCase string for use as a function name.
     """
     head, *tail = words.split(" ")
-    tail = [word.capitalize() for word in tail]
+    tail = [word[0].capitalize() + word[1:] for word in tail]
     return "".join([head, *tail])
 
 def words_to_pascal_case(words):
     """
     Converts words into a PascalCase string for use as a constant etc name.
     """
-    return "".join([word.capitalize() for word in words.split(" ")])
+    return (
+        "".join([word[0].capitalize() + word[1:] for word in words.split(" ")])
+    )
 
 def visual_context(snip):
     """

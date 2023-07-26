@@ -1,0 +1,16 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    words_to_pascal_case
+)
+
+endglobal
+
+snippet "\b((?:[Rr]emote|[Ww]eb)\s?[Dd]ata)" "RemoteData and WebData type names" r
+`!p snip.rv = words_to_pascal_case(match.group(1))`$0
+endsnippet
+
+snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?([nN]ot(?:(\sa|A)sked)|[lL]oading|[fF]ailure|[sS]uccess)" "RemoteData types" r
+${1:RemoteData.}`!p snip.rv = words_to_pascal_case(match.group(1))`$0
+endsnippet
