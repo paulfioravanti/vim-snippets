@@ -84,8 +84,11 @@ def tag_args(match):
     return match.group(2) or ""
 
 def is_elm_html_tag(tag_name):
-    # NOTE: This handling needed due to main being a valid HTML tag name.
-    if tag_name == "main":
+    # NOTE: This handling needed due to:
+    # - `main` being a valid HTML tag name but also an important Elm keyword
+    # - `style` not being a valid tag for the Elm Html package; `style` is only
+    # used as an attribute in Html.Attributes
+    if tag_name in ["main", "style"]:
         return False
 
     if tag_name == "main_":
@@ -189,6 +192,10 @@ endsnippet
 
 snippet source "HTML source tag" i
 source [ src "${1:url}", type_ "${2:type}" ] []$0
+endsnippet
+
+snippet style "Html.Attributes.style" w
+style "${1:attribute}" "${2:value}"$0
 endsnippet
 
 snippet target "<form> target attribute" i
