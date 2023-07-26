@@ -1,3 +1,7 @@
 snippet "\b[Tt]ask[\s\.]perform" "Task.perform" r
-Task.perform ${3:msg}${1: ${2:task}}$0
+Task.perform ${3:toMsgFunction}${1: ${2:task}}$0
+endsnippet
+
+snippet "\b[Tt]ask[\s\.]succeed" "Task.succeed" r
+Task.succeed${1: ${2:operation}}$0
 endsnippet
