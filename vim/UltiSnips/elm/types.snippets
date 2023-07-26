@@ -7,11 +7,21 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-def type_alias_default_text(match):
-    return "Model" if match.group(1) == "model" else "TypeAliasName"
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    words_to_pascal_case
+)
+
+def type_alias_default_text(text):
+    return words_to_pascal_case(text) if text else "TypeAliasName"
 
 def type_name_default_text(match):
-    return "Msg" if match.group(1) in ["message", "msg"] else "TypeName"
+    if match.group(1) in ["message", "msg"]:
+        return "Msg"
+    elif (name := match.group(2)):
+        return words_to_pascal_case(name)
+    else:
+        return "TypeName"
 
 endglobal
 
@@ -19,11 +29,15 @@ endglobal
 # spaces.
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "^(custom type|message|msg)" "Custom type" r
+snippet "^(custom type\s?([\w\s]*)|me?s(?:sa)?ge?)" "Custom type" r
 `!p autojump_if_blank(snip, [3])
-`type ${1:`!p snip.rv = type_name_default_text(match)`} =
-    ${2:Variant1}${3:
+`type ${1:`!p snip.rv = type_name_default_text(match)`}
+    = ${2:Variant1}${3:
     | ${4:Variant2}}$0
+endsnippet
+
+snippet "^model" "choose between type alias and custom type for model" r
+${1|custom type model,type alias model|}$0
 endsnippet
 
 snippet "^(?<!custom )(?<!record )type" "choose between type alias and custom type" r
@@ -34,8 +48,8 @@ snippet maybe "Maybe type" w
 Maybe ${1:Type}$0
 endsnippet
 
-snippet "^(type alias|model)" "Type Alias" r
-type alias ${1:`!p snip.rv = type_alias_default_text(match)`} =
+snippet "^(?:type )?alias\s?([\w\s]*)" "Type Alias" r
+type alias ${1:`!p snip.rv = type_alias_default_text(match.group(1))`} =
     ${2:record type}$0
 endsnippet
 
