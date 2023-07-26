@@ -1,3 +1,24 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+def maybe_paren(tabstop):
+    return ")" if tabstop == "(" else ""
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet lambda "lambda/anonymous function" w
+`!p autojump_if_blank(snip, [1])
+`${1:(}\\${2:x} -> $3`!p snip.rv = maybe_paren(t[1])`$0
+endsnippet
+
 snippet let "let statement" b
 let
     function$1
