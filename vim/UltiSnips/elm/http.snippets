@@ -1,0 +1,10 @@
+snippet "[Hh]ttp[\s\.]expect\s?[Jj][Ss][Oo][Nn]" "Http.expectJson" r
+Http.expectJson ${3:ResultMsg}${1: ${2:decoder}}
+endsnippet
+
+snippet "[Hh]ttp[\s\.]get" "Http.get" r
+Http.get
+    { url = ${1:"${2:https://${3:path}}"}
+    , expect = ${4:Http.expectJson}$5
+    }$0
+endsnippet

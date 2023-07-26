@@ -1,0 +1,14 @@
+global !p
+
+def decode_primitive_name(string):
+    return "int" if string == "integer" else string
+
+endglobal
+
+snippet "[Dd]ecode[\s\.](bool|float|int(?:eger)|string)" "Json.Decode.bool|float|int|string" r
+${1:Json.}Decode.`!p snip.rv = decode_primitive_name(match.group(1))`$0
+endsnippet
+
+snippet "[Dd]ecode[\s\.]succeed" "Json.Decode.succeed" r
+${1:Json.}Decode.succeed${2: ${3:DecodeType}}$0
+endsnippet
