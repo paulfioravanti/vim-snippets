@@ -4,6 +4,7 @@ import re
 _HTML_TAG_KEYWORDS = [
     "article",
     "audio",
+    "blockquote",
     "body",
     "button",
     "code",
@@ -77,6 +78,7 @@ _CLASSES = re.compile(r"(?<=\.)[^\.#]+") # .some-class
 
 # Bridging list of English words/phrases to HTML tag names
 _TAG_NAME_MAPPINGS = {
+    "block quote": "blockquote",
     "figure caption": "figcaption",
     "heading 1": "h1",
     "heading 2": "h2",
