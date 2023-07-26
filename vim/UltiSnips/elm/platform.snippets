@@ -5,10 +5,14 @@ def effect_module_name(string):
 
 endglobal
 
-snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]batch" "Cmd.batch" r
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)" "Cmd|Sub types" r
+`!p snip.rv = effect_module_name(match.group(1))`$0
+endsnippet
+
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]batch" "Cmd|Sub.batch" r
 `!p snip.rv = effect_module_name(match.group(1))`.batch [ ${1:${VISUAL:cmds}} ]$0
 endsnippet
 
-snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]none" "Cmd.none" r
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]none" "Cmd|Sub.none" r
 `!p snip.rv = effect_module_name(match.group(1))`.none$0
 endsnippet
