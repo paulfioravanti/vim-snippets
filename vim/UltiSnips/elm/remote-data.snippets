@@ -12,13 +12,17 @@ snippet "\b((?:[Rr]emote|[Ww]eb)\s?[Dd]ata)" "RemoteData and WebData type names"
 endsnippet
 
 snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?[fF]ailure" "RemoteData.Failure" r
-${1:RemoteData.}Failure ${2:error}$0
+RemoteData.Failure ${1:error}$0
 endsnippet
 
-snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?([nN]ot(?:(\sa|A)sked)|[lL]oading)" "RemoteData NotAsked and Loading types" r
-${1:RemoteData.}`!p snip.rv = words_to_pascal_case(match.group(1))`$0
+snippet "\b[Rr]emote\s?[Dd]ata[\s\.][fF]rom(\sr|R)esult" "RemoteData.fromResult" r
+RemoteData.fromResult${1: ${2:result}}$0
+endsnippet
+
+snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?([nN]ot(?:(\sa|A)sked)|[lL]oading)" "RemoteData.NotAsked and RemoteData.Loading" r
+RemoteData.`!p snip.rv = words_to_pascal_case(match.group(1))`$0
 endsnippet
 
 snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?[sS]uccess" "RemoteData.Success" r
-${1:RemoteData.}Success ${2:data}$0
+RemoteData.Success ${1:data}$0
 endsnippet
