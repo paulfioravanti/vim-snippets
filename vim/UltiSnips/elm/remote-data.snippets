@@ -11,6 +11,14 @@ snippet "\b((?:[Rr]emote|[Ww]eb)\s?[Dd]ata)" "RemoteData and WebData type names"
 `!p snip.rv = words_to_pascal_case(match.group(1))`$0
 endsnippet
 
-snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?([nN]ot(?:(\sa|A)sked)|[lL]oading|[fF]ailure|[sS]uccess)" "RemoteData types" r
+snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?[fF]ailure" "RemoteData.Failure" r
+${1:RemoteData.}Failure ${2:error}$0
+endsnippet
+
+snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?([nN]ot(?:(\sa|A)sked)|[lL]oading)" "RemoteData NotAsked and Loading types" r
 ${1:RemoteData.}`!p snip.rv = words_to_pascal_case(match.group(1))`$0
+endsnippet
+
+snippet "\b(?:[Rr]emote\s?[Dd]ata[\s\.])?[sS]uccess" "RemoteData.Success" r
+${1:RemoteData.}Success ${2:data}$0
 endsnippet
