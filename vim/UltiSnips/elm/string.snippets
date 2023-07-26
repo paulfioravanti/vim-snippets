@@ -2,7 +2,7 @@ global !p
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    words_to_camel_case_function
+    words_to_camel_case
 )
 
 endglobal
@@ -12,5 +12,5 @@ String.fromInt${1: ${2:int}}$0
 endsnippet
 
 snippet "\b[sS]tring[\s\.](pad(?:(\sl|L)eft|(\sr|R)ight)?)" "String.pad/padLeft/padRight" r
-String.`!p snip.rv = words_to_camel_case_function(match.group(1))` ${5:number} ${3:'${4:char}'}${1: ${2:string}}$0
+String.`!p snip.rv = words_to_camel_case(match.group(1))` ${5:number} ${3:'${4:char}'}${1: ${2:string}}$0
 endsnippet

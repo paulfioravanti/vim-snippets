@@ -67,7 +67,7 @@ def snake_to_camel(string):
     """
     return string.replace("_", " ").title().replace(" ", "")
 
-def words_to_camel_case_function(words):
+def words_to_camel_case(words):
     """
     Converts words into a camelCase string for use as a function name.
     """

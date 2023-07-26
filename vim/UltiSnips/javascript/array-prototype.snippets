@@ -10,7 +10,7 @@ from vim_pythonx_helpers import (
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character,
-    words_to_camel_case_function
+    words_to_camel_case
 )
 
 # ~/.vim/pythonx/javascript_helpers.py
@@ -83,7 +83,7 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\.(every|filter|find(?:(\sl|L)ast)?(?:(\si|I)ndex)?|flat(?:(\sm|M)ap)|for(?:(\se|E)ach)|group(?:((\st|T)o)((\sm|M)ap))?|map|some)" "Array.prototype.every/filter/find/findIndex/findLast/findLastIndex/flatMap/forEach/group/groupToMap/map(callbackFn, thisArg)" r
 `!p autojump_if_blank(snip, [1, 4, 6])
-`.`!p snip.rv = words_to_camel_case_function(match.group(1))`(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
+`.`!p snip.rv = words_to_camel_case(match.group(1))`(${3:${4:(}${5:x}`!p snip.rv = closing_character(t[4])` => ${6:\{}$7`!p snip.rv = maybe_spaces(t[6]) + closing_character(t[6])`}${1:, ${2:thisArg}})$0
 endsnippet
 
 context "make_context(snip)"
@@ -101,7 +101,7 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\.(includes|(?:last)?(?:((?<!last)i|\si|I))ndex(?:(\so|O)f))" "Array.prototype.includes/indexOf/lastIndexOf(searchElement, fromIndex)" r
 `!p autojump_if_blank(snip, [2])
-`.`!p snip.rv = words_to_camel_case_function(match.group(1))`(${1:searchElement}${2:, ${3:fromIndex}})$0
+`.`!p snip.rv = words_to_camel_case(match.group(1))`(${1:searchElement}${2:, ${3:fromIndex}})$0
 endsnippet
 
 snippet .join "Array.prototype.join(separator)" i
@@ -109,14 +109,14 @@ snippet .join "Array.prototype.join(separator)" i
 endsnippet
 
 snippet "\.(pop|reverse|shift|to(?:(\sr|R)eversed)|to(?:(\ss|S)tring))" "Array.prototype.pop/reverse/shift/toReversed/toString()" r
-.`!p snip.rv = words_to_camel_case_function(match.group(1))`()$0
+.`!p snip.rv = words_to_camel_case(match.group(1))`()$0
 endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\.(reduce(?:(\sr|R)ight)?)" "Array.prototype.reduce/reduceRight(callbackFn, initialValue)" r
 `!p autojump_if_blank(snip, [5])
-`.`!p snip.rv = words_to_camel_case_function(match.group(1))`(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
+`.`!p snip.rv = words_to_camel_case(match.group(1))`(${2:(${3:acc}, ${4:currentValue}) => ${5:\{}$6`!p snip.rv = maybe_spaces(t[5]) + closing_character(t[5])`}, ${1:initialValue})$0
 endsnippet
 
 context "make_context(snip)"
@@ -130,7 +130,7 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\.(sort|to(?:(\ss|S)orted))" "Array.prototype.sort/toSorted(compareFn)" r
 `!p autojump_if_blank(snip, [1, 4])
-`.`!p snip.rv = words_to_camel_case_function(match.group(1))`(${1:(${2:a}, ${3:b}) => ${4:\{}$5`!p snip.rv = maybe_spaces(t[4]) + closing_character(t[4])`})$0
+`.`!p snip.rv = words_to_camel_case(match.group(1))`(${1:(${2:a}, ${3:b}) => ${4:\{}$5`!p snip.rv = maybe_spaces(t[4]) + closing_character(t[4])`})$0
 endsnippet
 
 context "make_context(snip)"
