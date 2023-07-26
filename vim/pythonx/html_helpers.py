@@ -7,6 +7,7 @@ _HTML_TAG_KEYWORDS = [
     "blockquote",
     "body",
     "button",
+    "cite",
     "code",
     "div",
     "em",
