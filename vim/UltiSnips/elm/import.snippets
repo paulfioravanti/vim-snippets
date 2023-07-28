@@ -1,0 +1,60 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+def import_exposing_default_text(tabstop):
+    return tabstop.split(".")[-1]
+
+def module_alias_default_text(tabstop):
+    module_parts = tabstop.split(".")
+
+    if len(module_parts) == 1:
+        return "Alias"
+    else:
+        return text if (text := module_parts[-1]) else "Alias"
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet import "import statement" b
+`!p autojump_if_blank(snip, [2, 4])
+`import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}${6:, ${7:..}})}$0
+endsnippet
+
+snippet "import dict" "import Dict" b
+import Dict exposing (Dict${1:, ${2:..}})$0
+endsnippet
+
+snippet "import html" "import Html statement" b
+import Html exposing (Html${1:, ${2:..}})$0
+endsnippet
+
+snippet "import html attributes" "import Html.Attributes statement" b
+import Html.Attributes exposing (${1:..})$0
+endsnippet
+
+snippet "import html events" "import Html.Events statement" b
+import Html.Events exposing (${1:..})$0
+endsnippet
+
+snippet "import json decode" "import Json.Decode statement" b
+import Json.Decode${1: as ${2:Decode}} exposing (Decoder${3:, ${4:..}})$0
+endsnippet
+
+snippet "^import json( decode)? pipeline" "import Json.Decode.Pipeline statement" r
+import Json.Decode.Pipeline${1: as ${2:Pipeline}}${3: exposing (${4:..})}$0
+endsnippet
+
+snippet "import remote data" "import RemoteData statement" b
+import RemoteData exposing (WebData${1:, ${2:..}})}$0
+endsnippet
+
+snippet "import task" "import Task statement" b
+import Task${1: exposing (${2:Task}${3:, ${4:..}})}$0
+endsnippet

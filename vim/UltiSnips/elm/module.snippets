@@ -7,28 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-def import_exposing_default_text(tabstop):
-    return tabstop.split(".")[-1]
-
-def module_alias_default_text(tabstop):
-    module_parts = tabstop.split(".")
-
-    if len(module_parts) == 1:
-        return "Alias"
-    else:
-        return text if (text := module_parts[-1]) else "Alias"
-
 def module_exposing_default_text(tabstop):
     return "main" if tabstop == "Main" else ".."
 
 endglobal
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet import "import statement" b
-`!p autojump_if_blank(snip, [2, 4])
-`import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}${6:, ${7:..}})}$0
-endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
