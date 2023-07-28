@@ -104,7 +104,7 @@ snippet "((?:\w+\s)?\w+)" "convert tag descriptions to tag names" r
 endsnippet
 
 context "is_elm_html_tag(match.group(1))"
-snippet "(?<!input )(\w+)([#\.][\w\-#\.]+)?" "HTML tag double-/single-/multi-line choice" r
+snippet "(?<!input )(?<!import )(\w+)([#\.][\w\-#\.]+)?" "HTML tag double-/single-/multi-line choice" r
 `!p snip.rv = match.group(1) + tag_args(match)` ${1|double-line,multi-line,single-line|}$0
 endsnippet
 
