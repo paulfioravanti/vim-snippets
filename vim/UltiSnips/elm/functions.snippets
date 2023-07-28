@@ -21,7 +21,7 @@ def initialize_types(snip, args_index, types_index):
     output = ""
     for arg, index in zip(args, tabstop_indexes, strict=True):
         arg_name = "Record" if arg[0] == "{" else arg[0].capitalize() + arg[1:]
-        arg_type_text = f"{arg_name}Type"
+        arg_type_text = "Model" if arg_name == "Model" else f"{arg_name}Type"
         output += f" ${{{index}:{arg_type_text}}} ->"
 
     snip.expand_anon(output)
