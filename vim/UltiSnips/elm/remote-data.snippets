@@ -7,7 +7,7 @@ from global_helpers import (
 
 endglobal
 
-snippet "\b((?:[Rr]emote|[Ww]eb)\s?[Dd]ata)" "RemoteData and WebData type names" r
+snippet "\b(?<!import )((?:[Rr]emote|[Ww]eb)\s?[Dd]ata)" "RemoteData and WebData type names" r
 `!p snip.rv = words_to_pascal_case(match.group(1))`$0
 endsnippet
 
