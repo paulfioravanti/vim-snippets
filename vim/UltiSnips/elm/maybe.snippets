@@ -2,6 +2,10 @@ snippet just "Just value" w
 Just ${1:value}$0
 endsnippet
 
+snippet "[Mm]aybe[\s\.]with(?:\sd|D)efault" "Maybe.withDefault" r
+Maybe.withDefault ${3:default}${1: ${2:maybeValue}}$0
+endsnippet
+
 snippet nothing "Nothing" w
 Nothing$0
 endsnippet
