@@ -1,0 +1,10 @@
+snippet "[Dd]ict[\s\.]from(?:\sl|L)ist" "Dict.fromList" r
+Dict.fromList
+    [ (${1:key1}, ${2:value1})${3:
+    , (${4:key2}, ${5:value2})$6${7:
+    }}]$0
+endsnippet
+
+snippet "[Dd]ict[\s\.]get" "Dict.get" r
+Dict.get ${3:key}${1: ${2:dict}}$0
+endsnippet
