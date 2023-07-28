@@ -9,6 +9,10 @@ snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)" "Cmd|Sub types" r
 `!p snip.rv = effect_module_name(match.group(1))`$0
 endsnippet
 
+snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?) [Mm]e?s(?:sa)?ge?" "Cmd|Sub Msg types" r
+`!p snip.rv = effect_module_name(match.group(1))` ${1|Msg,msg|}$0
+endsnippet
+
 snippet "([Cc]o?m(?:man)?d|[Ss]ub(?:scription)?)[\s\.]batch" "Cmd|Sub.batch" r
 `!p snip.rv = effect_module_name(match.group(1))`.batch [ ${1:${VISUAL:cmds}} ]$0
 endsnippet

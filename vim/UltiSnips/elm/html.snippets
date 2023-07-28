@@ -114,6 +114,10 @@ snippet "(\w+)([#\.][\w\-#\.]+)? ((double|multi|single)-line)" "HTML tag double-
 $0
 endsnippet
 
+snippet "[Hh][Tt][Mm][Ll] [Mm]e?s(?:sa)?ge?" "Html Msg type" r
+Html ${1|Msg,msg|}$0
+endsnippet
+
 snippet iframe "HTML iframe tag" i
 iframe [ src "${1:src}" ] []$0
 endsnippet
