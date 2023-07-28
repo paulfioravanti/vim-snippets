@@ -79,10 +79,10 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^update (application|document|element)" "Browser.(application|document|element) update function" r
 `!p autojump_if_blank(snip, [1])
 `update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg ${1:model} =
     case msg of
-        ${1:${2:SomeMsg} ->
-            (${3:model}, ${4:Cmd.none})}$0
+        ${2:${3:SomeMsg} ->
+            (${4:model}, ${5:Cmd.none})}$0
 endsnippet
 
 context "make_context(snip)"
@@ -90,10 +90,10 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^update sandbox" "Browser.sandbox update function" r
 `!p autojump_if_blank(snip, [1])
 `update : Msg -> Model -> Model
-update msg model =
+update msg ${1:model} =
     case msg of
-        ${1:${2:SomeMsg} ->
-            ${3:model}}$0
+        ${2:${3:SomeMsg} ->
+            ${4:model}}$0
 endsnippet
 
 context "make_context(snip)"
@@ -101,9 +101,9 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^view (application|document)" "Browser.(application|document) view function" r
 `!p autojump_if_blank(snip, [1])
 `view : Model -> Document Msg
-view model =
-    ${1:{ title = ${2:title}
-    , body = ${3:body}
+view ${1:model} =
+    ${2:{ title = ${3:title}
+    , body = ${4:body}
     }}$0
 endsnippet
 
@@ -112,9 +112,9 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^view (element|sandbox)" "Browser.(element|sandbox) view function" r
 `!p autojump_if_blank(snip, [1])
 `view : Model -> Html Msg
-view model =
-    ${1:div [$2]
-        [ ${3:h1 [$4] [ text ${5:"${6:Replace this with real code!}"} ]}
+view ${1:model} =
+    ${2:div [$3]
+        [ ${4:h1 [$5] [ text ${6:"${7:Replace this with real code!}"} ]}
         ]}$0
 endsnippet
 
@@ -123,6 +123,6 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "^subscriptions" "Browser.(application|document|element) subscriptions function" r
 `!p autojump_if_blank(snip, [1])
 `subscriptions : Model -> Sub Msg
-subscriptions model =
-    ${1:Sub.none}$0
+subscriptions ${1:model} =
+    ${2:Sub.none}$0
 endsnippet
