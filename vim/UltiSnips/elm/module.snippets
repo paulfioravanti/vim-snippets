@@ -27,7 +27,7 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet import "import statement" b
 `!p autojump_if_blank(snip, [2, 4])
-`import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}$6)}$0
+`import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}${6:, ${7:..}})}$0
 endsnippet
 
 context "make_context(snip)"
