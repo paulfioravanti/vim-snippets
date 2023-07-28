@@ -37,11 +37,11 @@ snippet "^(custom type\s?([\w\s]*)|me?s(?:sa)?ge?)" "Custom type" r
 endsnippet
 
 snippet "^model" "choose between type alias and custom type for model" r
-${1|custom type model,type alias model|}$0
+${1|type alias model,custom type model|}$0
 endsnippet
 
 snippet "^(?<!custom )(?<!record )type" "choose between type alias and custom type" r
-${1|custom type,type alias|}$0
+${1|type alias,custom type|}$0
 endsnippet
 
 snippet maybe "Maybe type" w
