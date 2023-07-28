@@ -5,7 +5,7 @@ def decode_primitive_name(string):
 
 endglobal
 
-snippet "[Dd]ecode[\s\.](bool|float|int(?:eger)|string)" "Json.Decode.bool|float|int|string" r
+snippet "[Dd]ecode[\s\.](bool|float|int(?:eger)?|string)" "Json.Decode.bool|float|int|string" r
 ${1:Json.}Decode.`!p snip.rv = decode_primitive_name(match.group(1))`$0
 endsnippet
 
