@@ -26,37 +26,6 @@ def comprehension_opening(match):
         case _:
             return "{"
 
-def decorator_tag(match):
-    return "classmethod" if "class" in match.group(1) else "staticmethod"
-
-def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
-    if (
-        not snip.tabstop == 0 and
-        not (args_tabstop := snip.tabstops[init_tabstop_index])
-    ):
-        return
-
-    # Strip out all the surrounding tabstop characters
-    args_list = (
-        args_tabstop
-        .current_text
-        .removeprefix("def __init__(self")
-        .removesuffix("):")
-        .split(",")
-    )
-
-    args = [string.strip() for string in args_list if string]
-    tabstop_indexes = range(
-        starting_tabstop_index,
-        starting_tabstop_index + len(args)
-    )
-
-    output = ""
-    for arg, index in zip(args, tabstop_indexes, strict=True):
-        output += f"\n    self.{arg} = ${{{index}:{arg}}}"
-
-    snip.expand_anon(output)
-
 endglobal
 
 # NOTE: snip.tabstops[7] cannot be used here due to it being nested within
@@ -77,56 +46,6 @@ endsnippet
 # https://stackoverflow.com/a/40617321/567863
 snippet "\b(?<!dictionary )(?<!generator )(?<!list )(?<!set )comprehension" "choice of comprehension type" r
 ${1|list comprehension,dictionary comprehension,set comprehension,generator comprehension|}$0
-endsnippet
-
-snippet def "decide what kind of function or method to create" b
-def ${1|function,instance method,class method,static method|}$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "def function" "function" b
-`!p autojump_if_blank(snip, [3])
-`def ${1:name}(${2:args}):
-    ${3:"""
-    ${4:TODO: Docstring for $1.}
-    """
-    }$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef instance(?: method)?" "instance method" r
-`!p autojump_if_blank(snip, [4])
-`def ${1:name}(self${2:, ${3:args}}):
-    ${4:"""
-    ${5:TODO: Docstring for $1.}
-    """
-    }$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef (class(?: method)?)" "class method" r
-`!p autojump_if_blank(snip, [4])
-`@`!p snip.rv = decorator_tag(match)`
-def ${1:name}(cls${2:, ${3:args}}):
-    ${4:"""
-    ${5:TODO: Docstring for $1.}
-    """
-    }$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef (static(?: method)?)" "static method" r
-`!p autojump_if_blank(snip, [3])
-`@`!p snip.rv = decorator_tag(match)`
-def ${1:name}(${2:args}):
-    ${3:"""
-    ${4:TODO: Docstring for $1.}
-    """
-    }$0
 endsnippet
 
 snippet false "False" w
