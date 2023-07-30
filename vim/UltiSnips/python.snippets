@@ -28,20 +28,6 @@ def comprehension_opening(match):
 
 endglobal
 
-# NOTE: snip.tabstops[7] cannot be used here due to it being nested within
-# snip.tabstops[6]. So, we have to take the outer tabstop.
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop); initialize_args(snip, 6, 8)"
-snippet class "Python class" b
-`!p autojump_if_blank(snip, [2, 4, 6])
-`class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
-    ${4:"""
-    ${5:TODO: Docstring for $1.}
-    """
-
-    }${6:def __init__(self$7):}$0
-endsnippet
-
 # REF for multiple negative lookbehinds of differing lengths:
 # https://stackoverflow.com/a/40617321/567863
 snippet "\b(?<!dictionary )(?<!generator )(?<!list )(?<!set )comprehension" "choice of comprehension type" r
