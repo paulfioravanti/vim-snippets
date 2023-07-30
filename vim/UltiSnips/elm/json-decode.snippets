@@ -3,10 +3,65 @@ global !p
 def decode_primitive_name(string):
     return "int" if string == "integer" else string
 
+def build_map_function(snip, number_of_decoders):
+    output = (
+        f"${{1:Json.}}Decode.map{number_of_decoders} ${{2:valueFunction}}"
+    )
+    tabstop_indexes = range(3, 3 + number_of_decoders)
+
+    for index in tabstop_indexes:
+        output += f"\n    (${{{index}:decoder}})"
+
+    snip.expand_anon(output)
+
+def decoder_default_text(match, json_top_level_module):
+    match match.group(1).strip():
+        case "bool":
+            decoder = "Decode.bool"
+        case "float":
+            decoder = "Decode.float"
+        case "int":
+            decoder = "Decode.int"
+        case "integer":
+            decoder = "Decode.int"
+        case "string":
+            decoder = "Decode.string"
+        case _:
+            decoder = "decoder"
+
+    if decoder == "decoder":
+        return decoder
+
+    if json_top_level_module:
+        decoder = json_top_level_module + decoder
+
+    return decoder
+
 endglobal
+
+snippet "[Dd]ecode[\s\.]at" "Json.Decode.at" r
+${1:Json.}Decode.at ["${2:field1}"${3:, "${4:field2}"}$5]${6: ${7:decoder}}$0
+endsnippet
 
 snippet "[Dd]ecode[\s\.](bool|float|int(?:eger)?|string)" "Json.Decode.bool|float|int|string" r
 ${1:Json.}Decode.`!p snip.rv = decode_primitive_name(match.group(1))`$0
+endsnippet
+
+snippet "[Dd]ecode[\s\.]field( (?:bool|float|int(?:eger)?|string))?" "Json.Decode.field" r
+${1:Json.}Decode.field "${2:fieldName}"${3: ${4:`!p snip.rv = decoder_default_text(match, t[1])`}}$0
+endsnippet
+
+snippet "[Dd]ecode[\s\.]index" "Json.Decode.index" r
+${1:Json.}Decode.index ${2:index}${3: ${4:decoder}}$0
+endsnippet
+
+snippet "[Dd]ecode[\s\.]map" "Json.Decode.map" r
+${1:Json.}Decode.map ${2:valueFunction}${3: ${4:Decoder}}$0
+endsnippet
+
+post_jump "build_map_function(snip, int(match.group(1)))"
+snippet "[Dd]ecode[\s\.]map\s?([2-8])" "Json.Decode.map2-8" r
+$0
 endsnippet
 
 snippet "[Dd]ecode[\s\.]succeed" "Json.Decode.succeed" r
