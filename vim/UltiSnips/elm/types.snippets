@@ -44,10 +44,6 @@ snippet "^(?<!custom )(?<!record )type" "choose between type alias and custom ty
 ${1|type alias,custom type|}$0
 endsnippet
 
-snippet maybe "Maybe type" w
-Maybe ${1:Type}$0
-endsnippet
-
 snippet "^(?:type )?alias\s?([\w\s]*)" "Type Alias" r
 type alias ${1:`!p snip.rv = type_alias_default_text(match.group(1))`} =
     ${2:record type}$0

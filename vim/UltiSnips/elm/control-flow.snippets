@@ -24,6 +24,24 @@ snippet case "case statement" b
         ${7:-- do the default thing}}$0
 endsnippet
 
+snippet "case maybe" "case statement for a Maybe type" b
+case ${1:maybe} of
+    Just ${2:value} ->
+        ${3:-- do something}
+
+    Nothing ->
+        ${4:-- do something else}$0
+endsnippet
+
+snippet "case result" "case statement for a Result type" b
+case ${1:result} of
+    Ok ${2:data} ->
+        ${3:-- do something}
+
+    Err ${4:error} ->
+        ${5:-- do something else}$0
+endsnippet
+
 snippet "else if" "else if clause" b
 else if ${1:condition} then
     ${2:${VISUAL:-- do something}}$0
