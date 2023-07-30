@@ -9,8 +9,7 @@ from vim_pythonx_helpers import (
 
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
-    closing_character,
-    maybe_comma
+    closing_character
 )
 
 # ~/.vim/pythonx/python_helpers.py
@@ -58,12 +57,6 @@ def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
 
     snip.expand_anon(output)
 
-def maybe_cls(match):
-    return "cls" if "class" in match.group(1) else ""
-
-def maybe_self(match):
-    return "self" if "instance" in match.group(1) else ""
-
 endglobal
 
 # NOTE: snip.tabstops[7] cannot be used here due to it being nested within
@@ -92,9 +85,20 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef (function|instance(?: method)?)" "function or instance method" r
+snippet "def function" "function" b
+`!p autojump_if_blank(snip, [3])
+`def ${1:name}(${2:args}):
+    ${3:"""
+    ${4:TODO: Docstring for $1.}
+    """
+    }$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bdef instance(?: method)?" "instance method" r
 `!p autojump_if_blank(snip, [4])
-`def ${1:name}(${2:`!p snip.rv = maybe_self(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+`def ${1:name}(self${2:, ${3:args}}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
     """
@@ -103,12 +107,24 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef (class(?: method)?|static(?: method)?)" "class or static method" r
-`!p autojump_if_blank(snip, [2, 4])
+snippet "\bdef (class(?: method)?)" "class method" r
+`!p autojump_if_blank(snip, [4])
 `@`!p snip.rv = decorator_tag(match)`
-def ${1:name}(${2:`!p snip.rv = maybe_cls(match)`}`!p snip.rv = maybe_comma(t[2], t[3])`${3:args}):
+def ${1:name}(cls${2:, ${3:args}}):
     ${4:"""
     ${5:TODO: Docstring for $1.}
+    """
+    }$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bdef (static(?: method)?)" "static method" r
+`!p autojump_if_blank(snip, [3])
+`@`!p snip.rv = decorator_tag(match)`
+def ${1:name}(${2:args}):
+    ${3:"""
+    ${4:TODO: Docstring for $1.}
     """
     }$0
 endsnippet
