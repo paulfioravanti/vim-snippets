@@ -27,6 +27,10 @@ snippet import "import statement" b
 `import ${1:Module}${2: as ${3:`!p snip.rv = module_alias_default_text(t[1])`}}${4: exposing (${5:`!p snip.rv = import_exposing_default_text(t[1])`}${6:, ${7:..}})}$0
 endsnippet
 
+snippet "import browser" "import Browser statement" b
+import Browser${1: exposing (${2:Document}${3:, ${4:..}})}$0
+endsnippet
+
 snippet "import dict" "import Dict" b
 import Dict exposing (Dict${1:, ${2:..}})$0
 endsnippet
