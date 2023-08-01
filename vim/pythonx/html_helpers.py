@@ -90,6 +90,7 @@ _TAG_NAME_MAPPINGS = {
     "keyboard": "kbd",
     "list item": "li",
     "ordered list": "ol",
+    "paragraph": "p",
     "ruby text": "rt",
     "sample": "samp",
     "table data": "td",
