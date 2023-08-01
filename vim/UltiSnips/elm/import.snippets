@@ -28,7 +28,7 @@ snippet import "import statement" b
 endsnippet
 
 snippet "import browser" "import Browser statement" b
-import Browser${1: exposing (${2:Document}${3:, ${4:..}})}$0
+import Browser${1: exposing (${2:${3:Browser}${4:, ${5:..}}})}$0
 endsnippet
 
 snippet "import dict" "import Dict" b
@@ -60,7 +60,7 @@ import Json.Decode.Pipeline${1: as ${2:Pipeline}}${3: exposing (${4:..})}$0
 endsnippet
 
 snippet "import random" "import Random statement" b
-import Random${1: exposing (${2:Generator}${3:, ${4:..}})}$0
+import Random${1: exposing (${2:${3:Generator}${4:, ${5:..}}})}$0
 endsnippet
 
 snippet "import remote data" "import RemoteData statement" b
@@ -68,5 +68,9 @@ import RemoteData exposing (WebData${1:, ${2:..}})$0
 endsnippet
 
 snippet "import task" "import Task statement" b
-import Task${1: exposing (${2:Task}${3:, ${4:..}})}$0
+import Task${1: exposing (${2:${3:Task}${4:, ${5:..}}})}$0
+endsnippet
+
+snippet "import time" "import Time statement" b
+import Time${1: exposing (${2:${3:Posix}${4:, ${5:Zone}}${6:, ${7:..}}})}$0
 endsnippet
