@@ -59,6 +59,10 @@ snippet "^import json( decode)? pipeline" "import Json.Decode.Pipeline statement
 import Json.Decode.Pipeline${1: as ${2:Pipeline}}${3: exposing (${4:..})}$0
 endsnippet
 
+snippet "import random" "import Random statement" b
+import Random${1: exposing (${2:Generator}${3:, ${4:..}})}$0
+endsnippet
+
 snippet "import remote data" "import RemoteData statement" b
 import RemoteData exposing (WebData${1:, ${2:..}})$0
 endsnippet
