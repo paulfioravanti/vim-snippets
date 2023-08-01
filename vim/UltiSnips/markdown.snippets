@@ -22,7 +22,7 @@ def emphasis_ending(opening):
 
 endglobal
 
-snippet "\b((c|C)ode block|(B|b)lock)" "Code block" r
+snippet "\b(?<!steno )((c|C)ode block|(B|b)lock)" "Code block" r
 \`\`\`${1:txt}
 ${2:${VISUAL}}
 \`\`\`
