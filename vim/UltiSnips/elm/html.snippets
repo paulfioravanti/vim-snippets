@@ -32,7 +32,7 @@ def build_tag_with_attributes(snip, match):
     if tag_type == _MULTILINE:
         output += "\n   "
 
-    output += " [${1:"
+    output += " [ ${1:"
 
     if attributes:
         ids, classes = extract_ids_and_classes(attributes)
@@ -61,9 +61,9 @@ def build_tag_with_attributes(snip, match):
         if not attributes:
             output += "}"
 
-        output += "}$7]"
+        output += "}$7 ]"
     else:
-        output += "$7 }]"
+        output += "$7} ]"
 
     if tag_type == _SINGLELINE:
         output += " "

@@ -82,7 +82,7 @@ snippet "^update (application|document|element)" "Browser.(application|document|
 update msg ${1:model} =
     case msg of
         ${2:${3:SomeMsg} ->
-            (${4:model}, ${5:Cmd.none})}$0
+            ( ${4:model}, ${5:Cmd.none} )}$0
 endsnippet
 
 context "make_context(snip)"
