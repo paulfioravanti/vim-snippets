@@ -7,13 +7,16 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+def case_variable_default_text(match, default):
+    return text.strip() if (text := match.group(1)) else default
+
 endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet case "case statement" b
+snippet "\bcase(?! maybe)(?! result)( \w+)?" "case statement" r
 `!p autojump_if_blank(snip, [6])
-`case ${1:value} of
+`case ${1:`!p snip.rv = case_variable_default_text(match, "value")`} of
     ${2:valueOne} ->
         ${3:-- do something}
 
