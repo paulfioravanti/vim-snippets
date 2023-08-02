@@ -7,6 +7,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+def field_value_default_text(field_name):
+    return "value" if field_name == "fieldName" else field_name
+
 def record_update_default_text(match):
     return text if (text := match.group(1)) else "recordName"
 
@@ -45,5 +48,5 @@ snippet "record type" "Record Type definition" b
 endsnippet
 
 snippet "\brecord update(?:\s(\w+))?" "Update some fields of a record" r
-{ ${1:`!p snip.rv = record_update_default_text(match)`} | ${2:fieldName} = ${3:value} }$0
+{ ${1:`!p snip.rv = record_update_default_text(match)`} | ${2:fieldName} = ${3:`!p snip.rv = field_value_default_text(t[2])`} }$0
 endsnippet
