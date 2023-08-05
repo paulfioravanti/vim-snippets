@@ -33,29 +33,16 @@ with HTML, so in all general cases, the language-specific snippet should win.
 
 ## Videos
 
-You can see the snippets in action during the following videos:
+You can see the snippets in action during the following videos in my [Steno
+Coding][] YouTube playlist.
 
-- _[Steno Coding: React Tic-Tac-Toe][]_
-- _[Steno Coding: Exercism's "Luhn" challenge in Python][]_
-- _[Steno Coding: TDD-ing Exercism's "Bob" challenge in Ruby][]_
-- _[Stenography and Ruby][]_
-- _[Stenography and Elixir][]_
-- _[Build a real-time Twitter clone with steno using LiveView and Phoenix 1.6][]_
-- _[Rails 7: The Steno Demo][]_
-
-[Build a real-time Twitter clone with steno using LiveView and Phoenix 1.6]: https://www.youtube.com/watch?v=T_kMd7rxYU0
 [`honza/vim-snippets`]: https://github.com/honza/vim-snippets
 [my dotfiles]: https://github.com/paulfioravanti/dotfiles
 [my stenography dictionaries]: https://github.com/paulfioravanti/steno-dictionaries
 [Plover]: https://www.openstenoproject.org/plover/
 [`px.snippets`]: https://github.com/reconquest/vim-pythonx/blob/master/pythonx/px/snippets.py
-[Rails 7: The Steno Demo]: https://www.youtube.com/watch?v=q7g0ml60LGY
 [rcm]: https://github.com/thoughtbot/rcm
-[Steno Coding: Exercism's "Luhn" challenge in Python]: https://www.youtube.com/watch?v=YcIwT5i9_lA
-[Steno Coding: React Tic-Tac-Toe]: https://www.youtube.com/watch?v=3TDgZVIxncg
-[Steno Coding: TDD-ing Exercism's "Bob" challenge in Ruby]: https://www.youtube.com/watch?v=I9Oc4AirX_0
-[Stenography and Elixir]: https://www.youtube.com/watch?v=ZQO-5KfnCi4
-[Stenography and Ruby]: https://www.youtube.com/watch?v=3W9_k2CXrXE
+[Steno Coding]: https://www.youtube.com/playlist?list=PLNN5NpKrqwAMRA5uRGtGzwUDgzHFDk8Z4
 [Ultisnips]: https://github.com/SirVer/ultisnips
 [Vim]: https://www.vim.org/
 [`vim-pythonx`]: https://github.com/reconquest/vim-pythonx
