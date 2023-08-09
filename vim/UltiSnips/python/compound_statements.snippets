@@ -59,3 +59,15 @@ snippet match "match statement" b
     case _:
         ${10:# handle no match}$0
 endsnippet
+
+snippet try "try statement" b
+try:
+    $1
+${2:except${3:*}${4: ${5:ValueError}${6: as ${7:e}}}:
+    $8
+}${9:else:
+    $10
+}${11:finally:
+    $12
+}$0
+endsnippet
