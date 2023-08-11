@@ -12,7 +12,7 @@ def selector_info(match):
 
 endglobal
 
-snippet "(class|id|tag)" "CSS selector" r
+snippet "((?<!pseudo)(?<!pseudo )class|id|tag)" "CSS selector" r
 `!p
 selector, selector_type = selector_info(match)
 snip.rv = selector`${1:`!p snip.rv = selector_type`_name} {
