@@ -1,0 +1,85 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+def join_properties(match):
+    return "-".join(match.group(1, 2))
+
+endglobal
+
+snippet background "CSS background property" b
+background: ${1|color,global|};$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet border "CSS border property" b
+`!p autojump_if_blank(snip, [2])
+`border: ${1|border style,border width|}${2: ${3|border style,color|}${4: color}$5};$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "border radius" "CSS border-radius property" b
+`!p autojump_if_blank(snip, [3, 6, 9])
+`border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{top-right|top-right-bottom-left}}${5|px,em,%|}${6: ${7:{bottom-right}}${8|px,em,%|}${9: ${10:{bottom-left}}${11|px,em,%|}}}};$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "box shadow" "CSS box-shadow property" b
+`!p autojump_if_blank(snip, [6, 9])
+`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color$13};$0
+endsnippet
+
+snippet color "CSS color property" b
+color: color$1;$0
+endsnippet
+
+snippet display "CSS display property" b
+display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
+endsnippet
+
+snippet "flex direction" "flex-direction property" b
+flex-direction: ${1|row,row-reverse,column,column-reverse,global|};$0
+endsnippet
+
+snippet float "float property" b
+float: ${1|left,right,none,inline-start,inline-end|};$0
+endsnippet
+
+snippet "font size" "font-size property" b
+font-size: ${1|absolute size,relative size,length,percentage,global|};$0
+endsnippet
+
+snippet "font weight" "font-weight property" b
+font-weight: ${1|weight keyword,weight value|};$0
+endsnippet
+
+snippet "\b((?<!line )height|(?<!border )width)" "height/width property" r
+`!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "line height" "line-height property" b
+line-height: ${1|normal,length,percentage,number|};$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\b(margin|padding)" "CSS properties that deal with sides of an element" r
+`!p autojump_if_blank(snip, [2, 4, 6])
+``!p snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
+endsnippet
+
+snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto|};$0
+endsnippet
+
+snippet "text align" "CSS text-align property" b
+text-align: ${1|start,end,left,right,center,justify,justify-all,match-parent|};$0
+endsnippet
