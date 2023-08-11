@@ -11,6 +11,10 @@ snippet "\.remove\s?(prefix|suffix)" "str.removeprefix(prefix)/str.removesuffix(
 `.remove`!p snip.rv = part`(${1:`!p snip.rv = part`})$0
 endsnippet
 
+snippet .replace "str.replace(old, new[, count])" i
+.replace("${1:old}", "${2:new}"${3:, ${4:count}})$0
+endsnippet
+
 snippet "\.starts\s?with" "str.startswith(prefix[, start[, end]])" r
 .startswith("${1:prefix}"${2:, ${3:start}${4:, ${5:end}}})$0
 endsnippet
