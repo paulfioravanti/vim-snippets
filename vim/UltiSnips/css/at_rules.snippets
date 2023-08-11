@@ -1,3 +1,17 @@
 snippet import "@import directive" b
 @import ${1:"${2:url}"};$0
 endsnippet
+
+snippet media "@media query" b
+@media${1: ${2|only,not|}}${3: media type$4${5: ${6|and,or|}}}${7: (${8:media feature})$9} {
+  $10
+}$0
+endsnippet
+
+snippet "media feature" "@media query media feature" w
+(${1:condition})$0
+endsnippet
+
+snippet "media type" "@media query media types" w
+${1|screen,print,all|}$0
+endsnippet
