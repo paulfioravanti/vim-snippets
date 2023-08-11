@@ -9,7 +9,7 @@ endsnippet
 # NOTE: Priority lowered to not conflict with `color` property.
 priority -1
 snippet color "select from different color types" w
-${1|hex,rgba,hsl,hwb,color keyword|}$0
+${1|hex,rgb,hsl,hwb,color keyword|}$0
 endsnippet
 priority 0
 
@@ -23,6 +23,18 @@ endsnippet
 
 snippet "relative size" "relative size keywords" w
 ${1|smaller,larger|}$0
+endsnippet
+
+snippet "text decoration line keyword" "text-decoration-line keyword" w
+${1|none,underline,overline,line-through,blink|}$0
+endsnippet
+
+snippet "text decoration style keyword" "text-decoration-style keyword" w
+${1|solid,double,dotted,dashed,wavy|}$0
+endsnippet
+
+snippet "text decoration thickness keyword" "text-decoration-thickness keyword" w
+${1|auto,from-font,length,percentage,global|}$0
 endsnippet
 
 snippet "weight keyword" "font-weight keyword" w
