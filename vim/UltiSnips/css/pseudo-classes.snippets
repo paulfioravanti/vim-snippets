@@ -1,11 +1,18 @@
+global !p
+
+def join_pseudo(match):
+    return "-".join(match.group(1).split(" "))
+
+endglobal
+
 snippet "\bpseudo\s?class" "CSS pseudoclass" r
 ${1:&}:${2:pseudoclass} {
   $3
 }$0
 endsnippet
 
-snippet "\b(checked|focus|hover)" "CSS pseudoclass" r
-${1:&}:`!p snip.rv = match.group(1)` {
+snippet "\b(checked|focus|hover|(?:first|last) child)" "CSS pseudoclass" r
+${1:&}:`!p snip.rv = join_pseudo(match)` {
   $3
 }$0
 endsnippet
