@@ -10,6 +10,11 @@ from vim_pythonx_helpers import (
 def join_properties(match):
     return "-".join(match.group(1, 2))
 
+def limit_length_property(match):
+    limit, property_type = match.group(1, 2)
+    limit = limit.replace("imum", "")
+    return f"{limit}-{property_type}"
+
 endglobal
 
 snippet background "CSS background property" b
@@ -61,7 +66,7 @@ snippet "font weight" "font-weight property" b
 font-weight: ${1|weight keyword,weight value|};$0
 endsnippet
 
-snippet "\b((?<!line )height|(?<!border )width)" "height/width property" r
+snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!border )width)" "height/width property" r
 `!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
@@ -78,6 +83,10 @@ endsnippet
 
 snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,auto|};$0
+endsnippet
+
+snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
+`!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
 snippet "text align" "CSS text-align property" b
