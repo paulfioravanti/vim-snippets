@@ -18,14 +18,18 @@ def limit_length_property(match):
 endglobal
 
 snippet background "CSS background property" b
-background: ${1|color,global|};$0
+background: ${1|color type,global|};$0
+endsnippet
+
+snippet "background color" "CSS background-color property" b
+background-color: ${1|color type,currentcolor,transparent,global|};$0
 endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet border "CSS border property" b
 `!p autojump_if_blank(snip, [2])
-`border: ${1|border style,border width|}${2: ${3|border style,color|}${4: color}$5};$0
+`border: ${1|border style,border width|}${2: ${3|border style,color type|}${4: color type}$5};$0
 endsnippet
 
 context "make_context(snip)"
@@ -39,11 +43,11 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "box shadow" "CSS box-shadow property" b
 `!p autojump_if_blank(snip, [6, 9])
-`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color$13};$0
+`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0
 endsnippet
 
-snippet color "CSS color property" b
-color: color$1;$0
+snippet "\b(?<!background )color" "CSS color property" r
+color: color type$1;$0
 endsnippet
 
 snippet display "CSS display property" b
@@ -94,11 +98,11 @@ text-align: ${1|start,end,left,right,center,justify,justify-all,match-parent|};$
 endsnippet
 
 snippet "text decoration" "text-decoration property" b
-text-decoration:${1: text decoration line keyword$2}${3: text decoration style keyword$4}${5: color$6}${7: text decoration thickness keyword$8}$0
+text-decoration:${1: text decoration line keyword$2}${3: text decoration style keyword$4}${5: color type$6}${7: text decoration thickness keyword$8}$0
 endsnippet
 
 snippet "text decoration color" "text-decoration-color property" b
-text-decoration-color: color$1;$0
+text-decoration-color: color type$1;$0
 endsnippet
 
 snippet "text decoration line" "text-decoration-line property" b

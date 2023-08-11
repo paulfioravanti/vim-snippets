@@ -6,12 +6,9 @@ snippet "border style" "border styles" w
 ${1|dotted,dashed,solid,double,groove,ridge,inset,outset,hidden,none|}$0
 endsnippet
 
-# NOTE: Priority lowered to not conflict with `color` property.
-priority -1
-snippet color "select from different color types" w
+snippet "color type" "select from different color types" r
 ${1|hex,rgb,hsl,hwb,color keyword|}$0
 endsnippet
-priority 0
 
 snippet "color keyword" "color keywords" w
 ${1|black,silver,gray,white,maroon,red,purple,fuchsia,green,lime,olive,yellow,navy,blue,teal,aqua|}$0
