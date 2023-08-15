@@ -1,0 +1,27 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "(link|anchor|a tag)" "HTML <a> tag" r
+`!p autojump_if_blank(snip, [2])
+`<a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
+  ${4:${VISUAL:text}}
+</a>$0
+endsnippet
+
+snippet "(link|anchor) (mail|email)" "HTML <a> tag link to telephone number" r
+<a href="mailto:${1:${VISUAL:address}}">${2:$1}</a>$0
+endsnippet
+
+snippet "(link|anchor) phone" "HTML <a> tag link to telephone number" r
+<a href="tel:${1:${VISUAL:number}}">${2:$1}</a>$0
+endsnippet

@@ -18,8 +18,6 @@ from global_helpers import (
 from html_helpers import (
     can_map_to_tag_name,
     extract_ids_and_classes,
-    is_html_input_tag,
-    is_html_min_max_input_tag,
     is_html_tag,
     text_to_tag
 )
@@ -95,61 +93,8 @@ snippet img "HTML img tag" i
 `<img src="${1:src}"${2: alt="${3:alt}"} />$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet input "HTML input tag of type 'text'" b
-`!p autojump_if_blank(snip, [2, 4, 6, 8])
-`<input type="text"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
-endsnippet
-
-context "is_html_input_tag(match.group(1)) and make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\binput (\w+)" "HTML input tag of (type) with id, class, name, value" r
-`!p
-input_type = match.group(1)
-autojump_if_blank(snip, [2, 4, 6, 8])
-`<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}} />$0
-endsnippet
-
-context "is_html_min_max_input_tag(match.group(1)) and make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\binput (\w+)" "HTML input tag of (type) with id, name, min, max" r
-`!p
-input_type = match.group(1)
-autojump_if_blank(snip, [2, 4, 6, 8, 10, 12])
-`<input type="`!p snip.rv = input_type`"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: min="${11:min}"}${12: max="${13:max}"}} />$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "input tel" "HTML input tag of telephone number type" b
-`!p autojump_if_blank(snip, [2, 4, 6, 8, 10])
-`<input type="tel"${1:${2: id="${3:id}"}${4: class="${5:class}"}${6: name="${7:name}"}${8: value="${9:value}"}${10: pattern="${11:pattern}"}} />$0
-endsnippet
-
 snippet label "Inline label tag" i
 <label ${1:for="${2:input-id}}>${3:${VISUAL}}</label>$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(link|anchor|a tag)" "HTML <a> tag" r
-`!p autojump_if_blank(snip, [2])
-`<a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
-  ${4:${VISUAL:text}}
-</a>$0
-endsnippet
-
-snippet "(link|anchor) (mail|email)" "HTML <a> tag link to telephone number" r
-<a href="mailto:${1:${VISUAL:address}}">${2:$1}</a>$0
-endsnippet
-
-snippet "(link|anchor) phone" "HTML <a> tag link to telephone number" r
-<a href="tel:${1:${VISUAL:number}}">${2:$1}</a>$0
-endsnippet
-
-snippet method "<form> method attribute" i
-method="${1|post,get|}"$0
 endsnippet
 
 snippet option "HTML option tag" i
@@ -158,8 +103,4 @@ endsnippet
 
 snippet source "HTML source tag" i
 <source src="${1:url}" type="${2:type}" />$0
-endsnippet
-
-snippet target "<form> target attribute" i
-target="${1|_blank,_parent,_top|}"$0
 endsnippet
