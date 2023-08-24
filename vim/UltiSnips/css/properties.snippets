@@ -91,6 +91,10 @@ snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!bor
 `!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
+snippet "letter spacing" "letter-spacing property" b
+letter-spacing: ${1|normal,length,global|};$0
+endsnippet
+
 snippet "line height" "line-height property" b
 line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
