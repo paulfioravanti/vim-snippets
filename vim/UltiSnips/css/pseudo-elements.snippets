@@ -1,0 +1,18 @@
+global !p
+
+def join_pseudo(match):
+    return "-".join(match.group(1).split(" "))
+
+endglobal
+
+snippet "\bpseudo\s?element" "CSS pseudo-element" r
+${1:&}::${2:pseudo-element} {
+  $3
+}$0
+endsnippet
+
+snippet "\b(after|backdrop|before|cue|cue region|first (?:letter|line)|file selector button|marker|placeholder|selection)" "CSS pseudo-element" r
+${1:&}::`!p snip.rv = join_pseudo(match)` {
+  $3
+}$0
+endsnippet
