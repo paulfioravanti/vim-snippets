@@ -53,6 +53,12 @@ snippet "\b(?<!background )color" "CSS color property" r
 color: color type$1;$0
 endsnippet
 
+# NOTE: Values here are incomplete... add as needed
+# https://developer.mozilla.org/en-US/docs/Web/CSS/content
+snippet "\b(?<!(fit|max|min) )(?<!(align|place) )(?<!justify )content" "content property" r
+content: ${1|content keyword,url,string|};$0
+endsnippet
+
 snippet display "CSS display property" b
 display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
 endsnippet
