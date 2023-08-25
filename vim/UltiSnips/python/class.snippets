@@ -14,7 +14,7 @@ from python_helpers import (
 
 def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
     if (
-        not snip.tabstop == 0 and
+        not snip.tabstop == 0 or
         not (args_tabstop := snip.tabstops[init_tabstop_index])
     ):
         return
