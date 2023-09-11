@@ -30,7 +30,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bborder( top| bottom| left| right)?" "CSS border-related properties" r
+snippet "\bborder( (?:top|bottom|left|right))?" "CSS border-related properties" r
 `!p autojump_if_blank(snip, [2])
 `border`!p snip.rv = maybe_suffix(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
 endsnippet
