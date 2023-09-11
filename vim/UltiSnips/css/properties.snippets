@@ -59,6 +59,10 @@ snippet "\b(?<!(fit|max|min) )(?<!(align|place) )(?<!justify )content" "content 
 content: ${1|content keyword,url,string|};$0
 endsnippet
 
+snippet cursor "cursor property" b
+cursor:${1: url$2} cursor keyword$3;$0
+endsnippet
+
 snippet display "CSS display property" b
 display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
 endsnippet
