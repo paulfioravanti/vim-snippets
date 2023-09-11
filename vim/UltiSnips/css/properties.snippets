@@ -138,6 +138,10 @@ snippet outline "outline property" b
 outline:${1: ${2|color type,invert|}} border style$3${4: outline width$5};$0
 endsnippet
 
+snippet "outline offset" "outline offset property" b
+outline-offset: ${1|length,global|};$0
+endsnippet
+
 snippet "\b(padding) (block|inline) (start|end)" "CSS properties dealing with padding blocks/inline blocks" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,global|};$0
 endsnippet
@@ -147,7 +151,7 @@ text-align: ${1|start,end,left,right,center,justify,justify-all,match-parent|};$
 endsnippet
 
 snippet "text decoration" "text-decoration property" b
-text-decoration:${1: text decoration line keyword$2}${3: text decoration style keyword$4}${5: color type$6}${7: text decoration thickness keyword$8}$0
+text-decoration:${1: text decoration line keyword$2}${3: text decoration style keyword$4}${5: color type$6}${7: text decoration thickness keyword$8};$0
 endsnippet
 
 snippet "text decoration color" "text-decoration-color property" b
