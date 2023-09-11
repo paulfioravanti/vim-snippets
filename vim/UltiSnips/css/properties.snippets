@@ -53,6 +53,10 @@ snippet "box shadow" "CSS box-shadow property" b
 `box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0
 endsnippet
 
+snippet "box sizing" "box sizing property" b
+box-sizing: ${1|border-box,content-box,global|};$0
+endsnippet
+
 snippet "\b(?<!background )color" "CSS color property" r
 color: color type$1;$0
 endsnippet
