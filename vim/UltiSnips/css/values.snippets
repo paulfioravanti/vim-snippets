@@ -62,6 +62,12 @@ snippet "text transform keyword" "text-transform keyword" w
 ${1|capitalize,uppercase,lowercase,full-width,full-size-kana,none,global|}$0
 endsnippet
 
+# TODO: These are currently all just choices that act as prompts: there are no
+# implementations for them as function snippets.
+snippet "transform function" "transform function names" w
+${1|matrix,matrix3d,perspective,rotate,rotate3d,rotateX,rotateY,rotateZ,translate,translate3d,translateX,translateY,translateZ,scale,scale3d,scaleX,scaleY,scaleZ,skew,skewX,skewY|}$0
+endsnippet
+
 snippet "weight keyword" "font-weight keyword" w
 ${1|bold,bolder,lighter,normal|}$0
 endsnippet
