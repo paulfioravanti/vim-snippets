@@ -8,7 +8,7 @@ from vim_pythonx_helpers import (
 )
 
 def join_properties(match):
-    return "-".join(match.group(1, 2))
+    return "-".join(match.groups())
 
 def limit_length_property(match):
     limit, property_type = match.group(1, 2)
@@ -30,9 +30,13 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "border( top| bottom| left| right)?" "CSS border-related properties" r
+snippet "\bborder( top| bottom| left| right)?" "CSS border-related properties" r
 `!p autojump_if_blank(snip, [2])
 `border`!p snip.rv = maybe_suffix(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
+endsnippet
+
+snippet "\b(border) (block|inline) (start|end)" "CSS properties dealing with border blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
 endsnippet
 
 context "make_context(snip)"
@@ -107,15 +111,23 @@ context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet "\b(margin|padding)" "CSS properties that deal with sides of an element" r
 `!p autojump_if_blank(snip, [2, 4, 6])
-``!p snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
+snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
 endsnippet
 
 snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,auto|};$0
 endsnippet
 
+snippet "\b(margin|inset) (block|inline) (start|end)" "CSS properties dealing with margin/inset blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|};$0
+endsnippet
+
 snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
 `!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "\b(padding) (block|inline) (start|end)" "CSS properties dealing with padding blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,global|};$0
 endsnippet
 
 snippet "text align" "CSS text-align property" b
