@@ -103,7 +103,7 @@ snippet "font weight" "font-weight property" b
 font-weight: ${1|weight keyword,weight value|};$0
 endsnippet
 
-snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!border )width)" "height/width property" r
+snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!border )(?<!outline )width)" "height/width property" r
 `!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
@@ -132,6 +132,10 @@ endsnippet
 
 snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
 `!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet outline "outline property" b
+outline:${1: ${2|color type,invert|}} border style$3${4: outline width$5};$0
 endsnippet
 
 snippet "\b(padding) (block|inline) (start|end)" "CSS properties dealing with padding blocks/inline blocks" r
