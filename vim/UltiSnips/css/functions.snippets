@@ -31,11 +31,67 @@ snippet hwb "Hue, Whiteness, Blackness hwb() function" w
 `hsl(${1:hue}${2|deg,rad,grad,turn|} ${3:whiteness}% ${4:blackness}%${5: / ${6:alpha}${7:%}})$0
 endsnippet
 
+snippet matrix "matrix(a, b, c, d, tx, ty) function" w
+matrix(${1:a}, ${2:b}, ${3:c}, ${4:d}, ${5:tx}, ${6:ty})$0
+endsnippet
+
+snippet matrix3d "matrix3d(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) function" w
+matrix3d(${1:a1}, ${2:b1}, ${3:c1}, ${4:d1}, ${5:a2}, ${6:b2}, ${7:c2}, ${8:d2}, ${9:a3}, ${10:b3}, ${11:c3}, ${12:d3}, ${13:a4}, ${14:b4}, ${15:c4}, ${16:d4})$0
+endsnippet
+
+snippet perspective "perspective(d) function" w
+perspective(length$1)$0
+endsnippet
+
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet rgb "Red, Green, Blue components rgb() function" w
 `!p autojump_if_blank(snip, [4])
 `rgb(${1:red} ${2:green} ${3:blue}${4: ${5:alpha}})$0
+endsnippet
+
+snippet "\b(rotate(?:X|Y|Z)?)" "rotate(a) and rotateX/Y/Z functions" r
+`!p snip.rv = match.group(1)`(angle$1)$0
+endsnippet
+
+snippet rotate3d "rotate3d(x, y, z, a) function" w
+rotate3d(${1:x}, ${2:y}, ${3:z}, angle$4)$0
+endsnippet
+
+snippet scale "scale(sx, sy) function" w
+scale(${1|number,percentage|}${2:, ${3|number,percentage|}})$0
+endsnippet
+
+snippet scale3d "scale3d(sx, sy, sz) function" w
+scale3d(${1:sx}, ${2:sy}, ${3:sz})$0
+endsnippet
+
+snippet "\b(scale(?:X|Y|Z))" "scaleX/Y/Z functions" r
+`!p snip.rv = match.group(1)`(${1:s})$0
+endsnippet
+
+snippet skew "skew(ax, ay) function" w
+skew(angle$1${2:, angle$3})$0
+endsnippet
+
+snippet "\b(skew(?:X|Y))" "skewX/Y() functions" r
+`!p snip.rv = match.group(1)`(angle$1)$0
+endsnippet
+
+snippet translate "translate() function" w
+translate(${1|length,percentage|}${2:, ${3|length,percentage|}})$0
+endsnippet
+
+snippet translate3d "translate3d(tx, ty, tz) function" w
+translate3d(${1|length,percentage|}, ${2|length,percentage|}, length$3)$0
+endsnippet
+
+snippet "\b(translate(?:X|Y))" "translateX/Y() functions" r
+`!p snip.rv = match.group(1)`(${1|length,percentage|})$0
+endsnippet
+
+snippet translateZ "translateZ(tz) function" w
+translateZ(length$1)$0
 endsnippet
 
 snippet url "url() function" w
