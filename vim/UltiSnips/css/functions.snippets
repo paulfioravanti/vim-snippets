@@ -9,12 +9,12 @@ from vim_pythonx_helpers import (
 
 endglobal
 
-snippet fit-content "fit-content(<length-percentage>) function" w
-fit-content(${1|length,percentage|})$0
+snippet "\bcalc(ulate)?" "calc() function" r
+calc(${1:expression})$0
 endsnippet
 
-snippet hex "Hexadecimal color syntax" w
-#$0
+snippet fit-content "fit-content(<length-percentage>) function" w
+fit-content(${1|length,percentage|})$0
 endsnippet
 
 context "make_context(snip)"
