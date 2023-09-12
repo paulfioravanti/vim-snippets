@@ -1,0 +1,13 @@
+snippet root ":root css pseudo-class" b
+:root {
+  $0
+}
+endsnippet
+
+snippet "(?<!: )variable" "css variable definition" r
+--${1:variable-name}: ${2:value};$0
+endsnippet
+
+snippet "(?<=: )variable" "css variable usage" r
+var(--${1:variable-name})$0
+endsnippet
