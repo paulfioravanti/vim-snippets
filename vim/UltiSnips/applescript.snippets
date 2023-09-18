@@ -1,0 +1,64 @@
+snippet "continu(e|uation)" "continuation character" r
+¬$0
+endsnippet
+
+snippet display "display notification" b
+display notification ${1:message} with title ${2:title}$0
+endsnippet
+
+snippet "else if" "else if condition" b
+else if ${1:condition} then
+    ${2:${VISUAL:# do something}}$0
+endsnippet
+
+snippet if "if statement" b
+if ${1:condition} then
+  ${2:${VISUAL:# do something}}${3:
+else
+    ${4:# do something else}}$0
+end if
+endsnippet
+
+snippet global "global declaration" b
+global ${1:variableName}$0
+endsnippet
+
+snippet list "list literal" w
+{${1:element 1}, ${2:element 2}}$0
+endsnippet
+
+snippet on "handler definition" b
+on ${1:handlerName}(${2:args})
+  $0
+end $1
+endsnippet
+
+snippet property "property definition" b
+property : ${1:value}$0
+endsnippet
+
+snippet repeat "repeat block" b
+repeat with ${2:element} in ${1:collection}
+  $0
+end repeat
+endsnippet
+
+snippet "(?<=: )script" "script library reference" r
+script "$1"$0
+endsnippet
+
+snippet "(?<!: )script" "script definition" r
+script ${1:scriptName}
+  $0
+end script
+endsnippet
+
+snippet set "set statement" b
+set ${1:variableName} to ${2:value}$0
+endsnippet
+
+snippet tell "tell block" b
+tell application "${1:System Events}"$2
+  $0
+end tell
+endsnippet
