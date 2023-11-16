@@ -41,6 +41,10 @@ snippet require "require(name) → true or false" b
 require "${1:name}"$0
 endsnippet
 
+snippet "require[_\s]relative" "require_relative(name) → true or false" r
+require_relative "${1:name}"$0
+endsnippet
+
 snippet .then "then {|x| block } → an_object" i
 .then block$0
 endsnippet
