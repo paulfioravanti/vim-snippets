@@ -1,0 +1,28 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    choice_tabstop_chosen,
+    closing_character
+)
+
+def include_ending(opening):
+    return closing_character(opening) if choice_tabstop_chosen(opening) else ""
+
+endglobal
+
+snippet define "constant/macro define choice" b
+#define ${1|constant,macro|}$0
+endsnippet
+
+snippet "#?define constant" "#define constant" r
+#define ${1:NAME} ${2:VALUE}$0
+endsnippet
+
+snippet "#?define macro" "#define macro" r
+#define ${1:NAME}(${2:args}) ${3:/* macro_body */}$0
+endsnippet
+
+snippet include "#include directive" b
+#include ${1|<,"|}${2:${VISUAL:library}}`!p snip.rv = include_ending(t[1])`${3: // ${4:functions}}$0
+endsnippet
