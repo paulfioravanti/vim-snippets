@@ -1,0 +1,20 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_surround
+)
+
+endglobal
+
+snippet "\b(int|char|float|double)" "int/char/float/double data type" r
+${1:${2:static }${3:const }${4:unsigned }${5:`!p snip.rv = maybe_surround(t[6], "{")`${6|short,long|} `!p snip.rv = maybe_surround(t[6], "}")`}}`!p snip.rv = match.group(1)` ${7:name}${8: = ${9:value}};$0
+endsnippet
+
+snippet "size of" "sizeof" i
+sizeof(${1:object/type})$0
+endsnippet
+
+snippet var "expands to one of the four basic data types" b
+${1|int,char,float,double|}$0
+endsnippet
