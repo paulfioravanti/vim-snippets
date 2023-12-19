@@ -7,7 +7,40 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+def maybe_block_end(tabstop):
+    return "\n  }" if tabstop == " {" else ""
+
 endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet case "case clause for a switch statement" b
+`!p autojump_if_blank(snip, [2])
+`case ${1:value}:${2: \{}
+  ${3:/* statements */}${4:
+  break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[2])`$0
+endsnippet
+
+snippet "(conditional|ternary)" "ternary (?:) statement" r
+${1:condition} ? ${2:true} : ${3:false};$0
+endsnippet
+
+snippet "\b(do while|do-while statement)" "do...while statement" r
+do {
+  ${2:/* statements */}
+} while (${1:condition})`!p maybe_semi(snip)`$0
+endsnippet
+
+snippet "else if" "else if statement (use during if statement)" b
+} else if (${1:condition}) {
+  ${2:/* do something else */}$0
+endsnippet
+
+snippet for "for statement" b
+for (${1:${2:int }${3:i} = ${4:0}};${5: $3 < ${6:upperBound}};${7: $3++}) {
+  ${8:/* statements */}
+}$0
+endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
@@ -18,4 +51,32 @@ snippet if "if...else" b
 }${3: else {
   ${4:/* do something else */}
 }}$0
+endsnippet
+
+# NOTE: Autojumping if the `break` statements (tabstops 5 & 9) are blank seem
+# to break autojumping for the rest of the snippet, so I've removed them for now
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet switch "switch statement" b
+`!p autojump_if_blank(snip, [3, 7, 10])
+`switch (${1:expression}) {
+  case ${2:value1}:${3: \{}
+    ${4:/* statements */}${5:
+    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[3])`
+  case ${6:value2}:${7: \{}
+    ${8:/* statements */}${9:
+    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[7])`
+  default:${10: \{}
+    ${11:/* statements */}`!p snip.rv = maybe_block_end(t[10])`
+}$0
+endsnippet
+
+snippet "\b(?<!do )while" "while statement choice" r
+${1|while statement,do-while statement|}$0
+endsnippet
+
+snippet "while statement" "while statement" b
+while (${1:condition}) {
+  ${2:/* statements */}
+}$0
 endsnippet
