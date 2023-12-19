@@ -7,8 +7,10 @@ from global_helpers import (
 
 endglobal
 
-snippet "\b(int|char|float|double)" "int/char/float/double data type" r
-${1:${2:static }${3:const }${4:unsigned }${5:`!p snip.rv = maybe_surround(t[6], "{")`${6|short,long|} `!p snip.rv = maybe_surround(t[6], "}")`}}`!p snip.rv = match.group(1)` ${7:name}${8: = ${9:value}};$0
+snippet "\b(int|char|float|double|custom|variable)" "int/char/float/double/custom data type" r
+`!p var_type = match.group(1)
+var_type = "type" if var_type in ["custom", "variable"] else var_type
+`${1:${2:static }${3:const }${4:unsigned }${5:`!p snip.rv = maybe_surround(t[6], "{")`${6|short,long|} `!p snip.rv = maybe_surround(t[6], "}")`}}${7:`!p snip.rv = var_type`} ${8:*}${9:name}${10: = ${11:value}};$0
 endsnippet
 
 snippet "size of" "sizeof" i
@@ -16,5 +18,5 @@ sizeof(${1:object/type})$0
 endsnippet
 
 snippet var "expands to one of the four basic data types" b
-${1|int,char,float,double|}$0
+${1|int,char,float,double,custom|}$0
 endsnippet
