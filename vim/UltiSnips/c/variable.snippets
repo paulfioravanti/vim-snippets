@@ -10,7 +10,7 @@ endglobal
 snippet "\b(int|char|float|double|custom|variable)" "int/char/float/double/custom data type" r
 `!p var_type = match.group(1)
 var_type = "type" if var_type in ["custom", "variable"] else var_type
-`${1:${2:static }${3:const }${4:unsigned }${5:`!p snip.rv = maybe_surround(t[6], "{")`${6|short,long|} `!p snip.rv = maybe_surround(t[6], "}")`}}${7:`!p snip.rv = var_type`} ${8:*}${9:name}${10: = ${11:value}};$0
+`${1:${2:${3:static }${4:const }${5:unsigned }${6:`!p snip.rv = maybe_surround(t[7], "{")`${7|short,long|} `!p snip.rv = maybe_surround(t[7], "}")`}}${8:`!p snip.rv = var_type`} }${9:*}${10:name}${11: = ${12:value}};$0
 endsnippet
 
 snippet "size of" "sizeof" i

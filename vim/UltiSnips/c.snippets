@@ -1,7 +1,19 @@
+snippet hex "hex numbers" i
+0x${1:FFFF}$0
+endsnippet
+
 snippet main "main() function" b
 int main(int argc, char *argv[]) {
   ${VISUAL}$0
 
   return 0;
 }
+endsnippet
+
+snippet null "NULL macro" i
+NULL$0
+endsnippet
+
+snippet return "return statement" b
+return ${1:value};$0
 endsnippet

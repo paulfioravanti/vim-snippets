@@ -5,3 +5,15 @@ endsnippet
 snippet "(?<=<)hid API" "hidapi header name" r
 hidapi.h$0
 endsnippet
+
+snippet "hid exit" "int HID_API_EXPORT hid_exit(void)" i
+hid_exit();$0
+endsnippet
+
+snippet "(?<== )hid init" "int HID_API_EXPORT hid_init(void)" r
+hid_init()$0
+endsnippet
+
+snippet "(?<== )hid open" "hid_device * hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number)" r
+hid_open(${1:vendor_id}, ${2:product_id}, ${3:serial_number})$0
+endsnippet
