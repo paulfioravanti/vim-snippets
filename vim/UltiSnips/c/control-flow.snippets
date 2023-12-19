@@ -18,7 +18,7 @@ snippet case "case clause for a switch statement" b
 `!p autojump_if_blank(snip, [2])
 `case ${1:value}:${2: \{}
   ${3:/* statements */}${4:
-  break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[2])`$0
+  break;}`!p snip.rv = maybe_block_end(t[2])`$0
 endsnippet
 
 snippet "(conditional|ternary)" "ternary (?:) statement" r
@@ -28,7 +28,7 @@ endsnippet
 snippet "\b(do while|do-while statement)" "do...while statement" r
 do {
   ${2:/* statements */}
-} while (${1:condition})`!p maybe_semi(snip)`$0
+} while (${1:condition});$0
 endsnippet
 
 snippet "else if" "else if statement (use during if statement)" b
@@ -62,10 +62,10 @@ snippet switch "switch statement" b
 `switch (${1:expression}) {
   case ${2:value1}:${3: \{}
     ${4:/* statements */}${5:
-    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[3])`
+    break;}`!p snip.rv = maybe_block_end(t[3])`
   case ${6:value2}:${7: \{}
     ${8:/* statements */}${9:
-    break`!p maybe_semi(snip)`}`!p snip.rv = maybe_block_end(t[7])`
+    break;}`!p snip.rv = maybe_block_end(t[7])`
   default:${10: \{}
     ${11:/* statements */}`!p snip.rv = maybe_block_end(t[10])`
 }$0
