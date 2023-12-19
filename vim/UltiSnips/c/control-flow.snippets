@@ -1,0 +1,21 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet if "if...else" b
+`!p autojump_if_blank(snip, [3])
+`if (${1:condition}) {
+  ${2:${VISUAL:\/* do something *\/}}
+}${3: else {
+  ${4:/* do something else */}
+}}$0
+endsnippet
