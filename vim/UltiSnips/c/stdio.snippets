@@ -1,5 +1,61 @@
+global !p
+
+# Adapted from https://github.com/honza/vim-snippets/blob/a8dc763b3f534ec1a0c0ae5082689c10dcaf9d5f/UltiSnips/c.snippets#L8-L24
+def printf_expand_args(
+    snip,
+    format_tabstop_index,
+    placeholder_args_index,
+    next_tabstop_index
+):
+    """
+    This will look how many placeholders printf has and adds the separated
+    commas at the end.
+    """
+    if not snip.tabstop == placeholder_args_index:
+        return
+
+    # now add so many "," as much as the amount of placeholders
+    amount_placeholders = (
+        snip.tabstops[format_tabstop_index].current_text.count("%")
+    )
+    final_tabstop_index = next_tabstop_index + amount_placeholders
+    output = ""
+
+    # Add the amount of tabstops
+    for placeholder_index in range(next_tabstop_index, final_tabstop_index):
+        output += f", ${placeholder_index}"
+
+    # convert them into tabstops
+    snip.expand_anon(output)
+
+endglobal
+
+post_jump "printf_expand_args(snip, 2, 3, 4)"
+snippet "\b(fprintf(_s)?)" "int fprintf/fprintf_s( FILE *restrict stream, const char *restrict format, ... );" r
+`!p snip.rv = match.group(1)`("${1:stream}, ${2:format}\n"$3);$0
+endsnippet
+
+snippet print "choose print function" b
+${1|printf,fprintf,sprintf,snprintf,printf_s,sprintf_s,snprintf_s|}$0
+endsnippet
+
 snippet "print f" "printf function name" i
 printf$0
+endsnippet
+
+post_jump "printf_expand_args(snip, 1, 2, 3)"
+snippet "\b(printf(_s)?)" "int printf/printf_s( const char *restrict format, ... );" r
+`!p snip.rv = match.group(1)`("${1:format}\n"$2);$0
+endsnippet
+
+post_jump "printf_expand_args(snip, 3, 4, 5)"
+snippet "\b(snprintf(_s)?)" "int snprintf/snprintf_s( char *restrict buffer, size_t bufsz, const char *restrict format, ... );" r
+`!p snip.rv = match.group(1)`("${1:buffer}, ${2:bufsz}, ${3:format}\n"$4);$0
+endsnippet
+
+post_jump "printf_expand_args(snip, 2, 3, 4)"
+snippet "\b(sprintf(_s)?)" "int sprintf/sprintf_s( char *restrict buffer, const char *restrict format, ... );" r
+`!p snip.rv = match.group(1)`("${1:buffer}, ${2:format}\n"$3);$0
 endsnippet
 
 snippet "(?<=<)standard\s?[iI][oO]" "stdio library header name" r
