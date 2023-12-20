@@ -1,0 +1,18 @@
+global !p
+
+def type_var_placeholder(typedef_tabstop):
+    return "TypeName" if typedef_tabstop else "variable_name"
+
+endglobal
+
+snippet enum "enum definition" b
+${1:typedef }enum${2: ${3:tag}} {
+  ${4:TYPE}${5: = ${6:int_value}}${7:,}$8
+}${9: ${10:`!p snip.rv = type_var_placeholder(t[1])`}};$0
+endsnippet
+
+snippet struct "struct data type definition" b
+${1:typedef }struct${2: ${3:tag}} {
+  ${4:variable}$5
+}${6: ${7:`!p snip.rv = type_var_placeholder(t[1])`}};$0
+endsnippet
