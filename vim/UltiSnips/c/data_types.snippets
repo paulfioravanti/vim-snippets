@@ -12,7 +12,7 @@ ${1:typedef }enum${2: ${3:tag}} {
 endsnippet
 
 snippet struct "struct data type definition" b
-${1:typedef }struct${2: ${3:tag}} {
-  ${4:variable}$5
-}${6: ${7:`!p snip.rv = type_var_placeholder(t[1])`}};$0
+${1:typedef }struct${2: ${3:tag}}${4: {
+  ${5:variable}$6
+}}${7: ${8:`!p snip.rv = type_var_placeholder(t[1])`}};$0
 endsnippet
