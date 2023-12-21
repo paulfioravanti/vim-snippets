@@ -10,6 +10,14 @@ snippet "hid close" "void HID_API_EXPORT hid_close(hid_device *dev)" b
 hid_close(${1:handle});$0
 endsnippet
 
+snippet "hid device info" "struct hid_device_info" b
+struct hid_device_info ${1:*}${2:devices}$3;$0
+endsnippet
+
+snippet "(?<== )hid enumerate" "struct hid_device_info HID_API_EXPORT *hid_enumerate(unsigned short vendor_id, unsigned short product_id)" r
+hid_enumerate(${1:vendor_id}, ${2:product_id})$0
+endsnippet
+
 snippet "hid exit" "int HID_API_EXPORT hid_exit(void)" i
 hid_exit();$0
 endsnippet
