@@ -22,6 +22,10 @@ snippet "hid exit" "int HID_API_EXPORT hid_exit(void)" i
 hid_exit();$0
 endsnippet
 
+snippet "hid free enumeration" "void HID_API_EXPORT hid_free_enumeration(struct hid_device_info *devs)" b
+hid_free_enumeration(${1:devices});$0
+endsnippet
+
 snippet "(?<== )hid get manufacturer string" "int HID_API_EXPORT_CALL hid_get_manufacturer_string(hid_device *dev, wchar_t *string, size_t maxlen)" r
 hid_get_manufacturer_string(${1:handle}, ${2:wstr}, ${3:maxlen})$0
 endsnippet
@@ -32,4 +36,8 @@ endsnippet
 
 snippet "(?<== )hid open" "hid_device * hid_open(unsigned short vendor_id, unsigned short product_id, const wchar_t *serial_number)" r
 hid_open(${1:vendor_id}, ${2:product_id}, ${3:serial_number})$0
+endsnippet
+
+snippet "(?<== )hid open path" "hid_device * HID_API_EXPORT hid_open_path(const char *path)" r
+hid_open_path(${1:path})$0
 endsnippet
