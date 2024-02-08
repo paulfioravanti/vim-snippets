@@ -7,7 +7,7 @@ from global_helpers import (
 
 endglobal
 
-snippet "\b(int|char|float|double|custom|variable)" "int/char/float/double/custom data type" r
+snippet "\b(?<!wide )(int|char|float|double|custom|variable)" "int/char/float/double/custom data type" r
 `!p var_type = match.group(1)
 var_type = "type" if var_type in ["custom", "variable"] else var_type
 `${1:${2:${3:static }${4:const }${5:unsigned }${6:`!p snip.rv = maybe_surround(t[7], "{")`${7|short,long|} `!p snip.rv = maybe_surround(t[7], "}")`}}${8:`!p snip.rv = var_type`} }${9:*}${10:name}${11: = ${12:value}};$0

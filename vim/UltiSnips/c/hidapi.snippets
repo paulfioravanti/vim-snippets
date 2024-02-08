@@ -10,6 +10,10 @@ snippet "hid close" "void HID_API_EXPORT hid_close(hid_device *dev)" b
 hid_close(${1:handle});$0
 endsnippet
 
+snippet "hid device" "typedef struct hid_device_ hid_device" b
+hid_device$0
+endsnippet
+
 snippet "hid device info" "struct hid_device_info" b
 struct hid_device_info ${1:*}${2:devices}$3;$0
 endsnippet
