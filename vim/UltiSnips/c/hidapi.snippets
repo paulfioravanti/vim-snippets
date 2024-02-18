@@ -31,7 +31,7 @@ hid_free_enumeration(${1:devices});$0
 endsnippet
 
 snippet "hid get manufacturer string" "int HID_API_EXPORT_CALL hid_get_manufacturer_string(hid_device *dev, wchar_t *string, size_t maxlen)" r
-hid_get_manufacturer_string(${1:handle}, ${2:wstr}, ${3:maxlen})$0
+hid_get_manufacturer_string(${1:handle}, ${2:manufacturer}, ${3:MAX_LENGTH})$0
 endsnippet
 
 snippet "hid init" "int HID_API_EXPORT hid_init(void)" i
