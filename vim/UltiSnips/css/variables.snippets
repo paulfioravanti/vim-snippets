@@ -4,10 +4,10 @@ snippet root ":root css pseudo-class" b
 }
 endsnippet
 
-snippet "(?<!: )variable" "css variable definition" r
+snippet "(?<!: )var(iable)?" "css variable definition" r
 --${1:variable-name}: ${2:value};$0
 endsnippet
 
-snippet "(?<=: )variable" "css variable usage" r
+snippet "(?<=: )var(iable)?" "css variable usage" r
 var(--${1:variable-name})$0
 endsnippet
