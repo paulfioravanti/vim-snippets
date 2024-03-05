@@ -7,8 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-def join_properties(match):
-    return "-".join(match.groups())
+# ~/.vim/pythonx/css_helpers.py
+from css_helpers import (
+    join_properties
+)
 
 def limit_length_property(match):
     limit, property_type = match.group(1, 2)
@@ -117,41 +119,6 @@ endsnippet
 
 snippet "line height" "line-height property" b
 line-height: ${1|normal,length,percentage,number|};$0
-endsnippet
-
-snippet "\b(margin|padding)" "margin/padding choice tabstop" r
-`!p snip.rv = match.group(1)` ${1|shorthand,conventional,logical|}$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\b(margin|padding) shorthand" "CSS shorthand properties that deal with sides of an element" r
-`!p autojump_if_blank(snip, [2, 4, 6])
-snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
-endsnippet
-
-snippet "\b(margin|padding) conventional" "margin/padding conventional choice tabstop" r
-`!p snip.rv = match.group(1)` ${1|top,bottom,left,right|}$0
-endsnippet
-
-snippet "\b(margin|padding) (top|bottom|left|right)" "CSS properties that deal with specific sides of an element" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto|};$0
-endsnippet
-
-snippet "\b(margin|padding) logical" "margin/padding logical choice tabstop" r
-`!p snip.rv = match.group(1)` ${1|block,inline|}$0
-endsnippet
-
-snippet "\b(margin|inset) (block|inline)" "margin/inset logical block/inline choice tabstop" r
-`!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
-endsnippet
-
-snippet "\b(margin|inset)[-/s](block|inline) shorthand" "margin/inset shorthand logical block/inline choice tabstop" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|}${2: ${3|length,percentage|}};$0
-endsnippet
-
-snippet "\b(margin|inset)[-/s](block|inline) (start|end)" "CSS properties dealing with margin/inset blocks/inline blocks" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|};$0
 endsnippet
 
 snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
