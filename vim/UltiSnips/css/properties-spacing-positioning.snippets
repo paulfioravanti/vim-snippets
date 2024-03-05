@@ -49,10 +49,10 @@ snippet "\b(margin|padding|inset) (block|inline)" "margin/padding/inset logical 
 `!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
 endsnippet
 
-snippet "\b(margin|padding|inset)[-/s](block|inline) shorthand" "margin/inset shorthand logical block/inline choice tabstop" r
+snippet "\b(margin|padding|inset)[-\s](block|inline) shorthand" "margin/inset shorthand logical block/inline choice tabstop" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|}${2: ${3|length,percentage|}};$0
 endsnippet
 
-snippet "\b(margin|padding|inset)[-/s](block|inline) (start|end)" "CSS properties dealing with margin/inset blocks/inline blocks" r
+snippet "\b(margin|padding|inset)[-\s](block|inline) (start|end)" "CSS properties dealing with margin/inset blocks/inline blocks" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
 endsnippet
