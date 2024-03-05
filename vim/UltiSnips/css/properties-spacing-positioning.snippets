@@ -34,11 +34,11 @@ ${1|top,bottom,left,right|}$0
 endsnippet
 
 snippet "\b(margin|padding) (top|bottom|left|right)" "margin/padding to deal with specific sides of an element" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|};$0
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
 endsnippet
 
 snippet "\b(top|bottom|left|right)" "inset to deal with specific sides of an element" r
-`!p snip.rv = match.group(1)`: ${1|length,percentage,auto,global|};$0
+`!p snip.rv = match.group(1)`: ${1|length,percentage,auto,global,variable|};$0
 endsnippet
 
 snippet "\b(margin|padding|inset) logical" "margin/padding/inset logical choice tabstop" r
@@ -50,9 +50,9 @@ snippet "\b(margin|padding|inset) (block|inline)" "margin/padding/inset logical 
 endsnippet
 
 snippet "\b(margin|padding|inset)[-/s](block|inline) shorthand" "margin/inset shorthand logical block/inline choice tabstop" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|}${2: ${3|length,percentage|}};$0
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|}${2: ${3|length,percentage|}};$0
 endsnippet
 
 snippet "\b(margin|padding|inset)[-/s](block|inline) (start|end)" "CSS properties dealing with margin/inset blocks/inline blocks" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global|};$0
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
 endsnippet

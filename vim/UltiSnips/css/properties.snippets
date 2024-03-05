@@ -23,11 +23,11 @@ def maybe_suffix(match):
 endglobal
 
 snippet background "CSS background property" b
-background: ${1|color type,global|};$0
+background: ${1|color type,global,variable|};$0
 endsnippet
 
 snippet "background color" "CSS background-color property" b
-background-color: ${1|color type,currentcolor,transparent,global|};$0
+background-color: ${1|color type,currentcolor,transparent,global,variable|};$0
 endsnippet
 
 context "make_context(snip)"
@@ -64,7 +64,7 @@ box-sizing: ${1|border-box,content-box,global|};$0
 endsnippet
 
 snippet "\b(?<!background )(?<!: )color" "CSS color property" r
-color: color type$1;$0
+color: ${1|color type,variable|};$0
 endsnippet
 
 snippet "(?<=: )color" "CSS color property mapping" r
