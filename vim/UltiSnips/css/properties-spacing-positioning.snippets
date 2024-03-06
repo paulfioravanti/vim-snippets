@@ -45,7 +45,7 @@ snippet "\b(margin|padding|inset) logical" "margin/padding/inset logical choice 
 `!p snip.rv = match.group(1)` ${1|block,inline|}$0
 endsnippet
 
-snippet "\b(margin|padding|inset) (block|inline)" "margin/padding/inset logical block/inline choice tabstop" r
+snippet "\b(margin|padding|inset)[-\s](block|inline)" "margin/padding/inset logical block/inline choice tabstop" r
 `!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
 endsnippet
 
