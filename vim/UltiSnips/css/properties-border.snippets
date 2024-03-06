@@ -41,6 +41,22 @@ snippet "\b(border) (block|inline)" "border logical block/inline choice tabstop"
 `!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
 endsnippet
 
-snippet "\b(border)[-\s](block|inline) (?:(start|end)|(?:shorthand))" "CSS properties dealing with border blocks/inline blocks" r
+snippet "\b(border)[-\s](block|inline) (start|end)" "border block/inline start end choice tabstop" r
+`!p snip.rv = join_properties(match)` ${1|shorthand,color,style,width|}$0
+endsnippet
+
+snippet "\b(border)[-\s](block|inline)(?:[-\s](start|end))? shorthand" "border block/inline shorthand" r
 `!p snip.rv = join_properties(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
+endsnippet
+
+snippet "\b(border)[-\s](block|inline)[-\s](start|end) (color)" "border block/inline start/end color" r
+`!p snip.rv = join_properties(match)`: color type$1;$0
+endsnippet
+
+snippet "\b(border)[-\s](block|inline)[-\s](start|end) (style)" "border block/inline start/end style" r
+`!p snip.rv = join_properties(match)`: border style$1;$0
+endsnippet
+
+snippet "\b(border)[-\s](block|inline)[-\s](start|end) (width)" "border block/inline start/end width" r
+`!p snip.rv = join_properties(match)`: border width$1;$0
 endsnippet
