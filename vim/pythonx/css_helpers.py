@@ -7,4 +7,5 @@ def join_properties(match):
     """
     Return joined properties together.
     """
-    return "-".join(match.groups())
+    groups = [group for group in match.groups() if group is not None]
+    return "-".join(groups)

@@ -1,0 +1,46 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/css_helpers.py
+from css_helpers import (
+    join_properties
+)
+
+endglobal
+
+snippet border "border choice tabstop" b
+border ${1|shorthand,conventional,logical|}$0
+endsnippet
+
+snippet "border shorthand" "border shorthand properties" b
+border: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
+endsnippet
+
+snippet "border conventional" "border conventional properties choice tabstop" b
+border ${1|top,bottom,left,right|}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bborder (top|bottom|left|right)" "border conventional properties" r
+`!p autojump_if_blank(snip, [2])
+`border-`!p snip.rv = match.group(1)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
+endsnippet
+
+snippet "border logical" "border logical properties choice tabstop" b
+border ${1|block,inline|}$0
+endsnippet
+
+snippet "\b(border) (block|inline)" "border logical block/inline choice tabstop" r
+`!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
+endsnippet
+
+snippet "\b(border)[-\s](block|inline) (?:(start|end)|(?:shorthand))" "CSS properties dealing with border blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
+endsnippet

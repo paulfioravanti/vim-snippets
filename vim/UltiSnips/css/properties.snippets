@@ -7,18 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-# ~/.vim/pythonx/css_helpers.py
-from css_helpers import (
-    join_properties
-)
-
 def limit_length_property(match):
     limit, property_type = match.group(1, 2)
     limit = limit.replace("imum", "")
     return f"{limit}-{property_type}"
-
-def maybe_suffix(match):
-    return f"-{direction.strip()}" if (direction := match.group(1)) else ""
 
 endglobal
 
@@ -28,17 +20,6 @@ endsnippet
 
 snippet "background color" "CSS background-color property" b
 background-color: ${1|color type,currentcolor,transparent,global,variable|};$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bborder( (?:top|bottom|left|right))?" "CSS border-related properties" r
-`!p autojump_if_blank(snip, [2])
-`border`!p snip.rv = maybe_suffix(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
-endsnippet
-
-snippet "\b(border) (block|inline) (start|end)" "CSS properties dealing with border blocks/inline blocks" r
-`!p snip.rv = join_properties(match)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
 endsnippet
 
 context "make_context(snip)"
