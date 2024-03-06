@@ -16,7 +16,7 @@ snippet hex "Hexadecimal color syntax" w
 endsnippet
 
 snippet "\b(?<!font )(length|border width|size)" "common length units" r
-${1:number}${2:`!p snip.rv = maybe_surround(t[3], "{{")`${3|px,em,rem,vh|}`!p snip.rv = maybe_surround(t[3], "}}")`}$0
+${1:number}${2:`!p snip.rv = maybe_surround(t[3], " ")`${3|px,em,rem,vh|}}$0
 endsnippet
 
 snippet number "unitless number" w
