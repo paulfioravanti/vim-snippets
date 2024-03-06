@@ -1,3 +1,12 @@
+global !p
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_surround
+)
+
+endglobal
+
 snippet angle "angle units" w
 ${1:number}${2|deg,grad,rad,turn|}$0
 endsnippet
@@ -7,7 +16,7 @@ snippet hex "Hexadecimal color syntax" w
 endsnippet
 
 snippet "\b(?<!font )(length|border width|size)" "common length units" r
-${1:number}${2|px,em,rem,vh|}$0
+${1:number}${2:`!p snip.rv = maybe_surround(t[3], "{{")`${3|px,em,rem,vh|}`!p snip.rv = maybe_surround(t[3], "}}")`}$0
 endsnippet
 
 snippet number "unitless number" w
