@@ -24,17 +24,6 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "border radius" "CSS border-radius property" b
-`!p autojump_if_blank(snip, [3, 6, 9])
-`border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{top-right|top-right-bottom-left}}${5|px,em,%|}${6: ${7:{bottom-right}}${8|px,em,%|}${9: ${10:{bottom-left}}${11|px,em,%|}}}};$0
-endsnippet
-
-snippet "(border) (top|bottom) (left|right) (radius)" "border top/bottom left/right radius property" r
-`!p snip.rv = join_properties(match)`: ${1|length,percentage,global|}${2: ${3|length,percentage,global|}};$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
 snippet "box shadow" "CSS box-shadow property" b
 `!p autojump_if_blank(snip, [6, 9])
 `box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0

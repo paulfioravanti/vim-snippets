@@ -1,0 +1,38 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/css_helpers.py
+from css_helpers import (
+    join_properties
+)
+
+endglobal
+
+snippet "border radius" "border radius choice tabstop" b
+border radius ${1|shorthand,conventional,logical|}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bborder[-\s]radius shorthand" "border-radius shorthand property" r
+`!p autojump_if_blank(snip, [3, 6, 9])
+`border-radius: ${1:{all|top-left-bottom-right|top-left}}${2|px,em,%|}${3: ${4:{top-right|top-right-bottom-left}}${5|px,em,%|}${6: ${7:{bottom-right}}${8|px,em,%|}${9: ${10:{bottom-left}}${11|px,em,%|}}}};$0
+endsnippet
+
+snippet "\bborder radius conventional" "border radius conventional choice tabstop" r
+border ${1|top,bottom|} ${2|left,right|} radius$0
+endsnippet
+
+snippet "\bborder radius logical" "border radius logical choice tabstop" r
+border ${1|start,end|} ${2|start,end|} radius$0
+endsnippet
+
+snippet "(border) (top|bottom|start|end) (left|right|start|end) (radius)" "border radius conventional/logical properties" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,global|}${2: ${3|length,percentage,global|}};$0
+endsnippet
