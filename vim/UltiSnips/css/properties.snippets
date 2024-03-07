@@ -83,6 +83,10 @@ snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!bor
 `!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
+snippet isolation "isolation property" b
+isolation: ${1|isolate,auto,global|};$0
+endsnippet
+
 snippet "letter spacing" "letter-spacing property" b
 letter-spacing: ${1|normal,length,global|};$0
 endsnippet
@@ -141,4 +145,8 @@ endsnippet
 
 snippet transform "transform property" b
 transform: ${1|transform function,none,global|}${2: transform function$3}$0
+endsnippet
+
+snippet "\bz[-\s]index" "z-index property" r
+z-index: ${1|number,auto,global|};$0
 endsnippet
