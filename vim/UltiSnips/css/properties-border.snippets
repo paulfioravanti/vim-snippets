@@ -16,7 +16,7 @@ endglobal
 
 # See properties-border-radius.snippets for border-radius snippets
 snippet border "border choice tabstop" b
-border ${1|shorthand,conventional,logical,radius|}$0
+border ${1|shorthand,conventional,logical,radius,collapse|}$0
 endsnippet
 
 snippet "border shorthand" "border shorthand properties" b
@@ -60,4 +60,8 @@ endsnippet
 
 snippet "\b(border)[-\s](block|inline)[-\s](start|end) (width)" "border block/inline start/end width" r
 `!p snip.rv = join_properties(match)`: border width$1;$0
+endsnippet
+
+snippet "border[-\s]collapse" "border-collapse property" r
+border-collapse: ${1|collapse,separate,global|};$0
 endsnippet

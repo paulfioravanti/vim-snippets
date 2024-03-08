@@ -33,6 +33,10 @@ snippet "box sizing" "box sizing property" b
 box-sizing: ${1|border-box,content-box,global|};$0
 endsnippet
 
+snippet collapse "border/white-space collapse choice tabstop" b
+${1|border-collapse,white-space-collapse|}$0
+endsnippet
+
 snippet "\b(?<!background )(?<!start )(?<!end )(?<!: )color" "CSS color property" r
 color: ${1|color type,variable|};$0
 endsnippet
@@ -139,7 +143,7 @@ snippet "text transform" "text-transform property" b
 text-transform: text transform keyword$1;$0
 endsnippet
 
-snippet "(top|bottom|left|right)" "position elements" r
+snippet "\b(top|bottom|left|right)" "position elements" r
 `!p snip.rv = match.group(1)`: ${1|length,percentage,auto,global|};$0
 endsnippet
 
