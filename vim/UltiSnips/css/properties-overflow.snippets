@@ -1,0 +1,27 @@
+snippet overflow "overflow choice tabstop" b
+overflow ${1|shorthand,conventional,logical,wrap,clip margin|}$0
+endsnippet
+
+snippet "overflow shorthand" "overflow shorthand" b
+overflow: ${1|overflow keyword,global|};$0
+endsnippet
+
+snippet "overflow conventional" "overflow conventional" b
+overflow ${1|x,y|}$0
+endsnippet
+
+snippet "overflow logical" "overflow logical" b
+overflow ${1|block,inline|}$0
+endsnippet
+
+snippet "overflow[-\s](x|y|block|inline)" "overflow-x/y/block/inline" r
+overflow-`!p snip.rv = match.group(1)`: ${1|overflow keyword,global|};$0
+endsnippet
+
+snippet "overflow[-\s]wrap" "overflow wrap" r
+overflow-wrap: ${1|overflow wrap keyword,global|};$0
+endsnippet
+
+snippet "overflow[-\s]clip[-\s]margin" "overflow clip margin" r
+overflow-clip-margin: ${1|visual box,length|}${2: length$3};$0
+endsnippet
