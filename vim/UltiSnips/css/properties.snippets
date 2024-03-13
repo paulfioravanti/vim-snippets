@@ -51,6 +51,10 @@ snippet "\b(?<!(fit|max|min) )(?<!(align|place) )(?<!justify )content" "content 
 content: ${1|content keyword,url,string|};$0
 endsnippet
 
+snippet "(?<!background )clip( path)?" "clip-path property" r
+clip: ${1|none,url,geometry box,basic shape function,global|}${2: basic shape function$3};$0
+endsnippet
+
 snippet cursor "cursor property" b
 cursor:${1: url$2} cursor keyword$3;$0
 endsnippet

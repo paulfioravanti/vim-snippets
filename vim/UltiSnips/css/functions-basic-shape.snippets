@@ -1,0 +1,23 @@
+snippet "circle(\(\)| function)" "circle() function" r
+circle(${1|length,percentage,closest-side,farthest-side}${2: at ${3|length,percentage,position keyword|}${4: ${5|length,percentage,position keyword|}}})
+endsnippet
+
+snippet "ellipse(\(\)| function)" "ellipse() function" r
+ellipse(${1|length,percentage,closest-side,farthest-side} ${2|length,percentage,closest-side,farthest-side}${3: at ${4|length,percentage,position keyword|}${5: ${6|length,percentage,position keyword|}}})
+endsnippet
+
+snippet "inset(\(\)| function)" "inset() function" r
+inset(${1|length,percentage}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}}${8: round ${9:{all|top-left-bottom-right|top-left}}${10|px,em,%|}${11: ${12:{top-right|top-right-bottom-left}}${13|px,em,%|}${14: ${15:{bottom-right}}${16|px,em,%|}${17: ${18:{bottom-left}}${19|px,em,%|}}}}})
+endsnippet
+
+snippet "path(\(\)| function)" "path() function" r
+path(${1:${2|nonzero,evenodd|}, }${3:svg path string})
+endsnippet
+
+snippet "polygon(\(\)| function)" "polygon() function" r
+polygon(${1:${2|nonzero,evenodd|}, }${3|length,percentage|} ${4|length,percentage|})
+endsnippet
+
+snippet "rect(\(\)| function)" "rect() function" r
+rect(${1|length,percentage,auto} ${2|length,percentage,auto|} ${3|length,percentage,auto|} ${4|length,percentage, auto|}${5: round ${6:{all|top-left-bottom-right|top-left}}${7|px,em,%|}${8: ${9:{top-right|top-right-bottom-left}}${10|px,em,%|}${11: ${12:{bottom-right}}${13|px,em,%|}${14: ${15:{bottom-left}}${16|px,em,%|}}}}})
+endsnippet
