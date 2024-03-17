@@ -107,6 +107,10 @@ snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width pro
 `!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
+snippet opacity "opacity property" b
+opacity: ${1|number,percentage,global};$0
+endsnippet
+
 snippet outline "outline property" b
 outline:${1: ${2|color type,invert|}} border style$3${4: outline width$5};$0
 endsnippet
