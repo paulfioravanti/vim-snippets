@@ -1,0 +1,15 @@
+snippet "list[-\s]style" "list-style property" r
+list style ${1|shorthand,image,position,type|}$0
+endsnippet
+
+snippet "list[-\s]style[-\s]image" "list-style-image property" r
+list-style-image: ${1|none,url,gradient,global|};$0
+endsnippet
+
+snippet "list[-\s]style[-\s]position" "list-style-position property" r
+list-style-position: ${1|inside,outside,global|};$0
+endsnippet
+
+snippet "list[-\s]style[-\s]type" "list-style-type property" r
+list-style-type: ${1|list style type keyword,string,none,global|};$0
+endsnippet
