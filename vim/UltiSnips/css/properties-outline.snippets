@@ -1,0 +1,23 @@
+snippet outline "outline property" b
+outline ${1|shorthand,color,style,width,offset|}$0
+endsnippet
+
+snippet "outline shorthand" "outline shorthand property" b
+outline: ${1|outline style keyword,color type,global|}${2: ${3|outline style keyword,outline width keyword,length|}${4: ${5|outline width keyword,length|}}};$0
+endsnippet
+
+snippet "outline[-\s]color" "outline-color property" r
+outline-color: ${1|color type,auto,global|};$0
+endsnippet
+
+snippet "outline[-\s]offset" "outline-offset property" r
+outline-offset: ${1|length,global|};$0
+endsnippet
+
+snippet "outline[-\s]style" "outline-style property" r
+outline-style: ${1|outline style keyword,global|};$0
+endsnippet
+
+snippet "outline[-\s]width" "outline-width property" r
+outline-width: ${1|outline width keyword,length,global|};$0
+endsnippet
