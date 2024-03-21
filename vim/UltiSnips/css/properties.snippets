@@ -14,6 +14,10 @@ def limit_length_property(match):
 
 endglobal
 
+snippet "align[-\s]items" "align-items property" r
+align-items: ${1|normal,stretch,positional alignment keyword,baseline alignment keyword,global|};$0
+endsnippet
+
 snippet appearance "appearance property" b
 appearance: {1|none,auto,appearance keyword,global|};$0
 endsnippet
@@ -93,6 +97,10 @@ endsnippet
 
 snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
 `!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "justify[-\s]content" "justify-content property" r
+justify-content: ${1|positional alignment keyword,distributed alignment keyword,normal,safe center,unsafe center,global|};$0
 endsnippet
 
 snippet opacity "opacity property" b
