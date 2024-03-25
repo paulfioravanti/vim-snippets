@@ -1,0 +1,15 @@
+snippet gap "gap choice tabstop" b
+gap ${1|shorthand,row,column|}$0
+endsnippet
+
+snippet "gap shorthand" "gap shorthand property" b
+gap: ${1|length,percentage,calc,global|}${2: ${3|length,percentage,calc|}};$0
+endsnippet
+
+snippet "(gap column|column[-\s]gap)" "column-gap property" r
+column-gap: ${1|length,percentage,normal,global|};$0
+endsnippet
+
+snippet "(gap row|row[-\s]gap)" "row-gap property" r
+row-gap: ${1|length,percentage,global|};$0
+endsnippet
