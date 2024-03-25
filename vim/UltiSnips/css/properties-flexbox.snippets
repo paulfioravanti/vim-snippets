@@ -1,0 +1,27 @@
+snippet flex "flex choice tabstop" b
+flex ${1|shorthand,grow,shrink,basis,direction,flow,wrap|}$0
+endsnippet
+
+snippet "flex shorthand" "flex shorthand property" b
+flex: ${1|number,length,flex basis keyword,auto,initial,none,global|}${2: ${3|number,length,flex basis keyword|}${4: ${5|flex basis keyword|}}};$0
+endsnippet
+
+snippet "flex[-\s]basis" "flex-basis property" r
+flex-basis: ${1|flex basis keyword,width,auto,global|};$0
+endsnippet
+
+snippet "flex[-\s]direction" "flex-direction property" r
+flex-direction: ${1|row,row-reverse,column,column-reverse,global|};$0
+endsnippet
+
+snippet "flex[-\s]flow" "flex-flow property" r
+flex-flow: ${1|flex direction keyword,flex wrap keyword,global|}${2: ${3|flex direction keyword,flex wrap keyword|};$0
+endsnippet
+
+snippet "flex[-\s](grow|shrink)" "flex-(grow|shrink) property" r
+flex-`!p snip.rv = match.group(1)`: ${1|number,global|};$0
+endsnippet
+
+snippet "flex[-\s]wrap" "flex-wrap property" r
+flex-wrap: ${1|flex wrap keyword,global|};$0
+endsnippet
