@@ -15,3 +15,11 @@ endsnippet
 snippet "media type" "@media query media types" w
 ${1|screen,print,all|}$0
 endsnippet
+
+snippet property "@property at-rule" b
+@property --${1:property-name} {
+  syntax: ${2|syntax keyword,string|};
+  inherits: ${3|true,false|};
+  initial-value: $4;
+}$0
+endsnippet
