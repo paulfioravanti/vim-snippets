@@ -9,8 +9,12 @@ from vim_pythonx_helpers import (
 
 endglobal
 
-snippet "\bcalc(ulate)?" "calc() function" r
+snippet "\bcalc(ulate)?(\(\))?" "calc() function" r
 calc(${1:expression})$0
+endsnippet
+
+snippet clamp "clamp() function" w
+clamp(${1|length,calc(),min(),max()|}, ${2|length,calc(),min(),max()|}, ${3|length,calc(),min(),max()|});$0
 endsnippet
 
 snippet fit-content "fit-content(<length-percentage>) function" w
@@ -37,6 +41,10 @@ endsnippet
 
 snippet matrix3d "matrix3d(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4) function" w
 matrix3d(${1:a1}, ${2:b1}, ${3:c1}, ${4:d1}, ${5:a2}, ${6:b2}, ${7:c2}, ${8:d2}, ${9:a3}, ${10:b3}, ${11:c3}, ${12:d3}, ${13:a4}, ${14:b4}, ${15:c4}, ${16:d4})$0
+endsnippet
+
+snippet "(min|max)\(\)" "min() and max() functions" r
+`!p snip.rv = match.group(1)`(${1|length,angle,percentage,number,calc keyword|}, ${2|length,angle,percentage,number,calc keyword|})$0
 endsnippet
 
 snippet "opacity(\(\)| function)" "opacity() function" r
