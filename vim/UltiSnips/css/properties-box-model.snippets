@@ -1,0 +1,74 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/css_helpers.py
+from css_helpers import (
+    join_properties
+)
+
+def limit_length_property(match):
+    limit, property_type = match.group(1, 2)
+    limit = limit.replace("imum", "")
+    return f"{limit}-{property_type}"
+
+endglobal
+
+snippet "box sizing" "box sizing property" b
+box-sizing: ${1|border-box,content-box,global|};$0
+endsnippet
+
+snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!border )(?<!outline )width)" "width/height property" r
+`!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
+`!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
+endsnippet
+
+snippet "\b(margin|padding)" "margin/padding choice tabstop" r
+`!p snip.rv = match.group(1)` ${1|shorthand,conventional,logical|}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\b(margin|padding) shorthand" "margin/padding shorthand" r
+`!p autojump_if_blank(snip, [2, 4, 6])
+snip.rv = match.group(1)`: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
+endsnippet
+
+snippet "\b(margin|padding) conventional" "margin/padding conventional choice tabstop" r
+`!p snip.rv = match.group(1)` ${1|top,bottom,left,right|}$0
+endsnippet
+
+snippet "\b(margin|padding) (top|bottom|left|right)" "margin/padding to deal with specific sides of an element" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
+endsnippet
+
+snippet "\b(margin|padding) logical" "margin/padding logical choice tabstop" r
+`!p snip.rv = match.group(1)` ${1|block,inline|}$0
+endsnippet
+
+snippet "\b(margin|padding)[-\s](block|inline)" "margin/padding logical block/inline choice tabstop" r
+`!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
+endsnippet
+
+snippet "\b(margin|padding)[-\s](block|inline) shorthand" "margin/padding shorthand logical block/inline choice tabstop" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|}${2: ${3|length,percentage|}};$0
+endsnippet
+
+snippet "\b(margin|padding)[-\s](block|inline) (start|end)" "CSS properties dealing with margin/padding blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "box shadow" "CSS box-shadow property" b
+`!p autojump_if_blank(snip, [6, 9])
+`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0
+endsnippet

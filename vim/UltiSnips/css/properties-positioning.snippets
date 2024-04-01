@@ -1,0 +1,58 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/css_helpers.py
+from css_helpers import (
+    join_properties
+)
+
+endglobal
+
+snippet position "position property" b
+position: ${1|layout mode,global|};$0
+endsnippet
+
+snippet "\b(top|bottom|left|right)" "position elements" r
+`!p snip.rv = match.group(1)`: ${1|length,percentage,auto,global,variable|};$0
+endsnippet
+
+snippet inset "inset choice tabstop" b
+inset: ${1|shorthand,conventional,logical|}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "inset shorthand" "inset shorthand" b
+`!p autojump_if_blank(snip, [2, 4, 6])
+`inset: ${1|length,percentage|}${2: ${3|length,percentage|}${4: ${5|length,percentage|}${6: ${7|length,percentage|}}}};$0
+endsnippet
+
+snippet "inset conventional" "inset conventional choice tabstop" b
+${1|top,bottom,left,right|}$0
+endsnippet
+
+snippet "inset logical" "inset logical choice tabstop" b
+inset ${1|block,inline|}$0
+endsnippet
+
+snippet "\b(inset)[-\s](block|inline)" "inset logical block/inline choice tabstop" r
+`!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
+endsnippet
+
+snippet "\b(inset)[-\s](block|inline) shorthand" "inset shorthand logical block/inline choice tabstop" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|}${2: ${3|length,percentage|}};$0
+endsnippet
+
+snippet "\b(inset)[-\s](block|inline) (start|end)" "inset blocks/inline blocks" r
+`!p snip.rv = join_properties(match)`: ${1|length,percentage,auto,global,variable|};$0
+endsnippet
+
+snippet "\bz[-\s]index" "z-index property" r
+z-index: ${1|number,auto,global|};$0
+endsnippet

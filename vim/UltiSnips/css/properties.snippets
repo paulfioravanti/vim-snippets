@@ -1,23 +1,3 @@
-global !p
-
-# ~/.vim/pythonx/vim_pythonx_helpers.py
-from vim_pythonx_helpers import (
-    autojump_if_blank,
-    make_context,
-    make_jumper
-)
-
-def limit_length_property(match):
-    limit, property_type = match.group(1, 2)
-    limit = limit.replace("imum", "")
-    return f"{limit}-{property_type}"
-
-endglobal
-
-snippet "align[-\s]items" "align-items property" r
-align-items: ${1|normal,stretch,positional alignment keyword,baseline alignment keyword,global|};$0
-endsnippet
-
 snippet appearance "appearance property" b
 appearance: {1|none,auto,appearance keyword,global|};$0
 endsnippet
@@ -28,17 +8,6 @@ endsnippet
 
 snippet "background color" "CSS background-color property" b
 background-color: ${1|color type,currentcolor,transparent,global,variable|};$0
-endsnippet
-
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "box shadow" "CSS box-shadow property" b
-`!p autojump_if_blank(snip, [6, 9])
-`box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0
-endsnippet
-
-snippet "box sizing" "box sizing property" b
-box-sizing: ${1|border-box,content-box,global|};$0
 endsnippet
 
 snippet collapse "border/white-space collapse choice tabstop" b
@@ -60,23 +29,15 @@ content: ${1|content keyword,url,string|};$0
 endsnippet
 
 snippet "(?<!background )clip( path)?" "clip-path property" r
-clip: ${1|none,url,geometry box,basic shape function,global|}${2: basic shape function$3};$0
+clip-path: ${1|none,url,geometry box,basic shape function,global|}${2: basic shape function$3};$0
 endsnippet
 
 snippet cursor "cursor property" b
 cursor:${1: url$2} cursor keyword$3;$0
 endsnippet
 
-snippet display "CSS display property" b
-display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
-endsnippet
-
 snippet float "float property" b
 float: ${1|left,right,none,inline-start,inline-end|};$0
-endsnippet
-
-snippet "\b(?<!maximum )(?<!max )(?<!minimum )(?<!min )((?<!line )height|(?<!border )(?<!outline )width)" "height/width property" r
-`!p snip.rv = match.group(1)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
 endsnippet
 
 snippet isolation "isolation property" b
@@ -91,20 +52,8 @@ snippet "line height" "line-height property" b
 line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
 
-snippet "\b(max(?:imum)?|min(?:imum)?) (height|width)" "min/max height/width property" r
-`!p snip.rv = limit_length_property(match)`: ${1|length,percentage,max-content,min-content,auto,fit-content|};$0
-endsnippet
-
-snippet "justify[-\s]content" "justify-content property" r
-justify-content: ${1|positional alignment keyword,distributed alignment keyword,normal,safe center,unsafe center,global|};$0
-endsnippet
-
 snippet opacity "opacity property" b
 opacity: ${1|number,percentage,global};$0
-endsnippet
-
-snippet position "position property" b
-position: ${1|layout mode,global|};$0
 endsnippet
 
 snippet "text align" "CSS text-align property" b
@@ -135,18 +84,10 @@ snippet "text transform" "text-transform property" b
 text-transform: text transform keyword$1;$0
 endsnippet
 
-snippet "\b(top|bottom|left|right)" "position elements" r
-`!p snip.rv = match.group(1)`: ${1|length,percentage,auto,global|};$0
-endsnippet
-
 snippet transform "transform property" b
 transform: ${1|transform function,none,global|}${2: transform function$3}$0
 endsnippet
 
 snippet visibility "visibility property" b
 visibility: ${1|visible,hidden,collapse,global|}$0
-endsnippet
-
-snippet "\bz[-\s]index" "z-index property" r
-z-index: ${1|number,auto,global|};$0
 endsnippet
