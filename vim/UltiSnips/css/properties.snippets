@@ -6,7 +6,7 @@ snippet background "CSS background property" b
 background: ${1|color type,global,variable|};$0
 endsnippet
 
-snippet "background color" "CSS background-color property" b
+snippet "\bbackground[-\s]color" "CSS background-color property" r
 background-color: ${1|color type,currentcolor,transparent,global,variable|};$0
 endsnippet
 
@@ -28,7 +28,7 @@ snippet "\b(?<!(fit|max|min) )(?<!(align|place) )(?<!justify )content" "content 
 content: ${1|content keyword,url,string|};$0
 endsnippet
 
-snippet "(?<!background )clip( path)?" "clip-path property" r
+snippet "\b(?<!background )clip([-\s]path)?" "clip-path property" r
 clip-path: ${1|none,url,geometry box,basic shape function,global|}${2: basic shape function$3};$0
 endsnippet
 
@@ -48,11 +48,11 @@ snippet isolation "isolation property" b
 isolation: ${1|isolate,auto,global|};$0
 endsnippet
 
-snippet "letter[-\s]spacing" "letter-spacing property" r
+snippet "\bletter[-\s]spacing" "letter-spacing property" r
 letter-spacing: ${1|normal,length,global|};$0
 endsnippet
 
-snippet "line height" "line-height property" b
+snippet "\bline[-\s]height" "line-height property" r
 line-height: ${1|normal,length,percentage,number|};$0
 endsnippet
 
@@ -60,31 +60,35 @@ snippet opacity "opacity property" b
 opacity: ${1|number,percentage,global};$0
 endsnippet
 
-snippet "text align" "CSS text-align property" b
+snippet order "order property" b
+order: ${1|number,global};$0
+endsnippet
+
+snippet "\btext[-\s]align" "CSS text-align property" r
 text-align: ${1|start,end,left,right,center,justify,justify-all,match-parent|};$0
 endsnippet
 
-snippet "text decoration" "text-decoration property" b
+snippet "\btext[-\s]decoration" "text-decoration property" r
 text-decoration:${1: text decoration line keyword$2}${3: text decoration style keyword$4}${5: color type$6}${7: text decoration thickness keyword$8};$0
 endsnippet
 
-snippet "text decoration color" "text-decoration-color property" b
+snippet "\btext[-\s]decoration[-\s]color" "text-decoration-color property" r
 text-decoration-color: color type$1;$0
 endsnippet
 
-snippet "text decoration line" "text-decoration-line property" b
+snippet "\btext[-\s]decoration[-\s]line" "text-decoration-line property" r
 text-decoration-line: text decoration line keyword$1;$0
 endsnippet
 
-snippet "text decoration style" "text-decoration-style property" b
+snippet "\btext[-\s]decoration[-\s]style" "text-decoration-style property" r
 text-decoration-style: text decoration style keyword$1;$0
 endsnippet
 
-snippet "text decoration thickness" "text-decoration-thickness property" b
+snippet "\btext[-\s]decoration[-\s]thickness" "text-decoration-thickness property" r
 text-decoration-thickness: text decoration thickness keyword$1;$0
 endsnippet
 
-snippet "text transform" "text-transform property" b
+snippet "\btext[-\s]transform" "text-transform property" r
 text-transform: text transform keyword$1;$0
 endsnippet
 
