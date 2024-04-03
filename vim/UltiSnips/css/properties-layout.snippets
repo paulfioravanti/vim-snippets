@@ -2,8 +2,8 @@ snippet display "CSS display property" b
 display: ${1|block,inline,inline-block,flex,inline-flex,grid,inline-grid,flow-root,none,contents,table,table-row,list-item,global|};$0
 endsnippet
 
-snippet "align[-\s]items" "align-items property" r
-align-items: ${1|normal,stretch,positional alignment keyword,baseline alignment keyword,global|};$0
+snippet "align[-\s](items|content|self)" "align-(items|content|self) properties" r
+align-`!p snip.rv = match.group(1)`: ${1|normal,stretch,positional alignment keyword,baseline alignment keyword,global|};$0
 endsnippet
 
 snippet gap "gap choice tabstop" b
