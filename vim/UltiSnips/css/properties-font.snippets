@@ -2,12 +2,17 @@ snippet font "font-related properties choice" b
 font ${1|face,family,size,style,weight|}$0
 endsnippet
 
+snippet "\bfont[-\s]display" "font-display property" r
+font-display: font display keyword$1;$0
+endsnippet
+
 snippet "\bfont[-\s]face" "font-face at-rule" r
 @font-face {
   font-family: ${1|font family name,generic font family|};
   src: url("$2") format("${3|collection,embedded-opentype,opentype,svg,truetype,woff,woff2|}");
   font-weight: ${4|weight keyword,weight value|};
   font-style: font style style$5;
+  font-display: font display keyword$6;
 }$0
 endsnippet
 
