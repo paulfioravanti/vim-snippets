@@ -22,6 +22,10 @@ snippet "(gap row|row[-\s]gap)" "row-gap property" r
 row-gap: ${1|length,percentage,global|};$0
 endsnippet
 
-snippet "justify[-\s]content" "justify-content property" r
-justify-content: ${1|positional alignment keyword,distributed alignment keyword,normal,safe center,unsafe center,global|};$0
+snippet "justify[-\s](content|items)" "justify-(content|items) properties" r
+justify-`!p snip.rv = match.group(1)`: ${1|positional alignment keyword,distributed alignment keyword,normal,safe center,unsafe center,global|};$0
+endsnippet
+
+snippet "place[-\s](content|items)" "place-(content|items) properties" r
+place-`!p snip.rv = match.group(1)`: ${1|normal,stretch,positional alignment keyword,baseline alignment keyword,global|} ${2|positional alignment keyword,distributed alignment keyword,normal,safe center,unsafe center,global|};$0
 endsnippet
