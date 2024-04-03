@@ -88,6 +88,10 @@ snippet "\btext[-\s]decoration[-\s]thickness" "text-decoration-thickness propert
 text-decoration-thickness: text decoration thickness keyword$1;$0
 endsnippet
 
+snippet "\btext[-\s]indent" "text-indent property" r
+text-indent: ${1|length,percentage,global|}${2: ${3|each-line,hanging|}};$0
+endsnippet
+
 snippet "\btext[-\s]transform" "text-transform property" r
 text-transform: text transform keyword$1;$0
 endsnippet
