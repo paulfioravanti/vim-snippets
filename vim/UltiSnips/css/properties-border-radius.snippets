@@ -33,6 +33,6 @@ snippet "\bborder radius logical" "border radius logical choice tabstop" r
 border ${1|start,end|} ${2|start,end|} radius$0
 endsnippet
 
-snippet "(border) (top|bottom|start|end) (left|right|start|end) (radius)" "border radius conventional/logical properties" r
+snippet "\b(border)[-\s](top|bottom|start|end)[-\s](left|right|start|end)[-\s](radius)" "border radius conventional/logical properties" r
 `!p snip.rv = join_properties(match)`: ${1|length,percentage,global|}${2: ${3|length,percentage,global|}};$0
 endsnippet

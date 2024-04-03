@@ -68,7 +68,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "box shadow" "CSS box-shadow property" b
+snippet "\bbox[-\s]shadow" "CSS box-shadow property" r
 `!p autojump_if_blank(snip, [6, 9])
 `box-shadow: ${1:inset }${2:{offset-x}}${3|px,em|} ${4:{offset-y}}${5|px,em|}${6: ${7:{blur-radius}}${8|px,em|}${9: ${10:{spread-radius}}${11|px,em|}}} ${12:color type$13};$0
 endsnippet

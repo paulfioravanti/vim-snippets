@@ -14,18 +14,18 @@ snippet "overflow logical" "overflow logical" b
 overflow ${1|block,inline|}$0
 endsnippet
 
-snippet "overflow[-\s](x|y|block|inline)" "overflow-x/y/block/inline" r
+snippet "\boverflow[-\s](x|y|block|inline)" "overflow-x/y/block/inline" r
 overflow-`!p snip.rv = match.group(1)`: ${1|overflow keyword,global|};$0
 endsnippet
 
-snippet "overflow[-\s]wrap" "overflow wrap" r
+snippet "\boverflow[-\s]wrap" "overflow wrap" r
 overflow-wrap: ${1|overflow wrap keyword,global|};$0
 endsnippet
 
-snippet "overflow[-\s]clip[-\s]margin" "overflow clip margin" r
+snippet "\boverflow[-\s]clip[-\s]margin" "overflow clip margin" r
 overflow-clip-margin: ${1|visual box,length|}${2: length$3};$0
 endsnippet
 
-snippet "text[-\s]overflow" "text-overflow property" r
+snippet "\btext[-\s]overflow" "text-overflow property" r
 text-overflow: ${1|clip,ellipsis,global|}${2: ${3:" [..]"};$0
 endsnippet

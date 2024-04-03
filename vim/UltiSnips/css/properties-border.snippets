@@ -29,7 +29,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bborder (top|bottom|left|right)" "border conventional properties" r
+snippet "\bborder[-\s](top|bottom|left|right)" "border conventional properties" r
 `!p autojump_if_blank(snip, [2])
 `border-`!p snip.rv = match.group(1)`: ${1|border width,border style|}${2: ${3|border style,color type|}${4: color type}$5};$0
 endsnippet
@@ -38,7 +38,7 @@ snippet "border logical" "border logical properties choice tabstop" b
 border ${1|block,inline|}$0
 endsnippet
 
-snippet "\b(border) (block|inline)" "border logical block/inline choice tabstop" r
+snippet "\b(border)[-\s](block|inline)" "border logical block/inline choice tabstop" r
 `!p snip.rv = join_properties(match)` ${1|shorthand,start,end|}$0
 endsnippet
 
@@ -62,6 +62,6 @@ snippet "\b(border)[-\s](block|inline)[-\s](start|end) (width)" "border block/in
 `!p snip.rv = join_properties(match)`: border width$1;$0
 endsnippet
 
-snippet "border[-\s]collapse" "border-collapse property" r
+snippet "\bborder[-\s]collapse" "border-collapse property" r
 border-collapse: ${1|collapse,separate,global|};$0
 endsnippet
