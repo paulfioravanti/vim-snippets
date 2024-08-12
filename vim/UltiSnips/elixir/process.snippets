@@ -16,14 +16,14 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bcancel timer(?: 2)?" "Process.cancel_timer(timer_ref, options \\ [])" r
+snippet "\bcancel[_ ]timer" "Process.cancel_timer(timer_ref, options \\ [])" r
 `!p autojump_if_blank(snip, [2, 5])
 `Process.cancel_timer(${1:timer_ref}${2:${3:, async: ${4:true}}${5:, info: ${6:false}}})$0
 endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bsend after(?: 4)?" "Process.send_after/4" r
+snippet "\bsend[_ ]after" "Process.send_after/4" r
 `!p autojump_if_blank(snip, [5])
 `Process.send_after(${1:dest}, ${2::}${3:msg}`!p snip.rv = closing_character(t[2])`, ${4:time}${5:, {:abs, ${6:true}}})$0
 endsnippet

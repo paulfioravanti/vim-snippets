@@ -11,11 +11,11 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "Timex format" "Timex.format/(1|2)" w
+snippet "[tT]imex[\\. ]format" "Timex.format/(2|3)" r
 `!p autojump_if_blank(snip, [1])
 `Timex.format!(${1:${2:datetime}, }"${3:%FT%T%:z}", :${4:strftime})$0
 endsnippet
 
-snippet "Timex now" "Timex.now/(0|1)" w
+snippet "[tT]imex[\\. ]now" "Timex.now/(0|1)" r
 Timex.now(${1:time_zone})$0
 endsnippet
