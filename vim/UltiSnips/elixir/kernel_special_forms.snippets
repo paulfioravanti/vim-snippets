@@ -60,18 +60,18 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet for "Kernel.SpecialForms.for/1"
+snippet for "Kernel.SpecialForms.for/1" w
 `!p autojump_if_blank(snip, [2])
 `for ${1:args}${2: do
   $3
 end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
 endsnippet
 
-snippet "f(:?u)?n(:?ction)?" "Kernel.SpecialForms.fn/2" ri
+snippet "fu?n(ction)?" "Kernel.SpecialForms.fn/2" r
 fn ${1:args} -> $2 end$0
 endsnippet
 
-snippet "f(:?u)?n(:?ction)? (?:(&|capture))" "Kernel.SpecialForms.&/1" ri
+snippet "fu?n(ction)? (&|capture)" "Kernel.SpecialForms.&/1" r
 &(&1$1)$0
 endsnippet
 
