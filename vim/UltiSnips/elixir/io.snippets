@@ -1,0 +1,22 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "(?i:IO[\\. ])?inspect" "IO.inspect/2" r
+`!p autojump_if_blank(snip, [2])
+`IO.inspect(${1:item}${2:`!p snip.rv = maybe_comma(t[1], t[3])`${3:opts}})$0
+endsnippet
