@@ -16,14 +16,14 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(?:repo )?all" "Ecto.Repo.c:all(queryable, opts)" r
+snippet "([rR]epo[\\. ])?all" "Ecto.Repo.c:all(queryable, opts)" r
 `!p autojump_if_blank(snip, [2])
 `Repo.all(${1:queryable}`!p snip.rv = maybe_comma(t[1], t[2])`${2:prefix: "${3:prefix}"})$0
 endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(?:repo )?update all" "Ecto.Repo.c:update_all(queryable, updates, opts)" r
+snippet "([rR]epo[\\. ])?update[_ ]all" "Ecto.Repo.c:update_all(queryable, updates, opts)" r
 `!p autojump_if_blank(snip, [1])
 `Repo.update_all(${1:${2:queryable}, }${3|set,inc,push,pull|}: [${4:field}: ${5:value}])$0
 endsnippet
