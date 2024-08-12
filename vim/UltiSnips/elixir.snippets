@@ -68,10 +68,6 @@ snippet "list generator" "List generator used in for comprehensions" i
 ${1:element} <- ${2:[${3:list}]}$0
 endsnippet
 
-snippet "(?:enum )?random" "Enum.random/1" r
-Enum.random(${1:enumerable})$0
-endsnippet
-
 snippet segment "Bitstring segment" i
 ${1:name}::${2:type}$0
 endsnippet
@@ -87,6 +83,6 @@ snippet tuple "literal tuple" i
 {${1:first}, ${2:second}$3}$0
 endsnippet
 
-snippet "tuple (.+)" "tagged tuple" r
+snippet "tuple (.+)" "literal tagged tuple" r
 {:`!p snip.rv = tuple_tag(match)`, ${1:value}}$0
 endsnippet

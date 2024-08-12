@@ -15,3 +15,7 @@ snippet "[eE]num[\\. ]filter" "Enum.filter/2" r
 `!p autojump_if_blank(snip, [1])
 `Enum.filter(${1:${2:enumerable}, }${3:fun})$0
 endsnippet
+
+snippet "([eE]num[\\. ])?random" "Enum.random/1" r
+Enum.random(${1:enumerable})$0
+endsnippet
