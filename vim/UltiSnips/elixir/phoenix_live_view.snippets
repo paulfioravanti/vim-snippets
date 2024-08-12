@@ -50,7 +50,7 @@ snippet component "Phoenix.LiveView.Helpers.component/2" b
 />$0
 endsnippet
 
-snippet "connected(:??)?" "Phoenix.LiveView.connected?/1" r
+snippet "connected\??" "Phoenix.LiveView.connected?/1" r
 connected?(socket)$0
 endsnippet
 
@@ -76,7 +76,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "handle event" "Phoenix.(LiveView|LiveComponent).handle_event(event, unsigned_params, socket)" b
+snippet "\bhandle[_ ]event" "Phoenix.(LiveView|LiveComponent).handle_event(event, unsigned_params, socket)" r
 `!p autojump_if_blank(snip, [4])
 `@impl true
 def handle_event("${1:event}", ${2|params,_unsigned_params|}, socket) do
@@ -91,7 +91,7 @@ $0
 """
 endsnippet
 
-snippet "live component" "Phoenix.LiveView.Helpers.live_component(assigns)" b
+snippet "\blive[_ ]component" "Phoenix.LiveView.Helpers.live_component(assigns)" r
 `!p
 module, file = module_parts(path)
 `<.live_component
@@ -102,7 +102,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "live patch" "Phoenix.LiveView.Helpers.live_patch/2" b
+snippet "\blive[_ ]patch" "Phoenix.LiveView.Helpers.live_patch/2" r
 `!p autojump_if_blank(snip, [1, 5, 7, 8])
 `<%= live_patch${1: "${2:text}",} to: Routes.${3:path_function}(@socket, :${4:action}${5:, ${6:param}})${7:, replace: true} ${8:do %>
   $9
@@ -136,7 +136,7 @@ def render(assigns) do
 end
 endsnippet
 
-snippet "temporary assigns" "temporary_assigns parameter" w
+snippet "\btemporary[_ ]assigns" "temporary_assigns parameter" r
 temporary_assigns: [${1:assign}: ${2:reset_value}]$0
 endsnippet
 
