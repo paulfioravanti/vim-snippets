@@ -1,0 +1,17 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "[sS]tream[\\. ]filter" "Stream.filter/2" r
+`!p autojump_if_blank(snip, [1])
+`Stream.filter(${1:${2:enum}, }${3:fun})$0
+endsnippet

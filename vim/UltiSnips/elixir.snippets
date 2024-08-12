@@ -27,19 +27,12 @@ def tuple_tag(match):
 
 endglobal
 
-snippet "bitstring generator" "Bitstring generator used in for comprehensions" i
-<<${1:char} <- ${2:"${3:binary}"}>>$0
-endsnippet
-
 snippet comment "Elixir comment" w
 # ${1:${VISUAL}}$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet filter "(Enum|Keyword|Map|Stream).filter/2" w
-`!p autojump_if_blank(snip, [2])
-`${1|Enum,Map,Stream,Keyword|}.filter(${2:${3:enumerable}, }${4:fun})$0
+snippet "(?<![eE]num[\\. ])(?<![mM]ap[\\. ])(?<![sS]tream[\\. ])(?<![kK]eyword[\\. ])filter" "(Enum|Map|Stream|Keyword).filter/2 chooser" r
+${1|Enum,Map,Stream,Keyword|}.filter$0
 endsnippet
 
 context "make_context(snip)"

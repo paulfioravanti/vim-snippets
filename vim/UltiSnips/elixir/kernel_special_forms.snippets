@@ -28,8 +28,8 @@ snippet alias "Kernel.SpecialForms.alias(module, opts)" b
 `alias ${1:`!p snip.rv = root_module_name(path)`}${2:.${3:ModuleName}}${4: as: ${5:Keyword}}$0
 endsnippet
 
-snippet bitstring "Kernel.SpecialForms.<<args>>" i
-<<$1>>$0
+snippet bitstring "Kernel.SpecialForms.<<args>>/1" i
+<<${1:${2:char} <- ${3:"${4:binary}"}}>>$0
 endsnippet
 
 context "make_context(snip)"
