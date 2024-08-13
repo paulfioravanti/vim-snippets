@@ -1,7 +1,15 @@
+snippet "h(ea)?d" "Kernel.hd/1" r
+${1:Kernel.}hd(${2:list})$0
+endsnippet
+
 snippet "(?<!put[_ ])elem" "Kernel.elem/2" r
 ${1:Kernel.}elem(${2:${3:tuple}, }${4:index})$0
 endsnippet
 
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
 ${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
+endsnippet
+
+snippet "t(ai)?l" "Kernel.tl/1" r
+${1:Kernel.}tl(${2:list})$0
 endsnippet
