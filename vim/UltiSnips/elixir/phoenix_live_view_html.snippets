@@ -20,7 +20,7 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\b(button|div|p|span)" "Heex HTML tag with id and class options" r
+snippet "\b(button|div|p|span) tag" "Heex HTML tag with id and class options" r
 `!p
 tag = match.group(1)
 autojump_if_blank(snip, [1, 2, 5])

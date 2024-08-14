@@ -9,8 +9,8 @@ from vim_pythonx_helpers import (
 
 endglobal
 
-snippet abs "Kernel.abs/1" i
-${1:Kernel.}abs(${2:number})$0
+snippet "(abs|floor)" "Kernel.(abs|floor)/1" r
+${1:Kernel.}`!p snip.rv = match.group(1)`(${2:number})$0
 endsnippet
 
 snippet apply "Kernel.apply/(2|3)" i
@@ -33,7 +33,7 @@ snippet "(bit|byte)[_ ]size" "Kernel.(bit_size|byte_size)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`_size(${2:bitstring})$0
 endsnippet
 
-snippet "ceil(ing)?" "Kernel.ceil/1" r
+snippet "(ceil)(?:ing)?" "Kernel.ceil/1" r
 ${1:Kernel.}ceil(${2:number})$0
 endsnippet
 
@@ -48,18 +48,26 @@ snippet "\bdef\s?guard" "Kernel.(defguard|defguardp)/1" r
 `defguard${1:p} ${2:guard}(${3:value}) when ${4:condition}$0
 endsnippet
 
-snippet "(?<!put[_ ])elem" "Kernel.elem/2" r
+snippet exit "Kernel.exit/1" i
+${1:Kernel.}exit(${2|:normal,:shutdown,exit shutdown tuple|})$0
+endsnippet
+
+snippet "exit shutdown tuple" "Kernel.exit/1 shutdown tuple choice" r
+{:shutdown, ${1:term or integer}}$0
+endsnippet
+
+snippet "(?<!floor[_ ])div(ision)?" "Kernel.div/2" r
+${1:Kernel.}div(${2:${3:dividend}, }${4:divisor})$0
+endsnippet
+
+snippet "(?<!put[_ ])elem(ent)?" "Kernel.elem/2" r
 ${1:Kernel.}elem(${2:${3:tuple}, }${4:index})$0
 endsnippet
 
-snippet "h(ea)?d" "Kernel.hd/1" r
-${1:Kernel.}hd(${2:list})$0
+snippet "(h(ea)?d|t(ai)?l)" "Kernel.(hd|tail)/1" r
+${1:Kernel.}`!p snip.rv = match.group(1)`(${2:list})$0
 endsnippet
 
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
 ${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
-endsnippet
-
-snippet "t(ai)?l" "Kernel.tl/1" r
-${1:Kernel.}tl(${2:list})$0
 endsnippet
