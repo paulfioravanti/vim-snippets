@@ -50,13 +50,6 @@ snippet "\bdef\s?exception" "Kernel.defexception(fields)" r
 defexception [:${1:field}$2]$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef\s?guard" "Kernel.(defguard|defguardp)/1" r
-`!p autojump_if_blank(snip, [1])
-`defguard${1:p} ${2:guard}(${3:value}) when ${4:condition}$0
-endsnippet
-
 snippet "\bdef\s?module" "Kernel.defmodule(alias, do_block)" r
 defmodule ${1:`!p snip.rv = module_name(path)`} do
   $0

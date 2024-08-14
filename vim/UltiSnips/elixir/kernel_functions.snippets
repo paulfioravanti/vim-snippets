@@ -1,9 +1,59 @@
-snippet "h(ea)?d" "Kernel.hd/1" r
-${1:Kernel.}hd(${2:list})$0
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+endglobal
+
+snippet abs "Kernel.abs/1" i
+${1:Kernel.}abs(${2:number})$0
+endsnippet
+
+snippet apply "Kernel.apply/(2|3)" i
+${1:Kernel.}apply(${2:${3:module}, }${4:${5:function}, }args)$0
+endsnippet
+
+snippet "binary[_ ]part" "Kernel.binary_part/(2|3) choice" r
+binary_part/${1|2,3|}$0
+endsnippet
+
+snippet "binary[_ ]part/2" "Kernel.binary_part/2" r
+${1:Kernel.}binary_part(${2:${3:binary}, }${4:range})$0
+endsnippet
+
+snippet "binary[_ ]part/3" "Kernel.binary_part/3" r
+${1:Kernel.}binary_part(${2:${3:binary}, }${4:start}, ${5:size})$0
+endsnippet
+
+snippet "(bit|byte)[_ ]size" "Kernel.(bit_size|byte_size)/1" r
+${1:Kernel.}`!p snip.rv = match.group(1)`_size(${2:bitstring})$0
+endsnippet
+
+snippet "ceil(ing)?" "Kernel.ceil/1" r
+${1:Kernel.}ceil(${2:number})$0
+endsnippet
+
+snippet "de?bu?g" "Kernel.hd/1" r
+${1:Kernel.}dbg(${2:${3:code \\\ quote do binding() end}, }${4:options \\\ []})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bdef\s?guard" "Kernel.(defguard|defguardp)/1" r
+`!p autojump_if_blank(snip, [1])
+`defguard${1:p} ${2:guard}(${3:value}) when ${4:condition}$0
 endsnippet
 
 snippet "(?<!put[_ ])elem" "Kernel.elem/2" r
 ${1:Kernel.}elem(${2:${3:tuple}, }${4:index})$0
+endsnippet
+
+snippet "h(ea)?d" "Kernel.hd/1" r
+${1:Kernel.}hd(${2:list})$0
 endsnippet
 
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
