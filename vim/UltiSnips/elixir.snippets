@@ -35,18 +35,12 @@ snippet "(?<![eE]num[\\. ])(?<![mM]ap[\\. ])(?<![sS]tream[\\. ])(?<![kK]eyword[\
 ${1|Enum,Map,Stream,Keyword|}.filter$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet key-value "Key-value pair" i
-`!p autojump_if_blank(snip, [1, 4])
-`${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
+snippet "key[- ]value" "Key-value pair" r
+${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
 endsnippet
 
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop)"
-snippet keyword "Literal Elixir keyword list" i
-`!p autojump_if_blank(snip, [1])
-`${1:[}${2:key}: ${3:value}$4`!p snip.rv = closing_character(t[1])`$0
+snippet "(keyword|opts)" "Literal Elixir keyword list" r
+${1:[}${2:key}: ${3:value}$4`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
 snippet "line length" "Elixir formatter line_length parameter" w
