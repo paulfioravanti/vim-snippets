@@ -68,6 +68,10 @@ snippet "function[_ ]exported\??" "Kernel.function_exported/3" r
 ${1:Kernel.}function_exported?(${2:${3:module}, }${4:function}, ${5:arity})$0
 endsnippet
 
+snippet "get[_ ]and[_ ]update[_ ]in" "Kernel.get_and_update_in/3" r
+${1:Kernel.}get_and_update_in(${2:${3:data}, }${4:keys}, function$5)$0
+endsnippet
+
 snippet "(h(ea)?d|t(ai)?l)" "Kernel.(hd|tail)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`(${2:list})$0
 endsnippet
