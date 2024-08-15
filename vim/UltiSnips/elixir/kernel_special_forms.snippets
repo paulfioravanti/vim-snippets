@@ -38,23 +38,23 @@ snippet case "Kernel.SpecialForms.case(condition, clauses)" w
 `!p autojump_if_blank(snip, [3])
 `case ${1:value} do
   ${2:pattern} ${3:when ${4:condition} }->
-    ${5:${VISUAL:# do something}}
+    ${5:${VISUAL:# do something}}$6
   _ ->
-    $6
+    $7
 end$0
 endsnippet
 
 snippet cond "Kernel.SpecialForms.cond(clauses)" w
 cond do
   ${1:condition} ->
-    ${2:${VISUAL:# do something}}
+    ${2:${VISUAL:# do something}}$3
   true ->
-    $3
+    $4
 end$0
 endsnippet
 
-snippet condition "Kernel.SpecialForms.cond/2 condition" b
-${1:condition} ->
+snippet "\b(clause|condition)" "Kernel.SpecialForms.(cond/2|fn/1 clause/condition" r
+${1:`!p snip.rv = match.group(1)`} ->
   ${2:${VISUAL:# do something}}$0
 endsnippet
 
@@ -67,12 +67,16 @@ snippet for "Kernel.SpecialForms.for/1" w
 end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
 endsnippet
 
-snippet "fu?n(ction)?" "Kernel.SpecialForms.fn/2" r
+snippet "(anonymous function|fn)" "Kernel.SpecialForms.fn/1" r
 fn ${1:args} -> $2 end$0
 endsnippet
 
-snippet "fu?n(ction)? (&|capture)" "Kernel.SpecialForms.&/1" r
-&(&1$1)$0
+snippet "((&\s?|capture )function|&\(&1\))" "Kernel.SpecialForms.&/1" r
+&(${1:&1}$2)$0
+endsnippet
+
+snippet "(?<!anonymous )(?<!capture )(?<!&)(?<!& )function" "Kernel.SpecialForms.(&/1|fn/2) choice" r
+${1|fn,&(&1)|}$0
 endsnippet
 
 context "make_context(snip)"
