@@ -64,6 +64,10 @@ snippet "exit shutdown tuple" "Kernel.exit/1 shutdown tuple choice" i
 {:shutdown, ${1:term or integer}}$0
 endsnippet
 
+snippet "function[_ ]exported\??" "Kernel.function_exported/3" r
+${1:Kernel.}function_exported?(${2:${3:module}, }${4:function}, ${5:arity})$0
+endsnippet
+
 snippet "(h(ea)?d|t(ai)?l)" "Kernel.(hd|tail)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`(${2:list})$0
 endsnippet
