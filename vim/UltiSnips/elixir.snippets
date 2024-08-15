@@ -35,6 +35,10 @@ snippet "(?<![eE]num[\\. ])(?<![mM]ap[\\. ])(?<![sS]tream[\\. ])(?<![kK]eyword[\
 ${1|Enum,Map,Stream,Keyword|}.filter$0
 endsnippet
 
+snippet "(?<![iI][oO][\\. ])(?<![kK]ernel[\\. ])(?<![iI]nspect[\\. ])inspect" "(IO|Kernel|Inspect).inspect/(2|3) chooser" r
+${1|Kernel,IO,Inspect|}.inspect$0
+endsnippet
+
 snippet "key[- ]value" "Key-value pair" r
 ${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}${4:,}$0
 endsnippet

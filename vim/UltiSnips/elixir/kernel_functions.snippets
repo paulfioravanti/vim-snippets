@@ -7,6 +7,11 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
 endglobal
 
 snippet "(abs|floor)" "Kernel.(abs|floor)/1" r
@@ -78,6 +83,13 @@ endsnippet
 
 snippet "(h(ea)?d|t(ai)?l)" "Kernel.(hd|tail)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`(${2:list})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "[kK]ernel[\\. ]inspect" "Kernel.inspect/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel}.inspect(${2:term}${3:`!p snip.rv = maybe_comma(t[2], t[4])`${4:opts}}$5)$0
 endsnippet
 
 snippet "put[_ ]elem" "Kernel.put_elem/3" r

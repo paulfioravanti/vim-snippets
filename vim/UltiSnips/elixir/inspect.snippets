@@ -14,17 +14,9 @@ from global_helpers import (
 
 endglobal
 
-snippet "(?i:IO[\\. ])inspect" "IO.inspect/(2|3) chooser" r
-IO.inspect${1|/2,/3|}$0
-endsnippet
-
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(?i:IO[\\. ])inspect/2" "IO.inspect/2" r
+snippet "[iI]nspect[\\. ]inspect" "Inspect.inspect/2" r
 `!p autojump_if_blank(snip, [1])
-`IO.inspect(${1:item}${2:`!p snip.rv = maybe_comma(t[1], t[3])`${3:opts}}$4)$0
-endsnippet
-
-snippet "(?i:IO[\\. ])inspect/3" "IO.inspect/3" r
-IO.inspect(${1:${2:device}, }${3:item}, ${4:opts}$5)$0
+`Inspect.inspect(${1:term}${2:`!p snip.rv = maybe_comma(t[1], t[3])`${3:opts}}$4)$0
 endsnippet
