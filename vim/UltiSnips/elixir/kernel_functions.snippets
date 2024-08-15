@@ -92,6 +92,35 @@ snippet "[kK]ernel[\\. ]inspect" "Kernel.inspect/2" r
 `${1:Kernel}.inspect(${2:term}${3:`!p snip.rv = maybe_comma(t[2], t[4])`${4:opts}}$5)$0
 endsnippet
 
+snippet "is[_ ](atom|binary|bitstring|boolean|float|integer|list|map|number|pid|port|reference|tuple)" "Kernel.is_(atom|binary|bitstring|boolean|float|integer|list|map|number|pid|port|reference|tuple)/1" r
+${1:Kernel.}is_`!p snip.rv = match.group(1)`(${2:term})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "is[_ ](exception|struct)" "Kernel.is_(exception|struct)/(1|2)" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}is_`!p snip.rv = match.group(1)`(${2:term}`!p snip.rv = maybe_comma(t[2], t[3])`${3:name})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "is[_ ]function" "Kernel.is_function/(1|2)" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}is_function(${2:term}`!p snip.rv = maybe_comma(t[2], t[3])`${3:arity})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "is[_ ]map[_ ]key" "Kernel.is_map_key/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}is_map_key(${2:${3:map}, }${4:key})$0
+endsnippet
+
+snippet "is[_ ]non[_ ]struct[_ ]map" "Kernel.is_non_struct_map/1" r
+${1:Kernel.}is_non_struct_map(${2:term})$0
+endsnippet
+
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
 ${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
 endsnippet
