@@ -195,3 +195,8 @@ snippet "(spawn([_ ](link|monitor))?)" "Kernel.spawn_(link|monitor)/(1|3)" r
 function_name = match.group(1).replace(" ", "_")
 `${1:Kernel.}`!p snip.rv = function_name`(${2:${3:module}, }${4:function}`!p snip.rv = maybe_comma(t[4], t[5])`${5:args})$0
 endsnippet
+
+# NOTE: Jumpers don't seem to want to work with this snippet...
+snippet "[kK]ernel[\\. ]struct!?(/2)?" "Kernel.struct(!)/2" r
+${1:Kernel.}struct${2:!}(${3:${4:struct}, }${5:fields \\\ []})$0
+endsnippet

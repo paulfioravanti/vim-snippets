@@ -70,9 +70,13 @@ snippet segment "Bitstring segment" i
 ${1:name}::${2:type}$0
 endsnippet
 
+snippet "(?<![kK]ernel[\\. ])(?<!literal )struct" "Kernel.struct(!)/2 or literal struct chooser" r
+${1|Kernel.struct/2,literal struct|}$0
+endsnippet
+
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(?<!is[_ ]non[_ ])(?<!is[_ ])struct( .+)?" "Elixir struct" r
+snippet "literal struct( .+)?" "Elixir struct" r
 `!p autojump_if_blank(snip, [2])
 `%${1:`!p snip.rv = struct_name(match)`}{${2:${3:field}: ${4:$3}}}$0
 endsnippet
