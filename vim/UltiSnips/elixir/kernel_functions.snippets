@@ -118,6 +118,25 @@ snippet "is[_ ]map[_ ]key" "Kernel.is_map_key/2" r
 `${1:Kernel.}is_map_key(${2:${3:map}, }${4:key})$0
 endsnippet
 
+snippet "macro[_ ]exported\??" "Kernel.macro_exported?/3" r
+${1:Kernel.}macro_exported?(${2:${3:module}, }${4:macro}, ${5:arity})$0
+endsnippet
+
+snippet "make[_ ]ref" "Kernel.make_ref/0" r
+${1:Kernel.}make_ref()$0
+endsnippet
+
+snippet "map[_ ]size" "Kernel.map_size/1" r
+${1:Kernel.}map_size(${2:map})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "((?<!min[_ ])max|min)(?:imum|$)" "Kernel.(max|min)/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}`!p snip.rv = match.group(1)`(${2:${3:first}, }${4:second})$0
+endsnippet
+
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
 ${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
 endsnippet
