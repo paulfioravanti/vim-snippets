@@ -14,7 +14,7 @@ from global_helpers import (
 
 endglobal
 
-snippet "(abs|floor)" "Kernel.(abs|floor)/1" r
+snippet "(abs|floor|(?<!g)round)" "Kernel.(abs|floor|round)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`(${2:number})$0
 endsnippet
 
@@ -53,12 +53,18 @@ snippet "\bdef\s?guard" "Kernel.(defguard|defguardp)/1" r
 `defguard${1:p} ${2:guard}(${3:value}) when ${4:condition}$0
 endsnippet
 
-snippet "(?<!floor[_ ])div(ision)?" "Kernel.div/2" r
-${1:Kernel.}div(${2:${3:dividend}, }${4:divisor})$0
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "((?<!floor[_ ])div(?:ision)?|rem(?:ainder)?)" "Kernel.(div|rem)/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}`!p snip.rv = match.group(1)`(${2:${3:dividend}, }${4:divisor})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "(?<!put[_ ])elem(ent)?" "Kernel.elem/2" r
-${1:Kernel.}elem(${2:${3:tuple}, }${4:index})$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}elem(${2:${3:tuple}, }${4:index})$0
 endsnippet
 
 snippet exit "Kernel.exit/1" i
@@ -69,16 +75,25 @@ snippet "exit shutdown tuple" "Kernel.exit/1 shutdown tuple choice" i
 {:shutdown, ${1:term or integer}}$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "function[_ ]exported\??" "Kernel.function_exported/3" r
-${1:Kernel.}function_exported?(${2:${3:module}, }${4:function}, ${5:arity})$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}function_exported?(${2:${3:module}, }${4:function}, ${5:arity})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "get[_ ]and[_ ]update[_ ]in" "Kernel.get_and_update_in/3" r
-${1:Kernel.}get_and_update_in(${2:${3:data}, }${4:keys}, function$5)$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}get_and_update_in(${2:${3:data}, }${4:keys}, function$5)$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "get[_ ]in" "Kernel.get_in/2" r
-${1:Kernel.}get_in(${2:${3:data}, }${4:opts}$5)$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}get_in(${2:${3:data}, }${4:opts}$5)$0
 endsnippet
 
 snippet "(h(ea)?d|length|t(ai)?l)" "Kernel.(hd|length|tail)/1" r
@@ -160,4 +175,8 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "put[_ ]in" "Kernel.put_in/3" r
 `!p autojump_if_blank(snip, [2])
 `${1:Kernel.}put_in(${2:${3:data}, }[${4:keys}], ${5:value})$0
+endsnippet
+
+snippet self "Kernel.self/0" i
+${1:Kernel.}self()$0
 endsnippet
