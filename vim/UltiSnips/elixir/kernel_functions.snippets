@@ -81,7 +81,7 @@ snippet "get[_ ]in" "Kernel.get_in/2" r
 ${1:Kernel.}get_in(${2:${3:data}, }${4:opts}$5)$0
 endsnippet
 
-snippet "(h(ea)?d|t(ai)?l)" "Kernel.(hd|tail)/1" r
+snippet "(h(ea)?d|length|t(ai)?l)" "Kernel.(hd|length|tail)/1" r
 ${1:Kernel.}`!p snip.rv = match.group(1)`(${2:list})$0
 endsnippet
 
@@ -92,8 +92,9 @@ snippet "[kK]ernel[\\. ]inspect" "Kernel.inspect/2" r
 `${1:Kernel}.inspect(${2:term}${3:`!p snip.rv = maybe_comma(t[2], t[4])`${4:opts}}$5)$0
 endsnippet
 
-snippet "is[_ ](atom|binary|bitstring|boolean|float|integer|list|map|number|pid|port|reference|tuple)" "Kernel.is_(atom|binary|bitstring|boolean|float|integer|list|map|number|pid|port|reference|tuple)/1" r
-${1:Kernel.}is_`!p snip.rv = match.group(1)`(${2:term})$0
+snippet "is[_ ](atom|binary|bitstring|boolean|float|integer|list|map|non[_ ]struct[_ ]map|number|pid|port|reference|tuple)" "Kernel.is_(atom|binary|bitstring|boolean|float|integer|list|map|non_struct_map|number|pid|port|reference|tuple)/1" r
+`!p term = match.group(1).replace(" ", "_")
+`${1:Kernel.}is_`!p snip.rv = term`(${2:term})$0
 endsnippet
 
 context "make_context(snip)"
@@ -115,10 +116,6 @@ post_jump "make_jumper(snip, snip.tabstop)"
 snippet "is[_ ]map[_ ]key" "Kernel.is_map_key/2" r
 `!p autojump_if_blank(snip, [2])
 `${1:Kernel.}is_map_key(${2:${3:map}, }${4:key})$0
-endsnippet
-
-snippet "is[_ ]non[_ ]struct[_ ]map" "Kernel.is_non_struct_map/1" r
-${1:Kernel.}is_non_struct_map(${2:term})$0
 endsnippet
 
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
