@@ -11,7 +11,7 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(link|anchor|a tag)" "HTML <a> tag" r
+snippet "((?<!spawn[_ ])link|anchor|a tag)" "HTML <a> tag" r
 `!p autojump_if_blank(snip, [2])
 `<a href="${1:url}"${2: target="${3|_blank,_parent,_top|}"}>
   ${4:${VISUAL:text}}

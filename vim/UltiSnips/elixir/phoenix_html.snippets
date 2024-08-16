@@ -56,7 +56,7 @@ endsnippet
 # $6 is used to force the tabstop into the block.
 context "maybe_eex_tag(snip) and make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet link "Phoenix.HTML.Link.link/2" w
+snippet "(?<!spawn[_ ])link" "Phoenix.HTML.Link.link/2" r
 `!p autojump_if_blank(snip, [2, 6])
 `${1:`!p snip.rv = initial_eex_tag(snip)`}link${2: "${3:text}",} to: "${4:/href}"$5${6: do`!p snip.rv = do_eex_tag(snip, t[1])`
   ${7:${VISUAL}}
