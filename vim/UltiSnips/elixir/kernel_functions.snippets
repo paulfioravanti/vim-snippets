@@ -141,10 +141,23 @@ snippet node "Kernel.node/(0|1)" i
 ${1:Kernel.}node(${2:arg})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "pop[_ ]in" "Kernel.pop_in/2" r
-${1:Kernel.}pop_in(${2:${3:data}, }[${4:keys}])$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}pop_in(${2:${3:data}, }[${4:keys}])$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
 snippet "put[_ ]elem" "Kernel.put_elem/3" r
-${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}put_elem(${2:${3:tuple}, }${4:index}, ${5:value})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "put[_ ]in" "Kernel.put_in/3" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}put_in(${2:${3:data}, }[${4:keys}], ${5:value})$0
 endsnippet
