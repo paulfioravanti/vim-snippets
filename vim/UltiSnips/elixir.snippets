@@ -85,6 +85,6 @@ snippet "(?<!exit shutdown )(?<!is[_ ])tuple" "literal tuple" r
 {${1:first}, ${2:second}$3}$0
 endsnippet
 
-snippet "tuple (.+)" "literal tagged tuple" r
+snippet "tuple(?![_ ]size) (.+)" "literal tagged tuple" r
 {:`!p snip.rv = tuple_tag(match)`, ${1:value}}$0
 endsnippet

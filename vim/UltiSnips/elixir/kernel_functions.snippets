@@ -55,9 +55,9 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "((?<!floor[_ ])div(?:ision)?|rem(?:ainder)?)" "Kernel.(div|rem)/2" r
+snippet "(?<!floor[_ ])div(?:ision)?" "Kernel.div/2" r
 `!p autojump_if_blank(snip, [2])
-`${1:Kernel.}`!p snip.rv = match.group(1)`(${2:${3:dividend}, }${4:divisor})$0
+`${1:Kernel.}div(${2:${3:dividend}, }${4:divisor})$0
 endsnippet
 
 context "make_context(snip)"
@@ -84,9 +84,10 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "get[_ ]and[_ ]update[_ ]in" "Kernel.get_and_update_in/3" r
+snippet "((get[_ ]and[_ ])?update[_ ]in)" "Kernel.(get_and_)update_in/3" r
 `!p autojump_if_blank(snip, [2])
-`${1:Kernel.}get_and_update_in(${2:${3:data}, }${4:keys}, function$5)$0
+function_name = match.group(1).replace(" ", "_")
+`${1:Kernel.}`!p snip.rv = function_name`(${2:${3:data}, }[${4:keys}], ${5:function}$6)$0
 endsnippet
 
 context "make_context(snip)"
@@ -177,6 +178,13 @@ snippet "put[_ ]in" "Kernel.put_in/3" r
 `${1:Kernel.}put_in(${2:${3:data}, }[${4:keys}], ${5:value})$0
 endsnippet
 
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "rem(?:ainder)?" "Kernel.rem/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}rem(${2:${3:dividend}, }${4:divisor})$0
+endsnippet
+
 snippet self "Kernel.self/0" i
 ${1:Kernel.}self()$0
 endsnippet
@@ -199,4 +207,27 @@ endsnippet
 # NOTE: Jumpers don't seem to want to work with this snippet...
 snippet "[kK]ernel[\\. ]struct!?(/2)?" "Kernel.struct(!)/2" r
 ${1:Kernel.}struct${2:!}(${3:${4:struct}, }${5:fields \\\ []})$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "(tap|then)" "Kernel.(tap|then)/2" r
+`!p autojump_if_blank(snip, [2])
+`${1:Kernel.}`!p snip.rv = match.group(1)`(${2:${3:value}, }${4:function}$5)$0
+endsnippet
+
+snippet "(?<!catch[_ ])throw" "Kernel.throw/1" r
+${1:Kernel.}throw(${2:term})$0
+endsnippet
+
+snippet "to[_ ]timeout" "Kernel.to_timeout/1" r
+${1:Kernel.}to_timeout(${2:duration})$0
+endsnippet
+
+snippet "trunc(?:ate)?" "Kernel.trunc/1" r
+${1:Kernel.}trunc(${2:number})$0
+endsnippet
+
+snippet "tuple[_ ]size" "Kernel.tuple_size/1" r
+${1:Kernel.}tuple_size(${2:tuple})$0
 endsnippet
