@@ -41,22 +41,31 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "\bdef\s?delegate" "Kernel.defdelegate(funs, opts)" r
+snippet "\bdef\s?delegate" "Kernel.defdelegate/2" r
 `!p autojump_if_blank(snip, [3])
 `defdelegate ${1:fun}, to: ${2:Module}${3:, as: ${4:fun}}$0
 endsnippet
 
-snippet "\bdef\s?exception" "Kernel.defexception(fields)" r
+snippet "\bdef\s?exception" "Kernel.defexception/1" r
 defexception [:${1:field}$2]$0
 endsnippet
 
-snippet "\bdef\s?module" "Kernel.defmodule(alias, do_block)" r
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bdef\s?impl(mentation)?" "Kernel.defimpl/3" r
+`!p autojump_if_blank(snip, [2])
+`defimpl ${1:Name}, for: ${2:[}${3:Type}$4`!p snip.rv = closing_character(t[2])` do
+  $0
+end
+endsnippet
+
+snippet "\bdef\s?module" "Kernel.defmodule/2" r
 defmodule ${1:`!p snip.rv = module_name(path)`} do
   $0
 end
 endsnippet
 
-snippet "\bdef\s?struct" "Kernel.defstruct(fields)" r
+snippet "\bdef\s?struct" "Kernel.defstruct/1" r
 defstruct ${1:[}:${2:field}$3`!p snip.rv = closing_character(t[1])`$0
 endsnippet
 
@@ -78,7 +87,7 @@ snippet "\b(if|unless):" "Kernel.(if|unless)/2 single-line" r
 snip.rv = match.group(1)` ${1:condition}, do: ${2:${VISUAL}}${3:, else: $4}$0
 endsnippet
 
-snippet "is[_ ]nil" "Kernel.is_nil(term)" r
+snippet "is[_ ]nil" "Kernel.is_nil/1" r
 is_nil(${1:term})$0
 endsnippet
 
@@ -121,7 +130,7 @@ endsnippet
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet use "Kernel.use(module, opts \\ [])" b
+snippet use "Kernel.use/2" b
 `!p autojump_if_blank(snip, [2])
 `use ${1:Module}${2:, ${3:key}: ${4:value}}$0
 endsnippet
