@@ -98,33 +98,33 @@ snippet range "Kernel...///3 first..last//step" i
 `${1:first}..${2:last}${3://${4:step}}$0
 endsnippet
 
-snippet "sigil c" "Kernel.sigil_c(term, modifiers)" i
+snippet "sigil[_ ]c" "Kernel.sigil_c/2(term, modifiers)" r
 ~c(${1:chars})$0
 endsnippet
 
-snippet "sigil D" "Kernel.sigil_D(date_string, modifiers)" i
+snippet "sigil[_ ]D" "Kernel.sigil_D/2(date_string, modifiers)" r
 ~D[${1:`date +%Y-%m-%d`}]$0
 endsnippet
 
-snippet "sigil N" "Kernel.sigil_N(naive_datetime_string, modifiers)" i
+snippet "sigil[_ ]N" "Kernel.sigil_N/2(naive_datetime_string, modifiers)" r
 ~N[${1:`date "+%Y-%m-%d %T"`}]$0
 endsnippet
 
 # https://hexdocs.pm/elixir/1.12/Regex.html#module-modifiers
-snippet "sigil r" "Kernel.sigil_r(term, modifiers)" i
+snippet "sigil[_ ]r" "Kernel.sigil_r/2(term, modifiers)" r
 ~r/${2:regex}/${1|f,i,m,s,u,x,U|}$0
 endsnippet
 
-snippet "sigil s" "Kernel.sigil_s(term, modifiers)" i
+snippet "sigil[_ ]s" "Kernel.sigil_s/2(term, modifiers)" r
 ~s(${1:string})$0
 endsnippet
 
-snippet "sigil T" "Kernel.sigil_T(time_string, modifiers)" i
+snippet "sigil[_ ]T" "Kernel.sigil_T/2(time_string, modifiers)" r
 ~T[${1:`date +%T`}]$0
 endsnippet
 
 # https://hexdocs.pm/elixir/1.12/Kernel.html#sigil_w/2
-snippet "sigil w" "Kernel.sigil_w(term, modifiers)" i
+snippet "sigil[_ ]w" "Kernel.sigil_w/2(term, modifiers)" r
 ~w(${2:words})${1|s,a,c|}$0
 endsnippet
 
