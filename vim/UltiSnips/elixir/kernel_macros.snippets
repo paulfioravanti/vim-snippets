@@ -25,9 +25,9 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet def "Kernel.(def|defp)/2 multiline" b
+snippet "(\bdef(macro)?)" "Kernel.(def|defp|defmacro|defmacrop)/2 multiline" r
 `!p autojump_if_blank(snip, [1, 3, 5])
-`def${1:p} ${2:function_name}${3:(${4:args})}${5: do
+snip.rv = match.group(1)`${1:p} ${2:function_name}${3:(${4:args})}${5: do
   $6
 end}`!p snip.rv = maybe(t[5], _SINGLE_LINE_DO)`$0
 endsnippet
