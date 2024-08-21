@@ -25,9 +25,9 @@ endglobal
 
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "(\bdef(macro)?)" "Kernel.(def|defp|defmacro|defmacrop)/2 multiline" r
+snippet "\bdef" "Kernel.(def|defp)/2 multiline" r
 `!p autojump_if_blank(snip, [1, 3, 5])
-snip.rv = match.group(1)`${1:p} ${2:function_name}${3:(${4:args})}${5: do
+`def${1:p} ${2:name}${3:(${4:args})}${5: do
   $6
 end}`!p snip.rv = maybe(t[5], _SINGLE_LINE_DO)`$0
 endsnippet
@@ -59,14 +59,31 @@ snippet "\bdef\s?impl(mentation)?" "Kernel.defimpl/3" r
 end
 endsnippet
 
-snippet "\bdef\s?module" "Kernel.defmodule/2" r
-defmodule ${1:`!p snip.rv = module_name(path)`} do
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "\bdef\s?macro" "Kernel.(defmacro|defmacrop)/2 multiline" r
+`!p autojump_if_blank(snip, [1, 3])
+`defmacro${1:p} ${2:name}${3:(${4:args})} do
   $0
 end
 endsnippet
 
+snippet "\bdef\s?(module|protocol)" "Kernel.def(module|protocol)/2" r
+def`!p snip.rv = match.group(1)` ${1:`!p snip.rv = module_name(path)`} do
+  $0
+end
+endsnippet
+
+snippet "\bdef\s?overridable" "Kernel.defoverridable/1" r
+defoverridable ${1:keywords_or_behaviour}$0
+endsnippet
+
 snippet "\bdef\s?struct" "Kernel.defstruct/1" r
 defstruct ${1:[}:${2:field}$3`!p snip.rv = closing_character(t[1])`$0
+endsnippet
+
+snippet destructure "Kernel.destructure/2" i
+destructure(${1:left}, ${2:right})$0
 endsnippet
 
 context "make_context(snip)"
