@@ -91,11 +91,12 @@ function_name = match.group(1).replace(" ", "_")
 `${1:Kernel.}`!p snip.rv = function_name`(${2:${3:data_or_path}, }${4:[${5:keys}]}`!p snip.rv = maybe_comma(t[4], t[6])`${6:function}$7)$0
 endsnippet
 
+# NOTE: Arity/1 version of this function is a macro
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
-snippet "get[_ ]in" "Kernel.get_in/2" r
+snippet "get[_ ]in" "Kernel.get_in/(1|2)" r
 `!p autojump_if_blank(snip, [2])
-`${1:Kernel.}get_in(${2:${3:data}, }${4:opts}$5)$0
+`${1:Kernel.}get_in(${2:data_or_path}`!p snip.rv = maybe_comma(t[2], t[3])`${3:opts}$4)$0
 endsnippet
 
 snippet "(h(ea)?d|length|t(ai)?l)" "Kernel.(hd|length|tail)/1" r
