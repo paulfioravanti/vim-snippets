@@ -66,6 +66,10 @@ snippet "(?<!is[_ ])(?<!is[_ ]non[_ ]struct[_ ])(?<!struct )map" "Literal Elixir
 `%{${1:"}${2:key}`!p snip.rv = key_closing(t[1])` ${3:$2}$4}$0
 endsnippet
 
+snippet "(?<![kK]ernel[\\. ])(?<![rR]egex[\\. ])(?<![sS]tring[\\. ])(?<![vV]ersion[\\. ])match\?" "(Kernel|Regex|String|Version).match?/(2|3) chooser" r
+${1|Kernel,Regex,String,Version|}.match?$0
+endsnippet
+
 snippet segment "Bitstring segment" i
 ${1:name}::${2:type}$0
 endsnippet

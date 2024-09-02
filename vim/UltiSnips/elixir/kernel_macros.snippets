@@ -108,6 +108,10 @@ snippet "is[_ ]nil" "Kernel.is_nil/1" r
 is_nil(${1:term})$0
 endsnippet
 
+snippet "[kK]ernel[\\. ]match\?" "Kernel.match?/2" r
+${1:Kernel.}match?(${2:${3:pattern}, }${4:expr})$0
+endsnippet
+
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet range "Kernel...///3 first..last//step" i

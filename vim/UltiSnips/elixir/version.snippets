@@ -1,0 +1,22 @@
+global !p
+
+# ~/.vim/pythonx/vim_pythonx_helpers.py
+from vim_pythonx_helpers import (
+    autojump_if_blank,
+    make_context,
+    make_jumper
+)
+
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_comma
+)
+
+endglobal
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet "[vV]ersion[\\. ]match\?" "Version.match?/3" r
+`!p autojump_if_blank(snip, [1, 4])
+`Version.match?(${1:${2:version}, }${3:requirement}`!p snip.rv = maybe_comma(t[3], t[4])`${4:allow_pre: ${5:true}})$0
+endsnippet
