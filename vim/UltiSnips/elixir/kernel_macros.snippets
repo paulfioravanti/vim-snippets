@@ -112,11 +112,22 @@ snippet "[kK]ernel[\\. ]match\?" "Kernel.match?/2" r
 ${1:Kernel.}match?(${2:${3:pattern}, }${4:expr})$0
 endsnippet
 
+snippet "(?<!re)raise" "Kernel.raise/(1|2)" r
+raise ${1:message_or_exception}${2:, ${3:attributes}}$0
+endsnippet
+
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet range "Kernel...///3 first..last//step" i
 `!p autojump_if_blank(snip, [3])
 `${1:first}..${2:last}${3://${4:step}}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet reraise "Kernel.reraise/(2|3)" i
+`!p autojump_if_blank(snip, [2])
+`reraise ${1:message_or_exception}${2:, ${3:attributes}}, ${4:__STACKTRACE__}$0
 endsnippet
 
 snippet "sigil[_ ]c" "Kernel.sigil_c/2(term, modifiers)" r
@@ -149,6 +160,10 @@ snippet "sigil[_ ]w" "Kernel.sigil_w/2(term, modifiers)" r
 ~w(${2:words})${1|s,a,c|}$0
 endsnippet
 
+snippet "to[_ ](charlist|string)" "Kernel.to_(charlist|string)/1" r
+${1:Kernel.}to_`!p snip.rv = match.group(1)`(${2:term})$0
+endsnippet
+
 context "make_context(snip)"
 post_jump "make_jumper(snip, snip.tabstop)"
 snippet use "Kernel.use/2" b
@@ -159,4 +174,11 @@ endsnippet
 # REF path variable: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt#L894
 snippet "\buse (phx|phoenix)" "Kernel.use/2 with a Phoenix module" r
 use ${1:`!p snip.rv = root_module_name(path)`}, :${2|channel,component,controller,live_component,live_view,router,view|}$0
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet var! "Kernel.var!/2" i
+`!p autojump_if_blank(snip, [3, 5])
+`${1:Kernel.}var!(${2:var}${3:, ${4:context}})${5: = ${6:value}}$0
 endsnippet
