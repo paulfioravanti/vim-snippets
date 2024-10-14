@@ -53,7 +53,7 @@ cond do
 end$0
 endsnippet
 
-snippet "\b(clause|condition)" "Kernel.SpecialForms.(cond/2|fn/1 clause/condition" r
+snippet "\b(clause|condition)" "Kernel.SpecialForms.(cond/2|fn/1) clause/condition" r
 ${1:`!p snip.rv = match.group(1)`} ->
   ${2:${VISUAL:# do something}}$0
 endsnippet
@@ -67,7 +67,7 @@ snippet for "Kernel.SpecialForms.for/1" w
 end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
 endsnippet
 
-snippet "(anonymous function|fn)" "Kernel.SpecialForms.fn/1" r
+snippet "(fn|anonymous function)" "Kernel.SpecialForms.fn/1" r
 fn ${1:args} -> $2 end$0
 endsnippet
 
@@ -92,4 +92,13 @@ snippet pattern "Kernel.SpecialForms.case/2 pattern match" b
 `!p autojump_if_blank(snip, [2])
 `${1:pattern} ${2:when ${3:condition} }->
   ${0:# do something}
+endsnippet
+
+context "make_context(snip)"
+post_jump "make_jumper(snip, snip.tabstop)"
+snippet quote "Kernel.SpecialForms.quote/2" b
+`!p autojump_if_blank(snip, [1, 2])
+`quote`!p snip.rv = " " if t[1] else ""`${1:options}${2: do
+  $3
+end}`!p snip.rv = maybe(t[2], _SINGLE_LINE_DO)`$0
 endsnippet
