@@ -9,4 +9,7 @@ from global_helpers import (
 
 
 def class_name(snip):
+    """
+    Convert snippet file basename to camel case.
+    """
     return snake_to_camel(snip.basename)

@@ -1,3 +1,7 @@
+"""
+Vim Pythonx-related Ultisnips snippet helper functions.
+NOTE: Changes to this file require restarting Vim!
+"""
 # https://github.com/reconquest/vim-pythonx
 import px.snippets
 from px.snippets import (

@@ -7,7 +7,7 @@ from UltiSnips import vim_helper
 
 
 # REF: https://stackoverflow.com/a/3469155/567863
-_NON_NEWLINE_WHITESPACE = "[^\S\r\n]"
+_NON_NEWLINE_WHITESPACE = r"[^\S\r\n]"
 
 def class_attribute_name():
     """
@@ -22,6 +22,9 @@ def class_attribute_name():
     return "className" if vim_helper.eval("&filetype") == "javascript" else "class"
 
 def maybe_semi(snip):
+    """
+    Determines whether a semi-colon (;) is needed at the end of a line.
+    """
     # NOTE: This guard is needed to prevent recursion bugs when starting a
     # snippet and then running undo before the snippet has finished.
     # See: https://github.com/SirVer/ultisnips/issues/375#issuecomment-55115227
@@ -30,6 +33,9 @@ def maybe_semi(snip):
         snip.rv = ";" if option == "always" else ""
 
 def maybe_spaces(tabstop):
+    """
+    Determines whether trailing spaces are required.
+    """
     if not tabstop:
         return ""
 
@@ -45,4 +51,4 @@ def _get_config_option(snip, option, default=None):
     """
     Gets a config option from ~/.vim/settings/ultisnips.vim
     """
-    return snip.opt('g:ultisnips_javascript["{}"]'.format(option), default)
+    return snip.opt(f"g:ultisnips_javascript[\"{option}\"]", default)

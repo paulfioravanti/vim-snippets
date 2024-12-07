@@ -1,3 +1,7 @@
+"""
+HTML-related Ultisnips snippet helper functions.
+NOTE: Changes to this file require restarting Vim!
+"""
 import re
 
 
