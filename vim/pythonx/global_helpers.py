@@ -3,7 +3,7 @@ Ultisnips snippet global helper functions. Intended for multiple languages.
 NOTE: Changes to this file require restarting Vim!
 """
 
-_CLOSING_CHARACTERS = {
+_CLOSING_CHARACTERS: dict[str,str] = {
     "(": ")",
     "{": "}",
     "[": "]",
@@ -14,7 +14,7 @@ _CLOSING_CHARACTERS = {
     "\"": "\""
 }
 
-def choice_tabstop_chosen(choice_tabstop):
+def choice_tabstop_chosen(choice_tabstop: str) -> bool:
     """
     Checks if a choice tabstop has been chosen.
     """
@@ -22,7 +22,7 @@ def choice_tabstop_chosen(choice_tabstop):
     # a choice has not been made yet.
     return not choice_tabstop.startswith("1.")
 
-def closing_character(tabstop):
+def closing_character(tabstop: list[str] | None) -> str:
     """
     Return closing character for a tabstop containing an opening character.
     """
@@ -30,7 +30,7 @@ def closing_character(tabstop):
     # them run into each other, always take the first character of the string.
     return _CLOSING_CHARACTERS.get(tabstop[0], "") if tabstop else ""
 
-def key_closing(opening):
+def key_closing(opening: str) -> str:
     """
     Intended for languages that have key-value stores where their keys can be
     written as both strings or some kind of constant (like an atom or symbol
@@ -40,49 +40,34 @@ def key_closing(opening):
     """
     return "\" =>" if opening == "\"" else ":"
 
-def maybe(tabstop, alternative):
+def maybe(tabstop: str, alternative: str) -> str:
     """
     A simple maybe clause to put in an alternative value if a tabstop
     is missing.
     """
     return "" if tabstop else alternative
 
-def maybe_comma(left, right):
+def maybe_comma(left: str, right: str) -> str:
     """
     Aims to remove commas between function arguments when the right-side
     argument is removed.
     """
     return ", " if left and right else ""
 
-def maybe_surround(choice_tabstop, surround):
+def maybe_surround(choice_tabstop: str, surround: str) -> str:
     """
     Surround a choice tabstop with `surround` chars to indicate the whole
     tabstop itself is optional.
     """
     return "" if choice_tabstop_chosen(choice_tabstop) else surround
 
-def snake_to_camel(string):
+def snake_to_camel(string: str) -> str:
     """
     Given a snake_cased_string, returns a CamelCaseString.
     """
     return string.replace("_", " ").title().replace(" ", "")
 
-def words_to_camel_case(words):
-    """
-    Converts words into a camelCase string for use as a function name.
-    """
-    head, *tail = words.split(" ")
-    tail = [word[0].capitalize() + word[1:] for word in tail]
-    return "".join([head, *tail])
-
-def words_to_pascal_case(words):
-    """
-    Converts words into a PascalCase string for use as a constant etc name.
-    """
-    return (
-        "".join([word[0].capitalize() + word[1:] for word in words.split(" ")])
-    )
-
+# Cannot type hint a `snip`.
 def visual_context(snip):
     """
     Visual text is not available in post_jump by default
@@ -94,3 +79,19 @@ def visual_context(snip):
     See html.snippets for an example of using this function.
     """
     return {"visual": snip.visual_text}
+
+def words_to_camel_case(words: str) -> str:
+    """
+    Converts words into a camelCase string for use as a function name.
+    """
+    head, *tail = words.split(" ")
+    tail = [word[0].capitalize() + word[1:] for word in tail]
+    return "".join([head, *tail])
+
+def words_to_pascal_case(words: str) -> str:
+    """
+    Converts words into a PascalCase string for use as a constant etc name.
+    """
+    return (
+        "".join([word[0].capitalize() + word[1:] for word in words.split(" ")])
+    )

@@ -12,6 +12,7 @@ from px.snippets import (
 )
 
 
+# Cannot type hint a `snip`.
 def autojump_if_blank(snip, positions):
     """
     Derived from the "Autojump from tabstop when it's empty" guide:
@@ -23,12 +24,14 @@ def autojump_if_blank(snip, positions):
     ):
         advance_jumper(snip)
 
+# Cannot type hint a `snip`.
 def make_context(snip):
     """
     Wrapper around px.snippets method.
     """
     return px.snippets.make_context(snip)
 
+# Cannot type hint a `snip`.
 def make_jumper(snip, on_tabstop=1):
     """
     Wrapper around px.snippets method.

@@ -9,6 +9,7 @@ from global_helpers import (
 )
 
 
+# Cannot type hint a `snip`.
 def class_name(snip):
     """
     Convert snippet file basename to camel case.

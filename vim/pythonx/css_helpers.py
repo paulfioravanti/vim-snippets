@@ -3,7 +3,10 @@ CSS-related Ultisnips snippet helper functions.
 NOTE: Changes to this file require restarting Vim!
 """
 
-def join_properties(match: str) -> str:
+from typing import Match
+
+
+def join_properties(match: Match) -> str:
     """
     Return joined properties together.
     """
