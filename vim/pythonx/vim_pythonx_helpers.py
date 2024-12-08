@@ -2,6 +2,7 @@
 Vim Pythonx-related Ultisnips snippet helper functions.
 NOTE: Changes to this file require restarting Vim!
 """
+
 # https://github.com/reconquest/vim-pythonx
 import px.snippets
 from px.snippets import (
@@ -9,6 +10,7 @@ from px.snippets import (
     get_jumper_position,
     get_jumper_text
 )
+
 
 def autojump_if_blank(snip, positions):
     """

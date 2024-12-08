@@ -12,6 +12,7 @@ from global_helpers import (
     closing_character
 )
 
+
 def queryable_name(snip, match):
     if queryable := snip.v.text or match.group(1):
         return queryable.title()

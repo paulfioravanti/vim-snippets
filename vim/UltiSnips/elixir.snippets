@@ -17,6 +17,7 @@ from global_helpers import (
     key_closing
 )
 
+
 def struct_name(match):
     capture = match.group(1)
     return capture.lstrip().title() if capture else "Struct"
