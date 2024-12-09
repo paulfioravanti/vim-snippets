@@ -9,14 +9,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def erb_placeholder(tag):
-    if tag == "%#":
-        return "comment"
-    if tag == "%==":
-        return "raw_expression"
-
-    return "expression"
+from .eruby import (
+    erb_placeholder
+)
 
 endglobal
 

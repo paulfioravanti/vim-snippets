@@ -2,4 +2,6 @@
 ignored-modules =
     UltiSnips,
     global_helpers,
-    px.snippets,
+    html_helpers,
+    javascript_helpers,
+    px.snippets

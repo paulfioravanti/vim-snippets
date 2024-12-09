@@ -3,20 +3,14 @@ extends elixir
 
 global !p
 
-import re
-
 # ~/.vim/pythonx/global_helpers.py
 from global_helpers import (
     closing_character
 )
 
-
-def eex_placeholder(tag):
-    if tag == "%#":
-        return "comment"
-    if tag in ["%%", "%%="]:
-        return "quotation"
-    return "expression"
+from .eelixir import (
+    eex_placeholder
+)
 
 endglobal
 

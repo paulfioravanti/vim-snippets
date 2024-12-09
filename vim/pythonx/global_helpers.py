@@ -54,6 +54,12 @@ def maybe_comma(left: str, right: str) -> str:
     """
     return ", " if left and right else ""
 
+def maybe_paren(tabstop: str) -> str:
+    """
+    Return closing parenthesis if tabstop contains opening parenthesis.
+    """
+    return ")" if tabstop == "(" else ""
+
 def maybe_surround(choice_tabstop: str, surround: str) -> str:
     """
     Surround a choice tabstop with `surround` chars to indicate the whole

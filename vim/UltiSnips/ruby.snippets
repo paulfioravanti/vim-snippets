@@ -20,45 +20,12 @@ from ruby_helpers import (
     class_name
 )
 
-
-_PERCENT_LITERALS = {
-    "string": "w",
-    "word": "w",
-    "symbol": "i"
-}
-
-def initialize_args(tabstop, snip):
-    if not tabstop:
-        snip.rv = ""
-        return
-
-    args = [string.strip() for string in tabstop.split(",") if string]
-    snip.shift(2)
-    for arg in args:
-        snip += snip.mkline("", indent="")
-        snip.rv += f"@{arg} = {arg}"
-
-def initialize_attr_args(tabstop):
-    if not tabstop:
-        return ""
-
-    args = [string.strip() for string in tabstop.split(",") if string]
-    attrs = map(lambda arg: f":{arg}", args)
-    return " " + ", ".join(attrs)
-
-def percent_literal(match):
-    capture = match.group(1)
-    if capture:
-        return _PERCENT_LITERALS.get(capture, "")
-    return ""
-
-def words_to_constant(match):
-    capture = match.group(1)
-    if not capture:
-        return "CONSTANT_NAME"
-
-    word_list = capture.upper().split()
-    return "_".join(word_list)
+from .ruby import (
+    initialize_args,
+    initialize_attr_args,
+    percent_literal,
+    words_to_constant
+)
 
 endglobal
 

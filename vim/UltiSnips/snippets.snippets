@@ -7,23 +7,10 @@ from global_helpers import (
     closing_character
 )
 
-
-_GLOBAL_START = "global"
-_GLOBAL_END = "endglobal"
-_INLINE_PYTHON_START = "`!p "
-_INLINE_PYTHON_END = "`"
-_SNIPPET_START = "snippet"
-_SNIPPET_END = "endsnippet"
-
-def maybe_visual_colon(tabstop):
-    return ":" if tabstop else ""
-
-def parse_snippet_action_name(match):
-    action_name = match.group(1)
-    if action_name == "preexpand":
-        return "pre_expand"
-    else:
-        return action_name.replace(" ", "_")
+from .snippets import (
+    maybe_visual_colon,
+    parse_snippet_action_name
+)
 
 endglobal
 

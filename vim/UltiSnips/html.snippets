@@ -17,53 +17,14 @@ from global_helpers import (
 # ~/.vim/pythonx/html_helpers.py
 from html_helpers import (
     can_map_to_tag_name,
-    extract_ids_and_classes,
     is_html_tag,
     text_to_tag
 )
 
-# ~/.vim/pythonx/javascript_helpers.py
-from javascript_helpers import (
-    class_attribute_name
+from .html import (
+    build_tag_with_attributes,
+    tag_args
 )
-
-
-_MULTILINE = "multi-line"
-
-def build_tag_with_attributes(snip, match):
-    tag, attributes, tag_type = match.group(1, 2, 3)
-    tag = text_to_tag(tag)
-    # NOTE: Although a tag with attributes probably doesn't need this wrapping
-    # $1 tabstop, without it, the snippet spacing is borked, which seems like a
-    # bug in UltiSnips. Might be related to the following issue:
-    # https://github.com/SirVer/ultisnips/issues/1013
-    output = f"<{tag}${{1:"
-
-    if attributes:
-        ids, classes = extract_ids_and_classes(attributes)
-
-        if ids:
-            output += f" id=\"{ids}\""
-
-        if classes:
-            output += f" {class_attribute_name()}=\"{classes}\""
-    else:
-        output += "${2: id=\"${3:id}\"}"
-        output += f"${{4: ${{5:{class_attribute_name()}}}=\"${{6:classes}}\"}}"
-
-    output += "}$7>"
-
-    visual = snip.context["visual"].strip(" \t\n\r")
-    if tag_type == _MULTILINE:
-        output += f"\n  ${{8:{visual}}}\n"
-    else:
-        output += f"${{8:{visual}}}"
-
-    output += f"</{tag}>"
-    snip.expand_anon(output)
-
-def tag_args(match):
-    return match.group(2) or ""
 
 endglobal
 

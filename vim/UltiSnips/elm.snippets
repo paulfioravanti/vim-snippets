@@ -7,9 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def maybe_paren(tabstop):
-    return ")" if tabstop == "(" else ""
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_paren
+)
 
 endglobal
 

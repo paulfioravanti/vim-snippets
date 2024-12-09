@@ -9,14 +9,15 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_paren
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
 )
-
-
-def maybe_paren(tabstop):
-    return ")" if tabstop == "(" else ""
 
 endglobal
 
