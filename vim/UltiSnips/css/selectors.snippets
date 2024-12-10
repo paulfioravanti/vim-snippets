@@ -1,14 +1,8 @@
 global !p
 
-def selector_info(match):
-    selector_type = match.group(1)
-    match selector_type:
-        case "class":
-            return (".", selector_type)
-        case "id":
-            return ("#", selector_type)
-        case _:
-            return ("", selector_type)
+from .selectors import (
+    selector_info
+)
 
 endglobal
 

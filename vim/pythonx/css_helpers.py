@@ -12,3 +12,9 @@ def join_properties(match: Match) -> str:
     """
     groups = [group for group in match.groups() if group is not None]
     return "-".join(groups)
+
+def join_pseudo(match: Match) -> str:
+    """
+    Return joined pseudo-class elements.
+    """
+    return "-".join(match.group(1).split(" "))
