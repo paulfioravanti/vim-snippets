@@ -15,12 +15,10 @@ from global_helpers import (
 
 # ~/.vim/pythonx/elixir_helpers.py
 from elixir_helpers import (
+    SINGLE_LINE_DO,
     module_name,
     root_module_name
 )
-
-
-_SINGLE_LINE_DO = ", do: "
 
 endglobal
 
@@ -30,7 +28,7 @@ snippet "\bdef" "Kernel.(def|defp)/2 multiline" r
 `!p autojump_if_blank(snip, [1, 3, 5])
 `def${1:p} ${2:name}${3:(${4:args})}${5: do
   $6
-end}`!p snip.rv = maybe(t[5], _SINGLE_LINE_DO)`$0
+end}`!p snip.rv = maybe(t[5], SINGLE_LINE_DO)`$0
 endsnippet
 
 context "make_context(snip)"

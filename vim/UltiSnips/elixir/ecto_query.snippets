@@ -12,21 +12,11 @@ from global_helpers import (
     closing_character
 )
 
-
-def queryable_name(snip, match):
-    if queryable := snip.v.text or match.group(1):
-        return queryable.title()
-    return "Queryable"
-
-def queryable_first_character(queryable):
-    if queryable:
-        return queryable[0].lower()
-    return "x"
-
-def query_expression_name(match):
-    name = match.group(1)
-    name = "order_by" if name == "order" or name == "order by" else name
-    return name
+from .ecto_query import (
+    query_expression_name,
+    queryable_first_character,
+    queryable_name
+)
 
 endglobal
 

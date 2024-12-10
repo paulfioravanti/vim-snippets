@@ -14,16 +14,13 @@ from global_helpers import (
 
 # ~/.vim/pythonx/elixir_helpers.py
 from elixir_helpers import (
-    module_name,
     to_module_name
 )
 
-
-def key_closing(opening):
-    return "," if opening == ":" else ":"
-
-def module_parts(path):
-    return module_name(path).rsplit(".", 1)
+from .phoenix_live_view import (
+    key_closing,
+    module_parts
+)
 
 endglobal
 

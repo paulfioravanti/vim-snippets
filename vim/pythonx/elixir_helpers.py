@@ -6,6 +6,8 @@ NOTE: Changes to this file require restarting Vim!
 import re
 
 
+SINGLE_LINE_DO = ", do: "
+
 _DASHES_AND_UNDERSCORES: re.Pattern = re.compile(r"[-_]")
 _FILE_EXTENSIONS: re.Pattern = re.compile(r"\.(?:html\.(?:h|l)?eex|ex)$")
 _NON_MODULE_DIRNAMES: list[str] = [

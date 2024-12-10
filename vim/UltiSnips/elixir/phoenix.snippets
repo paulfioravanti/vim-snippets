@@ -5,21 +5,9 @@ from global_helpers import (
     closing_character
 )
 
-
-def binding_var(match, tabstop):
-    return (
-        _binding_name(match)
-        + closing_character(tabstop)
-        + _binding_assign_character(tabstop)
-    )
-
-def _binding_name(match):
-    return match.group(1).replace(" ", "-")
-
-def _binding_assign_character(character):
-    if character == "\"":
-        return ": "
-    return "="
+from .phoenix import (
+    binding_var
+)
 
 endglobal
 
