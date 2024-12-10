@@ -7,9 +7,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def maybe_block_end(tabstop):
-    return "\n  }" if tabstop == " {" else ""
+from .control_flow import (
+    maybe_block_end
+)
 
 endglobal
 

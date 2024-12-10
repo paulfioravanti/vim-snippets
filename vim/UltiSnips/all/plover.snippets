@@ -2,15 +2,11 @@ priority -2
 
 global !p
 
-def maybe_ending_comma(snip):
-    return "," if snip.ft == "json" else ""
-
-def plover_modifier(match):
-    modifier = format_match(match)
-    return "ALT" if modifier == "OPTION" else modifier
-
-def format_match(match):
-    return match.group(1).upper()
+from .plover import (
+    maybe_ending_comma,
+    plover_modifier,
+    upcase_match,
+)
 
 endglobal
 
@@ -36,5 +32,5 @@ snippet steno "String steno dictionary entry" b
 endsnippet
 
 snippet "\bsteno ([AaBbDdEeFfGgHhKkLlOoPpRrSsTtUuWwZz0-9\*\/\-]+)" "String steno dictionary entry with outline" r
-"${1:`!p snip.rv = format_match(match)`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
+"${1:`!p snip.rv = upcase_match(match)`}": "${2:value}"`!p snip.rv = maybe_ending_comma(snip)`$0
 endsnippet

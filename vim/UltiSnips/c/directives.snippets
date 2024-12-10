@@ -1,14 +1,8 @@
 global !p
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
-    choice_tabstop_chosen,
-    closing_character
+from .directives import (
+    include_ending
 )
-
-
-def include_ending(opening):
-    return closing_character(opening) if choice_tabstop_chosen(opening) else ""
 
 endglobal
 

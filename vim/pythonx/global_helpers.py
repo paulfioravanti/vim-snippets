@@ -22,7 +22,7 @@ def choice_tabstop_chosen(choice_tabstop: str) -> bool:
     # a choice has not been made yet.
     return not choice_tabstop.startswith("1.")
 
-def closing_character(tabstop: list[str] | None) -> str:
+def closing_character(tabstop: str | None) -> str:
     """
     Return closing character for a tabstop containing an opening character.
     """

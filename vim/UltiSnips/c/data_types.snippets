@@ -1,7 +1,8 @@
 global !p
 
-def type_var_placeholder(typedef_tabstop):
-    return "TypeName" if typedef_tabstop else "variable_name"
+from .data_types import (
+    type_var_placeholder
+)
 
 endglobal
 

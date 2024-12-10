@@ -2,22 +2,9 @@ priority -2
 
 global !p
 
-def number_to_die_face(number):
-    match int(number):
-        case 1:
-            return "⚀"
-        case 2:
-            return "⚁"
-        case 3:
-            return "⚂"
-        case 4:
-            return "⚃"
-        case 5:
-            return "⚄"
-        case 6:
-            return "⚅"
-        case _:
-            return "□"
+from .unicode import (
+    number_to_die_face
+)
 
 endglobal
 
