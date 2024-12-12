@@ -7,9 +7,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def case_variable_default_text(match, default):
-    return text.strip() if (text := match.group(1)) else default
+from .control_flow import (
+    case_variable_default_text
+)
 
 endglobal
 

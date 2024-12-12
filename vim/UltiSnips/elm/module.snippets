@@ -7,9 +7,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def module_exposing_default_text(tabstop):
-    return "main" if tabstop == "Main" else ".."
+from .module import (
+    module_exposing_default_text
+)
 
 endglobal
 

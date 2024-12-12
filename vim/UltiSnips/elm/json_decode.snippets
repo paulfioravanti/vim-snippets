@@ -1,41 +1,10 @@
 global !p
 
-def decode_primitive_name(string):
-    return "int" if string == "integer" else string
-
-def build_map_function(snip, number_of_decoders):
-    output = (
-        f"${{1:Json.}}Decode.map{number_of_decoders} ${{2:valueFunction}}"
-    )
-    tabstop_indexes = range(3, 3 + number_of_decoders)
-
-    for index in tabstop_indexes:
-        output += f"\n    (${{{index}:decoder}})"
-
-    snip.expand_anon(output)
-
-def decoder_default_text(match, json_top_level_module):
-    match match.group(1).strip():
-        case "bool":
-            decoder = "Decode.bool"
-        case "float":
-            decoder = "Decode.float"
-        case "int":
-            decoder = "Decode.int"
-        case "integer":
-            decoder = "Decode.int"
-        case "string":
-            decoder = "Decode.string"
-        case _:
-            decoder = "decoder"
-
-    if decoder == "decoder":
-        return decoder
-
-    if json_top_level_module:
-        decoder = json_top_level_module + decoder
-
-    return decoder
+from .json_decode import (
+    build_map_function,
+    decode_primative_name,
+    decoder_default_text
+)
 
 endglobal
 

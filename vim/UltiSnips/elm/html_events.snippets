@@ -1,9 +1,8 @@
 global !p
 
-def words_to_function(words):
-    head, *tail = words.split(" ")
-    tail = [word.capitalize() for word in tail]
-    return "".join([head, *tail])
+from .html_events import (
+    words_to_function
+)
 
 endglobal
 

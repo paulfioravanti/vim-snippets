@@ -7,17 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def import_exposing_default_text(tabstop):
-    return tabstop.split(".")[-1]
-
-def module_alias_default_text(tabstop):
-    module_parts = tabstop.split(".")
-
-    if len(module_parts) == 1:
-        return "Alias"
-    else:
-        return text if (text := module_parts[-1]) else "Alias"
+from .imports import (
+    import_exposing_default_text,
+    module_alias_default_text
+)
 
 endglobal
 

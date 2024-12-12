@@ -7,22 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
-    words_to_pascal_case
+from .types import (
+    type_alias_default_text,
+    type_name_default_text
 )
-
-
-def type_alias_default_text(text):
-    return words_to_pascal_case(text) if text else "TypeAliasName"
-
-def type_name_default_text(match):
-    if match.group(1) in ["message", "msg"]:
-        return "Msg"
-    elif (name := match.group(2)):
-        return words_to_pascal_case(name)
-    else:
-        return "TypeName"
 
 endglobal
 

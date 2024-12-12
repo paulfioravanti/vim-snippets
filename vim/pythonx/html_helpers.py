@@ -4,7 +4,10 @@ NOTE: Changes to this file require restarting Vim!
 """
 
 import re
-from typing import Pattern
+from typing import (
+    Match,
+    Pattern
+)
 
 
 _HTML_TAG_KEYWORDS: list[str] = [
@@ -124,19 +127,19 @@ def extract_ids_and_classes(attributes: str) -> tuple[str, str]:
         _attribute_text(_CLASSES, attributes)
     )
 
-def is_html_input_tag(string: str) -> re.Match[str] | None:
+def is_html_input_tag(string: str) -> Match[str] | None:
     """
     Checks whether string contains a HTML input tag with a known input type.
     """
     return re.match(_HTML_INPUT_TYPE_KEYWORD, string)
 
-def is_html_min_max_input_tag(string: str) -> re.Match[str] | None:
+def is_html_min_max_input_tag(string: str) -> Match[str] | None:
     """
     Checks whether string contains a HTML input tag with a known input type.
     """
     return re.match(_HTML_MIN_MAX_INPUT_TYPE_KEYWORD, string)
 
-def is_html_tag(string: str) -> re.Match[str] | None:
+def is_html_tag(string: str) -> Match[str] | None:
     """
     Checks whether string contains a known HTML tag.
     """

@@ -1,7 +1,8 @@
 global !p
 
-def effect_module_name(string):
-    return "Cmd" if string.startswith(("C", "c")) else "Sub"
+from .platform import (
+    effect_module_name
+)
 
 endglobal
 

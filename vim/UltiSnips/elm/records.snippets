@@ -7,12 +7,10 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def field_value_default_text(field_name):
-    return "value" if field_name == "fieldName" else field_name
-
-def record_update_default_text(match):
-    return text if (text := match.group(1)) else "recordName"
+from .records import (
+    field_value_default_text,
+    record_update_default_text
+)
 
 endglobal
 
