@@ -1,7 +1,8 @@
 global !p
 
-def method_or_proc(match):
-    return "." if match.group(1) == "." else " &"
+from .object import (
+    method_or_proc
+)
 
 endglobal
 

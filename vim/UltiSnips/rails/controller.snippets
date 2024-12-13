@@ -7,41 +7,13 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
-    snake_to_camel
+from .controller import (
+    controller_class_resource_name,
+    controller_file_resource_name,
+    controller_model_default,
+    controller_singular_variable,
+    params_id
 )
-
-# ~/.vim/pythonx/ruby_helpers.py
-from ruby_helpers import (
-    class_name
-)
-
-
-def controller_class_resource_name(snip):
-    return snake_to_camel(controller_file_resource_name(snip))
-
-def controller_file_resource_name(snip):
-    return snip.basename.replace("_controller", "")
-
-def controller_model_default(controller_variable):
-    return snake_to_camel(controller_variable)
-
-def controller_singular_variable(snip):
-    controller_resource_name = controller_file_resource_name(snip)
-    if controller_resource_name.endswith("s"):
-        return controller_resource_name[:-1]
-
-    # Plural does not end in "s", and we do not have a plural/singular
-    # dictionary to work with, so just return the plural name and correct it
-    # within the snippet inline.
-    return controller_resource_name
-
-def params_id(controller_name, variable, model_name):
-    if model_name == controller_name.rstrip("s"):
-        return "id"
-
-    return variable + "_id"
 
 endglobal
 
