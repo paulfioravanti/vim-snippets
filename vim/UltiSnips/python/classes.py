@@ -1,19 +1,13 @@
-global !p
+"""
+Companion python file for `python/classes.snippets` file.
+"""
 
-# ~/.vim/pythonx/vim_pythonx_helpers.py
-from vim_pythonx_helpers import (
-    autojump_if_blank,
-    make_context,
-    make_jumper
-)
-
-# ~/.vim/pythonx/python_helpers.py
-from python_helpers import (
-    class_name
-)
-
-
+# Cannot type hint a `snip`.
+# pylint: disable=duplicate-code
 def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
+    """
+    Initialise arguments in a Python class
+    """
     if (
         not snip.tabstop == 0 or
         not (args_tabstop := snip.tabstops[init_tabstop_index])
@@ -40,19 +34,3 @@ def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
         output += f"\n    self.{arg} = ${{{index}:{arg}}}"
 
     snip.expand_anon(output)
-
-endglobal
-
-# NOTE: snip.tabstops[7] cannot be used here due to it being nested within
-# snip.tabstops[6]. So, we have to take the outer tabstop.
-context "make_context(snip)"
-post_jump "make_jumper(snip, snip.tabstop); initialize_args(snip, 6, 8)"
-snippet class "Python class" b
-`!p autojump_if_blank(snip, [2, 4, 6])
-`class ${1:`!p snip.rv = class_name(snip)`}${2:(${3:object})}:
-    ${4:"""
-    ${5:TODO: Docstring for $1.}
-    """
-
-    }${6:def __init__(self$7):}$0
-endsnippet

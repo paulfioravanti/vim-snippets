@@ -3,6 +3,7 @@ Companion python file for `javascript/function.snippets` file.
 """
 
 # Cannot type hint a `snip`.
+# pylint: disable=duplicate-code
 def initialize_args(snip, init_tabstop_index, starting_tabstop_index):
     """
     Initialise arguments for a Javascript class.

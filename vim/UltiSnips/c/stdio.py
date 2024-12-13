@@ -5,6 +5,7 @@ Companion python file for `c/stdio.snippets` file.
 # Cannot type hint a `snip`.
 # pylint: disable-next=line-too-long
 # Adapted from https://github.com/honza/vim-snippets/blob/a8dc763b3f534ec1a0c0ae5082689c10dcaf9d5f/UltiSnips/c.snippets#L8-L24
+# pylint: disable=duplicate-code
 def printf_expand_args(
     snip,
     format_tabstop_index,

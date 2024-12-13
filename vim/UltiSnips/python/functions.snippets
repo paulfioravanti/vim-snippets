@@ -7,9 +7,9 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
-
-def decorator_tag(match):
-    return "classmethod" if "class" in match.group(1) else "staticmethod"
+from .functions import (
+    decorator_tag
+)
 
 endglobal
 

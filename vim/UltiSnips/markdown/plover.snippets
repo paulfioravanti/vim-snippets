@@ -1,8 +1,8 @@
 global !p
 
-def star_flag_suffix(match):
-    suffix = match.group(1)
-    return suffix or ""
+from .plover import (
+    star_flag_suffix
+)
 
 endglobal
 
