@@ -7,14 +7,15 @@ from vim_pythonx_helpers import (
     make_jumper
 )
 
+# ~/.vim/pythonx/global_helpers.py
+from global_helpers import (
+    maybe_block_end
+)
+
 # ~/.vim/pythonx/javascript_helpers.py
 from javascript_helpers import (
     maybe_semi
 )
-
-
-def maybe_block_end(tabstop):
-    return "\n  }" if tabstop == " {" else ""
 
 endglobal
 

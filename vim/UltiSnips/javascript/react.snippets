@@ -1,7 +1,5 @@
 global !p
 
-import re
-
 # ~/.vim/pythonx/vim_pythonx_helpers.py
 from vim_pythonx_helpers import (
     autojump_if_blank,
@@ -19,38 +17,12 @@ from javascript_helpers import (
     maybe_semi
 )
 
-
-_PROP_SPACES_KEEP_END_BRACKET = re.compile(r"\s(?![^{]*\})|(/?>$)")
-_ON_PROP = re.compile(r"^on([A-Z]\w+)")
-
-def format_tag(snip):
-    parts = list(
-        filter(None, re.split(_PROP_SPACES_KEEP_END_BRACKET, snip.v.text))
-    )
-    snip.rv += parts[0]
-    for part in parts[1:-1]:
-        snip += snip.mkline("", indent="  ")
-        snip.rv += part
-    snip += snip.mkline("", indent="")
-    snip.rv += parts[-1]
-
-def maybe_self_closing(tabstop):
-    return "" if tabstop else " /"
-
-def prop_value_placeholder(tabstop):
-    if (match := _ON_PROP.match(tabstop)):
-        return "handle" + match.group(1)
-    else:
-        return tabstop
-
-def state_text_defaults(snip, tabstop):
-    state_name = _uppercased(tabstop) or "State"
-    set_state_text = f"set{state_name}"
-    initial_state_text = snip.v.text or f"initial{state_name}"
-    return (set_state_text, initial_state_text)
-
-def _uppercased(tabstop):
-    return tabstop[0].capitalize() + tabstop[1:] if tabstop else ""
+from .react import (
+    format_tag,
+    maybe_self_closing,
+    prop_value_placeholder,
+    state_text_defaults
+)
 
 endglobal
 
