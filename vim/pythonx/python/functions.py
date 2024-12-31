@@ -1,5 +1,6 @@
 """
 Companion python file for `python/functions.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 from typing import Match

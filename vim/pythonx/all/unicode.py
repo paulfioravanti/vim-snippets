@@ -1,5 +1,6 @@
 """
 Companion python file for `unicode.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 def number_to_die_face(number: str) -> str:

@@ -1,5 +1,6 @@
 """
 Companion python file for `elm/imports.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 

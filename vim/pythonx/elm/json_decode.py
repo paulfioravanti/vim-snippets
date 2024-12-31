@@ -1,5 +1,6 @@
 """
 Companion python file for `elm/json_decode.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 from typing import Match

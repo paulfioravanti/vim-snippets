@@ -1,5 +1,6 @@
 """
 Companion python file for `python/classes.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 # Cannot type hint a `snip`.

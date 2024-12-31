@@ -1,5 +1,6 @@
 """
 Companion python file for `elm/types.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 from typing import Match

@@ -1,5 +1,6 @@
 """
 Companion python file for `javascript/import_export.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 import re

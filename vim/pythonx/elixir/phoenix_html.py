@@ -1,5 +1,6 @@
 """
 Companion python file for `elixir/phoenix_html.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 _OPENING_EEX_TAG: str = "<%"

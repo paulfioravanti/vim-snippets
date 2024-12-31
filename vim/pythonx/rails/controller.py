@@ -1,5 +1,6 @@
 """
 Companion python file for `c/stdio.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 # ~/.vim/pythonx/global_helpers.py

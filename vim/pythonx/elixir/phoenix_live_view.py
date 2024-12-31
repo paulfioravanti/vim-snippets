@@ -1,5 +1,6 @@
 """
 Companion python file for `elixir/phoenix_live_view.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 # ~/.vim/pythonx/elixir_helpers.py

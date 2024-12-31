@@ -1,5 +1,6 @@
 """
 Companion python file for `elm/html_events.snippets` file.
+NOTE: Changes to this file require restarting Vim!
 """
 
 def words_to_function(words: str) -> str:
