@@ -10,7 +10,7 @@ def query_expression_name(match: Match) -> str:
     """
     Return a query expression name, making fixes for 'order'-related matches.
     """
-    name = match.group(1)
+    name: str = match.group(1)
     name = "order_by" if name in ("order", "order by") else name
     return name
 
@@ -20,6 +20,7 @@ def queryable_first_character(queryable: list[str]) -> str:
     """
     if queryable:
         return queryable[0].lower()
+
     return "x"
 
 # Cannot type hint a `snip`.

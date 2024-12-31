@@ -4,6 +4,7 @@ NOTE: Changes to this file require restarting Vim!
 """
 
 import re
+from typing import Match
 
 from UltiSnips import vim_helper
 
@@ -45,7 +46,7 @@ def maybe_spaces(tabstop: str) -> str:
         return ""
 
     # Match spaces on one-line functions only, not multiline.
-    trailing_spaces = re.match(
+    trailing_spaces: Match[str] | None = re.match(
         rf"^{tabstop[0]}({_NON_NEWLINE_WHITESPACE}+)",
         tabstop
     )

@@ -10,7 +10,7 @@ def join_properties(match: Match) -> str:
     """
     Return joined properties together.
     """
-    groups = [group for group in match.groups() if group is not None]
+    groups: list[str] = [group for group in match.groups() if group is not None]
     return "-".join(groups)
 
 def join_pseudo(match: Match) -> str:

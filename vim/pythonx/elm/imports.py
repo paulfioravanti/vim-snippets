@@ -14,7 +14,7 @@ def module_alias_default_text(tabstop: str) -> str:
     """
     Return text for Elm module aliasing.
     """
-    module_parts = tabstop.split(".")
+    module_parts: list[str] = tabstop.split(".")
 
     if len(module_parts) == 1:
         return "Alias"

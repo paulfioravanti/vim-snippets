@@ -96,6 +96,9 @@ def words_to_camel_case(words: str) -> str:
     """
     Converts words into a camelCase string for use as a function name.
     """
+    head: str
+    tail: list[str]
+
     head, *tail = words.split(" ")
     tail = [word[0].capitalize() + word[1:] for word in tail]
     return "".join([head, *tail])

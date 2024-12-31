@@ -33,26 +33,32 @@ def initialize_attr_args(tabstop: str) -> str:
     if not tabstop:
         return ""
 
-    args = [string.strip() for string in tabstop.split(",") if string]
-    attrs = map(lambda arg: f":{arg}", args)
+    args: list[str] = (
+        [string.strip() for string in tabstop.split(",") if string]
+    )
+    attrs: list[str] = map(lambda arg: f":{arg}", args)
     return " " + ", ".join(attrs)
 
 def percent_literal(match: Match) -> str:
     """
     Convert word to percent literal character.
     """
-    capture = match.group(1)
+    capture: Match[str] | None = match.group(1)
+
     if capture:
         return _PERCENT_LITERALS.get(capture, "")
+
     return ""
 
 def words_to_constant(match: Match) -> str:
     """
     Convert words to a Ruby CONSTANT_NAME.
     """
-    capture = match.group(1)
+    capture: Match[str] | None = match.group(1)
+
     if not capture:
         return "CONSTANT_NAME"
 
-    word_list = capture.upper().split()
+    word_list: list[str] = capture.upper().split()
+
     return "_".join(word_list)

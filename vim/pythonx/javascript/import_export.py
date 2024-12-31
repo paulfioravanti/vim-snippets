@@ -36,7 +36,7 @@ def module_file_default_text(t1: str, t2: str) -> str:
         # NOTE: When the default text for t2 is deleted/changed, the tabstop
         # itself also seems to get deleted, and any replacement text is appended
         # to t1, hence this clause.
-        file_text = t1.removeprefix(_OPENING_CURLY)
+        file_text: str = t1.removeprefix(_OPENING_CURLY)
         return (
             f"./{file_text}"
             if file_text and file_text[0].isupper()

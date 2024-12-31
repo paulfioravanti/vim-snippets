@@ -38,7 +38,7 @@ def to_module_name(string: str) -> str:
     return string.title().replace(" ", "")
 
 def _module_parts(path: str) -> list[str]:
-    path_parts = path.split("/")
+    path_parts: list[str] = path.split("/")
     for dirname in _NON_MODULE_DIRNAMES:
         if dirname in path_parts:
             path_parts.remove(dirname)

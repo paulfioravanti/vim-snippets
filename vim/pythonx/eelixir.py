@@ -9,6 +9,8 @@ def eex_placeholder(tag: str) -> str:
     """
     if tag == "%#":
         return "comment"
+
     if tag in ["%%", "%%="]:
         return "quotation"
+
     return "expression"

@@ -27,4 +27,5 @@ def _binding_name(match: Match) -> str:
 def _binding_assign_character(character: str) -> str:
     if character == "\"":
         return ": "
+
     return "="

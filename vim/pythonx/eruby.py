@@ -9,6 +9,7 @@ def erb_placeholder(tag: str) -> str:
     """
     if tag == "%#":
         return "comment"
+
     if tag == "%==":
         return "raw_expression"
 

@@ -7,6 +7,9 @@ def words_to_function(words: str) -> str:
     """
     Convert words to a valid Elm function name.
     """
+    head: str
+    tail: list[str]
+
     head, *tail = words.split(" ")
     tail = [word.capitalize() for word in tail]
     return "".join([head, *tail])

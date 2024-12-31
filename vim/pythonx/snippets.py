@@ -23,7 +23,11 @@ def parse_snippet_action_name(match: Match):
     """
     Return a snippet action name based on English spelling.
     """
-    action_name = match.group(1)
+    action_name: str | None = match.group(1)
+
+    if not action_name:
+        return "?"
+
     if action_name == "preexpand":
         return "pre_expand"
 
