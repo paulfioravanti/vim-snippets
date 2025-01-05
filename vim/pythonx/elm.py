@@ -1,5 +1,5 @@
 """
-Elm-related Ultisnips snippet helper functions.
+Companion python file for all Elm snippets.
 NOTE: Changes to this file require restarting Vim!
 """
 
