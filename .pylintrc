@@ -3,5 +3,5 @@ ignored-modules =
     UltiSnips,
     elixir,
     globals,
-    javascript_helpers,
+    javascript,
     px.snippets

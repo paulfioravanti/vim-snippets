@@ -9,8 +9,8 @@ from typing import (
     Pattern
 )
 
-# ~/.vim/pythonx/javascript_helpers.py
-from javascript_helpers import (
+# ~/.vim/pythonx/javascript.py
+from javascript import (
     class_attribute_name
 )
 
