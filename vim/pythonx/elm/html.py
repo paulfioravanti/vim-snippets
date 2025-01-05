@@ -8,8 +8,8 @@ from typing import (
     cast
 )
 
-# ~/.vim/pythonx/html_helpers.py
-from html_helpers import (
+# ~/.vim/pythonx/html.py
+from html import (
     extract_ids_and_classes,
     is_html_tag,
     text_to_tag
