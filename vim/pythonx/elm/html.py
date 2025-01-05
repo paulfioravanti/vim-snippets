@@ -9,7 +9,7 @@ from typing import (
 )
 
 # ~/.vim/pythonx/html.py
-from html import (
+from ..html import (
     extract_ids_and_classes,
     is_html_tag,
     text_to_tag
