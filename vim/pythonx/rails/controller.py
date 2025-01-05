@@ -3,8 +3,8 @@ Companion python file for `c/stdio.snippets` file.
 NOTE: Changes to this file require restarting Vim!
 """
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
+# ~/.vim/pythonx/globals.py
+from globals import (
     snake_to_camel
 )
 

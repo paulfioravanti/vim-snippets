@@ -5,8 +5,8 @@ NOTE: Changes to this file require restarting Vim!
 
 from typing import Match
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
+# ~/.vim/pythonx/globals.py
+from globals import (
     closing_character
 )
 

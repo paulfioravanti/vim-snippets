@@ -3,8 +3,8 @@ Companion python file for `c/directives.snippets` file.
 NOTE: Changes to this file require restarting Vim!
 """
 
-# ~/.vim/pythonx/global_helpers.py
-from global_helpers import (
+# ~/.vim/pythonx/globals.py
+from globals import (
     choice_tabstop_chosen,
     closing_character
 )
