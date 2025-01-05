@@ -1,5 +1,7 @@
 [TYPECHECK]
 ignored-modules =
     UltiSnips,
+    elixir,
+    globals,
     javascript_helpers,
     px.snippets
