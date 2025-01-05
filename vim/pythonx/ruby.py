@@ -1,15 +1,27 @@
 """
-Companion python file for `ruby.snippets` file.
+Companion python file for all Ruby snippets.
 NOTE: Changes to this file require restarting Vim!
 """
 
 from typing import Match
+
+# ~/.vim/pythonx/globals.py
+from globals import (
+    snake_to_camel
+)
 
 _PERCENT_LITERALS: dict[str, str] = {
     "string": "w",
     "word": "w",
     "symbol": "i"
 }
+
+# Cannot type hint a `snip`.
+def class_name(snip):
+    """
+    Convert snippet file basename to camel case.
+    """
+    return snake_to_camel(snip.basename)
 
 # Cannot type hint a `snip`.
 def initialize_args(tabstop, snip):
@@ -37,6 +49,7 @@ def initialize_attr_args(tabstop: str) -> str:
         [string.strip() for string in tabstop.split(",") if string]
     )
     attrs: list[str] = map(lambda arg: f":{arg}", args)
+
     return " " + ", ".join(attrs)
 
 def percent_literal(match: Match) -> str:
